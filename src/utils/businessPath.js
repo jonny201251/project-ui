@@ -1,0 +1,310 @@
+import { contextPath } from './unknown'
+import ProcessDesignForm from '../pages/ProcessDesign/Form'
+import ProcessDesignList from '../pages/ProcessDesign/List'
+import ChargeDeptLeaderForm from '../pages/ChargeDeptLeader/Form'
+import ChargeDeptLeaderList from '../pages/ChargeDeptLeader/List'
+import ProviderForm from '../pages/Provider/Form'
+import ProviderList from '../pages/Provider/List'
+import ProviderScore1List from '../pages/ProviderScore1/List'
+import ProviderScore1AddForm from '../pages/ProviderScore1/AddForm'
+import ProviderScore1EditForm from '../pages/ProviderScore1/EditForm'
+import ProviderScore1CheckForm from '../pages/ProviderScore1/CheckForm'
+import ProviderScore1ChangeForm from '../pages/ProviderScore1/ChangeForm'
+import ProviderScore1ViewHistory from '../pages/ProviderScore1/ViewHistory'
+import ProviderScore1ViewForm from '../pages/ProviderScore1/ViewForm'
+import CustomerForm from '../pages/Customer/Form'
+import CustomerList from '../pages/Customer/List'
+import CustomerScore1List from '../pages/CustomerScore1/List'
+import CustomerScore1AddForm from '../pages/CustomerScore1/AddForm'
+import CustomerScore1CheckForm from '../pages/CustomerScore1/CheckForm'
+import CustomerScore1ChangeForm from '../pages/CustomerScore1/ChangeForm'
+import CustomerScore1ViewHistory from '../pages/CustomerScore1/ViewHistory'
+import CustomerScore1ViewForm from '../pages/CustomerScore1/ViewForm'
+import CustomerCheck12List from '../pages/CustomerCheck12/List'
+import CustomerCheck12AddForm from '../pages/CustomerCheck12/AddForm'
+import CustomerCheck12CheckForm from '../pages/CustomerCheck12/CheckForm'
+import CustomerCheck12ChangeForm from '../pages/CustomerCheck12/ChangeForm'
+import CustomerCheck12ViewHistory from '../pages/CustomerCheck12/ViewHistory'
+import CustomerCheck12ViewForm from '../pages/CustomerCheck12/ViewForm'
+import ProjectPowerList from '../pages/ProjectPower/List'
+import ProjectPowerAddForm from '../pages/ProjectPower/AddForm'
+import ProjectPowerCheckForm from '../pages/ProjectPower/CheckForm'
+import ProjectPowerViewForm from '../pages/ProjectPower/ViewForm'
+import OtherPowerList from '../pages/OtherPower/List'
+import OtherPowerAddForm from '../pages/OtherPower/AddForm'
+import OtherPowerCheckForm from '../pages/OtherPower/CheckForm'
+import OtherPowerViewForm from '../pages/OtherPower/ViewForm'
+import ProjectCodeList from '../pages/ProjectCode/List'
+import ProjectCodeForm from '../pages/ProjectCode/Form'
+import SmallProjectList from '../pages/SmallProject/List'
+import SmallProjectAddForm from '../pages/SmallProject/AddForm'
+import SmallProjectCheckForm from '../pages/SmallProject/CheckForm'
+import SmallProjectChangeForm from '../pages/SmallProject/ChangeForm'
+import SmallProjectViewHistory from '../pages/SmallProject/ViewHistory'
+import SmallProjectViewForm from '../pages/SmallProject/ViewForm'
+import SmallBudgetProjectForm from '../pages/SmallBudgetProject/Form'
+import SmallBudgetProjectList from '../pages/SmallBudgetProject/List'
+import SmallBudgetInForm from '../pages/SmallBudgetIn/Form'
+import SmallBudgetInList from '../pages/SmallBudgetIn/List'
+import SmallBudgetOutForm from '../pages/SmallBudgetOut/Form'
+import SmallBudgetOutList from '../pages/SmallBudgetOut/List'
+import BigBudgetProjectForm from '../pages/BigBudgetProject/Form'
+import BigBudgetProjectList from '../pages/BigBudgetProject/List'
+import BigBudgetInForm from '../pages/BigBudgetIn/Form'
+import BigBudgetInList from '../pages/BigBudgetIn/List'
+import BigBudgetCompanyForm from '../pages/BigBudgetCompany/Form'
+import BigBudgetCompanyList from '../pages/BigBudgetCompany/List'
+import BigBudgetOutForm from '../pages/BigBudgetOut/Form'
+import BigBudgetOutList from '../pages/BigBudgetOut/List'
+import ProjectIn1Form from '../pages/ProjectIn1/Form'
+import ProjectIn1List from '../pages/ProjectIn1/List'
+import ProjectOut1Form from '../pages/ProjectOut1/Form'
+import ProjectOut1List from '../pages/ProjectOut1/List'
+import ProjectInOutList from '../pages/ProjectInOut/List'
+import ProviderSimpleList from '../pages/ProviderSimple/List'
+import ProviderSimpleForm from '../pages/ProviderSimple/Form'
+import ProviderQueryList from '../pages/ProviderQuery/List'
+import ProviderQueryAddForm from '../pages/ProviderQuery/AddForm'
+import ProviderQueryCheckForm from '../pages/ProviderQuery/CheckForm'
+import ProviderQueryViewForm from '../pages/ProviderQuery/ViewForm'
+//
+import AForm from '../pages/A/Form'
+import AList from '../pages/A/List'
+
+export const aPath = {
+  flag: 'aPath', width: 1000, Form: AForm, List: AList,
+  list: contextPath + '/a/list',
+  get: contextPath + '/a/get',
+  add: contextPath + '/a/add',
+  edit: contextPath + '/a/edit',
+  delete: contextPath + '/a/delete',
+}
+
+//flag、导出名称、sysPermission.path,三个地方名称一样
+export const processDesignPath = {
+  flag: 'processDesignPath', width: '95%', Form: ProcessDesignForm, List: ProcessDesignList,
+  list: contextPath + '/processDesign/list',
+  get: contextPath + '/processDesign/get',
+  add: contextPath + '/processDesign/add',
+  edit: contextPath + '/processDesign/edit',
+  delete: contextPath + '/processDesign/delete',
+  getProcessFormBefore: contextPath + '/processDesign/getProcessFormBefore',
+  getBpmnXml: contextPath + '/processDesign/getBpmnXml',
+}
+export const processInstPath = {
+  flag: 'processInstPath',
+  list: contextPath + '/processInst/list',
+  getRunTaskKeyList: contextPath + '/processInst/getRunTaskKeyList',
+  myList: contextPath + '/processInst/myList',
+}
+export const processInstNodePath = {
+  flag: 'processInstPath',
+  list: contextPath + '/processInstNode/list',
+}
+export const chargeDeptLeaderPath = {
+  flag: 'chargeDeptLeaderPath', width: 820, Form: ChargeDeptLeaderForm, List: ChargeDeptLeaderList,
+  list: contextPath + '/chargeDeptLeader/list',
+  get: contextPath + '/chargeDeptLeader/get',
+  add: contextPath + '/chargeDeptLeader/add',
+  edit: contextPath + '/chargeDeptLeader/edit',
+  delete: contextPath + '/chargeDeptLeader/delete',
+  getChargeDeptLeader: contextPath + '/chargeDeptLeader/getChargeDeptLeader',
+  getDeptVL: contextPath + '/chargeDeptLeader/getDeptVL',
+}
+
+export const providerPath = {
+  flag: 'providerPath', Form: ProviderForm, List: ProviderList,
+  list: contextPath + '/provider/list',
+  get: contextPath + '/provider/get',
+  add: contextPath + '/provider/add',
+  edit: contextPath + '/provider/edit',
+  delete: contextPath + '/provider/delete',
+}
+/*
+  新增流程：AddForm，编辑：EditForm，审批流程：CheckForm，变更流程：ChangeForm
+  查看：ViewHistory,ViewForm
+  撤回流程
+ */
+export const providerScore1Path = {
+  flag: 'providerScore1Path', width: 1100, List: ProviderScore1List,
+  AddForm: ProviderScore1AddForm,
+  EditForm: ProviderScore1EditForm,
+  CheckForm: ProviderScore1CheckForm,
+  ChangeForm: ProviderScore1ChangeForm,
+  ViewHistory: ProviderScore1ViewHistory,
+  ViewForm: ProviderScore1ViewForm,
+  list: contextPath + '/providerScore1/list',
+  viewHistory: contextPath + '/providerScore1/viewHistory',
+  get: contextPath + '/providerScore1/get',
+  btnHandle: contextPath + '/providerScore1/btnHandle',
+}
+export const customerPath = {
+  flag: 'customerPath', Form: CustomerForm, List: CustomerList,
+  list: contextPath + '/customer/list',
+  get: contextPath + '/customer/get',
+  add: contextPath + '/customer/add',
+  edit: contextPath + '/customer/edit',
+  delete: contextPath + '/customer/delete',
+}
+export const customerScore1Path = {
+  flag: 'customerScore1Path', width: 1100, changeButtonName: '复评', List: CustomerScore1List,
+  AddForm: CustomerScore1AddForm,
+  EditForm: CustomerScore1AddForm,
+  CheckForm: CustomerScore1CheckForm,
+  ChangeForm: CustomerScore1ChangeForm,
+  ViewHistory: CustomerScore1ViewHistory,
+  ViewForm: CustomerScore1ViewForm,
+  list: contextPath + '/customerScore1/list',
+  viewHistory: contextPath + '/customerScore1/viewHistory',
+  get: contextPath + '/customerScore1/get',
+  btnHandle: contextPath + '/customerScore1/btnHandle',
+}
+export const customerCheck12Path = {
+  flag: 'customerCheck12Path', width: 900, List: CustomerCheck12List,
+  AddForm: CustomerCheck12AddForm,
+  EditForm: CustomerCheck12AddForm,
+  CheckForm: CustomerCheck12CheckForm,
+  ChangeForm: CustomerCheck12ChangeForm,
+  ViewHistory: CustomerCheck12ViewHistory,
+  ViewForm: CustomerCheck12ViewForm,
+  list: contextPath + '/customerCheck12/list',
+  viewHistory: contextPath + '/customerCheck12/viewHistory',
+  get: contextPath + '/customerCheck12/get',
+  btnHandle: contextPath + '/customerCheck12/btnHandle',
+}
+export const projectPowerPath = {
+  flag: 'projectPowerPath', width: 1000, haveChange: '无', List: ProjectPowerList,
+  AddForm: ProjectPowerAddForm,
+  EditForm: ProjectPowerAddForm,
+  CheckForm: ProjectPowerCheckForm,
+  ViewForm: ProjectPowerViewForm,
+  list: contextPath + '/projectPower/list',
+  get: contextPath + '/projectPower/get',
+  btnHandle: contextPath + '/projectPower/btnHandle',
+}
+export const otherPowerPath = {
+  flag: 'otherPowerPath', width: 1000, List: OtherPowerList,
+  AddForm: OtherPowerAddForm,
+  EditForm: OtherPowerAddForm,
+  CheckForm: OtherPowerCheckForm,
+  ViewForm: OtherPowerViewForm,
+  list: contextPath + '/otherPower/list',
+  get: contextPath + '/otherPower/get',
+  btnHandle: contextPath + '/otherPower/btnHandle',
+}
+
+export const projectCodePath = {
+  flag: 'projectCodePath', width: 800, Form: ProjectCodeForm, List: ProjectCodeList,
+  list: contextPath + '/projectCode/list',
+  get: contextPath + '/projectCode/get',
+  add: contextPath + '/projectCode/add',
+  edit: contextPath + '/projectCode/edit',
+  delete: contextPath + '/projectCode/delete',
+  getLabelValue: contextPath + '/projectCode/getLabelValue',
+}
+
+export const smallProjectPath = {
+  flag: 'smallProjectPath', width: 1200, List: SmallProjectList,
+  AddForm: SmallProjectAddForm,
+  EditForm: SmallProjectAddForm,
+  CheckForm: SmallProjectCheckForm,
+  ChangeForm: SmallProjectChangeForm,
+  ViewHistory: SmallProjectViewHistory,
+  ViewForm: SmallProjectViewForm,
+  list: contextPath + '/smallProject/list',
+  viewHistory: contextPath + '/smallProject/viewHistory',
+  get: contextPath + '/smallProject/get',
+  btnHandle: contextPath + '/smallProject/btnHandle',
+}
+export const smallBudgetProjectPath = {
+  flag: 'smallBudgetProjectPath', width: 1000, Form: SmallBudgetProjectForm, List: SmallBudgetProjectList,
+  list: contextPath + '/smallBudgetProject/list',
+  get: contextPath + '/smallBudgetProject/get',
+  add: contextPath + '/smallBudgetProject/add',
+  edit: contextPath + '/smallBudgetProject/edit',
+}
+export const smallBudgetInPath = {
+  flag: 'smallBudgetInPath', width: 700, Form: SmallBudgetInForm, List: SmallBudgetInList,
+  list: contextPath + '/smallBudgetIn/list',
+  get: contextPath + '/smallBudgetIn/get',
+  add: contextPath + '/smallBudgetIn/add',
+  edit: contextPath + '/smallBudgetIn/edit',
+}
+export const smallBudgetOutPath = {
+  flag: 'smallBudgetOutPath', width: 800, Form: SmallBudgetOutForm, List: SmallBudgetOutList,
+  list: contextPath + '/smallBudgetOut/list',
+  get: contextPath + '/smallBudgetOut/get',
+  add: contextPath + '/smallBudgetOut/add',
+  edit: contextPath + '/smallBudgetOut/edit',
+}
+export const bigBudgetProjectPath = {
+  flag: 'bigBudgetProjectPath', width: 1000, Form: BigBudgetProjectForm, List: BigBudgetProjectList,
+  list: contextPath + '/bigBudgetProject/list',
+  get: contextPath + '/bigBudgetProject/get',
+  add: contextPath + '/bigBudgetProject/add',
+  edit: contextPath + '/bigBudgetProject/edit',
+}
+export const bigBudgetInPath = {
+  flag: 'bigBudgetInPath', width: 700, Form: BigBudgetInForm, List: BigBudgetInList,
+  list: contextPath + '/bigBudgetIn/list',
+  get: contextPath + '/bigBudgetIn/get',
+  add: contextPath + '/bigBudgetIn/add',
+  edit: contextPath + '/bigBudgetIn/edit',
+}
+export const bigBudgetCompanyPath = {
+  flag: 'bigBudgetCompanyPath', width: 800, Form: BigBudgetCompanyForm, List: BigBudgetCompanyList,
+  list: contextPath + '/bigBudgetCompany/list',
+  get: contextPath + '/bigBudgetCompany/get',
+  add: contextPath + '/bigBudgetCompany/add',
+  edit: contextPath + '/bigBudgetCompany/edit',
+}
+export const bigBudgetCompanyDialogPath = {
+  list: contextPath + '/bigBudgetCompany/dialogList',
+}
+export const bigBudgetOutPath = {
+  flag: 'bigBudgetOutPath', width: 800, Form: BigBudgetOutForm, List: BigBudgetOutList,
+  list: contextPath + '/bigBudgetOut/list',
+  get: contextPath + '/bigBudgetOut/get',
+  add: contextPath + '/bigBudgetOut/add',
+  edit: contextPath + '/bigBudgetOut/edit',
+}
+export const budgetProjectDialogPath = {
+  list: contextPath + '/budgetProject/list',
+}
+export const projectIn1Path = {
+  flag: 'projectIn1Path', width: 1100, Form: ProjectIn1Form, List: ProjectIn1List,
+  list: contextPath + '/projectIn1/list',
+  get: contextPath + '/projectIn1/get',
+  add: contextPath + '/projectIn1/add',
+  edit: contextPath + '/projectIn1/edit',
+}
+export const projectOut1Path = {
+  flag: 'projectOut1Path', width: 1200, Form: ProjectOut1Form, List: ProjectOut1List,
+  list: contextPath + '/projectOut1/list',
+  get: contextPath + '/projectOut1/get',
+  add: contextPath + '/projectOut1/add',
+  edit: contextPath + '/projectOut1/edit',
+}
+export const projectInOutPath = {
+  List: ProjectInOutList,
+  get: contextPath + '/projectInOut/get',
+}
+export const providerSimplePath = {
+  flag: 'providerSimplePath', width: 1000, Form: ProviderSimpleForm, List: ProviderSimpleList,
+  list: contextPath + '/providerSimple/list',
+  get: contextPath + '/providerSimple/get',
+  add: contextPath + '/providerSimple/add',
+  edit: contextPath + '/providerSimple/edit',
+}
+export const providerQueryPath = {
+  flag: 'providerQueryPath', width: 1000, List: ProviderQueryList,
+  AddForm: ProviderQueryAddForm,
+  EditForm: ProviderQueryAddForm,
+  CheckForm: ProviderQueryCheckForm,
+  ViewForm: ProviderQueryViewForm,
+  list: contextPath + '/providerQuery/list',
+  get: contextPath + '/providerQuery/get',
+  btnHandle: contextPath + '/providerQuery/btnHandle',
+}
+
+
