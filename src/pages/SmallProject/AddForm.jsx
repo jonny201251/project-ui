@@ -122,9 +122,15 @@ export default (props) => {
       let value = field.value
       if (value) {
         if (value === '是') {
-          form.query('*(giveMoney,giveMoneyCycle)').forEach(fieldd => fieldd.setRequired(true))
+          form.query('*(giveMoney,giveMoneyCycle)').forEach(fieldd => fieldd.setState({
+            required: true,
+            pattern: 'editable',
+          }))
         } else {
-          form.query('*(giveMoney,giveMoneyCycle)').forEach(fieldd => fieldd.setRequired(false))
+          form.query('*(giveMoney,giveMoneyCycle)').forEach(fieldd => fieldd.setState({
+            pattern: 'disabled',
+            value: null,
+          }))
         }
       }
     })

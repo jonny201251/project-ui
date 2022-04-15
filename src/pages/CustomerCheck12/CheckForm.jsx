@@ -27,7 +27,7 @@ const SchemaField = createSchemaField({
 })
 
 export default (props) => {
-  let { form, type } = props
+  let { form, type,record } = props
 
   const showComment = () => {
     if (type === 'check') {

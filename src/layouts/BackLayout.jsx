@@ -67,9 +67,11 @@ export default () => {
             <Menu.Item key="55-供方评分-providerScore1Path">供方评分</Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="项目立项" key="项目立项">
-            <Menu.Item key="66-项目任务号-projectCodePath">项目任务号</Menu.Item>
+            <Menu.Item key="66-项目备案-projectCodePath">项目备案</Menu.Item>
             <Menu.Item key="66-一般项目立项-smallProjectPath">一般项目立项</Menu.Item>
             <Menu.Item key="55-重大项目评估-sysDicPath">重大项目评估</Menu.Item>
+            <Menu.Item key="66-其他项目(非立项)-smallProjectPath">其他项目(非立项)</Menu.Item>
+            <Menu.Item key="66-项目WBS-smallProjectPath">项目WBS</Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="授权管理" key="授权管理">
             <Menu.Item key="71-项目立项授权-projectPowerPath">项目立项授权</Menu.Item>
@@ -95,6 +97,7 @@ export default () => {
             <Menu.Item key="33-预计支出-bigBudgetOutPath">预计支出</Menu.Item>
             <Menu.Item key="44-项目预算-sysDicPath">项目预算</Menu.Item>
           </Menu.SubMenu>
+          <Menu.Item key="44-预算执行合同签署情况-sysDicPath">预算执行合同签署情况</Menu.Item>
           <Menu.SubMenu title="项目收支管理" key="项目收支管理">
             <Menu.Item key="1-收入明细-projectIn1Path">收入明细</Menu.Item>
             <Menu.Item key="1-支出明细-projectOut1Path">支出明细</Menu.Item>

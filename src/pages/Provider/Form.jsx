@@ -20,7 +20,7 @@ export default (props) => {
           name="usee" required title="供方用途" x-decorator="FormItem" x-component="Select"
           enum={[
             { label: '一般项目立项时(三类)', value: '一般项目立项时(三类)' },
-            { label: '一般项目立项后(三类-其他方)', value: '一般项目立项后(三类-其他方)' },
+            { label: '一般项目立项后(其他方)', value: '一般项目立项后(其他方)' },
             { label: '重大项目立项时(三类)', value: '重大项目立项时(三类)' },
             { label: '重大项目立项后(其他方)', value: '重大项目立项后(其他方)' }
           ]}

@@ -13,11 +13,13 @@ import {
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
-import { Button, ConfigProvider, message } from 'antd'
+import { Button, ConfigProvider, message, Tabs } from 'antd'
 import { session } from '../../utils'
 import DialogList from './DialogList'
 import { LoadingButton } from '../../components'
 import { SearchOutlined } from '@ant-design/icons'
+import ProcessDesignGraph from '../ProcessDesignGraph'
+import ProcessInstNodeList from '../ProcessInstNode/List'
 
 const InputButton = (props) => {
   return <div style={{ display: 'inline-flex', width: '100%' }}>
@@ -38,7 +40,7 @@ const SchemaField = createSchemaField({
 
 
 export default (props) => {
-  let { form, type } = props
+  let { form, type,record } = props
 
   useEffect(async () => {
     console.log(session.getItem('userList'))
@@ -95,32 +97,42 @@ export default (props) => {
   }
 
   return <ConfigProvider locale={zhCN}>
-    <Form form={form} labelWidth={130}>
-      <SchemaField>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
-          <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
-          <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String
-            name="projectName" required title="被授权项目" x-decorator="FormItem"
-            x-component="InputButton" x-component-props={{ onClick: onClick }} x-decorator-props={{ gridSpan: 2 }}/>
-          <SchemaField.String
-            name="displayNamee" required title="被授权人" x-decorator="FormItem"
-            x-component="Select" x-component-props={{ showSearch: true }}
-            enum={session.getItem('userList')}/>
-          <SchemaField.String
-            name="descc" required title="授权事项及权限" x-component="Input.TextArea"
-            x-component-props={{ rows: 2 }} x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}/>
-          <SchemaField.String
-            name="timeLimitTmp" required title="申请期限"
-            x-component="DatePicker.RangePicker"
-            // x-component-props={{ format: 'YYYY年MM月DD日' }}
-            x-decorator="FormItem" x-decorator-props={{ tooltip: '双击鼠标进行选择', gridSpan: 2 }}
-          />
-          <SchemaField.String name="code" required title="授权号" x-component="Input" x-decorator="FormItem"/>
-        </SchemaField.Void>
-      </SchemaField>
-    </Form>
+    <Tabs animated={false} size={'small'}>
+      <Tabs.TabPane tab="表单数据" key="1">
+        <Form form={form} labelWidth={130}>
+          <SchemaField>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+              <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
+              <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
+              <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String
+                name="projectName" required title="被授权项目" x-decorator="FormItem"
+                x-component="InputButton" x-component-props={{ onClick: onClick }} x-decorator-props={{ gridSpan: 2 }}/>
+              <SchemaField.String
+                name="displayNamee" required title="被授权人" x-decorator="FormItem"
+                x-component="Select" x-component-props={{ showSearch: true }}
+                enum={session.getItem('userList')}/>
+              <SchemaField.String
+                name="descc" required title="授权事项及权限" x-component="Input.TextArea"
+                x-component-props={{ rows: 2 }} x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}/>
+              <SchemaField.String
+                name="timeLimitTmp" required title="申请期限"
+                x-component="DatePicker.RangePicker"
+                // x-component-props={{ format: 'YYYY年MM月DD日' }}
+                x-decorator="FormItem" x-decorator-props={{ tooltip: '双击鼠标进行选择', gridSpan: 2 }}
+              />
+              <SchemaField.String name="code" required title="授权号" x-component="Input" x-decorator="FormItem"/>
+            </SchemaField.Void>
+          </SchemaField>
+        </Form>
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="流程图" key="2">
+        <ProcessDesignGraph processInstId={record.processInstId}/>
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="审批记录" key="3">
+        <ProcessInstNodeList processInstId={record.processInstId}/>
+      </Tabs.TabPane>
+    </Tabs>
   </ConfigProvider>
 }
 

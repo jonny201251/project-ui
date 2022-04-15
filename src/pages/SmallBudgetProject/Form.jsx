@@ -38,7 +38,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,taskCode,property,protectRate,invoiceRate,totalCost,endMoney,inChangeMoney,outChangeMoney,contractCode,customerName)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,taskCode,property,protectRate,invoiceRate,totalCost,endMoney,inChangeMoney,outChangeMoney,customerName)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {

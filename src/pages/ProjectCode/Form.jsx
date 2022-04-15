@@ -1,9 +1,9 @@
-import { Cascader, Form, FormItem, FormLayout, Input, Select,FormGrid } from '@formily/antd'
+import { Cascader, Form, FormItem, FormLayout, Input, Select, FormGrid } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 
 const SchemaField = createSchemaField({
-  components: { FormLayout, FormItem, Input, Select, Cascader,FormGrid },
+  components: { FormLayout, FormItem, Input, Select, Cascader, FormGrid },
 })
 
 export default (props) => {
@@ -11,7 +11,7 @@ export default (props) => {
 
   useEffect(() => {
     if (!record) {
-      form.query('taskCode').take().setDisplay('hidden')
+      form.query('taskCode').take().setState({ display: 'hidden', pattern: 'disabled' })
     }
   }, [])
 
