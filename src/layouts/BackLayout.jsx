@@ -97,8 +97,8 @@ export default () => {
             <Menu.Item key="44-项目预算-sysDicPath">项目预算</Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="预算执行合同签署情况" key="预算执行合同签署情况">
-            <Menu.Item key="1-收款合同-projectIn1Path">收款合同</Menu.Item>
-            <Menu.Item key="1-付款合同-projectOut1Path">付款合同</Menu.Item>
+            <Menu.Item key="1-收款合同-inContractPath">收款合同</Menu.Item>
+            <Menu.Item key="1-付款合同-outContractPath">付款合同</Menu.Item>
             <Menu.Item key="1-合同号和WBS号-projectInOutPath">合同号和WBS号</Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="项目收支管理" key="项目收支管理">

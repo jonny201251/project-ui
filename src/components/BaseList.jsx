@@ -13,6 +13,7 @@ export default (props) => {
     bordered
     rowKey={rowKey}
     actionRef={actionRef}
+    form={{ ignoreRules: false}}
     columns={columns}
     columnEmptyText={true}
     //列表数据

@@ -69,7 +69,7 @@ export default (props) => {
           (form) => {
             form.setValues(dbRecord)
             return <>
-              <path.EditForm form={form} type={type} record={dbRecord} dialog={dialog}/>
+              <path.ChangeForm form={form} type={type} record={dbRecord} dialog={dialog}/>
               <FormDialog.Footer>
                 <FormButtonGroup gutter={16} align={'center'}>
                   {formButton(processFormBefore.buttonList, dialog, form, type)}
@@ -93,7 +93,7 @@ export default (props) => {
         dialog.open()
       }
     } else if (type === 'viewHistory') {
-      const dbRecord = await get(path.viewHistory, {
+      const dbRecord = await post(path.viewHistory, {
         path: path.flag,
         businessBaseId: record.processInst.businessBaseId,
       })

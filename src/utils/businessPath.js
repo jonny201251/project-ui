@@ -67,6 +67,16 @@ import ProviderQueryList from '../pages/ProviderQuery/List'
 import ProviderQueryAddForm from '../pages/ProviderQuery/AddForm'
 import ProviderQueryCheckForm from '../pages/ProviderQuery/CheckForm'
 import ProviderQueryViewForm from '../pages/ProviderQuery/ViewForm'
+import InContractList from '../pages/InContract/List'
+import InContractAddForm from '../pages/InContract/AddForm'
+import InContractChangeForm from '../pages/InContract/ChangeForm'
+import InContractViewForm from '../pages/InContract/ViewForm'
+import InContractViewHistory from '../pages/InContract/ViewHistory'
+import OutContractList from '../pages/OutContract/List'
+import OutContractAddForm from '../pages/OutContract/AddForm'
+import OutContractChangeForm from '../pages/OutContract/ChangeForm'
+import OutContractViewForm from '../pages/OutContract/ViewForm'
+import OutContractViewHistory from '../pages/OutContract/ViewHistory'
 //
 import AForm from '../pages/A/Form'
 import AList from '../pages/A/List'
@@ -271,6 +281,9 @@ export const bigBudgetOutPath = {
 export const budgetProjectDialogPath = {
   list: contextPath + '/budgetProject/list',
 }
+export const budgetProjectDialog2Path = {
+  list: contextPath + '/budgetProject/list2',
+}
 export const projectIn1Path = {
   flag: 'projectIn1Path', width: 1100, Form: ProjectIn1Form, List: ProjectIn1List,
   list: contextPath + '/projectIn1/list',
@@ -306,5 +319,30 @@ export const providerQueryPath = {
   get: contextPath + '/providerQuery/get',
   btnHandle: contextPath + '/providerQuery/btnHandle',
 }
-
+export const inContractPath = {
+  flag: 'inContractPath', width: 900, List: InContractList,
+  AddForm: InContractAddForm,
+  EditForm: InContractAddForm,
+  CheckForm: InContractAddForm,
+  ChangeForm: InContractChangeForm,
+  ViewHistory: InContractViewHistory,
+  ViewForm: InContractViewForm,
+  list: contextPath + '/inContract/list',
+  viewHistory: contextPath + '/inContract/viewHistory',
+  get: contextPath + '/inContract/get',
+  btnHandle: contextPath + '/inContract/btnHandle',
+}
+export const outContractPath = {
+  flag: 'outContractPath', width: 900, List: OutContractList,
+  AddForm: OutContractAddForm,
+  EditForm: OutContractAddForm,
+  CheckForm: OutContractAddForm,
+  ChangeForm: OutContractChangeForm,
+  ViewHistory: OutContractViewHistory,
+  ViewForm: OutContractViewForm,
+  list: contextPath + '/outContract/list',
+  viewHistory: contextPath + '/outContract/viewHistory',
+  get: contextPath + '/outContract/get',
+  btnHandle: contextPath + '/outContract/btnHandle',
+}
 

@@ -43,8 +43,10 @@ export default (props) => {
         typeIdList.reset()
         if (field.value === '角色') {
           typeIdList.dataSource = roleList
-        } else {
+        } else if (field.value === '用户') {
           typeIdList.dataSource = userList
+        } else if (field.value === '表单') {
+          typeIdList.setDisplay('none')
         }
       }
     })
@@ -80,6 +82,16 @@ export default (props) => {
     }
   }
 
+  const showHandleItem2 = () => {
+    if (type === '表单') {
+      return <SchemaField.String
+        name="javaVarName" required title="Java变量名称" x-decorator="FormItem"
+        x-component="Input"
+        x-component-props={{ placeholder: '英文逗号隔开' }}
+      />
+    }
+  }
+
   return <ConfigProvider locale={zhCN}>
     <Form form={form} className={styles.placeholder}>
       <SchemaField>
@@ -93,6 +105,7 @@ export default (props) => {
             enum={[
               { label: '角色', value: '角色' },
               { label: '用户', value: '用户' },
+              { label: '表单', value: '表单' },
             ]}
           />
           <SchemaField.Array
@@ -109,6 +122,7 @@ export default (props) => {
           >
             {showHandleItem()}
           </SchemaField.Array>
+          {showHandleItem2()}
           <SchemaField.String
             name="haveEditForm" required title="允许修改表单" x-decorator="FormItem"
             x-component="Radio.Group"
