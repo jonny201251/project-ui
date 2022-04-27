@@ -25,13 +25,23 @@ export default (props) => {
   let { form, type, record } = props
 
   useEffect(async () => {
-
+    form.setPattern('disabled')
+    if (!record.wbs) {
+      form.query('wbs').take()?.setState({ pattern: 'editable', required: true })
+    } else {
+      form.query('wbs').take()?.setState({ required: false })
+    }
+    form.query('contractCode').take()?.setState({ pattern: 'editable' })
   }, [])
 
 
   return <ConfigProvider locale={zhCN}>
-    <Form form={form} labelWidth={130} className={styles.placeholder}>
+    <Form form={form} labelWidth={110} className={styles.placeholder}>
       <SchemaField>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="contractCode" required x-decorator="FormItem" title="合同编号" x-component="Input"/>
+        </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
@@ -41,7 +51,6 @@ export default (props) => {
             x-component="Input"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="costType" title="费用类型" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
@@ -50,11 +59,9 @@ export default (props) => {
           <SchemaField.String
             name="contractName" x-decorator="FormItem" title="合同名称" x-component="Input"
             x-decorator-props={{ gridSpan: 2 }}/>
-          <SchemaField.String
-            name="contractType" x-decorator="FormItem" title="合同类型" x-component="Input"/>
+          <SchemaField.String name="contractType" x-decorator="FormItem" title="合同类型" x-component="Input"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="contractCode" required x-decorator="FormItem" title="合同编号" x-component="Input"/>
           <SchemaField.Number
             name="contractMoney" x-decorator="FormItem" title="合同金额" x-component="NumberPicker"/>
           <SchemaField.Number

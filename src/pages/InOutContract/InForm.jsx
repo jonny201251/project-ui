@@ -25,12 +25,18 @@ export default (props) => {
   let { form, type, record } = props
 
   useEffect(async () => {
-
+    form.setPattern('disabled')
+    if (!record.wbs) {
+      form.query('wbs').take()?.setState({ pattern: 'editable', required: true })
+    } else {
+      form.query('wbs').take()?.setState({ required: false })
+    }
+    form.query('contractCode').take()?.setState({ pattern: 'editable' })
   }, [])
 
 
   return <ConfigProvider locale={zhCN}>
-    <Form form={form} labelWidth={130} className={styles.placeholder}>
+    <Form form={form} labelWidth={110} className={styles.placeholder}>
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"/>
@@ -45,8 +51,9 @@ export default (props) => {
           <SchemaField.String
             name="name2" title="客户名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }} x-component="Input"/>
           <SchemaField.String
-            name="contractName" x-decorator="FormItem" title="收款合同名称" x-component="Input"
+            name="contractName" x-decorator="FormItem" title="合同名称" x-component="Input"
             x-decorator-props={{ gridSpan: 2 }}/>
+          <SchemaField.String name="contractType" x-decorator="FormItem" title="合同类型" x-component="Input"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.Number

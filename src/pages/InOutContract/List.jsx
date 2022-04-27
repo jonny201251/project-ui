@@ -1,9 +1,11 @@
-import { get, inOutContractPath, proTableRequest } from '../../utils'
+import { inOutContractPath, post, proTableRequest } from '../../utils'
 import ProTable from '@ant-design/pro-table'
-import { useRef } from 'react'
-import { FormDialog } from '@formily/antd'
+import React, { useRef } from 'react'
+import { FormButtonGroup, FormDialog } from '@formily/antd'
 import InForm from './InForm'
 import OutForm from './OutForm'
+import { Button, message } from 'antd'
+import { LoadingButton } from '../../components'
 
 export default () => {
   const actionRef = useRef()
@@ -14,9 +16,57 @@ export default () => {
         (form) => {
           form.setValues(record)
           if (record.contractType === '收款合同') {
-            return <InForm form={form} dialog={dialog} record={record}/>
+            return <>
+              <InForm form={form} dialog={dialog} record={record}/>
+              <FormDialog.Footer>
+                <FormButtonGroup gutter={16} align={'right'}>
+                  <Button onClick={() => dialog.close()}>取消</Button>
+                  <LoadingButton
+                    onClick={async () => {
+                      const values = await form.submit()
+                      if (values) {
+                        const data = await post(inOutContractPath.add, values)
+                        if (data) {
+                          actionRef.current.clearSelected()
+                          actionRef.current.reload()
+                          dialog.close()
+                          message.success('操作成功')
+                        }
+                      }
+                    }}
+                    type={'primary'}
+                  >
+                    确定
+                  </LoadingButton>
+                </FormButtonGroup>
+              </FormDialog.Footer>
+            </>
           } else {
-            return <OutForm form={form} dialog={dialog} record={record}/>
+            return <>
+              <OutForm form={form} dialog={dialog} record={record}/>
+              <FormDialog.Footer>
+                <FormButtonGroup gutter={16} align={'right'}>
+                  <Button onClick={() => dialog.close()}>取消</Button>
+                  <LoadingButton
+                    onClick={async () => {
+                      const values = await form.submit()
+                      if (values) {
+                        const data = await post(inOutContractPath.add, values)
+                        if (data) {
+                          actionRef.current.clearSelected()
+                          actionRef.current.reload()
+                          dialog.close()
+                          message.success('操作成功')
+                        }
+                      }
+                    }}
+                    type={'primary'}
+                  >
+                    确定
+                  </LoadingButton>
+                </FormButtonGroup>
+              </FormDialog.Footer>
+            </>
           }
         },
       )
@@ -30,6 +80,7 @@ export default () => {
     { title: '费用类型', dataIndex: 'costType', valueType: 'text' },
     { title: '税率', dataIndex: 'costRate', valueType: 'text' },
     { title: '合同类型', dataIndex: 'contractType', valueType: 'text' },
+    { title: '合同编号', dataIndex: 'contractCode', valueType: 'text' },
     { title: '合同名称', dataIndex: 'contractName', valueType: 'text' },
     { title: '合同金额', dataIndex: 'contractMoney', valueType: 'text' },
     { title: '结算金额', dataIndex: 'endMoney', valueType: 'text' },
