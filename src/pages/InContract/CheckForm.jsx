@@ -12,7 +12,7 @@ import {
 import styles from '../table-placeholder.less'
 import { ConfigProvider, Tabs } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
 
@@ -27,6 +27,11 @@ const SchemaField = createSchemaField({
 
 export default (props) => {
   let { form, type, record } = props
+
+  useEffect(() => {
+    form.setPattern('disabled')
+    form.query('comment').take()?.setPattern('editable')
+  }, [])
 
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
@@ -60,6 +65,10 @@ export default (props) => {
                 x-decorator-props={{ gridSpan: 2 }}
                 name="remark" title="备注" x-decorator="FormItem" x-component="Input.TextArea"
                 x-component-props={{ rows: 2 }}
+              />
+              <SchemaField.String
+                name="comment" title="审批意见" x-decorator="FormItem"
+                x-component="Input.TextArea" x-component-props={{ placeholder: '请输入意见' }}
               />
             </SchemaField.Void>
           </SchemaField>

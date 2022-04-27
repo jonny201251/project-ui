@@ -5,6 +5,7 @@ export default (props) => {
   const columns = [
     { title: '项目名称', dataIndex: 'name', valueType: 'text', colSize: 2 },
     { title: '任务号', dataIndex: 'taskCode', valueType: 'text', hideInSearch: true },
+    { title: 'WBS号', dataIndex: 'wbs', valueType: 'text', hideInSearch: true },
   ]
 
   return <BaseList

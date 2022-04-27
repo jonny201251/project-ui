@@ -8,8 +8,8 @@ import {
   FormItem,
   FormLayout,
   Input,
-  Radio,
   Select,
+  Radio,
 } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import {
@@ -20,19 +20,32 @@ import {
   LoadingButton,
   NumberPicker,
 } from '../../components'
-import { session } from '../../utils'
 import DialogList from './DialogList'
-import DialogList2 from './DialogList2'
 import styles from '../table-placeholder.less'
 import { Button, ConfigProvider, message } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import React, { useEffect } from 'react'
+import { onFieldReact } from '@formily/core'
+import { SearchOutlined } from '@ant-design/icons'
+import DialogList2 from '../SmallProject/DialogList2'
+
+const InputButton2 = (props) => {
+  return <div style={{ display: 'inline-flex', width: '100%' }}>
+    <Input {...props} style={{ ...props.style }}/>
+    <Button onClick={(e) => {
+      if (props.onClick) {
+        props.onClick('open')
+      }
+    }} icon={<SearchOutlined/>} type={'primary'}/>
+  </div>
+}
 
 const SchemaField = createSchemaField({
   components: {
     FormLayout, FormItem, Input, FormGrid,
     ArrayTable, ArrayTableAddition, ArrayTableIndex, ArrayTableRemove,
     LoadingButton, InputButton, NumberPicker, Select, DatePicker, Radio,
+    InputButton2,
   },
 })
 
@@ -40,17 +53,9 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,taskCode,property,contractCode,costType,costRate,endMoney,wbs)').forEach(field => {
+    form.query('*(taskCode,property,customerName,contractMoney,endMoney,contractName)').forEach(field => {
       field.setPattern('disabled')
     })
-    if (type === 'add') {
-      const user = session.getItem('user')
-      form.setInitialValues({
-        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
-        deptId: user.deptId, deptName: user.deptName,
-      })
-    }
   }, [])
 
   const onClick = (flag) => {
@@ -68,17 +73,17 @@ export default (props) => {
                     console.log(values)
                     if (values.selectedRow) {
                       form.setValues({
-                        type: values.selectedRow.type,
-                        wbs: values.selectedRow.wbs,
                         budgetId: values.selectedRow.id,
                         projectId: values.selectedRow.projectId,
                         name: values.selectedRow.name,
                         taskCode: values.selectedRow.taskCode,
                         property: values.selectedRow.property,
-                        costType: values.selectedRow.costType,
-                        costRate: values.selectedRow.costRate,
-                        providerId: values.selectedRow.companyId,
-                        providerName: values.selectedRow.companyName,
+                        customerName: values.selectedRow.customerName,
+                        customerCode: values.selectedRow.customerCode,
+                        contractMoney: values.selectedRow.contractMoney,
+                        endMoney: values.selectedRow.endMoney,
+                        contractName: values.selectedRow.contractName,
+                        wbs: values.selectedRow.wbs,
                       })
                       dialog2.close()
                     } else {
@@ -110,11 +115,10 @@ export default (props) => {
                 <LoadingButton
                   onClick={async () => {
                     const values = await form2.submit()
-                    console.log(values)
                     if (values.selectedRow) {
                       form.setValues({
                         providerId: values.selectedRow.id,
-                        providerName: values.selectedRow.name,
+                        providerName: values.selectedRow.name
                       })
                       dialog2.close()
                     } else {
@@ -134,38 +138,43 @@ export default (props) => {
     }
   }
 
-
   return <ConfigProvider locale={zhCN}>
-    <Form form={form} labelWidth={110} className={styles.placeholder}>
+    <Form form={form} labelWidth={100} className={styles.placeholder}>
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
-          <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
-          <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-        </SchemaField.Void>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="costType" title="费用类型" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
-            name="providerName" required title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
-            x-component="InputButton" x-component-props={{ onClick: onClick2 }}/>
+            name="type2" required title='往来类型' x-decorator="FormItem"
+            x-component="Radio.Group"
+            enum={[
+              { label: '收款', value: '收款' },
+              { label: '付款', value: '付款' },
+            ]}/>
           <SchemaField.String
-            name="contractName" required x-decorator="FormItem" title="付款合同名称" x-component="Input"
+            name="haveInOut" required title='影响收支' x-decorator="FormItem"
+            x-component="Radio.Group"
+            enum={[
+              { label: '是', value: '是' },
+              { label: '否', value: '否' },
+            ]}/>
+          <SchemaField.String
+            name="providerName" title="往来方名称" required x-decorator="FormItem"
+            x-component="InputButton2" x-component-props={{ onClick: onClick2 }}
             x-decorator-props={{ gridSpan: 2 }}/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="contractCode" x-decorator="FormItem" title="合同编号" x-component="Input"/>
-          <SchemaField.Number
-            name="contractMoney" required x-decorator="FormItem" title="合同金额" x-component="NumberPicker"/>
-          <SchemaField.Number
-            name="endMoney" x-decorator="FormItem" title="结算金额" x-component="NumberPicker"/>
+          <SchemaField.String name="ioDate" title='日期' required x-decorator="FormItem" x-component="DatePicker"/>
+          <SchemaField.String
+            name="remark" title='摘要' x-decorator="FormItem" x-component="Input.TextArea"
+            x-component-props={{ rows: 2 }}/>
+          <SchemaField.Number name="money" required title='往来款' x-decorator="FormItem" x-component="NumberPicker"/>
           <SchemaField.String
             x-decorator-props={{ gridSpan: 2 }}
-            name="remark" title="备注" x-decorator="FormItem" x-component="Input.TextArea" x-component-props={{ rows: 2 }}
+            name="remarkk" title="备注" x-decorator="FormItem" x-component="Input.TextArea"
+            x-component-props={{ rows: 2 }}
           />
         </SchemaField.Void>
       </SchemaField>

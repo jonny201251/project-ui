@@ -56,10 +56,16 @@ import BigBudgetCompanyForm from '../pages/BigBudgetCompany/Form'
 import BigBudgetCompanyList from '../pages/BigBudgetCompany/List'
 import BigBudgetOutForm from '../pages/BigBudgetOut/Form'
 import BigBudgetOutList from '../pages/BigBudgetOut/List'
+import ProjectInForm from '../pages/ProjectIn/Form'
+import ProjectInList from '../pages/ProjectIn/List'
 import ProjectIn1Form from '../pages/ProjectIn1/Form'
 import ProjectIn1List from '../pages/ProjectIn1/List'
 import ProjectOut1Form from '../pages/ProjectOut1/Form'
 import ProjectOut1List from '../pages/ProjectOut1/List'
+import ProjectOutForm from '../pages/ProjectOut/Form'
+import ProjectOutList from '../pages/ProjectOut/List'
+import ProjectIoForm from '../pages/ProjectIo/Form'
+import ProjectIoList from '../pages/ProjectIo/List'
 import ProjectInOutList from '../pages/ProjectInOut/List'
 import ProviderSimpleList from '../pages/ProviderSimple/List'
 import ProviderSimpleForm from '../pages/ProviderSimple/Form'
@@ -69,14 +75,17 @@ import ProviderQueryCheckForm from '../pages/ProviderQuery/CheckForm'
 import ProviderQueryViewForm from '../pages/ProviderQuery/ViewForm'
 import InContractList from '../pages/InContract/List'
 import InContractAddForm from '../pages/InContract/AddForm'
+import InContractCheckForm from '../pages/InContract/CheckForm'
 import InContractChangeForm from '../pages/InContract/ChangeForm'
 import InContractViewForm from '../pages/InContract/ViewForm'
 import InContractViewHistory from '../pages/InContract/ViewHistory'
 import OutContractList from '../pages/OutContract/List'
 import OutContractAddForm from '../pages/OutContract/AddForm'
+import OutContractCheckForm from '../pages/OutContract/CheckForm'
 import OutContractChangeForm from '../pages/OutContract/ChangeForm'
 import OutContractViewForm from '../pages/OutContract/ViewForm'
 import OutContractViewHistory from '../pages/OutContract/ViewHistory'
+import InOutContractList from '../pages/InOutContract/List'
 //
 import AForm from '../pages/A/Form'
 import AList from '../pages/A/List'
@@ -291,6 +300,30 @@ export const projectIn1Path = {
   add: contextPath + '/projectIn1/add',
   edit: contextPath + '/projectIn1/edit',
 }
+export const projectInPath = {
+  flag: 'projectInPath', width: 900, Form: ProjectInForm, List: ProjectInList,
+  list: contextPath + '/projectIn/list',
+  get: contextPath + '/projectIn/get',
+  add: contextPath + '/projectIn/add',
+  edit: contextPath + '/projectIn/edit',
+  delete: contextPath + '/projectIn/delete',
+}
+export const projectOutPath = {
+  flag: 'projectOutPath', width: 900, Form: ProjectOutForm, List: ProjectOutList,
+  list: contextPath + '/projectOut/list',
+  get: contextPath + '/projectOut/get',
+  add: contextPath + '/projectOut/add',
+  edit: contextPath + '/projectOut/edit',
+  delete: contextPath + '/projectOut/delete',
+}
+export const projectIoPath = {
+  flag: 'projectIoPath', width: 900, Form: ProjectIoForm, List: ProjectIoList,
+  list: contextPath + '/projectIo/list',
+  get: contextPath + '/projectIo/get',
+  add: contextPath + '/projectIo/add',
+  edit: contextPath + '/projectIo/edit',
+  delete: contextPath + '/projectIo/delete',
+}
 export const projectOut1Path = {
   flag: 'projectOut1Path', width: 1200, Form: ProjectOut1Form, List: ProjectOut1List,
   list: contextPath + '/projectOut1/list',
@@ -323,7 +356,7 @@ export const inContractPath = {
   flag: 'inContractPath', width: 900, List: InContractList,
   AddForm: InContractAddForm,
   EditForm: InContractAddForm,
-  CheckForm: InContractAddForm,
+  CheckForm: InContractCheckForm,
   ChangeForm: InContractChangeForm,
   ViewHistory: InContractViewHistory,
   ViewForm: InContractViewForm,
@@ -336,7 +369,7 @@ export const outContractPath = {
   flag: 'outContractPath', width: 900, List: OutContractList,
   AddForm: OutContractAddForm,
   EditForm: OutContractAddForm,
-  CheckForm: OutContractAddForm,
+  CheckForm: OutContractCheckForm,
   ChangeForm: OutContractChangeForm,
   ViewHistory: OutContractViewHistory,
   ViewForm: OutContractViewForm,
@@ -344,5 +377,10 @@ export const outContractPath = {
   viewHistory: contextPath + '/outContract/viewHistory',
   get: contextPath + '/outContract/get',
   btnHandle: contextPath + '/outContract/btnHandle',
+}
+export const inOutContractPath = {
+  List: InOutContractList,
+  list: contextPath + '/inOutContract/list',
+  add: contextPath + '/inOutContract/add',
 }
 

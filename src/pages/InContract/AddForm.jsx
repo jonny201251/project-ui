@@ -18,7 +18,7 @@ import {
   ArrayTableRemove,
   InputButton,
   LoadingButton,
-  NumberPicker,
+  NumberPicker, File,
 } from '../../components'
 import { session } from '../../utils'
 import DialogList from './DialogList'
@@ -33,6 +33,7 @@ const SchemaField = createSchemaField({
     FormLayout, FormItem, Input, FormGrid,
     ArrayTable, ArrayTableAddition, ArrayTableIndex, ArrayTableRemove,
     LoadingButton, InputButton, NumberPicker, Select, DatePicker, Radio,
+    File,
   },
 })
 
@@ -40,7 +41,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,taskCode,property,contractCode,endMoney)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,taskCode,property,contractCode,endMoney,wbs)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
@@ -68,7 +69,10 @@ export default (props) => {
                     console.log(values)
                     if (values.selectedRow) {
                       form.setValues({
-                        projectId: values.selectedRow.id,
+                        type: values.selectedRow.type,
+                        wbs: values.selectedRow.wbs,
+                        budgetId: values.selectedRow.id,
+                        projectId: values.selectedRow.projectId,
                         name: values.selectedRow.name,
                         taskCode: values.selectedRow.taskCode,
                         property: values.selectedRow.property,
@@ -129,15 +133,6 @@ export default (props) => {
     }
   }
 
-  const showComment = () => {
-    if (type === 'check') {
-      return <SchemaField.String
-        name="comment" title="审批意见" x-decorator="FormItem"
-        x-component="Input.TextArea" x-component-props={{ placeholder: '请输入意见' }}
-      />
-    }
-  }
-
   return <ConfigProvider locale={zhCN}>
     <Form form={form} labelWidth={110} className={styles.placeholder}>
       <SchemaField>
@@ -148,20 +143,15 @@ export default (props) => {
           <SchemaField.String
             name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-          <SchemaField.String name="taskCode" title="项目任务号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
-            name="customerName" required title="相对方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+            name="customerName" required title="客户名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="InputButton" x-component-props={{ onClick: onClick2 }}/>
           <SchemaField.String
-            name="accountType" required x-decorator="FormItem" title="账号类型" x-component="Radio.Group"
-            enum={[
-              { label: '动', value: '动' },
-              { label: '海', value: '海' },
-            ]}
-          />
-          <SchemaField.String
-            name="contractName" required x-decorator="FormItem" title="合同名称" x-component="Input"
+            name="contractName" required x-decorator="FormItem" title="收款合同名称" x-component="Input"
             x-decorator-props={{ gridSpan: 2 }}/>
+        </SchemaField.Void>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String name="contractCode" x-decorator="FormItem" title="合同编号" x-component="Input"/>
           <SchemaField.Number
             name="contractMoney" required x-decorator="FormItem" title="合同金额" x-component="NumberPicker"/>
@@ -171,7 +161,6 @@ export default (props) => {
             x-decorator-props={{ gridSpan: 2 }}
             name="remark" title="备注" x-decorator="FormItem" x-component="Input.TextArea" x-component-props={{ rows: 2 }}
           />
-          {showComment()}
         </SchemaField.Void>
       </SchemaField>
     </Form>

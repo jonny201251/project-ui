@@ -99,13 +99,16 @@ export default () => {
           <Menu.SubMenu title="预算执行合同签署情况" key="预算执行合同签署情况">
             <Menu.Item key="1-收款合同-inContractPath">收款合同</Menu.Item>
             <Menu.Item key="1-付款合同-outContractPath">付款合同</Menu.Item>
-            <Menu.Item key="1-合同号和WBS号-projectInOutPath">合同号和WBS号</Menu.Item>
+            <Menu.Item key="1-合同号和WBS号-inOutContractPath">合同号和WBS号</Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="项目收支管理" key="项目收支管理">
-            <Menu.Item key="1-收入明细-projectIn1Path">收入明细</Menu.Item>
-            <Menu.Item key="1-支出明细-projectOut1Path">支出明细</Menu.Item>
+            <Menu.Item key="1-收入信息-projectInPath">收入信息</Menu.Item>
+            <Menu.Item key="1-支出信息-projectOutPath">支出信息</Menu.Item>
+            <Menu.Item key="1-往来款信息-projectIoPath">往来款信息</Menu.Item>
+            <Menu.Item key="1-收支明细-sysDicPath">收支明细</Menu.Item>
             <Menu.Item key="1-项目收支-projectInOutPath">项目收支</Menu.Item>
           </Menu.SubMenu>
+          <Menu.Item key="99-合同执行情况-sysDicPath">合同执行情况</Menu.Item>
           <Menu.Item key="99-项目结算管理-sysDicPath">项目结算管理</Menu.Item>
         </Menu.SubMenu>
       )

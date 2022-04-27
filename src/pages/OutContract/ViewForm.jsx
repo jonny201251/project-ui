@@ -1,30 +1,17 @@
-import {
-  ArrayTable,
-  DatePicker,
-  Form,
-  FormButtonGroup,
-  FormDialog,
-  FormGrid,
-  FormItem,
-  FormLayout,
-  Input,
-  Select,
-  Radio,
-} from '@formily/antd'
+import { ArrayTable, DatePicker, Form, FormGrid, FormItem, FormLayout, Input, Radio, Select } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import {
   ArrayTableAddition,
   ArrayTableIndex,
   ArrayTableRemove,
+  File,
   InputButton,
   LoadingButton,
   NumberPicker,
 } from '../../components'
 import { session } from '../../utils'
-import DialogList from './DialogList'
-import DialogList2 from './DialogList2'
 import styles from '../table-placeholder.less'
-import { Button, ConfigProvider, message, Tabs } from 'antd'
+import { ConfigProvider, Tabs } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import React, { useEffect } from 'react'
 import ProcessDesignGraph from '../ProcessDesignGraph'
@@ -35,6 +22,7 @@ const SchemaField = createSchemaField({
     FormLayout, FormItem, Input, FormGrid,
     ArrayTable, ArrayTableAddition, ArrayTableIndex, ArrayTableRemove,
     LoadingButton, InputButton, NumberPicker, Select, DatePicker, Radio,
+    File,
   },
 })
 
@@ -51,27 +39,29 @@ export default (props) => {
               <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
               <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String
-                name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+                name="name" title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                 x-component="Input"/>
-              <SchemaField.String name="taskCode" title="项目任务号" x-decorator="FormItem" x-component="Input"/>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+              <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String name="costType" title="费用类型" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String
-                name="customerName" required title="相对方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+                name="providerName" title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                 x-component="Input"/>
               <SchemaField.String
-                name="accountType" required x-decorator="FormItem" title="账号类型" x-component="Radio.Group"
-                enum={[
-                  { label: '动', value: '动' },
-                  { label: '海', value: '海' },
-                ]}
-              />
-              <SchemaField.String
-                name="contractName" required x-decorator="FormItem" title="合同名称" x-component="Input"
-                x-decorator-props={{ gridSpan: 3 }}/>
+                name="contractName" required x-decorator="FormItem" title="付款合同名称" x-component="Input"
+                x-decorator-props={{ gridSpan: 2 }}/>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
               <SchemaField.String name="contractCode" x-decorator="FormItem" title="合同编号" x-component="Input"/>
               <SchemaField.Number
                 name="contractMoney" required x-decorator="FormItem" title="合同金额" x-component="NumberPicker"/>
               <SchemaField.Number
                 name="endMoney" x-decorator="FormItem" title="结算金额" x-component="NumberPicker"/>
+              <SchemaField.String
+                name="fileList" title="附件" x-decorator="FormItem" x-component="File"
+                x-decorator-props={{ gridSpan: 2 }}/>
               <SchemaField.String
                 x-decorator-props={{ gridSpan: 2 }}
                 name="remark" title="备注" x-decorator="FormItem" x-component="Input.TextArea"
@@ -89,6 +79,7 @@ export default (props) => {
       </Tabs.TabPane>
     </Tabs>
   </ConfigProvider>
+
 }
 
 

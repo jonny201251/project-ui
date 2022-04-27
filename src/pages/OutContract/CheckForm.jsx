@@ -12,7 +12,7 @@ import {
 import styles from '../table-placeholder.less'
 import { ConfigProvider, Tabs } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
 
@@ -28,6 +28,11 @@ const SchemaField = createSchemaField({
 export default (props) => {
   let { form, type, record } = props
 
+  useEffect(() => {
+    form.setPattern('disabled')
+    form.query('comment').take()?.setPattern('editable')
+  }, [])
+
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
       <Tabs.TabPane tab="表单数据" key="1">
@@ -38,14 +43,18 @@ export default (props) => {
               <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
               <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String
-                name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+                name="name" title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                 x-component="Input"/>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
               <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String name="costType" title="费用类型" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String
-                name="customerName" required title="客户名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+                name="providerName" title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                 x-component="Input"/>
               <SchemaField.String
-                name="contractName" required x-decorator="FormItem" title="收款合同名称" x-component="Input"
+                name="contractName" required x-decorator="FormItem" title="付款合同名称" x-component="Input"
                 x-decorator-props={{ gridSpan: 2 }}/>
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
@@ -60,6 +69,10 @@ export default (props) => {
                 x-decorator-props={{ gridSpan: 2 }}
                 name="remark" title="备注" x-decorator="FormItem" x-component="Input.TextArea"
                 x-component-props={{ rows: 2 }}
+              />
+              <SchemaField.String
+                name="comment" title="审批意见" x-decorator="FormItem"
+                x-component="Input.TextArea" x-component-props={{ placeholder: '请输入意见' }}
               />
             </SchemaField.Void>
           </SchemaField>

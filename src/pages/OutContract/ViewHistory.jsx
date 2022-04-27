@@ -7,6 +7,7 @@ export default (props) => {
   const actionRef = useRef()
   const columns = [
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
+    { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     {
       title: '合同名称', dataIndex: 'contractName', valueType: 'text',
       render: (text, record, _, action) => {
