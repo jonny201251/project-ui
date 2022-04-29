@@ -104,7 +104,7 @@ export default (props) => {
             name="projectName" title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}
             x-component="Input"/>
           <SchemaField.String name="projectTaskCode" title="项目任务号" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="costType" title="费用类型" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="costType" title="成本类型" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="costRate" x-decorator="FormItem" title="税率" x-component="Input"/>
           <SchemaField.String
             name="companyName" required title="公司名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}

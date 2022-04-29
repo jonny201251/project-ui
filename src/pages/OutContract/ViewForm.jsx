@@ -44,7 +44,7 @@ export default (props) => {
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
               <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
-              <SchemaField.String name="costType" title="费用类型" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String name="costType" title="成本类型" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String
                 name="providerName" title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}

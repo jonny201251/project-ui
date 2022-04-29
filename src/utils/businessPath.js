@@ -62,7 +62,6 @@ import ProjectOutForm from '../pages/ProjectOut/Form'
 import ProjectOutList from '../pages/ProjectOut/List'
 import ProjectIoForm from '../pages/ProjectIo/Form'
 import ProjectIoList from '../pages/ProjectIo/List'
-import ProjectInOutDetailList from '../pages/ProjectInOutDetail/List'
 import ProjectInOutList from '../pages/ProjectInOut/List'
 import ProviderSimpleList from '../pages/ProviderSimple/List'
 import ProviderSimpleForm from '../pages/ProviderSimple/Form'
@@ -314,15 +313,9 @@ export const projectIoPath = {
   edit: contextPath + '/projectIo/edit',
   delete: contextPath + '/projectIo/delete',
 }
-export const projectInOutDetailPath = {
-  List: ProjectInOutDetailList,
-  list: contextPath + '/projectInOut/list',
-  get: contextPath + '/projectInOut/getInOutDetail',
-}
 export const projectInOutPath = {
   List: ProjectInOutList,
   list: contextPath + '/projectInOut/list',
-  get: contextPath + '/projectInOut/getInOut',
 }
 export const providerSimplePath = {
   flag: 'providerSimplePath', width: 1000, Form: ProviderSimpleForm, List: ProviderSimpleList,

@@ -77,7 +77,7 @@ export default () => {
   const columns = [
     { title: '项目名称', dataIndex: 'name', valueType: 'text', render: (text, record) => render(record) },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
-    { title: '费用类型', dataIndex: 'costType', valueType: 'text' },
+    { title: '成本类型', dataIndex: 'costType', valueType: 'text' },
     { title: '税率', dataIndex: 'costRate', valueType: 'text' },
     { title: '合同类型', dataIndex: 'contractType', valueType: 'text' },
     { title: '合同编号', dataIndex: 'contractCode', valueType: 'text' },

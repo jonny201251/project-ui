@@ -5,7 +5,7 @@ export default (props) => {
   const columns = [
     { title: '项目名称', dataIndex: 'name', valueType: 'text', colSize: 2 },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text', hideInSearch: true },
-    { title: '费用类型', dataIndex: 'costType', valueType: 'text' },
+    { title: '成本类型', dataIndex: 'costType', valueType: 'text' },
     { title: '税率', dataIndex: 'costRate', valueType: 'text' },
     { title: '合同编号', dataIndex: 'contractCode', valueType: 'text', hideInSearch: true },
     { title: '合同名称', dataIndex: 'contractName', valueType: 'text', hideInSearch: true },

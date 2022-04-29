@@ -103,7 +103,7 @@ export default (props) => {
                 <SchemaField.Void x-decorator="FormItem" x-component="ArrayTableIndex"/>
               </SchemaField.Void>
               <SchemaField.Void
-                x-component="ArrayTable.Column" x-component-props={{ width: 150, title: '费用类型', align: 'center' }}>
+                x-component="ArrayTable.Column" x-component-props={{ width: 150, title: '成本类型', align: 'center' }}>
                 <SchemaField.String name="costType" required x-decorator="FormItem" x-component="Input"/>
               </SchemaField.Void>
               <SchemaField.Void

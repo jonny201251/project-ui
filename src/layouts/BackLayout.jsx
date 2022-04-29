@@ -109,8 +109,7 @@ export default () => {
             <Menu.Item key="1-收入信息-projectInPath">收入信息</Menu.Item>
             <Menu.Item key="1-支出信息-projectOutPath">支出信息</Menu.Item>
             <Menu.Item key="1-往来款信息-projectIoPath">往来款信息</Menu.Item>
-            <Menu.Item key="1-收支明细表-projectInOutDetailPath">收支明细表</Menu.Item>
-            <Menu.Item key="1-项目收支表-projectInOutPath">项目收支表</Menu.Item>
+            <Menu.Item key="1-项目收支-projectInOutPath">项目收支</Menu.Item>
           </Menu.SubMenu>
           <Menu.Item key="99-项目结算管理-sysDicPath">项目结算管理</Menu.Item>
           <Menu.SubMenu title="查询" key="查询">
