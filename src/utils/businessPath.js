@@ -58,10 +58,6 @@ import BigBudgetOutForm from '../pages/BigBudgetOut/Form'
 import BigBudgetOutList from '../pages/BigBudgetOut/List'
 import ProjectInForm from '../pages/ProjectIn/Form'
 import ProjectInList from '../pages/ProjectIn/List'
-import ProjectIn1Form from '../pages/ProjectIn1/Form'
-import ProjectIn1List from '../pages/ProjectIn1/List'
-import ProjectOut1Form from '../pages/ProjectOut1/Form'
-import ProjectOut1List from '../pages/ProjectOut1/List'
 import ProjectOutForm from '../pages/ProjectOut/Form'
 import ProjectOutList from '../pages/ProjectOut/List'
 import ProjectIoForm from '../pages/ProjectIo/Form'
@@ -293,13 +289,6 @@ export const budgetProjectDialogPath = {
 export const budgetProjectDialog2Path = {
   list: contextPath + '/budgetProject/list2',
 }
-export const projectIn1Path = {
-  flag: 'projectIn1Path', width: 1100, Form: ProjectIn1Form, List: ProjectIn1List,
-  list: contextPath + '/projectIn1/list',
-  get: contextPath + '/projectIn1/get',
-  add: contextPath + '/projectIn1/add',
-  edit: contextPath + '/projectIn1/edit',
-}
 export const projectInPath = {
   flag: 'projectInPath', width: 900, Form: ProjectInForm, List: ProjectInList,
   list: contextPath + '/projectIn/list',
@@ -323,13 +312,6 @@ export const projectIoPath = {
   add: contextPath + '/projectIo/add',
   edit: contextPath + '/projectIo/edit',
   delete: contextPath + '/projectIo/delete',
-}
-export const projectOut1Path = {
-  flag: 'projectOut1Path', width: 1200, Form: ProjectOut1Form, List: ProjectOut1List,
-  list: contextPath + '/projectOut1/list',
-  get: contextPath + '/projectOut1/get',
-  add: contextPath + '/projectOut1/add',
-  edit: contextPath + '/projectOut1/edit',
 }
 export const projectInOutPath = {
   List: ProjectInOutList,

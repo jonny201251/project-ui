@@ -68,8 +68,15 @@ export default (props) => {
                           name: values.selectedRow.name,
                           taskCode: values.selectedRow.taskCode,
                           property: values.selectedRow.property,
+                          providerId: values.selectedRow.providerId,
+                          providerName: values.selectedRow.providerName,
+                          contractCode: values.selectedRow.contractCode,
                           contractMoney: values.selectedRow.contractMoney,
+                          endMoney: values.selectedRow.endMoney,
                           contractName: values.selectedRow.contractName,
+                          wbs: values.selectedRow.wbs,
+                          costType: values.selectedRow.costType,
+                          costRate: values.selectedRow.costRate,
                         })
                       } else {
                         form.setValues({
@@ -99,16 +106,17 @@ export default (props) => {
       form.query('haveContract').take().validate()
     }
   }
-
   form.addEffects('id', () => {
     onFieldReact('haveContract', (field) => {
       if (field.value === '有') {
-
         form.query('*(providerName,contractCode,contractMoney,endMoney,contractName,outStyle,arriveDate)').forEach(fieldd => {
           fieldd.setState({ display: 'visible' })
         })
-        form.query('.costType').take()?.setState({ value: null, pattern: 'disabled' })
-        form.query('.costRate').take()?.setState({ value: null, pattern: 'disabled', display: 'visible' })
+        form.query('.costType').take()?.setState({
+          pattern: 'disabled',
+          dataSource: typeArr1.map(item => ({ label: item, value: item })),
+        })
+        form.query('.costRate').take()?.setState({ pattern: 'disabled', display: 'visible' })
       } else {
         form.query('*(providerName,contractCode,contractMoney,endMoney,contractName,outStyle,arriveDate,costRate)').forEach(fieldd => {
           fieldd.setState({ display: 'hidden' })
@@ -132,6 +140,11 @@ export default (props) => {
       }
     })
   })
+  const onChange = (e) => {
+    let value = e.target.value
+    form.reset()
+    form.setValues({ haveContract: value })
+  }
 
   return <ConfigProvider locale={zhCN}>
     <Form form={form} labelWidth={100} className={styles.placeholder}>
@@ -144,6 +157,7 @@ export default (props) => {
               { label: '有', value: '有' },
               { label: '无', value: '无' },
             ]}
+            x-component-props={{ onChange: onChange }}
           />
           <SchemaField.String
             name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}

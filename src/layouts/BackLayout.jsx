@@ -66,37 +66,41 @@ export default () => {
             <Menu.Item key="66-供方尽职调查-providerQueryPath">供方尽职调查</Menu.Item>
             <Menu.Item key="55-供方评分-providerScore1Path">供方评分</Menu.Item>
           </Menu.SubMenu>
-          <Menu.SubMenu title="项目立项" key="项目立项">
-            <Menu.Item key="66-项目备案-projectCodePath">项目备案</Menu.Item>
-            <Menu.Item key="66-一般项目立项-smallProjectPath">一般项目立项</Menu.Item>
-            <Menu.Item key="55-重大项目评估-sysDicPath">重大项目评估</Menu.Item>
-            <Menu.Item key="66-其他项目(非立项)-smallProjectPath">其他项目(非立项)</Menu.Item>
-          </Menu.SubMenu>
-          <Menu.SubMenu title="授权管理" key="授权管理">
-            <Menu.Item key="71-项目立项授权-projectPowerPath">项目立项授权</Menu.Item>
-            <Menu.Item key="55-一事一授权-otherPowerPath">一事一授权</Menu.Item>
-          </Menu.SubMenu>
           <Menu.SubMenu title="客户管理" key="客户管理">
             <Menu.Item key="66-客户信息-customerPath">客户信息</Menu.Item>
             <Menu.Item key="55-信用评级评分-customerScore1Path">客户信用评级评分</Menu.Item>
             <Menu.Item key="55-信用评级审批-customerCheck12Path">客户信用评级审批</Menu.Item>
           </Menu.SubMenu>
-          <Menu.SubMenu title="一般项目预算" key="一般项目预算">
-            <Menu.Item key="0-项目立项确认-sysDicPath">项目立项确认</Menu.Item>
-            <Menu.Item key="0-项目信息-smallBudgetProjectPath">项目信息</Menu.Item>
-            <Menu.Item key="1-预计收入-smallBudgetInPath">预计收入</Menu.Item>
-            <Menu.Item key="2-预计支出-smallBudgetOutPath">预计支出</Menu.Item>
-            <Menu.Item key="3-项目预算-sysDicPath">项目预算</Menu.Item>
+          <Menu.SubMenu title="授权管理" key="授权管理">
+            <Menu.Item key="71-项目立项授权-projectPowerPath">项目立项授权</Menu.Item>
+            <Menu.Item key="55-一事一授权-otherPowerPath">一事一授权</Menu.Item>
           </Menu.SubMenu>
-          <Menu.SubMenu title="重大项目预算" key="重大项目预算">
-            <Menu.Item key="0-项目立项确认-sysDicPath">项目立项确认</Menu.Item>
-            <Menu.Item key="00-项目信息-bigBudgetProjectPath">项目信息</Menu.Item>
-            <Menu.Item key="11-预计收入-bigBudgetInPath">预计收入</Menu.Item>
-            <Menu.Item key="22-公司信息-bigBudgetCompanyPath">公司信息</Menu.Item>
-            <Menu.Item key="33-预计支出-bigBudgetOutPath">预计支出</Menu.Item>
-            <Menu.Item key="44-项目预算-sysDicPath">项目预算</Menu.Item>
+          <Menu.Item key="66-项目备案-projectCodePath">项目备案</Menu.Item>
+          <Menu.SubMenu title="项目立项" key="项目立项">
+            <Menu.Item key="66-一般项目立项-smallProjectPath">一般项目立项</Menu.Item>
+            <Menu.Item key="55-重大项目评估-sysDicPath">重大项目评估</Menu.Item>
+            <Menu.Item key="66-项目保证金(函)-smallProjectPath">项目保证金(函)</Menu.Item>
+            <Menu.Item key="66-项目状态-smallProjectPath">项目状态</Menu.Item>
           </Menu.SubMenu>
-          <Menu.SubMenu title="预算执行合同签署情况" key="预算执行合同签署情况">
+          <Menu.SubMenu title="项目预算管理" key="项目预算管理">
+            <Menu.SubMenu title="一般项目预算" key="一般项目预算">
+              <Menu.Item key="0-项目立项确认-sysDicPath">项目立项确认</Menu.Item>
+              <Menu.Item key="0-项目信息-smallBudgetProjectPath">项目信息</Menu.Item>
+              <Menu.Item key="1-预计收入-smallBudgetInPath">预计收入</Menu.Item>
+              <Menu.Item key="2-预计支出-smallBudgetOutPath">预计支出</Menu.Item>
+              <Menu.Item key="3-项目预算-sysDicPath">项目预算</Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu title="重大项目预算" key="重大项目预算">
+              <Menu.Item key="0-项目立项确认-sysDicPath">项目立项确认</Menu.Item>
+              <Menu.Item key="00-项目信息-bigBudgetProjectPath">项目信息</Menu.Item>
+              <Menu.Item key="11-预计收入-bigBudgetInPath">预计收入</Menu.Item>
+              <Menu.Item key="22-公司信息-bigBudgetCompanyPath">公司信息</Menu.Item>
+              <Menu.Item key="33-预计支出-bigBudgetOutPath">预计支出</Menu.Item>
+              <Menu.Item key="44-项目预算-sysDicPath">项目预算</Menu.Item>
+            </Menu.SubMenu>
+            <Menu.Item key="66-非立项项目预算-smallProjectPath">非立项项目预算</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.SubMenu title="合同签署情况" key="合同签署情况">
             <Menu.Item key="1-收款合同-inContractPath">收款合同</Menu.Item>
             <Menu.Item key="1-付款合同-outContractPath">付款合同</Menu.Item>
             <Menu.Item key="1-合同号和WBS号-inOutContractPath">合同号和WBS号</Menu.Item>
@@ -105,11 +109,15 @@ export default () => {
             <Menu.Item key="1-收入信息-projectInPath">收入信息</Menu.Item>
             <Menu.Item key="1-支出信息-projectOutPath">支出信息</Menu.Item>
             <Menu.Item key="1-往来款信息-projectIoPath">往来款信息</Menu.Item>
-            <Menu.Item key="1-收支明细-sysDicPath">收支明细</Menu.Item>
-            <Menu.Item key="1-项目收支-projectInOutPath">项目收支</Menu.Item>
+            <Menu.Item key="1-收支明细表-sysDicPath">收支明细表</Menu.Item>
+            <Menu.Item key="1-项目收支表-projectInOutPath">项目收支表</Menu.Item>
           </Menu.SubMenu>
-          <Menu.Item key="99-合同执行情况-sysDicPath">合同执行情况</Menu.Item>
           <Menu.Item key="99-项目结算管理-sysDicPath">项目结算管理</Menu.Item>
+          <Menu.SubMenu title="查询" key="查询">
+            <Menu.Item key="99-合同执行情况-sysDicPath">合同执行情况</Menu.Item>
+            <Menu.Item key="1-项目履行台账-projectOutPath">项目履行台账</Menu.Item>
+            <Menu.Item key="1-项目状态-projectOutPath">项目状态</Menu.Item>
+          </Menu.SubMenu>
         </Menu.SubMenu>
       )
     }
@@ -255,7 +263,7 @@ export default () => {
           collapsible
           collapsed={collapsed}
           style={{ background: '#fff' }}
-          width={225}
+          width={200}
         >
           <Menu
             theme="light"

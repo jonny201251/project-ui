@@ -78,11 +78,6 @@ export default (props) => {
                         name: values.selectedRow.name,
                         taskCode: values.selectedRow.taskCode,
                         property: values.selectedRow.property,
-                        customerName: values.selectedRow.customerName,
-                        customerCode: values.selectedRow.customerCode,
-                        contractMoney: values.selectedRow.contractMoney,
-                        endMoney: values.selectedRow.endMoney,
-                        contractName: values.selectedRow.contractName,
                         wbs: values.selectedRow.wbs,
                       })
                       dialog2.close()
@@ -170,7 +165,10 @@ export default (props) => {
           <SchemaField.String
             name="remark" title='摘要' x-decorator="FormItem" x-component="Input.TextArea"
             x-component-props={{ rows: 2 }}/>
-          <SchemaField.Number name="money" required title='往来款' x-decorator="FormItem" x-component="NumberPicker"/>
+          <SchemaField.Number
+            name="money" required title='往来款' x-decorator="FormItem" x-component="NumberPicker"
+            x-component-props={{ placeholder: '收款填写正数，付款填写负数' }}
+          />
           <SchemaField.String
             x-decorator-props={{ gridSpan: 2 }}
             name="remarkk" title="备注" x-decorator="FormItem" x-component="Input.TextArea"

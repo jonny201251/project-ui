@@ -63,8 +63,9 @@ export default (props) => {
                         name: values.selectedRow.name,
                         taskCode: values.selectedRow.taskCode,
                         property: values.selectedRow.property,
+                        customerId: values.selectedRow.customerId,
                         customerName: values.selectedRow.customerName,
-                        customerCode: values.selectedRow.customerCode,
+                        contractCode: values.selectedRow.contractCode,
                         contractMoney: values.selectedRow.contractMoney,
                         endMoney: values.selectedRow.endMoney,
                         contractName: values.selectedRow.contractName,
@@ -113,10 +114,10 @@ export default (props) => {
           <SchemaField.String name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="customerName" title="客户名称" x-decorator="FormItem" x-component="Input"
-            x-decorator-props={{ gridSpan: 3 }}/>
+            x-decorator-props={{ gridSpan: 2 }}/>
           <SchemaField.String
             name="contractName" title="合同名称" x-decorator="FormItem" x-component="Input"
-            x-decorator-props={{ gridSpan: 3 }}
+            x-decorator-props={{ gridSpan: 2 }}
           />
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>

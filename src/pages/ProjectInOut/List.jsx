@@ -1,4 +1,4 @@
-import { get, projectIn1Path, projectInOutPath, proTableRequest } from '../../utils'
+import { get, projectInOutPath, proTableRequest } from '../../utils'
 import ProTable from '@ant-design/pro-table'
 import { useRef } from 'react'
 import { FormDialog } from '@formily/antd'
