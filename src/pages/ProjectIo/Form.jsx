@@ -167,7 +167,7 @@ export default (props) => {
             x-component-props={{ rows: 2 }}/>
           <SchemaField.Number
             name="money" required title='往来款' x-decorator="FormItem" x-component="NumberPicker"
-            x-component-props={{ placeholder: '收款填写正数，付款填写负数' }}
+            x-component-props={{ placeholder: '收款正数，付款负数' }}
           />
           <SchemaField.String
             x-decorator-props={{ gridSpan: 2 }}

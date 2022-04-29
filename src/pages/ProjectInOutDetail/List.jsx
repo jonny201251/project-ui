@@ -1,23 +1,24 @@
-import { projectInOutPath, proTableRequest } from '../../utils'
+import { get, projectInOutDetailPath, proTableRequest } from '../../utils'
 import ProTable from '@ant-design/pro-table'
 import { useRef } from 'react'
 import { FormDialog } from '@formily/antd'
-import { contextPath } from '../../utils'
+import Form from './Form'
 
 export default () => {
   const actionRef = useRef()
 
   const render = (record) => {
     return <a onClick={async () => {
-      let dialog = FormDialog({ title: '项目收支表', footer: null, keyboard: false, maskClosable: false, width: '98%' },
-        (form) => {
-          return <iframe
-            src={contextPath + '/jmreport/view/679927289940082688?projectId=' + record.projectId}
-            style={{ border: 0, width: '100%', height: document.body.clientHeight - 100 }}
-            frameBorder="0"/>
-        },
-      )
-      dialog.open({})
+      const data = await get(projectInOutDetailPath.get, { projectId: record.projectId })
+      if (data) {
+        let dialog = FormDialog({ title: '收支明细表', footer: null, keyboard: false, maskClosable: false, width: 1000 },
+          (form) => {
+            form.setValues(data)
+            return <Form form={form} dialog={dialog}/>
+          },
+        )
+        dialog.open({})
+      }
     }}>{record.name}</a>
   }
 
@@ -38,9 +39,8 @@ export default () => {
     actionRef={actionRef}
     columns={columns}
     columnEmptyText={true}
-    // pagination={{ pageSize: 1}}
     //列表数据
-    params={{ list: projectInOutPath.list }}
+    params={{ list: projectInOutDetailPath.list }}
     request={proTableRequest}
     //
     options={{ density: false }}
