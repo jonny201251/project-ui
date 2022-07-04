@@ -9,17 +9,6 @@ export default () => {
   const render = (text, record) => {
     return [
       <a onClick={async () => {
-        let dialog = FormDialog({ title: '收支明细表', footer: null, keyboard: false, maskClosable: false, width: '98%' },
-          (form) => {
-            return <iframe
-              src={contextPath + '/jmreport/view/679996015666331648?projectId=' + record.projectId}
-              style={{ border: 0, width: '100%', height: document.body.clientHeight - 100 }}
-              frameBorder="0"/>
-          },
-        )
-        dialog.open({})
-      }}>{'收支明细表'}</a>,
-      <a onClick={async () => {
         let dialog = FormDialog({ title: '项目收支表', footer: null, keyboard: false, maskClosable: false, width: '98%' },
           (form) => {
             return <iframe
@@ -30,6 +19,17 @@ export default () => {
         )
         dialog.open({})
       }}>{'项目收支表'}</a>,
+      <a onClick={async () => {
+        let dialog = FormDialog({ title: '收支明细表', footer: null, keyboard: false, maskClosable: false, width: '98%' },
+          (form) => {
+            return <iframe
+              src={contextPath + '/jmreport/view/679996015666331648?projectId=' + record.projectId}
+              style={{ border: 0, width: '100%', height: document.body.clientHeight - 100 }}
+              frameBorder="0"/>
+          },
+        )
+        dialog.open({})
+      }}>{'收支明细表'}</a>,
     ]
   }
 

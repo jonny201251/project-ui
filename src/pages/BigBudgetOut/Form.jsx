@@ -41,7 +41,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(projectName,projectTaskCode,costType,costRate)').forEach(field => {
+    form.query('*(name,taskCode,costType,costRate)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
@@ -71,8 +71,8 @@ export default (props) => {
                       form.setValues({
                         budgetId: values.selectedRow.id,
                         projectId: values.selectedRow.projectId,
-                        projectName: values.selectedRow.projectName,
-                        projectTaskCode: values.selectedRow.projectTaskCode,
+                        name: values.selectedRow.projectName,
+                        taskCode: values.selectedRow.projectTaskCode,
                         costType: values.selectedRow.costType,
                         costRate: values.selectedRow.costRate,
                         companyId: values.selectedRow.id,

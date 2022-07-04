@@ -42,7 +42,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(projectTaskCode,costRate)').forEach(field => {
+    form.query('*(taskCode,costRate)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
@@ -72,8 +72,8 @@ export default (props) => {
                       form.setValues({
                         budgetId: values.selectedRow.id,
                         projectId: values.selectedRow.projectId,
-                        projectName: values.selectedRow.name,
-                        projectTaskCode: values.selectedRow.taskCode,
+                        name: values.selectedRow.name,
+                        taskCode: values.selectedRow.taskCode,
                       })
                       dialog2.close()
                     } else {
@@ -117,9 +117,9 @@ export default (props) => {
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
-            name="projectName" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}
+            name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-          <SchemaField.String name="projectTaskCode" title="项目任务号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="taskCode" title="项目任务号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="costType" required title="成本类型" x-decorator="FormItem" x-component="Select"
             enum={typeArr.map(item => ({ label: item, value: item }))}

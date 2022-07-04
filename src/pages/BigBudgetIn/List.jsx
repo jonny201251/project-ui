@@ -3,8 +3,8 @@ import { BaseProTable } from '../../components'
 
 export default () => {
   const columns = [
-    { title: '项目名称', dataIndex: 'projectName', valueType: 'text' },
-    { title: '项目任务号', dataIndex: 'projectTaskCode', valueType: 'text' },
+    { title: '项目名称', dataIndex: 'name', valueType: 'text' },
+    { title: '项目任务号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '收入类型', dataIndex: 'inType', valueType: 'text' },
   ]
 

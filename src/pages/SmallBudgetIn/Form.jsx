@@ -69,9 +69,9 @@ export default (props) => {
                       form.setValues({
                         budgetId: values.selectedRow.id,
                         projectId: values.selectedRow.projectId,
-                        projectName: values.selectedRow.name,
-                        projectTaskCode: values.selectedRow.taskCode,
-                        projectType: values.selectedRow.projectType,
+                        name: values.selectedRow.name,
+                        taskCode: values.selectedRow.taskCode,
+                        type: values.selectedRow.projectType,
                       })
                       dialog2.close()
                     } else {
@@ -109,9 +109,9 @@ export default (props) => {
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 2, strictAutoFit: true }}>
           <SchemaField.String
-            name="projectName" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+            name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-          <SchemaField.String name="projectTaskCode" title="项目任务号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="taskCode" title="项目任务号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="inType" required title="收入类型" x-decorator="FormItem" x-component="Select"
             enum={[

@@ -14,6 +14,12 @@ export default (props) => {
     params[rowKey || 'id'] = record[rowKey || 'id']
 
     if (type === 'edit') {
+      if (path.flag === 'smallBudgetInPath') {
+        params['inType'] = record.inType
+      }
+      if (path.flag === 'smallBudgetOutPath') {
+        params['costType'] = record.costType
+      }
       const dbRecord = await get(path.get, params)
       if (dbRecord) {
         let dialog = FormDialog(
@@ -52,6 +58,12 @@ export default (props) => {
         dialog.open()
       }
     } else if (type === 'preview') {
+      if (path.flag === 'smallBudgetInPath') {
+        params['inType'] = record.inType
+      }
+      if (path.flag === 'smallBudgetOutPath') {
+        params['costType'] = record.costType
+      }
       const dbRecord = await get(path.get, params)
       if (dbRecord) {
         let dialog = FormDialog({ title: '浏览', footer: null, keyboard: false, maskClosable: false, width },
