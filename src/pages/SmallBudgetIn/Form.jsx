@@ -134,7 +134,7 @@ export default (props) => {
               <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '回款日期', align: 'center' }}>
                 <SchemaField.String
                   name="inDate" x-decorator="FormItem" x-component="DatePicker"
-                  x-component-props={{ picker: 'month', format: 'YYYY年MM' }}
+                  x-component-props={{ picker: 'month', format: 'YYYY年MM月' }}
                 />
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '金额', align: 'center' }}>
