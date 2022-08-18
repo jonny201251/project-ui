@@ -156,6 +156,7 @@ export default (props) => {
         </SchemaField.Void>
       </SchemaField>
     </Form>
+
   </ConfigProvider>
 }
 
