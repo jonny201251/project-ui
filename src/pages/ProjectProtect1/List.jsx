@@ -1,29 +1,28 @@
-import { proTableRequest, smallBudgetProjectPath } from '../../utils'
-import OperateButton from './OperateButton'
 import { useRef, useState } from 'react'
 import ProTable from '@ant-design/pro-table'
-import { ToolBarButton } from '../../components'
+import { proTableRequest, projectProtect1Path } from '../../utils'
+import { OperateButton, ToolBarButton } from '../../components'
 
 export default () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const actionRef = useRef()
   const columns = [
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
-    { title: '项目任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '业务状态', dataIndex: 'status', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
-    { title: '项目性质', dataIndex: 'property', valueType: 'text' },
-    { title: '合同编号', dataIndex: 'contractCode', valueType: 'text' },
-    { title: '合同金额', dataIndex: 'contractName', valueType: 'text' },
-    { title: '成本总预算', dataIndex: 'totalCost', valueType: 'text' },
-    { title: '版本', dataIndex: 'version', valueType: 'text' },
+    { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
+    { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '申请时间', dataIndex: 'createDatetime', valueType: 'text' },
     {
       title: '操作',
       valueType: 'option',
       render: (text, record, _, action) => [
-        <OperateButton record={record} path={smallBudgetProjectPath} actionRef={actionRef}/>,
+        <OperateButton record={record} path={projectProtect1Path} actionRef={actionRef}/>,
       ],
     },
   ]
+
 
   return <ProTable
     bordered
@@ -32,7 +31,7 @@ export default () => {
     columns={columns}
     columnEmptyText={true}
     //列表数据
-    params={{ list: smallBudgetProjectPath.list }}
+    params={{ list: projectProtect1Path.list }}
     request={proTableRequest}
     //复选框
     rowSelection={{ onChange: selectedRowKeys => setSelectedRowKeys(selectedRowKeys) }}
@@ -42,7 +41,7 @@ export default () => {
     //
     headerTitle={
       <ToolBarButton
-        path={smallBudgetProjectPath} actionRef={actionRef} selectedRowKeys={selectedRowKeys}
+        path={projectProtect1Path} actionRef={actionRef} selectedRowKeys={selectedRowKeys}
       />
     }
   />

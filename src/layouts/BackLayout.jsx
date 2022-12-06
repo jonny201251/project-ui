@@ -78,27 +78,16 @@ export default () => {
           <Menu.Item key="66-项目备案-projectCodePath">项目备案</Menu.Item>
           <Menu.SubMenu title="项目立项" key="项目立项">
             <Menu.Item key="66-一般项目立项-smallProjectPath">一般项目立项</Menu.Item>
+            <Menu.Item key="66-一般项目非立项-smallProjectNoPath">一般项目非立项</Menu.Item>
             <Menu.Item key="55-重大项目评估-sysDicPath">重大项目评估</Menu.Item>
-            <Menu.Item key="66-一般项目非立项-smallProjectPath">一般项目非立项</Menu.Item>
-            <Menu.Item key="66-项目保证金(函)-smallProjectPath">项目保证金(函)</Menu.Item>
-            <Menu.Item key="66-项目状态-smallProjectPath">项目状态</Menu.Item>
           </Menu.SubMenu>
+          <Menu.Item key="66-投标保证金(函)登记-projectProtect1Path">投标保证金(函)登记</Menu.Item>
           <Menu.SubMenu title="项目预算管理" key="项目预算管理">
-            <Menu.SubMenu title="一般项目预算" key="一般项目预算">
-              <Menu.Item key="0-项目立项确认-sysDicPath">项目立项确认</Menu.Item>
-              <Menu.Item key="0-项目信息-smallBudgetProjectPath">项目信息</Menu.Item>
-              <Menu.Item key="1-预计收入-smallBudgetInPath">预计收入</Menu.Item>
-              <Menu.Item key="2-预计支出-smallBudgetOutPath">预计支出</Menu.Item>
-              <Menu.Item key="3-项目预算-sysDicPath">项目预算</Menu.Item>
-            </Menu.SubMenu>
-            <Menu.SubMenu title="重大项目预算" key="重大项目预算">
-              <Menu.Item key="0-项目立项确认-sysDicPath">项目立项确认</Menu.Item>
-              <Menu.Item key="00-项目信息-bigBudgetProjectPath">项目信息</Menu.Item>
-              <Menu.Item key="11-预计收入-bigBudgetInPath">预计收入</Menu.Item>
-              <Menu.Item key="22-公司信息-bigBudgetCompanyPath">公司信息</Menu.Item>
-              <Menu.Item key="33-预计支出-bigBudgetOutPath">预计支出</Menu.Item>
-              <Menu.Item key="44-项目预算-sysDicPath">项目预算</Menu.Item>
-            </Menu.SubMenu>
+            <Menu.Item key="0-项目立项确认-sysDicPath">项目立项确认</Menu.Item>
+            <Menu.Item key="0-项目信息-smallBudgetProjectPath">项目信息</Menu.Item>
+            <Menu.Item key="1-预计收入-smallBudgetInPath">预计收入</Menu.Item>
+            <Menu.Item key="2-预计支出-smallBudgetOutPath">预计支出</Menu.Item>
+            <Menu.Item key="3-项目预算-sysDicPath">项目预算</Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="合同签署情况" key="合同签署情况">
             <Menu.Item key="1-收款合同-inContractPath">收款合同</Menu.Item>
@@ -115,7 +104,6 @@ export default () => {
           <Menu.SubMenu title="查询" key="查询">
             <Menu.Item key="99-合同执行情况-sysDicPath">合同执行情况</Menu.Item>
             <Menu.Item key="1-项目履行台账-projectOutPath">项目履行台账</Menu.Item>
-            <Menu.Item key="1-项目状态-projectOutPath">项目状态</Menu.Item>
           </Menu.SubMenu>
         </Menu.SubMenu>
       )

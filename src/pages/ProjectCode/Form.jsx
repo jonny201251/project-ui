@@ -106,7 +106,7 @@ export default (props) => {
   return <Form form={form} labelWrap={true} labelWidth={120}>
     <SchemaField>
       <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 2, strictAutoFit: true }}>
-        <SchemaField.String name="taskCode" required title="任务号" x-decorator="FormItem" x-component="Input"/>
+        <SchemaField.String name="taskCode" required title="任务号/备案号" x-decorator="FormItem" x-component="Input"/>
         <SchemaField.String name="projectName" required title="项目名称" x-decorator="FormItem" x-component="Input"/>
         <SchemaField.String
           name="projectProperty" required title="项目性质" x-decorator="FormItem" x-component="Select"

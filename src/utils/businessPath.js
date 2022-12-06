@@ -36,6 +36,10 @@ import OtherPowerCheckForm from '../pages/OtherPower/CheckForm'
 import OtherPowerViewForm from '../pages/OtherPower/ViewForm'
 import ProjectCodeList from '../pages/ProjectCode/List'
 import ProjectCodeForm from '../pages/ProjectCode/Form'
+import SmallProjectNoList from '../pages/SmallProjectNo/List'
+import SmallProjectNoForm from '../pages/SmallProjectNo/Form'
+import ProjectProtect1List from '../pages/ProjectProtect1/List'
+import ProjectProtect1Form from '../pages/ProjectProtect1/Form'
 import SmallProjectList from '../pages/SmallProject/List'
 import SmallProjectAddForm from '../pages/SmallProject/AddForm'
 import SmallProjectCheckForm from '../pages/SmallProject/CheckForm'
@@ -218,6 +222,24 @@ export const projectCodePath = {
   getLabelValue: contextPath + '/projectCode/getLabelValue',
 }
 
+export const smallProjectNoPath = {
+  flag: 'smallProjectNoPath', width: 1200, Form: SmallProjectNoForm, List: SmallProjectNoList,
+  list: contextPath + '/smallProjectNo/list',
+  get: contextPath + '/smallProjectNo/get',
+  add: contextPath + '/smallProjectNo/add',
+  edit: contextPath + '/smallProjectNo/edit',
+  delete: contextPath + '/smallProjectNo/delete',
+}
+
+export const projectProtect1Path = {
+  flag: 'projectProtect1Path', width: 1000, Form: ProjectProtect1Form, List: ProjectProtect1List,
+  list: contextPath + '/projectProtect1/list',
+  get: contextPath + '/projectProtect1/get',
+  add: contextPath + '/projectProtect1/add',
+  edit: contextPath + '/projectProtect1/edit',
+  delete: contextPath + '/projectProtect1/delete',
+}
+
 export const smallProjectPath = {
   flag: 'smallProjectPath', width: 1200, List: SmallProjectList,
   AddForm: SmallProjectAddForm,
@@ -237,6 +259,7 @@ export const smallBudgetProjectPath = {
   get: contextPath + '/smallBudgetProject/get',
   add: contextPath + '/smallBudgetProject/add',
   edit: contextPath + '/smallBudgetProject/edit',
+  modify: contextPath + '/smallBudgetProject/modify',
 }
 export const smallBudgetInPath = {
   flag: 'smallBudgetInPath', width: 700, Form: SmallBudgetInForm, List: SmallBudgetInList,

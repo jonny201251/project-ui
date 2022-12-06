@@ -74,6 +74,8 @@ export default (props) => {
                         projectId: values.selectedRow.projectId,
                         name: values.selectedRow.name,
                         taskCode: values.selectedRow.taskCode,
+                        haveDisplay: values.selectedRow.haveDisplay,
+                        version: values.selectedRow.version,
                       })
                       dialog2.close()
                     } else {

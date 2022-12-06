@@ -3,7 +3,7 @@ import { BaseProTable } from '../../components'
 
 export default () => {
   const columns = [
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '任务号/备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '项目名称', dataIndex: 'projectName', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
     { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
