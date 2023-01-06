@@ -15,7 +15,7 @@ export default () => {
     { title: '合同编号', dataIndex: 'contractCode', valueType: 'text' },
     { title: '合同金额', dataIndex: 'contractName', valueType: 'text' },
     { title: '成本总预算', dataIndex: 'totalCost', valueType: 'text' },
-    { title: '版本', dataIndex: 'version', valueType: 'text' },
+    { title: '调整次数', dataIndex: 'version', valueType: 'text' },
     {
       title: '操作',
       valueType: 'option',
