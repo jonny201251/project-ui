@@ -27,5 +27,6 @@ export default () => {
     { title: '当前步骤', dataIndex: ['processInst', 'displayProcessStep'], valueType: 'text' },
   ]
 
+
   return <BaseProTableProcess path={providerScore1Path} columns={columns}/>
 }
