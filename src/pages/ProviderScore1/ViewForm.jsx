@@ -211,6 +211,14 @@ export default (props) => {
                 </SchemaField.Void>
               </SchemaField.Object>
             </SchemaField.Array>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+              <SchemaField.Number name="startScore" title={<b>初评得分</b>}
+                                  x-decorator="FormItem" x-component="PreviewText"/>
+              <SchemaField.Number name="endScore" title="最终得分" x-decorator="FormItem" x-component="PreviewText"/>
+              <SchemaField.String
+                name="result" required title="结论" x-decorator="FormItem" x-component="PreviewText"
+              />
+            </SchemaField.Void>
           </SchemaField>
         </Form>
       </Tabs.TabPane>

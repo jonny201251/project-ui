@@ -44,7 +44,7 @@ export default () => {
   }
 
   const renderMenu = (menuList) => {
-    if (utils.env === 'dev') {
+    if (utils.env === 'devv') {
       openKeys.push('xxxx')
       return (
         <Menu.SubMenu
@@ -79,7 +79,7 @@ export default () => {
           <Menu.SubMenu title="项目立项" key="项目立项">
             <Menu.Item key="66-一般项目立项-smallProjectPath">一般项目立项</Menu.Item>
             <Menu.Item key="66-一般项目非立项-smallProjectNoPath">一般项目非立项</Menu.Item>
-            <Menu.Item key="55-重大项目评估-sysDicPath">重大项目评估</Menu.Item>
+            <Menu.Item key="55-重大项目评估-bigProjectPath">重大项目评估</Menu.Item>
           </Menu.SubMenu>
           <Menu.Item key="66-投标保证金(函)登记-projectProtect1Path">投标保证金(函)登记</Menu.Item>
           <Menu.SubMenu title="项目预算管理" key="项目预算管理">
@@ -108,6 +108,7 @@ export default () => {
         </Menu.SubMenu>
       )
     }
+
     return (
       menuList &&
       menuList.map((item) => {
@@ -116,7 +117,7 @@ export default () => {
           return (
             <Menu.SubMenu
               key={item.id}
-              icon={React.createElement(ICONS[item.icon])}
+              icon={item.icon && React.createElement(ICONS[item.icon])}
               title={item.name}
               onClick={onClick}
             >
@@ -188,7 +189,7 @@ export default () => {
   }
 
   useEffect(async () => {
-    setOpenKeys(rootSubmenuKeys)
+    // setOpenKeys(rootSubmenuKeys)
     //
     // await utils.get(utils.checkUserPath.haveLogin)
   }, [])
@@ -224,7 +225,7 @@ export default () => {
           <Dropdown overlay={DropdownMenu} className="user">
             <span>
               <UserOutlined style={{ paddingRight: 5, fontSize: 20 }}/>
-              {utils.env === 'dev' ? 'xxx' : utils.session.getItem('name')}
+              {utils.env === 'devv' ? 'xxx' : utils.session.getItem('displayName')}
             </span>
           </Dropdown>
           <span className="user">

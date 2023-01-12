@@ -32,7 +32,10 @@ export default () => {
             const data = await post(sysUserPath.login, values)
             const data2 = await get(preloadPath.get)
             if (data && data2) {
-              session.setItem('user', data)
+              session.setItem('user', data.user);
+              session.setItem('displayName', data.user.displayName);
+              session.setItem('menuList', data.menuList);
+
               Object.keys(data2).forEach(key => session.setItem(key, data2[key]))
               form.reset()
               setTabPanes([])

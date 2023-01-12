@@ -39,7 +39,7 @@ map.set('产品服务供货及使用情况', [
 ].map(item => ({ label: item, value: item })))
 
 export default (props) => {
-  let { form, record } = props
+  let { form, record, type } = props
 
   useEffect(async () => {
     form.query('*(deptName,displayName,createDate,providerName,type)').forEach(field => {
@@ -142,7 +142,45 @@ export default (props) => {
         }
       }
     })
+
+    onFieldReact('providerScore2List.*.startScore', (field) => {
+      let sum = 0
+      form.query('providerScore2List.*.startScore').forEach(field => {
+        if (field.value) {
+          sum += field.value
+        }
+      })
+      let tmp = form.query('startScore').take()
+      if (tmp && sum) {
+        tmp.value = sum
+      }
+    })
+
+    onFieldReact('providerScore2List.*.endScore', (field) => {
+      let sum = 0
+      form.query('providerScore2List.*.endScore').forEach(field => {
+        if (field.value) {
+          sum += field.value
+        }
+      })
+      let tmp = form.query('endScore').take()
+      if (tmp && sum) {
+        tmp.value = sum
+      }
+    })
+
   })
+
+  const showComment = () => {
+    if (type === 'check') {
+      return <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 2, strictAutoFit: true }}>
+        <SchemaField.String
+          name="comment" title="审批意见" x-decorator="FormItem"
+          x-component="Input.TextArea" x-component-props={{ placeholder: '请输入意见' }}
+        />
+      </SchemaField.Void>
+    }
+  }
 
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
@@ -211,6 +249,20 @@ export default (props) => {
                 </SchemaField.Void>
               </SchemaField.Object>
             </SchemaField.Array>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+              <SchemaField.Number name="startScore" title={<b>初评得分</b>}
+                                  x-decorator="FormItem" x-component="PreviewText"/>
+              <SchemaField.Number name="endScore" title="最终得分" x-decorator="FormItem" x-component="PreviewText"/>
+              <SchemaField.String
+                name="result" required title="结论" x-decorator="FormItem" x-component="Select"
+                enum={[
+                  { label: '同意', value: '同意' },
+                  { label: '不同意', value: '不同意' },
+                  { label: '列入合格供方', value: '列入合格供方' },
+                ]}
+              />
+            </SchemaField.Void>
+            {showComment()}
           </SchemaField>
         </Form>
       </Tabs.TabPane>

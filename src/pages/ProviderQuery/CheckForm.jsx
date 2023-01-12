@@ -60,7 +60,7 @@ export default (props) => {
                     const values = await form2.submit()
                     if (values.selectedRow) {
                       form.setValues({
-                        providerId: values.selectedRow.id,
+                        providerId: values.selectedRow.providerId,
                         usee: values.selectedRow.usee,
                         name: values.selectedRow.name,
                         property: values.selectedRow.property,
@@ -82,6 +82,17 @@ export default (props) => {
         },
       )
       dialog2.open({})
+    }
+  }
+
+  const showComment = () => {
+    if (type === 'check') {
+      return <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 2, strictAutoFit: true }}>
+        <SchemaField.String
+          name="comment" title="审批意见" x-decorator="FormItem"
+          x-component="Input.TextArea" x-component-props={{ placeholder: '请输入意见' }}
+        />
+      </SchemaField.Void>
     }
   }
 
@@ -130,6 +141,7 @@ export default (props) => {
                 name="fileList" title="附件" x-decorator="FormItem"
                 x-component="File" x-decorator-props={{ gridSpan: 2 }}/>
             </SchemaField.Void>
+            {showComment()}
           </SchemaField>
         </Form>
       </Tabs.TabPane>

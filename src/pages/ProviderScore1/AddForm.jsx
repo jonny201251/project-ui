@@ -51,11 +51,20 @@ export default (props) => {
       type: '民用产业项目', createDate: new Date().Format('yyyy-MM-dd'),
       userId: user.id, displayName: user.displayName, loginName: user.loginName,
       deptId: user.deptId, deptName: user.deptName,
+      startScore: 0, endScore: 0,
     })
     initList('民用产业项目')
   }, [])
 
   const onSelect = (value) => {
+    form.query('startScore').take().value = 0
+    initList(value)
+    form.clearErrors()
+  }
+
+  const onChange = (e) => {
+    form.query('startScore').take().value = 0
+    let value = e.target.value
     initList(value)
     form.clearErrors()
   }
@@ -165,10 +174,23 @@ export default (props) => {
         }
       }
     })
+
+    onFieldReact('providerScore2List.*.startScore', (field) => {
+      let sum = 0
+      form.query('providerScore2List.*.startScore').forEach(field => {
+        if (field.value) {
+          sum += field.value
+        }
+      })
+      let tmp = form.query('startScore').take()
+      if (tmp && sum) {
+        tmp.value = sum
+      }
+    })
   })
 
   const onClick = () => {
-    let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 700 },
+    let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
       (form2) => {
         return <>
           <ProviderDialog form={form2} dialog={dialog2} selectedId={form.values.providerId}/>
@@ -184,7 +206,6 @@ export default (props) => {
                   } else {
                     message.error('选择一条数据')
                   }
-                  console.log('aaa')
                 }}
                 type={'primary'}
               >
@@ -212,13 +233,14 @@ export default (props) => {
             x-component-props={{ onClick: onClick }}
           />
           <SchemaField.String
-            name="type" title="项目类别" x-decorator="FormItem" x-component="Select"
+            name="type" required title="项目类别" x-decorator="FormItem" x-component="Radio.Group"
             enum={[
               { label: '民用产业项目', value: '民用产业项目' },
               { label: '自筹资金项目', value: '自筹资金项目' },
               { label: '技改项目', value: '技改项目' },
             ]}
-            x-component-props={{ onSelect: onSelect }}
+            x-component-props={{ onChange: onChange }}
+            x-decorator-props={{ gridSpan: 2 }}
           />
         </SchemaField.Void>
         <SchemaField.Array
@@ -256,7 +278,7 @@ export default (props) => {
             </SchemaField.Void>
             <SchemaField.Void
               x-component="ArrayTable.Column"
-              x-component-props={{ width: 120, title: '初评得分' , align: 'center'}}
+              x-component-props={{ width: 120, title: '初评得分', align: 'center' }}
             >
               <SchemaField.Number x-decorator="FormItem" required name="startScore" x-component="NumberPicker"/>
             </SchemaField.Void>
@@ -269,9 +291,9 @@ export default (props) => {
           </SchemaField.Object>
         </SchemaField.Array>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.Number name="startScore" title="初评得分"
-                              x-decorator="FormItem" x-component="NumberPicker"/>
-          <SchemaField.Number name="endScore" title="最终得分" x-decorator="FormItem" x-component="NumberPicker"/>
+          <SchemaField.Number name="startScore" title={<b>初评得分</b>}
+                              x-decorator="FormItem" x-component="PreviewText"/>
+          {/*          <SchemaField.Number name="endScore" title="最终得分" x-decorator="FormItem" x-component="NumberPicker"/>
           <SchemaField.String
             name="result" required title="结论" x-decorator="FormItem" x-component="Select"
             enum={[
@@ -279,7 +301,7 @@ export default (props) => {
               { label: '不同意', value: '不同意' },
               { label: '列入合格供方', value: '列入合格供方' },
             ]}
-          />
+          />*/}
         </SchemaField.Void>
       </SchemaField>
     </Form>

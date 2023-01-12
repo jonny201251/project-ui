@@ -3,6 +3,8 @@ import SysDicForm from '../pages/SysDic/Form'
 import SysDicList from '../pages/SysDic/List'
 import SysRoleForm from '../pages/SysRole/Form'
 import SysRoleList from '../pages/SysRole/List'
+import SysPermissionForm from '../pages/SysPermission/Form'
+import SysPermissionList from '../pages/SysPermission/List'
 import SysUserForm from '../pages/SysUser/Form'
 import SysUserList from '../pages/SysUser/List'
 import SysDeptForm from '../pages/SysDept/Form'
@@ -27,6 +29,19 @@ export const sysRolePath = {
   delete: contextPath + '/sysRole/delete',
   all: contextPath + '/sysRole/all',
 }
+
+export const sysPermissionPath = {
+  flag: 'sysPermissionPath',
+  Form: SysPermissionForm,
+  List: SysPermissionList,
+  list: contextPath + '/sysPermission/list',
+  get: contextPath + '/sysPermission/get',
+  add: contextPath + '/sysPermission/add',
+  edit: contextPath + '/sysPermission/edit',
+  delete: contextPath + '/sysPermission/delete',
+  getTreeSelect: contextPath + '/sysPermission/getTreeSelect',
+}
+
 export const sysUserPath = {
   flag: 'sysUserPath', Form: SysUserForm, List: SysUserList,
   list: contextPath + '/sysUser/list',

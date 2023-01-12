@@ -49,6 +49,7 @@ export default (props) => {
   }, [])
 
   const onChange = (e) => {
+    form.query('startScore').take().value=0
     let value = e.target.value
     initList(value)
     form.clearErrors()
@@ -161,6 +162,20 @@ export default (props) => {
         }
       }
     })
+
+    onFieldReact('providerScore2List.*.startScore', (field) => {
+      let sum = 0
+      form.query('providerScore2List.*.startScore').forEach(field => {
+        if (field.value) {
+          sum += field.value
+        }
+      })
+      let tmp = form.query('startScore').take()
+      if (tmp && sum) {
+        tmp.value = sum
+      }
+    })
+
   })
 
   const onClick = () => {
@@ -194,16 +209,16 @@ export default (props) => {
   return <ConfigProvider locale={zhCN}>
     <Form form={form}>
       <SchemaField>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
-            name="deptName" required title="申请部门" x-component="Input"
-            x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+            name="deptName" title="申请部门" x-component="Input"
+            x-decorator="FormItem"
           />
-          <SchemaField.String name="displayName" required title="申请人" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="createDate" required title="打分日期" x-decorator="FormItem" x-component="DatePicker"/>
+          <SchemaField.String name="displayName" title="申请人" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="createDate" title="打分日期" x-decorator="FormItem" x-component="DatePicker"/>
           <SchemaField.String
             name="providerName" required title="供方名称" x-component="InputButton"
-            x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+            x-decorator="FormItem"
             x-component-props={{ onClick: onClick }}
           />
           <SchemaField.String
@@ -264,6 +279,10 @@ export default (props) => {
             </SchemaField.Void>
           </SchemaField.Object>
         </SchemaField.Array>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.Number name="startScore" title={<b>初评得分</b>}
+                              x-decorator="FormItem" x-component="PreviewText"/>
+        </SchemaField.Void>
       </SchemaField>
     </Form>
   </ConfigProvider>

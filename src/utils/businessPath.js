@@ -46,6 +46,12 @@ import SmallProjectCheckForm from '../pages/SmallProject/CheckForm'
 import SmallProjectChangeForm from '../pages/SmallProject/ChangeForm'
 import SmallProjectViewHistory from '../pages/SmallProject/ViewHistory'
 import SmallProjectViewForm from '../pages/SmallProject/ViewForm'
+import BigProjectList from '../pages/BigProject/List'
+import BigProjectAddForm from '../pages/BigProject/AddForm'
+import BigProjectCheckForm from '../pages/BigProject/CheckForm'
+import BigProjectChangeForm from '../pages/BigProject/ChangeForm'
+import BigProjectViewHistory from '../pages/BigProject/ViewHistory'
+import BigProjectViewForm from '../pages/BigProject/ViewForm'
 import SmallBudgetProjectForm from '../pages/SmallBudgetProject/Form'
 import SmallBudgetProjectList from '../pages/SmallBudgetProject/List'
 import SmallBudgetInForm from '../pages/SmallBudgetIn/Form'
@@ -138,6 +144,12 @@ export const providerPath = {
   add: contextPath + '/provider/add',
   edit: contextPath + '/provider/edit',
   delete: contextPath + '/provider/delete',
+}
+export const providerPath2 = {
+  list: contextPath + '/provider/list2',
+}
+export const providerPath3 = {
+  list: contextPath + '/provider/list3',
 }
 /*
   新增流程：AddForm，编辑：EditForm，审批流程：CheckForm，变更流程：ChangeForm
@@ -253,6 +265,19 @@ export const smallProjectPath = {
   get: contextPath + '/smallProject/get',
   btnHandle: contextPath + '/smallProject/btnHandle',
 }
+export const bigProjectPath = {
+  flag: 'bigProjectPath', width: 1200, List: BigProjectList,
+  AddForm: BigProjectAddForm,
+  EditForm: BigProjectAddForm,
+  CheckForm: BigProjectCheckForm,
+  ChangeForm: BigProjectChangeForm,
+  ViewHistory: BigProjectViewHistory,
+  ViewForm: BigProjectViewForm,
+  list: contextPath + '/bigProject/list',
+  viewHistory: contextPath + '/bigProject/viewHistory',
+  get: contextPath + '/bigProject/get',
+  btnHandle: contextPath + '/bigProject/btnHandle',
+}
 export const smallBudgetProjectPath = {
   flag: 'smallBudgetProjectPath', width: 1000, Form: SmallBudgetProjectForm, List: SmallBudgetProjectList,
   list: contextPath + '/smallBudgetProject/list',
@@ -346,6 +371,9 @@ export const providerSimplePath = {
   get: contextPath + '/providerSimple/get',
   add: contextPath + '/providerSimple/add',
   edit: contextPath + '/providerSimple/edit',
+}
+export const providerSimplePath2 = {
+  list: contextPath + '/providerSimple/list2',
 }
 export const providerQueryPath = {
   flag: 'providerQueryPath', width: 1000, List: ProviderQueryList,

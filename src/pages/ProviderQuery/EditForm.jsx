@@ -58,7 +58,7 @@ export default (props) => {
                     const values = await form2.submit()
                     if (values.selectedRow) {
                       form.setValues({
-                        providerId: values.selectedRow.id,
+                        providerId: values.selectedRow.providerId,
                         usee: values.selectedRow.usee,
                         name: values.selectedRow.name,
                         property: values.selectedRow.property,

@@ -93,7 +93,8 @@ export default (props) => {
     }
     const data = await get(projectCodePath.getLabelValue)
     if (data) {
-      form.query('taskCode').take().setDataSource(data)
+      let field = form.query('taskCode').take()
+      field && field.setDataSource(data)
     }
   }, [])
 

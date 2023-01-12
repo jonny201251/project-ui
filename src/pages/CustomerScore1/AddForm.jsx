@@ -79,6 +79,9 @@ export default (props) => {
       if (itemValue) {
         let startScoreField = field.query('.startScore').take()
         let endScoreField = field.query('.endScore').take()
+
+        startScoreField && startScoreField.setValue(null)
+
         if (kpiValue === '企业性质') {
           if (itemValue === '国有军工系统企业') {
             field.value = '9-10分'
@@ -301,7 +304,7 @@ export default (props) => {
             </SchemaField.Void>
             <SchemaField.Void
               x-component="ArrayTable.Column"
-              x-component-props={{ title: '评价指标', align: 'center' }}
+              x-component-props={{ title: '评价指标', align: 'center'}}
             >
               <SchemaField.String name="kpi" x-decorator="FormItem" x-component="PreviewText.Input"/>
             </SchemaField.Void>

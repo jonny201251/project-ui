@@ -134,3 +134,9 @@ const MyCard = (props) => {
 }
 
 export {MyCard}
+
+const Line = (props) => {
+  return <div>--</div>
+}
+
+export {Line}
