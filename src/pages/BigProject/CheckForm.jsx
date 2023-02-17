@@ -8,7 +8,7 @@ import {
   FormGrid,
   FormItem,
   FormLayout,
-  Input,
+  Input, PreviewText,
   Radio,
   Select,
 } from '@formily/antd'
@@ -70,7 +70,7 @@ const InputButton3 = (props) => {
 
 const SchemaField = createSchemaField({
   components: {
-    FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox,
+    FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox,PreviewText,
     Select, InputButton, InputButton2, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
     MyCard, Divider, InputButton3, Line,
   },
@@ -92,13 +92,16 @@ map.set('质保金比例', ['3%(含)以下', '3%以上'].map(item => ({ label: i
 map.set('标前项目进度', ['未开工', '开工进度10%以内', '开工进度30%以内', '开工进度30%及以上'].map(item => ({ label: item, value: item })))
 map.set('一类项目条件', ['具备条件', '不具备条件'].map(item => ({ label: item, value: item })))
 map.set('其他因素', ['无其他因素', '有其他因素'].map(item => ({ label: item, value: item })))
-map.set('项目评分', ['', '', '', '', '', ''].map(item => ({ label: item, value: item })))
+map.set('项目评分', ['--'].map(item => ({ label: item, value: item })))
 map.set('否决项', ['是', '否'].map(item => ({ label: item, value: item })))
 
 map.set('甲方角色', ['业主', '总包', '其他'].map(item => ({ label: item, value: item })))
 map.set('甲方企业性质', ['集团所属企业', '地级市以上政府', '国企', '县级以下政府', '民企', '其他'].map(item => ({ label: item, value: item })))
+map.set('甲方(业主)评分', ['--'].map(item => ({ label: item, value: item })))
+
 
 map.set('企业性质', ['集团所属企业', '国企', '民企', '其他'].map(item => ({ label: item, value: item })))
+map.set('战略伙伴评分', ['--'].map(item => ({ label: item, value: item })))
 
 export default (props) => {
   let { form, type, record } = props

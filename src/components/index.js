@@ -1,9 +1,11 @@
 import LoadingButton from './LoadingButton'
 import ToolBarButton from './ToolBarButton'
+import ToolBarButton2 from './ToolBarButton2'
 import OperateButton from './OperateButton'
 import ToolBarButtonProcess from './ToolBarButtonProcess'
 import OperateButtonProcess from './OperateButtonProcess'
 import BaseList from './BaseList'
+import BaseCheckBoxList from './BaseCheckBoxList'
 import BaseProTable from './BaseProTable'
 import BaseProTableProcess from './BaseProTableProcess'
 import { ArrayTable, Upload } from '@formily/antd'
@@ -16,9 +18,9 @@ import { contextPath } from '../utils'
 
 export {
   LoadingButton,
-  ToolBarButton, OperateButton,
+  ToolBarButton,ToolBarButton2, OperateButton,
   ToolBarButtonProcess, OperateButtonProcess,
-  BaseList, BaseProTable, BaseProTableProcess,
+  BaseList,BaseCheckBoxList, BaseProTable, BaseProTableProcess,
 }
 
 //文本框+按钮

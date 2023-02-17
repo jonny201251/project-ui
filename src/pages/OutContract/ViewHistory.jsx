@@ -18,7 +18,7 @@ export default (props) => {
     { title: '合同编号', dataIndex: 'contractCode', valueType: 'text' },
     { title: '合同金额', dataIndex: 'contractMoney', valueType: 'text' },
     { title: '结算金额', dataIndex: 'endMoney', valueType: 'text' },
-    { title: '版本号', dataIndex: ['processInst', 'businessVersion'], valueType: 'text' },
+    { title: '变更次数', dataIndex: ['processInst', 'businessVersion'], valueType: 'text' },
   ]
 
   return <ProTable

@@ -1,4 +1,4 @@
-import { DatePicker, Form, FormButtonGroup, FormDialog, FormGrid, FormItem, FormLayout, Input } from '@formily/antd'
+import { DatePicker, Form, FormButtonGroup, FormDialog, FormGrid, FormItem, FormLayout, Input,Select } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import { Button, ConfigProvider, message } from 'antd'
@@ -23,7 +23,7 @@ const InputButton = (props) => {
 const SchemaField = createSchemaField({
   components: {
     FormLayout, FormItem, FormGrid, Input, InputButton,
-    DatePicker, File,
+    DatePicker, File,Select
   },
 })
 
@@ -46,7 +46,7 @@ export default (props) => {
 
   const onClick = (flag) => {
     if (flag === 'open') {
-      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 900 },
         (form2) => {
           return <>
             <DialogList form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
@@ -124,6 +124,12 @@ export default (props) => {
           <SchemaField.String
             name="fileList" title="附件" x-decorator="FormItem"
             x-component="File" x-decorator-props={{ gridSpan: 2 }}/>
+          <SchemaField.String
+            name="userNameeList" required title="尽职调查" x-decorator="FormItem"
+            x-decorator-props={{ gridSpan: 2, tooltip: '流程审批节点' }}
+            x-component="Select" x-component-props={{ showSearch: true,mode:'multiple'  }}
+            enum={session.getItem('userList')}
+          />
         </SchemaField.Void>
       </SchemaField>
     </Form>

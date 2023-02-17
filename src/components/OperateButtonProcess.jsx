@@ -1,5 +1,5 @@
 import { message, Modal, Space } from 'antd'
-import { get, post, processDesignPath } from '../utils'
+import { get, post, processDesignPath, session } from '../utils'
 import { FormButtonGroup, FormDialog } from '@formily/antd'
 import { LoadingButton } from './index'
 import { QuestionCircleOutlined } from '@ant-design/icons'
@@ -8,7 +8,7 @@ export default (props) => {
   const { record, path, actionRef, rowKey, from } = props
   let width = path.width || 520
 
-  const formButton = (buttonList, dialog, form, type) => {
+  const formButton = (buttonList, haveEditForm, dialog, form, type) => {
     let btnArr = []
     buttonList.forEach(buttonName => {
       btnArr.push(
@@ -17,7 +17,7 @@ export default (props) => {
             const formValue = await form.submit()
             if (formValue) {
               console.log(formValue)
-              let values = { formValue, buttonName, type, path: path.flag }
+              let values = { formValue, buttonName, type, path: path.flag, haveEditForm, comment: formValue.comment }
               const data = await post(path.btnHandle, values)
               if (data) {
                 actionRef.current.clearSelected()
@@ -52,7 +52,7 @@ export default (props) => {
               <path.EditForm form={form} type={type} record={dbRecord} dialog={dialog}/>
               <FormDialog.Footer>
                 <FormButtonGroup gutter={16} align={'center'}>
-                  {formButton(processFormBefore.buttonList, dialog, form, type)}
+                  {formButton(processFormBefore.buttonList, processFormBefore.haveEditForm, dialog, form, type)}
                 </FormButtonGroup>
               </FormDialog.Footer>
             </>
@@ -72,7 +72,7 @@ export default (props) => {
               <path.ChangeForm form={form} type={type} record={dbRecord} dialog={dialog}/>
               <FormDialog.Footer>
                 <FormButtonGroup gutter={16} align={'center'}>
-                  {formButton(processFormBefore.buttonList, dialog, form, type)}
+                  {formButton(processFormBefore.buttonList, processFormBefore.haveEditForm, dialog, form, type)}
                 </FormButtonGroup>
               </FormDialog.Footer>
             </>
@@ -123,10 +123,14 @@ export default (props) => {
         },
       })
     } else if (type === 'delete') {
+      let content = '确定要删除'
+      if (record?.processInst?.businessName) {
+        content = content + '-' + record?.processInst?.businessName
+      }
       Modal.error({
         okText: '确定', closable: true, width: 450,
         icon: <QuestionCircleOutlined/>,
-        content: <p style={{ fontSize: 16 }}> 确定要删除-{record?.processInst?.businessName}</p>,
+        content: <p style={{ fontSize: 16 }}>{content}</p>,
         onOk: async (close) => {
           let values = { formValue: record, buttonName: '申请人删除', type, path: path.flag }
           const data = await post(path.btnHandle, values)
@@ -151,21 +155,22 @@ export default (props) => {
     if (processStatus) {
       if (processStatus === '审批中') {
         arr.push(<a onClick={() => onClick('view')}>查看</a>)
-        if (version > 1) {
+        if (version > 0) {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
         arr.push(<a onClick={() => onClick('recall')}>撤回</a>)
       } else if (processStatus === '完成') {
         arr.push(<a onClick={() => onClick('view')}>查看</a>)
-        if (version > 1) {
+        if (version > 0) {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
         if (!path.haveChange) {
           arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
         }
       } else if (processStatus === '退回' || processStatus === '退回申请人' || processStatus === '申请人撤回') {
+        arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
         arr.push(<a onClick={() => onClick('view')}>查看</a>)
-        if (version > 1) {
+        if (version > 0) {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
         arr.push(<a onClick={() => onClick('delete')}>删除</a>)

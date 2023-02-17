@@ -1,4 +1,4 @@
-import { inContractPath } from '../../utils'
+import { providerQueryPath } from '../../utils'
 import ProTable from '@ant-design/pro-table'
 import React, { useRef } from 'react'
 import { OperateButtonProcess } from '../../components'
@@ -6,18 +6,15 @@ import { OperateButtonProcess } from '../../components'
 export default (props) => {
   const actionRef = useRef()
   const columns = [
-    { title: '项目名称', dataIndex: 'name', valueType: 'text' },
-    { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
+    { title: '供方用途', dataIndex: 'usee', valueType: 'text' },
     {
-      title: '合同名称', dataIndex: 'contractName', valueType: 'text',
+      title: '供方名称', dataIndex: 'name', valueType: 'text',
       render: (text, record, _, action) => {
         return <OperateButtonProcess
-          record={record} path={inContractPath} actionRef={actionRef} from={'ViewHistory'}/>
+          record={record} path={providerQueryPath} actionRef={actionRef} from={'ViewHistory'}/>
       },
     },
-    { title: '合同编号', dataIndex: 'contractCode', valueType: 'text' },
-    { title: '合同金额', dataIndex: 'contractMoney', valueType: 'text' },
-    { title: '结算金额', dataIndex: 'endMoney', valueType: 'text' },
+    { title: '考察时间', dataIndex: 'queryDate', valueType: 'text' },
     { title: '变更次数', dataIndex: ['processInst', 'businessVersion'], valueType: 'text' },
   ]
 

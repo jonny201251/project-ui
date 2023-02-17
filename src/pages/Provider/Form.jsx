@@ -1,10 +1,10 @@
 import { Form, FormItem, FormLayout, Input, Select } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
-import { NumberPicker } from '../../components'
+import { NumberPicker, File } from '../../components'
 
 const SchemaField = createSchemaField({
-  components: { FormLayout, FormItem, Input, NumberPicker, Select },
+  components: { FormLayout, FormItem, Input, NumberPicker, Select, File },
 })
 
 export default (props) => {
@@ -22,8 +22,9 @@ export default (props) => {
             { label: '一般项目立项时(三类)', value: '一般项目立项时(三类)' },
             { label: '一般项目立项后(其他方)', value: '一般项目立项后(其他方)' },
             { label: '重大项目立项时(三类)', value: '重大项目立项时(三类)' },
-            { label: '重大项目立项后(其他方)', value: '重大项目立项后(其他方)' }
+            { label: '重大项目立项后(其他方)', value: '重大项目立项后(其他方)' },
           ]}
+          x-decorator-props={{ tooltip: '三类:渠道方，其他方:采购方、施工方'}}
         />
         <SchemaField.String name="name" required title="供方名称" x-decorator="FormItem" x-component="Input"/>
         <SchemaField.String
@@ -46,6 +47,15 @@ export default (props) => {
         <SchemaField.Number name="registerMoney" required title="注册资本" x-decorator="FormItem"
                             x-component="NumberPicker"/>
         <SchemaField.Number name="realMoney" title="实缴资本" x-decorator="FormItem" x-component="NumberPicker"/>
+        <SchemaField.String
+          name="fileList" required title="附件" x-decorator="FormItem" x-component="File"
+          x-decorator-props={{
+            feedbackText: '上传 营业执照、法人信息',
+            labelCol: 6,
+            wrapperCol: 10,
+          }}
+          // x-decorator-props={{ tooltip: '营业执照、法人信息'}}
+        />
         <SchemaField.String
           name="remark" title="备注" x-decorator="FormItem"
           x-component="Input.TextArea"

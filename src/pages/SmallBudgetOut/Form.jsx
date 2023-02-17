@@ -42,7 +42,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(taskCode,costRate)').forEach(field => {
+    form.query('*(taskCode)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {

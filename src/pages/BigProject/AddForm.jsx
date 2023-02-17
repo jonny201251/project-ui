@@ -91,14 +91,16 @@ map.set('质保金比例', ['3%(含)以下', '3%以上'].map(item => ({ label: i
 map.set('标前项目进度', ['未开工', '开工进度10%以内', '开工进度30%以内', '开工进度30%及以上'].map(item => ({ label: item, value: item })))
 map.set('一类项目条件', ['具备条件', '不具备条件'].map(item => ({ label: item, value: item })))
 map.set('其他因素', ['无其他因素', '有其他因素'].map(item => ({ label: item, value: item })))
-map.set('项目评分', ['', '', '', '', '', ''].map(item => ({ label: item, value: item })))
+map.set('项目评分', ['--'].map(item => ({ label: item, value: item })))
 map.set('否决项', ['是', '否'].map(item => ({ label: item, value: item })))
 
 map.set('甲方角色', ['业主', '总包', '其他'].map(item => ({ label: item, value: item })))
 map.set('甲方企业性质', ['集团所属企业', '地级市以上政府', '国企', '县级以下政府', '民企', '其他'].map(item => ({ label: item, value: item })))
+map.set('甲方(业主)评分', ['--'].map(item => ({ label: item, value: item })))
+
 
 map.set('企业性质', ['集团所属企业', '国企', '民企', '其他'].map(item => ({ label: item, value: item })))
-
+map.set('战略伙伴评分', ['--'].map(item => ({ label: item, value: item })))
 
 export default (props) => {
   let { form, type } = props
@@ -229,7 +231,6 @@ export default (props) => {
         scoreField && scoreField.setValidator({ minimum: 0, maximum: 5, required: true })
         standardField && standardField.setValue('0-5分')
       } else if (desc1Value === '项目评分') {
-        field.setComponent('Line')
         standardField && standardField.setValue('0-100分')
       } else if (desc1Value === '否决项') {
         standardField && standardField.setValue('--')
@@ -306,7 +307,7 @@ export default (props) => {
         } else if (desc1Value === '项目模式') {
           if (desc2Value === 'EPC') {
             field.value = '1-4分'
-            scoreField && scoreField.setValidator({ minimum: 4, maximum: 4, required: true })
+            scoreField && scoreField.setValidator({ minimum: 1, maximum: 4, required: true })
           } else if (desc2Value === '其他') {
             field.value = '2-5分'
             scoreField && scoreField.setValidator({ minimum: 2, maximum: 5, required: true })
@@ -371,7 +372,6 @@ export default (props) => {
         scoreField && scoreField.setValidator({ minimum: 0, maximum: 4, required: true })
         standardField && standardField.setValue('0-4分')
       } else if (desc1Value === '甲方(业主)评分') {
-        field.setComponent('Line')
         standardField && standardField.setValue('0-100分')
       } else if (desc1Value === '否决项') {
         standardField && standardField.setValue('--')
@@ -452,7 +452,6 @@ export default (props) => {
         scoreField && scoreField.setValidator({ minimum: 0, maximum: 4, required: true })
         standardField && standardField.setValue('0-4分')
       } else if (desc1Value === '战略伙伴评分') {
-        field.setComponent('Line')
         standardField && standardField.setValue('0-100分')
       } else if (desc1Value === '否决项') {
         standardField && standardField.setValue('--')

@@ -20,7 +20,6 @@ export default (props) => {
           onClick={async () => {
             const formValue = await form.submit()
             if (formValue) {
-              console.log(formValue)
               let values = { formValue, buttonName, type, path: path.flag, haveEditForm, comment: formValue.comment }
               const data = await post(path.btnHandle, values)
               if (data) {
@@ -61,7 +60,8 @@ export default (props) => {
         (form) => {
           form.setValues(dbRecord)
           return <>
-            <path.CheckForm form={form} type={type} record={dbRecord} dialog={dialog}/>
+            <path.CheckForm form={form} type={type} record={dbRecord} dialog={dialog}
+                            haveEditForm={processFormBefore.haveEditForm}/>
             <FormDialog.Footer>
               <FormButtonGroup gutter={16} align={'center'}>
                 {formButton(processFormBefore.buttonList, processFormBefore.haveEditForm, dialog, form, 'check')}

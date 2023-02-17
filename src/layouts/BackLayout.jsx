@@ -65,6 +65,7 @@ export default () => {
             <Menu.Item key="66-供方情况简表-providerSimplePath">供方情况简表</Menu.Item>
             <Menu.Item key="66-供方尽职调查-providerQueryPath">供方尽职调查</Menu.Item>
             <Menu.Item key="55-供方评分-providerScore1Path">供方评分</Menu.Item>
+            <Menu.Item key="566-供方动态监控-providerControlPath">供方动态监控</Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="客户管理" key="客户管理">
             <Menu.Item key="66-客户信息-customerPath">客户信息</Menu.Item>
@@ -72,7 +73,7 @@ export default () => {
             <Menu.Item key="55-信用评级审批-customerCheck12Path">客户信用评级审批</Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="授权管理" key="授权管理">
-            <Menu.Item key="71-项目立项授权-projectPowerPath">项目立项授权</Menu.Item>
+            <Menu.Item key="71-年度授权-projectPowerPath">年度授权</Menu.Item>
             <Menu.Item key="55-一事一授权-otherPowerPath">一事一授权</Menu.Item>
           </Menu.SubMenu>
           <Menu.Item key="66-项目备案-projectCodePath">项目备案</Menu.Item>
@@ -100,10 +101,10 @@ export default () => {
             <Menu.Item key="1-往来款信息-projectIoPath">往来款信息</Menu.Item>
             <Menu.Item key="1-项目收支-projectInOutPath">项目收支</Menu.Item>
           </Menu.SubMenu>
-          <Menu.Item key="99-项目结算管理-sysDicPath">项目结算管理</Menu.Item>
+          <Menu.Item key="99-项目结算管理-projectEndPath">项目结算管理</Menu.Item>
           <Menu.SubMenu title="查询" key="查询">
-            <Menu.Item key="99-合同执行情况-sysDicPath">合同执行情况</Menu.Item>
-            <Menu.Item key="1-项目履行台账-projectOutPath">项目履行台账</Menu.Item>
+            <Menu.Item key="99-合同执行情况-contractRunPath">合同执行情况</Menu.Item>
+            <Menu.Item key="1-项目履行台账-projectRunPath">项目履行台账</Menu.Item>
           </Menu.SubMenu>
         </Menu.SubMenu>
       )

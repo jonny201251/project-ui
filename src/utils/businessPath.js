@@ -78,7 +78,9 @@ import ProviderSimpleForm from '../pages/ProviderSimple/Form'
 import ProviderQueryList from '../pages/ProviderQuery/List'
 import ProviderQueryAddForm from '../pages/ProviderQuery/AddForm'
 import ProviderQueryCheckForm from '../pages/ProviderQuery/CheckForm'
+import ProviderQueryViewHistory from '../pages/ProviderQuery/ViewHistory'
 import ProviderQueryViewForm from '../pages/ProviderQuery/ViewForm'
+import ProviderQueryChangeForm from '../pages/ProviderQuery/ChangeForm'
 import InContractList from '../pages/InContract/List'
 import InContractAddForm from '../pages/InContract/AddForm'
 import InContractCheckForm from '../pages/InContract/CheckForm'
@@ -92,9 +94,17 @@ import OutContractChangeForm from '../pages/OutContract/ChangeForm'
 import OutContractViewForm from '../pages/OutContract/ViewForm'
 import OutContractViewHistory from '../pages/OutContract/ViewHistory'
 import InOutContractList from '../pages/InOutContract/List'
+import ProjectEndForm from '../pages/ProjectEnd/Form'
+import ProjectEndList from '../pages/ProjectEnd/List'
+import ContractRunForm from '../pages/ContractRun/Form'
+import ContractRunList from '../pages/ContractRun/List'
+import ProjectRunForm from '../pages/ProjectRun/Form'
+import ProjectRunList from '../pages/ProjectRun/List'
 //
 import AForm from '../pages/A/Form'
 import AList from '../pages/A/List'
+import SysRoleForm from '../pages/SysRole/Form'
+import SysRoleList from '../pages/SysRole/List'
 
 export const aPath = {
   flag: 'aPath', width: 1000, Form: AForm, List: AList,
@@ -144,6 +154,7 @@ export const providerPath = {
   add: contextPath + '/provider/add',
   edit: contextPath + '/provider/edit',
   delete: contextPath + '/provider/delete',
+  modify: contextPath + '/provider/modify',
 }
 export const providerPath2 = {
   list: contextPath + '/provider/list2',
@@ -380,8 +391,11 @@ export const providerQueryPath = {
   AddForm: ProviderQueryAddForm,
   EditForm: ProviderQueryAddForm,
   CheckForm: ProviderQueryCheckForm,
+  ViewHistory: ProviderQueryViewHistory,
   ViewForm: ProviderQueryViewForm,
+  ChangeForm: ProviderQueryChangeForm,
   list: contextPath + '/providerQuery/list',
+  viewHistory: contextPath + '/providerQuery/viewHistory',
   get: contextPath + '/providerQuery/get',
   btnHandle: contextPath + '/providerQuery/btnHandle',
 }
@@ -417,3 +431,15 @@ export const inOutContractPath = {
   add: contextPath + '/inOutContract/add',
 }
 
+export const projectEndPath = {
+  flag: 'projectEndPath', Form: ProjectEndForm, List: ProjectEndList,
+  list: contextPath + '/projectEndPath/list',
+}
+export const contractRunPath = {
+  flag: 'contractRunPath', Form: ContractRunForm, List: ContractRunList,
+  list: contextPath + '/contractRunPath/list',
+}
+export const projectRunPath = {
+  flag: 'projectRunPath', Form: ProjectRunForm, List: ProjectRunList,
+  list: contextPath + '/projectRunPath/list',
+}

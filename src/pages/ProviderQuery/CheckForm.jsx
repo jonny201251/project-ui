@@ -30,19 +30,13 @@ const SchemaField = createSchemaField({
 })
 
 export default (props) => {
-  let { form, type, record } = props
+  let { form, type, record, haveEditForm } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,name,usee)').forEach(field => {
-      field.setPattern('disabled')
-    })
-    if (type === 'add') {
-      const user = session.getItem('user')
-      form.setInitialValues({
-        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
-        deptId: user.deptId, deptName: user.deptName,
-      })
+    console.log(props)
+    if (haveEditForm === '否') {
+      form.setPattern('disabled')
+      form.query('comment').take()?.setPattern('editable')
     }
   }, [])
 

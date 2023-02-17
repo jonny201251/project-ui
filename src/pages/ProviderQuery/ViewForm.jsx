@@ -32,58 +32,6 @@ const SchemaField = createSchemaField({
 export default (props) => {
   let { form, type, record } = props
 
-  useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,name,usee)').forEach(field => {
-      field.setPattern('disabled')
-    })
-    if (type === 'add') {
-      const user = session.getItem('user')
-      form.setInitialValues({
-        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
-        deptId: user.deptId, deptName: user.deptName,
-      })
-    }
-  }, [])
-
-  const onClick = (flag) => {
-    if (flag === 'open') {
-      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
-        (form2) => {
-          return <>
-            <DialogList form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
-            <FormDialog.Footer>
-              <FormButtonGroup gutter={16} align={'right'}>
-                <Button onClick={() => dialog2.close()}>取消</Button>
-                <LoadingButton
-                  onClick={async () => {
-                    const values = await form2.submit()
-                    if (values.selectedRow) {
-                      form.setValues({
-                        providerId: values.selectedRow.id,
-                        usee: values.selectedRow.usee,
-                        name: values.selectedRow.name,
-                        property: values.selectedRow.property,
-                        address: values.selectedRow.address,
-                        registerMoney: values.selectedRow.registerMoney,
-                      })
-                      dialog2.close()
-                    } else {
-                      message.error('选择一条数据')
-                    }
-                  }}
-                  type={'primary'}
-                >
-                  确定
-                </LoadingButton>
-              </FormButtonGroup>
-            </FormDialog.Footer>
-          </>
-        },
-      )
-      dialog2.open({})
-    }
-  }
 
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
@@ -96,7 +44,7 @@ export default (props) => {
               <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String
                 name="name" required title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
-                x-component="InputButton" x-component-props={{ onClick: onClick }}/>
+                x-component="Input"/>
               <SchemaField.String name="queryDate" required title="考察时间" x-decorator="FormItem"
                                   x-component="DatePicker"/>
               <SchemaField.String
@@ -129,6 +77,9 @@ export default (props) => {
               <SchemaField.String
                 name="fileList" title="附件" x-decorator="FormItem"
                 x-component="File" x-decorator-props={{ gridSpan: 2 }}/>
+              <SchemaField.String
+                name="userNamee" title="尽职调查部门" x-decorator="FormItem"
+                x-component="Input" x-decorator-props={{ gridSpan: 2 }}/>
             </SchemaField.Void>
           </SchemaField>
         </Form>

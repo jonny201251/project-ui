@@ -4,7 +4,7 @@ import { Form, FormItem, Input, Password, Submit } from '@formily/antd'
 import { createForm } from '@formily/core'
 import * as ICONS from '@ant-design/icons'
 import './login.less'
-import { post,get,preloadPath, sysUserPath, session } from '../../utils'
+import { post, get, preloadPath, sysUserPath, session } from '../../utils'
 import { history, useModel } from 'umi'
 
 const SchemaField = createSchemaField({
@@ -31,10 +31,12 @@ export default () => {
           onAutoSubmit={async (values) => {
             const data = await post(sysUserPath.login, values)
             const data2 = await get(preloadPath.get)
-            if (data && data2) {
-              session.setItem('user', data.user);
-              session.setItem('displayName', data.user.displayName);
-              session.setItem('menuList', data.menuList);
+            const data3 = await get(sysUserPath.all)
+            if (data && data2 && data3) {
+              session.setItem('user', data.user)
+              session.setItem('displayName', data.user.displayName)
+              session.setItem('menuList', data.menuList)
+              session.setItem('userAll', data3)
 
               Object.keys(data2).forEach(key => session.setItem(key, data2[key]))
               form.reset()

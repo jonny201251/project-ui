@@ -107,7 +107,7 @@ export default (props) => {
           <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="displayNamee" required title="被授权人" x-decorator="FormItem"
-            x-component="Select" x-component-props={{ showSearch: true }}
+            x-component="Select" x-component-props={{ showSearch: true,mode:'multiple' }}
             enum={session.getItem('userList')}/>
           <SchemaField.String name="deptNamee" title="所在部门" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
