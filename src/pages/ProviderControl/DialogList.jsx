@@ -1,4 +1,4 @@
-import { providerSimplePath2 } from '../../utils'
+import { providerPath4 } from '../../utils'
 import { BaseList } from '../../components'
 
 
@@ -16,6 +16,6 @@ export default (props) => {
 
   return <BaseList
     form={props.form} selectedId={props.selectedId}
-    path={providerSimplePath2} columns={columns} search={{ span: 12 }}
+    path={providerPath4} columns={columns} search={{ span: 12 }}
   />
 }

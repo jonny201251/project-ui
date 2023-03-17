@@ -1,13 +1,13 @@
-import { providerScore1Path } from '../../utils'
+import { providerScore1Path1 } from '../../utils'
 import { BaseProTableProcess } from '../../components'
 
 export default () => {
   const columns = [
     { title: '项目类别', dataIndex: 'type', valueType: 'text' },
+    { title: '供方用途', dataIndex: 'usee', valueType: 'text' },
     { title: '供方名称', dataIndex: 'providerName', valueType: 'text' },
-    // { title: '创建时间', dataIndex: 'createDate', valueType: 'text' },
     { title: '初评得分', dataIndex: 'startScore', valueType: 'text' },
-    { title: '最终得分', dataIndex: 'endScore', valueType: 'text' },
+    { title: '部门打分', dataIndex: 'endScore', valueType: 'text' },
     { title: '结论', dataIndex: 'result', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
     { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
@@ -28,5 +28,5 @@ export default () => {
   ]
 
 
-  return <BaseProTableProcess path={providerScore1Path} columns={columns}/>
+  return <BaseProTableProcess path={providerScore1Path1} columns={columns}/>
 }

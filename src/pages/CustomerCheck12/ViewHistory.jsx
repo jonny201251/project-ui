@@ -1,4 +1,4 @@
-import { providerScore1Path } from '../../utils'
+import { providerScore1Path1 } from '../../utils'
 import ProTable from '@ant-design/pro-table'
 import React, { useRef } from 'react'
 import { OperateButtonProcess } from '../../components'
@@ -11,7 +11,7 @@ export default (props) => {
       title: '供方名称', dataIndex: 'providerName', valueType: 'text',
       render: (text, record, _, action) => {
         return <OperateButtonProcess
-          record={record} path={providerScore1Path} actionRef={actionRef} from={'ViewHistory'}/>
+          record={record} path={providerScore1Path1} actionRef={actionRef} from={'ViewHistory'}/>
       },
     },
     { title: '初评得分', dataIndex: 'startScore', valueType: 'text' },

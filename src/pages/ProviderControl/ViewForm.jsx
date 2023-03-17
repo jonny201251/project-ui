@@ -30,65 +30,8 @@ const SchemaField = createSchemaField({
 })
 
 export default (props) => {
-  let { form, type, record, haveEditForm } = props
+  let { form, type, record } = props
 
-  useEffect(async () => {
-    if (haveEditForm === '否') {
-      form.setPattern('disabled')
-      form.query('comment').take()?.setPattern('editable')
-    }
-  }, [])
-
-  const onClick = (flag) => {
-    if (flag === 'open') {
-      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
-        (form2) => {
-          return <>
-            <DialogList form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
-            <FormDialog.Footer>
-              <FormButtonGroup gutter={16} align={'right'}>
-                <Button onClick={() => dialog2.close()}>取消</Button>
-                <LoadingButton
-                  onClick={async () => {
-                    const values = await form2.submit()
-                    if (values.selectedRow) {
-                      form.setValues({
-                        providerId: values.selectedRow.providerId,
-                        usee: values.selectedRow.usee,
-                        name: values.selectedRow.name,
-                        property: values.selectedRow.property,
-                        address: values.selectedRow.address,
-                        registerMoney: values.selectedRow.registerMoney,
-                        result: values.selectedRow.result,
-                      })
-                      dialog2.close()
-                    } else {
-                      message.error('选择一条数据')
-                    }
-                  }}
-                  type={'primary'}
-                >
-                  确定
-                </LoadingButton>
-              </FormButtonGroup>
-            </FormDialog.Footer>
-          </>
-        },
-      )
-      dialog2.open({})
-    }
-  }
-
-  const showComment = () => {
-    if (type === 'check') {
-      return <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 2, strictAutoFit: true }}>
-        <SchemaField.String
-          name="comment" title="审批意见" x-decorator="FormItem"
-          x-component="Input.TextArea" x-component-props={{ placeholder: '请输入意见' }}
-        />
-      </SchemaField.Void>
-    }
-  }
 
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
@@ -101,7 +44,7 @@ export default (props) => {
               <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String
                 name="name" required title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
-                x-component="InputButton" x-component-props={{ onClick: onClick }}/>
+                x-component="Input"/>
               <SchemaField.String name="queryDate" required title="考察时间" x-decorator="FormItem"
                                   x-component="DatePicker"/>
               <SchemaField.String
@@ -134,8 +77,10 @@ export default (props) => {
               <SchemaField.String
                 name="fileList" title="附件" x-decorator="FormItem"
                 x-component="File" x-decorator-props={{ gridSpan: 2 }}/>
+              <SchemaField.String
+                name="userNamee" title="尽职调查部门" x-decorator="FormItem"
+                x-component="Input" x-decorator-props={{ gridSpan: 2 }}/>
             </SchemaField.Void>
-            {showComment()}
           </SchemaField>
         </Form>
       </Tabs.TabPane>

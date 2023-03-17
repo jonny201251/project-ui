@@ -7,7 +7,6 @@ import ProviderForm from '../pages/Provider/Form'
 import ProviderList from '../pages/Provider/List'
 import ProviderScore1List from '../pages/ProviderScore1/List'
 import ProviderScore1AddForm from '../pages/ProviderScore1/AddForm'
-import ProviderScore1EditForm from '../pages/ProviderScore1/EditForm'
 import ProviderScore1CheckForm from '../pages/ProviderScore1/CheckForm'
 import ProviderScore1ChangeForm from '../pages/ProviderScore1/ChangeForm'
 import ProviderScore1ViewHistory from '../pages/ProviderScore1/ViewHistory'
@@ -75,12 +74,19 @@ import ProjectIoList from '../pages/ProjectIo/List'
 import ProjectInOutList from '../pages/ProjectInOut/List'
 import ProviderSimpleList from '../pages/ProviderSimple/List'
 import ProviderSimpleForm from '../pages/ProviderSimple/Form'
+
 import ProviderQueryList from '../pages/ProviderQuery/List'
 import ProviderQueryAddForm from '../pages/ProviderQuery/AddForm'
 import ProviderQueryCheckForm from '../pages/ProviderQuery/CheckForm'
 import ProviderQueryViewHistory from '../pages/ProviderQuery/ViewHistory'
 import ProviderQueryViewForm from '../pages/ProviderQuery/ViewForm'
 import ProviderQueryChangeForm from '../pages/ProviderQuery/ChangeForm'
+
+import ProviderControlList from '../pages/ProviderControl/List'
+import ProviderControlAddForm from '../pages/ProviderControl/AddForm'
+import ProviderControlCheckForm from '../pages/ProviderControl/CheckForm'
+import ProviderControlViewForm from '../pages/ProviderControl/ViewForm'
+
 import InContractList from '../pages/InContract/List'
 import InContractAddForm from '../pages/InContract/AddForm'
 import InContractCheckForm from '../pages/InContract/CheckForm'
@@ -162,15 +168,18 @@ export const providerPath2 = {
 export const providerPath3 = {
   list: contextPath + '/provider/list3',
 }
+export const providerPath4 = {
+  list: contextPath + '/provider/list4',
+}
 /*
   新增流程：AddForm，编辑：EditForm，审批流程：CheckForm，变更流程：ChangeForm
   查看：ViewHistory,ViewForm
   撤回流程
  */
-export const providerScore1Path = {
-  flag: 'providerScore1Path', width: 1100, List: ProviderScore1List,
+export const providerScore1Path1 = {
+  flag: 'providerScore1Path1', width: 1100, List: ProviderScore1List,
   AddForm: ProviderScore1AddForm,
-  EditForm: ProviderScore1EditForm,
+  EditForm: ProviderScore1AddForm,
   CheckForm: ProviderScore1CheckForm,
   ChangeForm: ProviderScore1ChangeForm,
   ViewHistory: ProviderScore1ViewHistory,
@@ -180,6 +189,20 @@ export const providerScore1Path = {
   get: contextPath + '/providerScore1/get',
   btnHandle: contextPath + '/providerScore1/btnHandle',
 }
+export const providerScore1Path2 = {
+  flag: 'providerScore1Path2', width: 1100, List: ProviderScore1List,
+  AddForm: ProviderScore1AddForm,
+  EditForm: ProviderScore1AddForm,
+  CheckForm: ProviderScore1CheckForm,
+  ChangeForm: ProviderScore1ChangeForm,
+  ViewHistory: ProviderScore1ViewHistory,
+  ViewForm: ProviderScore1ViewForm,
+  list: contextPath + '/providerScore1/list',
+  viewHistory: contextPath + '/providerScore1/viewHistory',
+  get: contextPath + '/providerScore1/get',
+  btnHandle: contextPath + '/providerScore1/btnHandle',
+}
+
 export const customerPath = {
   flag: 'customerPath', Form: CustomerForm, List: CustomerList,
   list: contextPath + '/customer/list',
@@ -399,6 +422,19 @@ export const providerQueryPath = {
   get: contextPath + '/providerQuery/get',
   btnHandle: contextPath + '/providerQuery/btnHandle',
 }
+
+
+export const providerControlPath = {
+  flag: 'providerControlPath', width: 1000, List: ProviderControlList,
+  AddForm: ProviderControlAddForm,
+  EditForm: ProviderControlAddForm,
+  CheckForm: ProviderControlCheckForm,
+  ViewForm: ProviderControlViewForm,
+  list: contextPath + '/providerControl/list',
+  get: contextPath + '/providerControl/get',
+  btnHandle: contextPath + '/providerControl/btnHandle',
+}
+
 export const inContractPath = {
   flag: 'inContractPath', width: 900, List: InContractList,
   AddForm: InContractAddForm,

@@ -1,14 +1,10 @@
-import { customerScore1Path } from '../../utils'
+import { providerControlPath } from '../../utils'
 import { BaseProTableProcess } from '../../components'
 
 export default () => {
   const columns = [
-    { title: '客户名称', dataIndex: 'customerName', valueType: 'text' },
-    { title: '初评得分', dataIndex: 'startScore', valueType: 'text' },
-    { title: '初评等级', dataIndex: 'startResult', valueType: 'text' },
-    { title: '部门打分', dataIndex: 'endScore', valueType: 'text' },
-    { title: '部门等级', dataIndex: 'endResult', valueType: 'text' },
-    { title: '结论', dataIndex: 'result', valueType: 'text' },
+    { title: '供方用途', dataIndex: 'usee', valueType: 'text' },
+    { title: '供方名称', dataIndex: 'name', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
     { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '申请时间', dataIndex: 'createDatetime', valueType: 'text' },
@@ -27,5 +23,5 @@ export default () => {
     { title: '当前步骤', dataIndex: ['processInst', 'displayProcessStep'], valueType: 'text' },
   ]
 
-  return <BaseProTableProcess path={customerScore1Path} columns={columns}/>
+  return <BaseProTableProcess path={providerControlPath} columns={columns} search={true}/>
 }

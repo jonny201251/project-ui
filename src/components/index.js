@@ -7,20 +7,21 @@ import OperateButtonProcess from './OperateButtonProcess'
 import BaseList from './BaseList'
 import BaseCheckBoxList from './BaseCheckBoxList'
 import BaseProTable from './BaseProTable'
+import BaseProTable2 from './BaseProTable2'
 import BaseProTableProcess from './BaseProTableProcess'
 import { ArrayTable, Upload } from '@formily/antd'
 import React from 'react'
 import { clone, isValid } from '@formily/shared'
 import { useField } from '@formily/react'
-import { Button, Card, Input, InputNumber, } from 'antd'
+import { Button, Card, Input, InputNumber } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import { contextPath } from '../utils'
 
 export {
   LoadingButton,
-  ToolBarButton,ToolBarButton2, OperateButton,
+  ToolBarButton, ToolBarButton2, OperateButton,
   ToolBarButtonProcess, OperateButtonProcess,
-  BaseList,BaseCheckBoxList, BaseProTable, BaseProTableProcess,
+  BaseList, BaseCheckBoxList, BaseProTable, BaseProTable2, BaseProTableProcess,
 }
 
 //文本框+按钮
@@ -130,15 +131,21 @@ const File = (props) => {
 export { File }
 
 const MyCard = (props) => {
-  return <Card size={'small'} title={<b style={{textAlign:'center'}}>{props.title}</b>}
+  return <Card size={'small'} title={<b style={{ textAlign: 'center' }}>{props.title}</b>}
                bodyStyle={{ paddingBottom: 0, paddingLeft: 0, paddingRight: 0 }}
                style={{ marginBottom: 10 }}>{props.children}</Card>
 }
 
-export {MyCard}
+export { MyCard }
 
 const Line = (props) => {
   return <div>--</div>
 }
 
-export {Line}
+export { Line }
+
+const Text = (props) => {
+  return <span>{props.value}</span>
+}
+
+export { Text }

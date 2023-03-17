@@ -30,14 +30,14 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,deptNamee)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
       const user = session.getItem('user')
       form.setInitialValues({
         createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
+        displayName: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
         fileList:[{name:'法定代表人授权委托书-模板.doc',status:'done',url:contextPath+'/upload/法定代表人授权委托书-模板.doc'}]
       })
@@ -84,14 +84,12 @@ export default (props) => {
   }
 
   form.addEffects('id', () => {
-    onFieldReact('displayNamee', (field) => {
+    onFieldReact('displayNameeTmp', (field) => {
       let value = field.value
       if (value) {
         const userMap = session.getItem('userMap')
         const user = userMap[value]
-        console.log(user)
         if (user) {
-
           form.setValues({ deptIdd: user.deptId, deptNamee: user.deptName })
         }
       }
@@ -106,7 +104,7 @@ export default (props) => {
           <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
-            name="displayNamee" required title="被授权人" x-decorator="FormItem"
+            name="displayNameeTmp" required title="被授权人" x-decorator="FormItem"
             x-component="Select" x-component-props={{ showSearch: true,mode:'multiple' }}
             enum={session.getItem('userList')}/>
           <SchemaField.String name="deptNamee" title="所在部门" x-decorator="FormItem" x-component="Input"/>

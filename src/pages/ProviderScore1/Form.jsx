@@ -11,7 +11,7 @@ import { Button, ConfigProvider } from 'antd'
 import { ArrayTableIndex, InputButton, LoadingButton, NumberPicker } from '../../components'
 import { getTodayDate } from '../../utils'
 import { onFieldReact } from '@formily/core'
-import ProviderDialog from './ProviderDialog'
+import ProviderDialog from './DialogList'
 
 
 const SchemaField = createSchemaField({

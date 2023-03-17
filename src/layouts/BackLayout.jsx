@@ -61,11 +61,11 @@ export default () => {
           <Menu.Item key="4-权限管理-sysPermissionPath">权限管理</Menu.Item>
           <Menu.Item key="4-公司主管领导-chargeDeptLeaderPath">公司主管领导</Menu.Item>
           <Menu.SubMenu title="供方管理" key="供方管理">
+            <Menu.Item key="566-供方动态监控-providerControlPath">供方动态监控</Menu.Item>
             <Menu.Item key="66-供方基本信息-providerPath">供方基本信息</Menu.Item>
             <Menu.Item key="66-供方情况简表-providerSimplePath">供方情况简表</Menu.Item>
             <Menu.Item key="66-供方尽职调查-providerQueryPath">供方尽职调查</Menu.Item>
             <Menu.Item key="55-供方评分-providerScore1Path">供方评分</Menu.Item>
-            <Menu.Item key="566-供方动态监控-providerControlPath">供方动态监控</Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="客户管理" key="客户管理">
             <Menu.Item key="66-客户信息-customerPath">客户信息</Menu.Item>
@@ -120,7 +120,6 @@ export default () => {
               key={item.id}
               icon={item.icon && React.createElement(ICONS[item.icon])}
               title={item.name}
-              onClick={onClick}
             >
               {renderMenu(item.children)}
             </Menu.SubMenu>
@@ -260,6 +259,7 @@ export default () => {
             selectedKeys={[activeKey]}
             openKeys={openKeys}
             onOpenChange={(openkeys) => setOpenKeys(openkeys)}
+            onClick={onClick}
           >
             {renderMenu(utils.session.getItem('menuList'))}
           </Menu>

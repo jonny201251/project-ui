@@ -16,16 +16,15 @@ import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, message } from 'antd'
-import { ArrayTableIndex, InputButton, LoadingButton, NumberPicker } from '../../components'
+import { ArrayTableIndex, InputButton, LoadingButton, NumberPicker,Text } from '../../components'
 import { session } from '../../utils'
 import { onFieldReact } from '@formily/core'
-import ProviderDialog from './ProviderDialog'
-
+import ProviderDialog from './DialogList'
 
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, PreviewText, Select, NumberPicker, ArrayTableIndex,
-    ArrayTable, FormGrid, DatePicker, InputButton, Radio,
+    ArrayTable, FormGrid, DatePicker, InputButton, Radio,Text
   },
 })
 
@@ -40,20 +39,22 @@ map.set('产品服务供货及使用情况', [
 ].map(item => ({ label: item, value: item })))
 
 export default (props) => {
-  let { form } = props
+  let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(deptName,displayName,createDate)').forEach(field => {
+    form.query('*(deptName,displayName,createDatetime,usee,startScore,endScore)').forEach(field => {
       field.setPattern('disabled')
     })
     const user = session.getItem('user')
-    form.setInitialValues({
-      type: '民用产业项目', createDate: new Date().Format('yyyy-MM-dd'),
-      userId: user.id, displayName: user.displayName, loginName: user.loginName,
-      deptId: user.deptId, deptName: user.deptName,
-      startScore: 0, endScore: 0,
-    })
-    initList('民用产业项目')
+    if (type === 'add') {
+      form.setInitialValues({
+        type: '民用产业项目', createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
+        userId: user.id, displayName: user.displayName, loginName: user.loginName,
+        deptId: user.deptId, deptName: user.deptName,
+        startScore: 0, endScore: 0,
+      })
+      initList('民用产业项目')
+    }
   }, [])
 
   const onSelect = (value) => {
@@ -83,7 +84,9 @@ export default (props) => {
 
   form.addEffects('id', () => {
     onFieldReact('providerScore2List.*.item', (field) => {
-      field.query('.endScore').take()?.setPattern('disabled')
+      if (session.getItem('user').loginName !== '孙欢') {
+        field.query('.endScore').take()?.setPattern('disabled')
+      }
       let kpiValue = field.query('.kpi').get('value')
       if (kpiValue) {
         field.dataSource = map.get(kpiValue)
@@ -109,7 +112,9 @@ export default (props) => {
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
             endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
-          endScoreField && endScoreField.setPattern('disabled')
+          if (session.getItem('user').loginName !== '孙欢') {
+            endScoreField?.setPattern('disabled')
+          }
         }
         if (kpiValue === '合同法律风险' || kpiValue === '供货合同风险') {
           if (itemValue === '没有') {
@@ -125,7 +130,9 @@ export default (props) => {
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
             endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
-          endScoreField && endScoreField.setPattern('disabled')
+          if (session.getItem('user').loginName !== '孙欢') {
+            endScoreField?.setPattern('disabled')
+          }
         }
         if (kpiValue === '不良记录情况(比如恶意拖欠农民工工资等)') {
           if (itemValue === '无') {
@@ -187,6 +194,20 @@ export default (props) => {
         tmp.value = sum
       }
     })
+
+    onFieldReact('providerScore2List.*.endScore', (field) => {
+      let sum = 0
+      form.query('providerScore2List.*.endScore').forEach(field => {
+        if (field.value) {
+          sum += field.value
+        }
+      })
+      let tmp = form.query('endScore').take()
+      if (tmp && sum) {
+        tmp.value = sum
+      }
+    })
+
   })
 
   const onClick = () => {
@@ -201,7 +222,11 @@ export default (props) => {
                 onClick={async () => {
                   const values = await form2.submit()
                   if (values.selectedRow) {
-                    form.setValues({ providerId: values.selectedRow.id, providerName: values.selectedRow.name })
+                    form.setValues({
+                      providerId: values.selectedRow.id,
+                      usee: values.selectedRow.usee,
+                      providerName: values.selectedRow.name,
+                    })
                     dialog2.close()
                   } else {
                     message.error('选择一条数据')
@@ -219,28 +244,46 @@ export default (props) => {
     dialog2.open({})
   }
 
+  const showResult = () => {
+    const user = session.getItem('user')
+    if (user.loginName === '孙欢') {
+      return <SchemaField.String
+        name="result" required title={<b>结论</b>} x-decorator="FormItem" x-component="Radio.Group"
+        enum={[
+          { label: '合格', value: '合格' },
+          { label: '不合格', value: '不合格' },
+        ]}
+      />
+    } else {
+      return <SchemaField.String name="result" title={<b>结论</b>}
+                                 x-decorator="FormItem" x-component="Text"/>
+    }
+  }
+
   return <ConfigProvider locale={zhCN}>
     <Form form={form} labelWidth={90}>
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.String name="displayName" title="申请人" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"
           />
-          <SchemaField.String name="displayName" title="申请人" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="createDate" title="打分日期" x-decorator="FormItem" x-component="DatePicker"/>
+          <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
-            name="providerName" required title="供方名称" x-component="InputButton" x-decorator="FormItem"
-            x-component-props={{ onClick: onClick }}
-          />
-          <SchemaField.String
-            name="type" required title="项目类别" x-decorator="FormItem" x-component="Radio.Group"
+            name="type" required title="项目类别" x-decorator="FormItem" x-component="Select"
             enum={[
               { label: '民用产业项目', value: '民用产业项目' },
               { label: '自筹资金项目', value: '自筹资金项目' },
               { label: '技改项目', value: '技改项目' },
             ]}
-            x-component-props={{ onChange: onChange }}
-            x-decorator-props={{ gridSpan: 2 }}
+            x-component-props={{ onSelect: onSelect }}
+          />
+          <SchemaField.String
+            name="providerName" required title="供方名称" x-component="InputButton" x-decorator="FormItem"
+            x-component-props={{ onClick: onClick }}
+          />
+          <SchemaField.String
+            name="usee" required title="供方用途" x-component="Input" x-decorator="FormItem"
           />
         </SchemaField.Void>
         <SchemaField.Array
@@ -292,7 +335,10 @@ export default (props) => {
         </SchemaField.Array>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.Number name="startScore" title={<b>初评得分</b>}
-                              x-decorator="FormItem" x-component="PreviewText"/>
+                              x-decorator="FormItem" x-component="PreviewText.Input"/>
+          <SchemaField.Number name="endScore" title={<b>部门打分</b>}
+                              x-decorator="FormItem" x-component="PreviewText.Input"/>
+          {showResult()}
           {/*          <SchemaField.Number name="endScore" title="最终得分" x-decorator="FormItem" x-component="NumberPicker"/>
           <SchemaField.String
             name="result" required title="结论" x-decorator="FormItem" x-component="Select"

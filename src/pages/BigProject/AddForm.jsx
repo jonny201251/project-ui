@@ -244,7 +244,7 @@ export default (props) => {
         console.log(desc1Value)
         let desc2Field = field.query('.desc2').take()
         let scoreField = field.query('.score').take()
-        scoreField && scoreField.setValue(null)
+        // scoreField && scoreField.setValue(null)
         if (desc1Value === '资金来源') {
           if (desc2Value === '国拨') {
             field.value = '8-10分'
@@ -385,7 +385,7 @@ export default (props) => {
         console.log(desc1Value)
         let desc2Field = field.query('.desc2').take()
         let scoreField = field.query('.score').take()
-        scoreField && scoreField.setValue(null)
+        // scoreField && scoreField.setValue(null)
         if (desc1Value === '甲方角色') {
           if (desc2Value === '业主') {
             field.value = '8-10分'
@@ -465,7 +465,7 @@ export default (props) => {
         console.log(desc1Value)
         let desc2Field = field.query('.desc2').take()
         let scoreField = field.query('.score').take()
-        scoreField && scoreField.setValue(null)
+        // scoreField && scoreField.setValue(null)
         if (desc1Value === '企业性质') {
           if (desc2Value === '集团所属企业' || desc2Value === '国企') {
             field.value = '8-12分'

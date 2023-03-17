@@ -64,6 +64,7 @@ export default () => {
             <SchemaField.String
               name="password"
               title="密码"
+              default="1"
               required
               x-decorator="FormItem"
               x-component="Password"

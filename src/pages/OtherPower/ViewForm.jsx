@@ -31,75 +31,6 @@ const SchemaField = createSchemaField({
 export default (props) => {
   let { form, type,record } = props
 
-  useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,deptNamee)').forEach(field => {
-      field.setPattern('disabled')
-    })
-    if (type === 'add') {
-      const user = session.getItem('user')
-      form.setInitialValues({
-        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
-        deptId: user.deptId, deptName: user.deptName,
-        fileList:[{name:'法定代表人授权委托书-模板.doc',status:'done',url:contextPath+'/upload/法定代表人授权委托书-模板.doc'}]
-      })
-    }
-    if (type === 'add' || type === 'edit') {
-      form.query('code').take().setDisplay('hidden')
-    }
-  }, [])
-
-  const onClick = (flag) => {
-    if (flag === 'open') {
-      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
-        (form2) => {
-          return <>
-            <DialogList form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
-            <FormDialog.Footer>
-              <FormButtonGroup gutter={16} align={'right'}>
-                <Button onClick={() => dialog2.close()}>取消</Button>
-                <LoadingButton
-                  onClick={async () => {
-                    const values = await form2.submit()
-                    if (values.selectedRow) {
-                      form.setValues({
-                        projectId: values.selectedRow.id,
-                        projectName: values.selectedRow.name,
-                        ProjectProperty: values.selectedRow.property,
-                      })
-                      dialog2.close()
-                    } else {
-                      message.error('选择一条数据')
-                    }
-                  }}
-                  type={'primary'}
-                >
-                  确定
-                </LoadingButton>
-              </FormButtonGroup>
-            </FormDialog.Footer>
-          </>
-        },
-      )
-      dialog2.open({})
-    }
-  }
-
-  form.addEffects('id', () => {
-    onFieldReact('displayNamee', (field) => {
-      let value = field.value
-      if (value) {
-        const userMap = session.getItem('userMap')
-        const user = userMap[value]
-        console.log(user)
-        if (user) {
-
-          form.setValues({ deptIdd: user.deptId, deptNamee: user.deptName })
-        }
-      }
-    })
-  })
-
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
       <Tabs.TabPane tab="表单数据" key="1">
@@ -130,6 +61,16 @@ export default (props) => {
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
               <SchemaField.String name="fileList" required title="授权委托书" x-decorator="FormItem" x-component="File"/>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+              <SchemaField.String
+                name="endType" required title="授权人意见" x-decorator="FormItem" x-component="Radio.Group"
+                x-decorator-props={{ tooltip: '流程的最后一个审批节点', gridSpan: 2 }}
+                enum={[
+                  {label:'公司主管领导',value:'公司主管领导'},
+                  {label:'董事长',value:'董事长'},
+                ]}
+              />
             </SchemaField.Void>
           </SchemaField>
         </Form>

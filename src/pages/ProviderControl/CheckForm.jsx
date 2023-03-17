@@ -41,6 +41,9 @@ export default (props) => {
 
   const onClick = (flag) => {
     if (flag === 'open') {
+      if (haveEditForm === '否') {
+        return
+      }
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {
           return <>
@@ -59,7 +62,6 @@ export default (props) => {
                         property: values.selectedRow.property,
                         address: values.selectedRow.address,
                         registerMoney: values.selectedRow.registerMoney,
-                        result: values.selectedRow.result,
                       })
                       dialog2.close()
                     } else {
@@ -102,34 +104,14 @@ export default (props) => {
               <SchemaField.String
                 name="name" required title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                 x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-              <SchemaField.String name="queryDate" required title="考察时间" x-decorator="FormItem"
-                                  x-component="DatePicker"/>
+              <SchemaField.String name="usee" title="供方用途" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String
-                name="scale" title="企业规模" x-decorator="FormItem" x-component="Input.TextArea"
+                required
+                name="descc" title="变动说明" x-decorator="FormItem" x-component="Input.TextArea"
                 x-component-props={{
                   rows: 3,
-                  placeholder: '人员总数，技术人员比例，各专业人员比例，考察办公区域规模，办公面积、在当地行业的影响力等。组织架构、经营机制。每年的业务量（合同金额）；现阶段的任务量，正在做设计的项目有哪些？',
+                  placeholder: '合格供方情况变动说明',
                 }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="achievement" title="近年主要业绩" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{ rows: 2, placeholder: '是否有与本项目同类工程的业绩？' }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="quality" title="质量管理现状" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{ rows: 2, placeholder: '要求说明质量管理体系运行情况。' }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="product" title="生产检测条件" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{ rows: 2, placeholder: '要求说明生产检测条件实施情况。' }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="descc" title="业绩现场考察" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{ rows: 2, placeholder: '施工组织设计。' }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="service" title="后期服务" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{ rows: 2, placeholder: '如何保证招标项目的全程服务。' }}
                 x-decorator-props={{ gridSpan: 3 }}/>
               <SchemaField.String
                 name="fileList" title="附件" x-decorator="FormItem"

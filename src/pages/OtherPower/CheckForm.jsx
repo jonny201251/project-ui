@@ -14,9 +14,9 @@ import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, message, Tabs } from 'antd'
-import { session,contextPath } from '../../utils'
+import { session, contextPath } from '../../utils'
 import DialogList from './DialogList'
-import { LoadingButton,File } from '../../components'
+import { LoadingButton, File } from '../../components'
 import { onFieldReact } from '@formily/core'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
@@ -29,23 +29,31 @@ const SchemaField = createSchemaField({
 
 
 export default (props) => {
-  let { form, type,record } = props
+  let { form, record, type,haveEditForm } = props
 
   useEffect(async () => {
+    if (haveEditForm === '否') {
+      form.setPattern('disabled')
+      form.query('comment').take()?.setPattern('editable')
+    }
+
+    const user = session.getItem('user')
+
+    if (record?.code || user.displayName === '祁瑛') {
+      form.query('code').take().setDisplay('visible')
+    } else {
+      form.query('code').take().setDisplay('hidden')
+    }
     form.query('*(displayName,deptName,createDatetime,deptNamee)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
-      const user = session.getItem('user')
       form.setInitialValues({
         createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
         displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
-        fileList:[{name:'法定代表人授权委托书-模板.doc',status:'done',url:contextPath+'/upload/法定代表人授权委托书-模板.doc'}]
+        fileList: [{ name: '法定代表人授权委托书-模板.doc', status: 'done', url: contextPath + '/upload/法定代表人授权委托书-模板.doc' }],
       })
-    }
-    if (type === 'add' || type === 'edit') {
-      form.query('code').take().setDisplay('hidden')
     }
   }, [])
 
@@ -100,6 +108,17 @@ export default (props) => {
     })
   })
 
+  const showComment = () => {
+    if (type === 'check') {
+      return <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 2, strictAutoFit: true }}>
+        <SchemaField.String
+          name="comment" title="审批意见" x-decorator="FormItem"
+          x-component="Input.TextArea" x-component-props={{ placeholder: '请输入意见' }}
+        />
+      </SchemaField.Void>
+    }
+  }
+
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
       <Tabs.TabPane tab="表单数据" key="1">
@@ -131,6 +150,7 @@ export default (props) => {
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
               <SchemaField.String name="fileList" required title="授权委托书" x-decorator="FormItem" x-component="File"/>
             </SchemaField.Void>
+            {showComment()}
           </SchemaField>
         </Form>
       </Tabs.TabPane>

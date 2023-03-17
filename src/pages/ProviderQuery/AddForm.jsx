@@ -64,6 +64,7 @@ export default (props) => {
                         property: values.selectedRow.property,
                         address: values.selectedRow.address,
                         registerMoney: values.selectedRow.registerMoney,
+                        result: values.selectedRow.result,
                       })
                       dialog2.close()
                     } else {

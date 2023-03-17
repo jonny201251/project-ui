@@ -1,5 +1,5 @@
 import { customerPath } from '../../utils'
-import { BaseProTable } from '../../components'
+import { BaseProTable2 } from '../../components'
 
 export default () => {
   const columns = [
@@ -7,7 +7,10 @@ export default () => {
     { title: '客户企业性质', dataIndex: 'property', valueType: 'text' },
     { title: '纳税人识别号', dataIndex: 'code', valueType: 'text' },
     { title: '结论', dataIndex: 'result', valueType: 'text' },
+    { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
+    { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text' },
   ]
 
-  return <BaseProTable path={customerPath} columns={columns} search={{ labelWidth: 90 }}/>
+  return <BaseProTable2 path={customerPath} columns={columns} search={{ labelWidth: 90 }}/>
 }

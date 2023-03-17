@@ -1,4 +1,4 @@
-import { providerScore1Path } from '../../utils'
+import { customerScore1Path } from '../../utils'
 import ProTable from '@ant-design/pro-table'
 import React, { useRef } from 'react'
 import { OperateButtonProcess } from '../../components'
@@ -6,16 +6,17 @@ import { OperateButtonProcess } from '../../components'
 export default (props) => {
   const actionRef = useRef()
   const columns = [
-    { title: '项目类别', dataIndex: 'type', valueType: 'text' },
     {
-      title: '供方名称', dataIndex: 'providerName', valueType: 'text',
+      title: '客户名称', dataIndex: 'customerName', valueType: 'text',
       render: (text, record, _, action) => {
         return <OperateButtonProcess
-          record={record} path={providerScore1Path} actionRef={actionRef} from={'ViewHistory'}/>
+          record={record} path={customerScore1Path} actionRef={actionRef} from={'ViewHistory'}/>
       },
     },
     { title: '初评得分', dataIndex: 'startScore', valueType: 'text' },
-    { title: '最终得分', dataIndex: 'endScore', valueType: 'text' },
+    { title: '初评等级', dataIndex: 'startResult', valueType: 'text' },
+    { title: '部门打分', dataIndex: 'endScore', valueType: 'text' },
+    { title: '部门等级', dataIndex: 'endResult', valueType: 'text' },
     { title: '结论', dataIndex: 'result', valueType: 'text' },
     { title: '变更次数', dataIndex: ['processInst', 'businessVersion'], valueType: 'text' },
   ]
