@@ -1,17 +1,37 @@
 import { Cascader, Form, FormItem, FormLayout, Input, Select, FormGrid } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
+import { contextPath, session } from '../../utils'
 
 const SchemaField = createSchemaField({
   components: { FormLayout, FormItem, Input, Select, Cascader, FormGrid },
 })
 
 export default (props) => {
-  let { form, record } = props
+  let { form, record, type } = props
 
   useEffect(() => {
-    if (!record) {
-      form.query('taskCode').take().setState({ display: 'hidden', pattern: 'disabled' })
+    const user = session.getItem('user')
+
+    if (record?.taskCode) {
+      form.query('taskCode').take().setDisplay('visible')
+      if(user.displayName === '代佳宝'){
+        form.query('taskCode').take().setPattern('editable')
+      }else{
+        form.query('taskCode').take().setPattern('disabled')
+      }
+    } else {
+      form.query('taskCode').take().setDisplay('hidden')
+    }
+    // form.query('taskCode').take().setState({ display: 'hidden', pattern: 'disabled' })
+
+    if (type === 'add') {
+      const user = session.getItem('user')
+      form.setInitialValues({
+        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
+        displayName: user.displayName, loginName: user.loginName,
+        deptId: user.deptId, deptName: user.deptName,
+      })
     }
   }, [])
 
@@ -106,8 +126,10 @@ export default (props) => {
   return <Form form={form} labelWrap={true} labelWidth={120}>
     <SchemaField>
       <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 2, strictAutoFit: true }}>
-        <SchemaField.String name="taskCode" required title="任务号/备案号" x-decorator="FormItem" x-component="Input"/>
-        <SchemaField.String name="projectName" required title="项目名称" x-decorator="FormItem" x-component="Input"/>
+        <SchemaField.String
+          name="projectName" required title="项目名称" x-decorator="FormItem"
+          x-component="Input.TextArea" x-component-props={{ rows: 2 }}
+        />
         <SchemaField.String
           name="projectProperty" required title="项目性质" x-decorator="FormItem" x-component="Select"
           enum={[
@@ -135,9 +157,12 @@ export default (props) => {
           ]}
         />
         <SchemaField.String
-          name="businessTypeList" required title="业务类别" x-decorator="FormItem" x-component="Cascader"
+          name="businessTypeTmp" required title="业务类别" x-decorator="FormItem" x-component="Cascader"
           enum={optionArr}
         />
+      </SchemaField.Void>
+      <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 2, strictAutoFit: true }}>
+        <SchemaField.String name="taskCode" title="任务号/备案号" x-decorator="FormItem" x-component="Input"/>
       </SchemaField.Void>
     </SchemaField>
   </Form>

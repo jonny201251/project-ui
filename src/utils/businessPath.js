@@ -88,12 +88,14 @@ import ProviderControlCheckForm from '../pages/ProviderControl/CheckForm'
 import ProviderControlViewForm from '../pages/ProviderControl/ViewForm'
 
 import InContractList from '../pages/InContract/List'
+import InContractForm from '../pages/InContract/Form'
 import InContractAddForm from '../pages/InContract/AddForm'
 import InContractCheckForm from '../pages/InContract/CheckForm'
 import InContractChangeForm from '../pages/InContract/ChangeForm'
 import InContractViewForm from '../pages/InContract/ViewForm'
 import InContractViewHistory from '../pages/InContract/ViewHistory'
 import OutContractList from '../pages/OutContract/List'
+import OutContractForm from '../pages/OutContract/Form'
 import OutContractAddForm from '../pages/OutContract/AddForm'
 import OutContractCheckForm from '../pages/OutContract/CheckForm'
 import OutContractChangeForm from '../pages/OutContract/ChangeForm'
@@ -162,6 +164,12 @@ export const providerPath = {
   delete: contextPath + '/provider/delete',
   modify: contextPath + '/provider/modify',
 }
+export const providerSmallProjectPath = {
+  list: contextPath + '/provider/listSmallProject',
+}
+export const providerBigProjectPath = {
+  list: contextPath + '/provider/listBigProject',
+}
 export const providerPath2 = {
   list: contextPath + '/provider/list2',
 }
@@ -211,6 +219,9 @@ export const customerPath = {
   edit: contextPath + '/customer/edit',
   delete: contextPath + '/customer/delete',
 }
+export const customer3Path = {
+  list: contextPath + '/customer/list3',
+}
 export const customerScore1Path = {
   flag: 'customerScore1Path', width: 1100, changeButtonName: '复评', List: CustomerScore1List,
   AddForm: CustomerScore1AddForm,
@@ -259,9 +270,10 @@ export const otherPowerPath = {
 }
 
 export const projectCodePath = {
-  flag: 'projectCodePath', width: 800, Form: ProjectCodeForm, List: ProjectCodeList,
+  flag: 'projectCodePath', width: 900, Form: ProjectCodeForm, List: ProjectCodeList,
   list: contextPath + '/projectCode/list',
   get: contextPath + '/projectCode/get',
+  have:contextPath + '/projectCode/have',
   add: contextPath + '/projectCode/add',
   edit: contextPath + '/projectCode/edit',
   delete: contextPath + '/projectCode/delete',
@@ -437,29 +449,19 @@ export const providerControlPath = {
 
 export const inContractPath = {
   flag: 'inContractPath', width: 900, List: InContractList,
-  AddForm: InContractAddForm,
-  EditForm: InContractAddForm,
-  CheckForm: InContractCheckForm,
-  ChangeForm: InContractChangeForm,
-  ViewHistory: InContractViewHistory,
-  ViewForm: InContractViewForm,
+  Form: InContractForm,
   list: contextPath + '/inContract/list',
-  viewHistory: contextPath + '/inContract/viewHistory',
   get: contextPath + '/inContract/get',
-  btnHandle: contextPath + '/inContract/btnHandle',
+  add: contextPath + '/inContract/add',
+  edit: contextPath + '/inContract/edit',
 }
 export const outContractPath = {
   flag: 'outContractPath', width: 900, List: OutContractList,
-  AddForm: OutContractAddForm,
-  EditForm: OutContractAddForm,
-  CheckForm: OutContractCheckForm,
-  ChangeForm: OutContractChangeForm,
-  ViewHistory: OutContractViewHistory,
-  ViewForm: OutContractViewForm,
+  Form: OutContractForm,
   list: contextPath + '/outContract/list',
-  viewHistory: contextPath + '/outContract/viewHistory',
   get: contextPath + '/outContract/get',
-  btnHandle: contextPath + '/outContract/btnHandle',
+  add: contextPath + '/outContract/add',
+  edit: contextPath + '/outContract/edit',
 }
 export const inOutContractPath = {
   List: InOutContractList,

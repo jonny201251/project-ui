@@ -8,8 +8,8 @@ import {
   FormItem,
   FormLayout,
   Input,
-  Radio,
   Select,
+  Radio,
 } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import {
@@ -18,7 +18,7 @@ import {
   ArrayTableRemove,
   InputButton,
   LoadingButton,
-  NumberPicker,
+  NumberPicker, File,
 } from '../../components'
 import { session } from '../../utils'
 import DialogList from './DialogList'
@@ -33,6 +33,7 @@ const SchemaField = createSchemaField({
     FormLayout, FormItem, Input, FormGrid,
     ArrayTable, ArrayTableAddition, ArrayTableIndex, ArrayTableRemove,
     LoadingButton, InputButton, NumberPicker, Select, DatePicker, Radio,
+    File,
   },
 })
 
@@ -40,7 +41,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,taskCode,property,contractCode,costType,costRate,endMoney,wbs)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,taskCode,property,contractCode,endMoney,wbs)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
@@ -75,10 +76,8 @@ export default (props) => {
                         name: values.selectedRow.name,
                         taskCode: values.selectedRow.taskCode,
                         property: values.selectedRow.property,
-                        costType: values.selectedRow.costType,
-                        costRate: values.selectedRow.costRate,
-                        providerId: values.selectedRow.companyId,
-                        providerName: values.selectedRow.companyName,
+                        customerId: values.selectedRow.customerId,
+                        customerName: values.selectedRow.customerName,
                       })
                       dialog2.close()
                     } else {
@@ -113,8 +112,8 @@ export default (props) => {
                     console.log(values)
                     if (values.selectedRow) {
                       form.setValues({
-                        providerId: values.selectedRow.id,
-                        providerName: values.selectedRow.name,
+                        customerId: values.selectedRow.id,
+                        customerName: values.selectedRow.name,
                       })
                       dialog2.close()
                     } else {
@@ -134,27 +133,22 @@ export default (props) => {
     }
   }
 
-
   return <ConfigProvider locale={zhCN}>
     <Form form={form} labelWidth={110} className={styles.placeholder}>
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="displayName" title="创建人" x-component="Input" x-decorator="FormItem"/>
-          <SchemaField.String name="deptName" title="创建部门" x-component="Input" x-decorator="FormItem"/>
-          <SchemaField.String name="createDatetime" title="创建时间" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
+          <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
+          <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-        </SchemaField.Void>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="costType" title="成本类型" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
-            name="providerName" required title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+            name="customerName" required title="客户名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="InputButton" x-component-props={{ onClick: onClick2 }}/>
           <SchemaField.String
-            name="contractName" required x-decorator="FormItem" title="付款合同名称" x-component="Input"
+            name="contractName" required x-decorator="FormItem" title="收款合同名称" x-component="Input"
             x-decorator-props={{ gridSpan: 2 }}/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>

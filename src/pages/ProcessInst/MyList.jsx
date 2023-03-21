@@ -8,7 +8,7 @@ export default () => {
   const columns = [
     { title: '流程类型', dataIndex: 'processName', valueType: 'text' },
     {
-      title: '流程名称', valueType: 'text',
+      title: '业务名称', valueType: 'text',
       render: (text, record, _, action) => {
         return <OperateButtonProcess record={record} actionRef={actionRef}/>
       },

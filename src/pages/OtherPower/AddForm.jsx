@@ -27,14 +27,15 @@ const SchemaField = createSchemaField({
 
 
 export default (props) => {
-  let { form, type } = props
+  let { form, type,record } = props
 
   useEffect(async () => {
     form.query('*(displayName,deptName,createDatetime)').forEach(field => {
       field.setPattern('disabled')
     })
+    const user = session.getItem('user')
     if (type === 'add') {
-      const user = session.getItem('user')
+
       form.setInitialValues({
         createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
         displayName: user.displayName, loginName: user.loginName,
@@ -42,7 +43,9 @@ export default (props) => {
         fileList:[{name:'法定代表人授权委托书-模板.doc',status:'done',url:contextPath+'/upload/法定代表人授权委托书-模板.doc'}]
       })
     }
-    if (type === 'add' || type === 'edit') {
+    if (record?.code || user.displayName === '祁瑛') {
+      form.query('code').take().setDisplay('visible')
+    } else {
       form.query('code').take().setDisplay('hidden')
     }
   }, [])

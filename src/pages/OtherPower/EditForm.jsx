@@ -14,9 +14,9 @@ import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, message } from 'antd'
-import { session,contextPath } from '../../utils'
+import { session, contextPath } from '../../utils'
 import DialogList from './DialogList'
-import { LoadingButton,File } from '../../components'
+import { LoadingButton, File } from '../../components'
 import { onFieldReact } from '@formily/core'
 
 const SchemaField = createSchemaField({
@@ -27,22 +27,24 @@ const SchemaField = createSchemaField({
 
 
 export default (props) => {
-  let { form, type } = props
+  let { form, type, record } = props
 
   useEffect(async () => {
     form.query('*(displayName,deptName,createDatetime,deptNamee)').forEach(field => {
       field.setPattern('disabled')
     })
+    const user = session.getItem('user')
     if (type === 'add') {
-      const user = session.getItem('user')
       form.setInitialValues({
         createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
         displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
-        fileList:[{name:'法定代表人授权委托书-模板.doc',status:'done',url:contextPath+'/upload/法定代表人授权委托书-模板.doc'}]
+        fileList: [{ name: '法定代表人授权委托书-模板.doc', status: 'done', url: contextPath + '/upload/法定代表人授权委托书-模板.doc' }],
       })
     }
-    if (type === 'add' || type === 'edit') {
+    if (record?.code || user.displayName === '祁瑛') {
+      form.query('code').take().setDisplay('visible')
+    } else {
       form.query('code').take().setDisplay('hidden')
     }
   }, [])

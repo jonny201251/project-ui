@@ -22,6 +22,7 @@ import {
   ArrayTableAddition,
   ArrayTableIndex,
   ArrayTableRemove,
+  File,
   Line,
   LoadingButton,
   MyCard,
@@ -71,7 +72,7 @@ const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox, PreviewText,
     Select, InputButton, InputButton2, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
-    MyCard, Divider, InputButton3, Line,
+    MyCard, Divider, InputButton3, Line, File,
   },
 })
 
@@ -94,25 +95,28 @@ map.set('其他因素', ['无其他因素', '有其他因素'].map(item => ({ la
 map.set('项目评分', ['--'].map(item => ({ label: item, value: item })))
 map.set('否决项', ['是', '否'].map(item => ({ label: item, value: item })))
 
-map.set('甲方角色', ['业主', '总包', '其他'].map(item => ({ label: item, value: item })))
-map.set('甲方企业性质', ['集团所属企业', '地级市以上政府', '国企', '县级以下政府', '民企', '其他'].map(item => ({ label: item, value: item })))
-map.set('甲方(业主)评分', ['--'].map(item => ({ label: item, value: item })))
+map.set('客户角色', ['业主', '总包', '其他'].map(item => ({ label: item, value: item })))
+map.set('客户企业性质', ['集团所属企业', '地级市以上政府', '国企', '县级以下政府', '民企', '其他'].map(item => ({ label: item, value: item })))
+map.set('客户(业主)评分', ['--'].map(item => ({ label: item, value: item })))
 
 
 map.set('企业性质', ['集团所属企业', '国企', '民企', '其他'].map(item => ({ label: item, value: item })))
-map.set('战略伙伴评分', ['--'].map(item => ({ label: item, value: item })))
+map.set('供方评分', ['--'].map(item => ({ label: item, value: item })))
 
 export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,startDisplay,endDisplay,remark2)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,customerName,providerName)').forEach(field => {
       field.setPattern('disabled')
     })
-    form.query('remark2').take().value = '1.评分权重\n' +
-      '一、二类项目：项目、甲方（业主）评分占比为 6:4；三类项目：项目、甲方（业主）、战略伙伴评分占比为 4:2:4。\n' +
-      '2.评估结论\n' +
-      '评分 90 分（含）以上为低风险项目；评分 70 分（含）以上为中等风险项目；评分 70 分以下为高风险项目'
+    form.query('remark2').take()?.setState({
+      pattern: 'readOnly',
+      value: '1.评分权重\n' +
+        '一、二类项目：项目、客户（业主）评分占比为 6:4；三类项目：项目、客户（业主）、供方评分占比为 4:2:4。\n' +
+        '2.评估结论\n' +
+        '评分 90 分（含）以上为低风险项目；评分 70 分（含）以上为中等风险项目；评分 70 分以下为高风险项目',
+    })
     if (type === 'add') {
       const user = session.getItem('user')
       form.setInitialValues({
@@ -120,6 +124,7 @@ export default (props) => {
         displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
       })
+
       form.query('list2').take().value = [
         { desc1: '资金来源', scoreDesc: '国拨得分 8～10；自筹、地方政府得分 6～8；贷款、外资投资得分0～6；其他 0～8' },
         { desc1: '资金落实情况', scoreDesc: '落实到位得分 7～12；未落实得分0～6' },
@@ -140,14 +145,14 @@ export default (props) => {
       ].map(obj => ({ desc1: obj.desc1, standard: ' ', scoreDesc: obj.scoreDesc }))
 
       form.query('list3').take().value = [
-        { desc1: '甲方角色', scoreDesc: '业主得分 8～10；总包得分 5～8；其他 0～8' },
-        { desc1: '甲方企业性质', scoreDesc: '集团所属企业、地级市以上政府得分 8～10；国企、县级以下政府得分 6～9；民企得分 3～8；其他得分 0～7' },
-        { desc1: '甲方注册时间', scoreDesc: '一年以下得分 0～1；两年以下得分 1～2；两年及以上得满分' },
-        { desc1: '标的金额/甲方注册资本', scoreDesc: '政府部门得满分；比值≤1 得分8～10；比值≤5 得分 5～7；比值＞5 得分 0～4' },
-        { desc1: '甲方诉讼/失信事项', scoreDesc: '无相关事项得满分；近一年内有相关事项得分 0～6；近三年内有相关事项得分 0～8；近五年内有相关事项得分 0～9' },
-        { desc1: '甲方股权出质比例', scoreDesc: '未出质得满分；比例 1/3 以下得分 7～9；比例 2/3 以下得分 4～6；比例 2/3 及以上得分 0～3' },
+        { desc1: '客户角色', scoreDesc: '业主得分 8～10；总包得分 5～8；其他 0～8' },
+        { desc1: '客户企业性质', scoreDesc: '集团所属企业、地级市以上政府得分 8～10；国企、县级以下政府得分 6～9；民企得分 3～8；其他得分 0～7' },
+        { desc1: '客户注册时间', scoreDesc: '一年以下得分 0～1；两年以下得分 1～2；两年及以上得满分' },
+        { desc1: '标的金额/客户注册资本', scoreDesc: '政府部门得满分；比值≤1 得分8～10；比值≤5 得分 5～7；比值＞5 得分 0～4' },
+        { desc1: '客户诉讼/失信事项', scoreDesc: '无相关事项得满分；近一年内有相关事项得分 0～6；近三年内有相关事项得分 0～8；近五年内有相关事项得分 0～9' },
+        { desc1: '客户股权出质比例', scoreDesc: '未出质得满分；比例 1/3 以下得分 7～9；比例 2/3 以下得分 4～6；比例 2/3 及以上得分 0～3' },
         { desc1: '其他因素', scoreDesc: '无其他因素得满分；有其他因素适情评分' },
-        { desc1: '甲方(业主)评分', scoreDesc: '  ' },
+        { desc1: '客户(业主)评分', scoreDesc: '  ' },
         { desc1: '否决项', scoreDesc: '集团、三院、公司黑灰名单；评分低于 60 分' },
       ].map(obj => ({ desc1: obj.desc1, standard: ' ', scoreDesc: obj.scoreDesc }))
 
@@ -160,12 +165,12 @@ export default (props) => {
         { desc1: '合作业绩', scoreDesc: '无合作业绩得分 0～4；有一项得分 3～5；有三项以下得分 6～9；有三项及以上得分 10～1' },
         { desc1: '项目实施能力', scoreDesc: '具备项目直接实施能力得分 8～10；不具备项目直接实施能力得分 0～5' },
         { desc1: '其他因素', scoreDesc: '无其他因素得满分；有其他因素适情评分' },
-        { desc1: '战略伙伴评分', scoreDesc: '  ' },
+        { desc1: '供方评分', scoreDesc: '  ' },
         { desc1: '否决项', scoreDesc: '集团、三院、公司黑灰名单；评分低于 60 分' },
       ].map(obj => ({ desc1: obj.desc1, standard: ' ', scoreDesc: obj.scoreDesc }))
 
       let list4Field = form.query('list4').take()
-      list4Field && list4Field.setDisplay('none')
+      list4Field?.setDisplay('none')
     }
 
 
@@ -182,14 +187,9 @@ export default (props) => {
       if (value) {
         let list4Field = form.query('list4').take()
         if (value === '三类') {
-          form.query('*(strategyName,strategyProperty)')
-            .forEach(fieldd => fieldd.setState({ required: true, pattern: 'editable' }))
-          list4Field && list4Field.setDisplay('visible')
+          list4Field?.setDisplay('visible')
         } else {
-          form.query('*(strategyName,strategyProperty)')
-            .forEach(fieldd => fieldd.setState({ pattern: 'disabled', value: null }))
-
-          list4Field && list4Field.setDisplay('none')
+          list4Field?.setDisplay('none')
         }
       }
     })
@@ -231,6 +231,8 @@ export default (props) => {
         scoreField && scoreField.setValidator({ minimum: 0, maximum: 5, required: true })
         standardField && standardField.setValue('0-5分')
       } else if (desc1Value === '项目评分') {
+        field.setValue('--')
+        scoreField?.setPattern('disabled')
         standardField && standardField.setValue('0-100分')
       } else if (desc1Value === '否决项') {
         standardField && standardField.setValue('--')
@@ -342,6 +344,18 @@ export default (props) => {
         }
       }
     })
+    onFieldReact('list2.*(0,1,2,3,4,5,6,7,8,9,10,11,12,13).score', (field) => {
+      let sum = 0
+      form.query('list2.*(0,1,2,3,4,5,6,7,8,9,10,11,12,13).score').forEach(field => {
+        if (field.value) {
+          sum += field.value
+        }
+      })
+      let tmp = form.query('list2.14.score').take()
+      if (tmp && sum) {
+        tmp.setState({ value: sum, pattern: 'disabled' })
+      }
+    })
 
     onFieldReact('list3.*.desc2', (field) => {
       let desc1Value = field.query('.desc1').get('value')
@@ -351,19 +365,19 @@ export default (props) => {
       //
       let scoreField = field.query('.score').take()
       let standardField = field.query('.standard').take()
-      if (desc1Value === '甲方注册时间') {
+      if (desc1Value === '客户注册时间') {
         field.setComponent('DatePicker')
         scoreField && scoreField.setValidator({ minimum: 0, maximum: 3, required: true })
         standardField && standardField.setValue('0-3分')
-      } else if (desc1Value === '标的金额/甲方注册资本') {
+      } else if (desc1Value === '标的金额/客户注册资本') {
         field.setComponent('Input')
         scoreField && scoreField.setValidator({ minimum: 0, maximum: 10, required: true })
         standardField && standardField.setValue('0-10分')
-      } else if (desc1Value === '甲方诉讼/失信事项') {
+      } else if (desc1Value === '客户诉讼/失信事项') {
         field.setComponent('Input')
         scoreField && scoreField.setValidator({ minimum: 0, maximum: 10, required: true })
         standardField && standardField.setValue('0-10分')
-      } else if (desc1Value === '甲方股权出质比例') {
+      } else if (desc1Value === '客户股权出质比例') {
         field.setComponent('Input')
         scoreField && scoreField.setValidator({ minimum: 0, maximum: 10, required: true })
         standardField && standardField.setValue('0-10分')
@@ -371,7 +385,9 @@ export default (props) => {
         field.setComponent('Input')
         scoreField && scoreField.setValidator({ minimum: 0, maximum: 4, required: true })
         standardField && standardField.setValue('0-4分')
-      } else if (desc1Value === '甲方(业主)评分') {
+      } else if (desc1Value === '客户(业主)评分') {
+        field.setValue('--')
+        scoreField?.setPattern('disabled')
         standardField && standardField.setValue('0-100分')
       } else if (desc1Value === '否决项') {
         standardField && standardField.setValue('--')
@@ -386,7 +402,7 @@ export default (props) => {
         let desc2Field = field.query('.desc2').take()
         let scoreField = field.query('.score').take()
         // scoreField && scoreField.setValue(null)
-        if (desc1Value === '甲方角色') {
+        if (desc1Value === '客户角色') {
           if (desc2Value === '业主') {
             field.value = '8-10分'
             scoreField && scoreField.setValidator({ minimum: 8, maximum: 10, required: true })
@@ -397,7 +413,7 @@ export default (props) => {
             field.value = '0-8分'
             scoreField && scoreField.setValidator({ minimum: 0, maximum: 8, required: true })
           }
-        } else if (desc1Value === '甲方企业性质') {
+        } else if (desc1Value === '客户企业性质') {
           if (desc2Value === '集团所属企业' || desc2Value === '地级市以上政府') {
             field.value = '8-10分'
             scoreField && scoreField.setValidator({ minimum: 8, maximum: 10, required: true })
@@ -412,6 +428,18 @@ export default (props) => {
             scoreField && scoreField.setValidator({ minimum: 0, maximum: 7, required: true })
           }
         }
+      }
+    })
+    onFieldReact('list3.*(0,1,2,3,4,5,6).score', (field) => {
+      let sum = 0
+      form.query('list3.*(0,1,2,3,4,5,6).score').forEach(field => {
+        if (field.value) {
+          sum += field.value
+        }
+      })
+      let tmp = form.query('list3.7.score').take()
+      if (tmp && sum) {
+        tmp.setState({ value: sum, pattern: 'disabled' })
       }
     })
 
@@ -451,7 +479,9 @@ export default (props) => {
         field.setComponent('Input')
         scoreField && scoreField.setValidator({ minimum: 0, maximum: 4, required: true })
         standardField && standardField.setValue('0-4分')
-      } else if (desc1Value === '战略伙伴评分') {
+      } else if (desc1Value === '供方评分') {
+        field.setValue('--')
+        scoreField?.setPattern('readOnly')
         standardField && standardField.setValue('0-100分')
       } else if (desc1Value === '否决项') {
         standardField && standardField.setValue('--')
@@ -480,6 +510,18 @@ export default (props) => {
         }
       }
     })
+    onFieldReact('list4.*(0,1,2,3,4,5,6,7).score', (field) => {
+      let sum = 0
+      form.query('list4.*(0,1,2,3,4,5,6,7).score').forEach(field => {
+        if (field.value) {
+          sum += field.value
+        }
+      })
+      let tmp = form.query('list4.8.score').take()
+      if (tmp && sum) {
+        tmp.setState({ value: sum, pattern: 'disabled' })
+      }
+    })
   })
 
   const onClick = (flag) => {
@@ -494,28 +536,11 @@ export default (props) => {
                 <LoadingButton
                   onClick={async () => {
                     const values = await form2.submit()
-                    console.log(values)
-                    console.log(values.selectedRow.startScore)
                     if (values.selectedRow) {
                       form.setValues({
                         customerId: values.selectedRow.id,
                         customerName: values.selectedRow.name,
-                        customerProperty: values.selectedRow.property,
-                        startScore: values.selectedRow.startScore,
-                        startResult: values.selectedRow.startResult,
-                        endScore: values.selectedRow.endScore,
-                        endResult: values.selectedRow.endResult,
                       })
-                      if (values.selectedRow.startScore) {
-                        form.setValues({
-                          startScore: values.selectedRow.startScore,
-                          startResult: values.selectedRow.startResult,
-                          endScore: values.selectedRow.endScore,
-                          endResult: values.selectedRow.endResult,
-                          startDisplay: values.selectedRow.startScore + '分，' + values.selectedRow.startResult,
-                          endDisplay: values.selectedRow.endScore + '分，' + values.selectedRow.endResult,
-                        })
-                      }
                       dialog2.close()
                     } else {
                       message.error('选择一条数据')
@@ -535,6 +560,8 @@ export default (props) => {
   }
 
   const onClick2 = (flag) => {
+    let field = form.query('property').take()
+    if (field?.value !== '三类') return
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {
@@ -548,9 +575,8 @@ export default (props) => {
                     const values = await form2.submit()
                     if (values.selectedRow) {
                       form.setValues({
-                        strategyId: values.selectedRow.id,
-                        strategyName: values.selectedRow.name,
-                        strategyProperty: values.selectedRow.property,
+                        providerId: values.selectedRow.id,
+                        providerName: values.selectedRow.name,
                       })
                       dialog2.close()
                     } else {
@@ -571,7 +597,7 @@ export default (props) => {
   }
 
   return <ConfigProvider locale={zhCN}>
-    <Form form={form} labelWidth={110} className={styles.placeholder}>
+    <Form form={form} labelWidth={130} className={styles.placeholder}>
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
           <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
@@ -579,9 +605,9 @@ export default (props) => {
           <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
                               x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
+          <SchemaField.String name="taskCode" required title="任务号" x-decorator="FormItem" x-component="Select"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
-          <SchemaField.String name="taskCode" required title="项目任务号" x-decorator="FormItem" x-component="Select"/>
           <SchemaField.String
             name="property" required title="项目性质" x-decorator="FormItem" x-component="Select"
             enum={[
@@ -590,45 +616,24 @@ export default (props) => {
               { label: '三类', value: '三类' },
             ]}
           />
-          <SchemaField.String name="location" required title="项目地点" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="projectRate" required title="项目毛利率" x-decorator="FormItem" x-component="Input"
             x-component-props={{ placeholder: '示例：3%' }}/>
+          <SchemaField.String
+            name="location" required title="项目地点" x-decorator="FormItem"
+            x-component="Input" x-decorator-props={{ gridSpan: 2 }}
+          />
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
           <SchemaField.String name="customerName" required title="客户名称" x-decorator="FormItem"
+                              x-decorator-props={{ gridSpan: 2 }}
                               x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-          <SchemaField.String
-            name="customerProperty" required title="客户企业性质" x-decorator="FormItem" x-component="Select"
-            enum={[
-              { label: '事业单位', value: '事业单位' },
-              { label: '国有企业', value: '国有企业' },
-              { label: '民营企业', value: '民营企业' },
-              { label: '外资合资', value: '外资合资' },
-              { label: '个体经营', value: '个体经营' },
-              { label: '其他', value: '其他' },
-            ]}
-          />
-          <SchemaField.String name="startDisplay" title="客户信用初评得分及等级" x-decorator="FormItem"
-                              x-component="Input"/>
-          <SchemaField.String name="endDisplay" title="客户信用建议得分及等级" x-decorator="FormItem"
-                              x-component="Input"/>
-          <SchemaField.String name="strategyName" title="战略伙伴名称" x-decorator="FormItem"
+          <SchemaField.String name="providerName" title="供方名称" x-decorator="FormItem"
+                              x-decorator-props={{ gridSpan: 2 }}
                               x-component="InputButton2" x-component-props={{ onClick: onClick2 }}/>
           <SchemaField.String
-            name="strategyProperty" title="战略伙伴名称企业性质" x-decorator="FormItem" x-component="Select"
-            enum={[
-              { label: '事业单位', value: '事业单位' },
-              { label: '国有企业', value: '国有企业' },
-              { label: '民营企业', value: '民营企业' },
-              { label: '外资合资', value: '外资合资' },
-              { label: '个体经营', value: '个体经营' },
-              { label: '其他', value: '其他' },
-            ]}
-          />
-          <SchemaField.String
-            name="idTypeList" required title="法人身份证类型" x-decorator="FormItem" x-component="Checkbox.Group"
-            x-decorator-props={{ gridSpan: 2 }}
+            name="idTypeListTmp" required title="法人身份证类型" x-decorator="FormItem" x-component="Checkbox.Group"
+            x-decorator-props={{ gridSpan: 4 }}
             enum={[
               { label: '身份证原件', value: '身份证原件' },
               { label: '身份证电子版', value: '身份证电子版' },
@@ -693,6 +698,11 @@ export default (props) => {
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
           <SchemaField.String
+            name="fileList" title="附件" x-decorator="FormItem"
+            x-component="File" x-decorator-props={{ gridSpan: 2 }}/>
+        </SchemaField.Void>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+          <SchemaField.String
             name="remark" title="备注" x-component="Input.TextArea"
             x-decorator-props={{ gridSpan: 2 }}
             x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
@@ -753,7 +763,7 @@ export default (props) => {
             size: 'small',
             pagination: { pageSize: 200 },
             sticky: true,
-            title: () => <div style={{ textAlign: 'center', fontWeight: 'bolder' }}>甲方(业务)评估</div>,
+            title: () => <div style={{ textAlign: 'center', fontWeight: 'bolder' }}>客户(业务)评估</div>,
           }}
         >
           <SchemaField.Object>
@@ -765,13 +775,13 @@ export default (props) => {
             </SchemaField.Void>
             <SchemaField.Void
               x-component="ArrayTable.Column"
-              x-component-props={{ width: 200, title: '甲方(业主)情况', align: 'center', colSpan: 2 }}
+              x-component-props={{ width: 200, title: '客户(业主)情况', align: 'center', colSpan: 2 }}
             >
               <SchemaField.String name="desc1" x-decorator="FormItem" x-component="PreviewText.Input"/>
             </SchemaField.Void>
             <SchemaField.Void
               x-component="ArrayTable.Column"
-              x-component-props={{ width: 220, title: '甲方(业主)情况', align: 'center', colSpan: 0 }}
+              x-component-props={{ width: 220, title: '客户(业主)情况', align: 'center', colSpan: 0 }}
             >
               <SchemaField.String name="desc2" required x-decorator="FormItem" x-component="Select"/>
             </SchemaField.Void>
@@ -802,7 +812,7 @@ export default (props) => {
             size: 'small',
             pagination: { pageSize: 200 },
             sticky: true,
-            title: () => <div style={{ textAlign: 'center', fontWeight: 'bolder' }}>战略伙伴评估</div>,
+            title: () => <div style={{ textAlign: 'center', fontWeight: 'bolder' }}>供方评估</div>,
           }}
         >
           <SchemaField.Object>
@@ -814,13 +824,13 @@ export default (props) => {
             </SchemaField.Void>
             <SchemaField.Void
               x-component="ArrayTable.Column"
-              x-component-props={{ width: 200, title: '战略伙伴情况', align: 'center', colSpan: 2 }}
+              x-component-props={{ width: 200, title: '供方情况', align: 'center', colSpan: 2 }}
             >
               <SchemaField.String name="desc1" x-decorator="FormItem" x-component="PreviewText.Input"/>
             </SchemaField.Void>
             <SchemaField.Void
               x-component="ArrayTable.Column"
-              x-component-props={{ width: 220, title: '战略伙伴情况', align: 'center', colSpan: 0 }}
+              x-component-props={{ width: 220, title: '供方情况', align: 'center', colSpan: 0 }}
             >
               <SchemaField.String name="desc2" required x-decorator="FormItem" x-component="Select"/>
             </SchemaField.Void>

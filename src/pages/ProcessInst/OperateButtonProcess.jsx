@@ -7,7 +7,8 @@ import { LoadingButton } from '../../components'
 export default (props) => {
   const { record, actionRef } = props
 
-  let title = record.businessName
+  // let title = record.businessName
+  let title = '审批'
   //
   let path = utils[record.path]
   let width = path.width || 520
@@ -75,6 +76,6 @@ export default (props) => {
   }
 
   return <a onClick={() => onClick()}>
-    {title}
+    {record.businessName}
   </a>
 }

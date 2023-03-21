@@ -1,5 +1,5 @@
 import { projectRunPath } from '../../utils'
-import { BaseProTable } from '../../components'
+import { BaseProTable2 } from '../../components'
 
 export default () => {
   const columns = [
@@ -16,5 +16,5 @@ export default () => {
     { title: '开票余额', dataIndex: '11', valueType: 'text' },
   ]
 
-  return <BaseProTable path={projectRunPath} columns={columns}/>
+  return <BaseProTable2 path={projectRunPath} columns={columns}/>
 }

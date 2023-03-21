@@ -1,5 +1,5 @@
 import { contractRunPath } from '../../utils'
-import { BaseProTable } from '../../components'
+import { BaseProTable2 } from '../../components'
 
 export default () => {
   const columns = [
@@ -16,5 +16,5 @@ export default () => {
 
   ]
 
-  return <BaseProTable path={contractRunPath} columns={columns}/>
+  return <BaseProTable2 path={contractRunPath} columns={columns}/>
 }

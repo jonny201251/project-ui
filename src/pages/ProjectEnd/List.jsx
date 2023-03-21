@@ -1,5 +1,5 @@
 import { projectEndPath } from '../../utils'
-import { BaseProTable } from '../../components'
+import { BaseProTable2 } from '../../components'
 
 export default () => {
   const columns = [
@@ -16,5 +16,5 @@ export default () => {
     { title: '备注', dataIndex: 'remark', valueType: 'text' },
   ]
 
-  return <BaseProTable path={projectEndPath} columns={columns}/>
+  return <BaseProTable2 path={projectEndPath} columns={columns}/>
 }
