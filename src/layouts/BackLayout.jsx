@@ -84,7 +84,6 @@ export default () => {
           </Menu.SubMenu>
           <Menu.Item key="66-投标保证金(函)登记-projectProtect1Path">投标保证金(函)登记</Menu.Item>
           <Menu.SubMenu title="项目预算管理" key="项目预算管理">
-            <Menu.Item key="0-项目立项确认-sysDicPath">项目立项确认</Menu.Item>
             <Menu.Item key="0-项目信息-smallBudgetProjectPath">项目信息</Menu.Item>
             <Menu.Item key="1-预计收入-smallBudgetInPath">预计收入</Menu.Item>
             <Menu.Item key="2-预计支出-smallBudgetOutPath">预计支出</Menu.Item>

@@ -82,6 +82,13 @@ import ProviderQueryViewHistory from '../pages/ProviderQuery/ViewHistory'
 import ProviderQueryViewForm from '../pages/ProviderQuery/ViewForm'
 import ProviderQueryChangeForm from '../pages/ProviderQuery/ChangeForm'
 
+
+import ProjectProtectList from '../pages/ProjectProtect/List'
+import ProjectProtectAddForm from '../pages/ProjectProtect/AddForm'
+import ProjectProtectCheckForm from '../pages/ProjectProtect/CheckForm'
+import ProjectProtectViewForm from '../pages/ProjectProtect/ViewForm'
+
+
 import ProviderControlList from '../pages/ProviderControl/List'
 import ProviderControlAddForm from '../pages/ProviderControl/AddForm'
 import ProviderControlCheckForm from '../pages/ProviderControl/CheckForm'
@@ -163,6 +170,9 @@ export const providerPath = {
   edit: contextPath + '/provider/edit',
   delete: contextPath + '/provider/delete',
   modify: contextPath + '/provider/modify',
+}
+export const providerCodePath = {
+  list: contextPath + '/provider/listCode',
 }
 export const providerSmallProjectPath = {
   list: contextPath + '/provider/listSmallProject',
@@ -270,10 +280,10 @@ export const otherPowerPath = {
 }
 
 export const projectCodePath = {
-  flag: 'projectCodePath', width: 900, Form: ProjectCodeForm, List: ProjectCodeList,
+  flag: 'projectCodePath', width: 1000, Form: ProjectCodeForm, List: ProjectCodeList,
   list: contextPath + '/projectCode/list',
   get: contextPath + '/projectCode/get',
-  have:contextPath + '/projectCode/have',
+  have: contextPath + '/projectCode/have',
   add: contextPath + '/projectCode/add',
   edit: contextPath + '/projectCode/edit',
   delete: contextPath + '/projectCode/delete',
@@ -287,6 +297,17 @@ export const smallProjectNoPath = {
   add: contextPath + '/smallProjectNo/add',
   edit: contextPath + '/smallProjectNo/edit',
   delete: contextPath + '/smallProjectNo/delete',
+}
+
+export const projectProtectPath = {
+  flag: 'projectProtectPath', width: 1000, List: ProjectProtectList, haveChange: true,
+  AddForm: ProjectProtectAddForm,
+  EditForm: ProjectProtectAddForm,
+  CheckForm: ProjectProtectCheckForm,
+  ViewForm: ProjectProtectViewForm,
+  list: contextPath + '/projectProtect/list',
+  get: contextPath + '/projectProtect/get',
+  btnHandle: contextPath + '/projectProtect/btnHandle',
 }
 
 export const projectProtect1Path = {
@@ -421,6 +442,9 @@ export const providerSimplePath = {
 export const providerSimplePath2 = {
   list: contextPath + '/providerSimple/list2',
 }
+export const projectDialogPath = {
+  list: contextPath + '/projectDialog/list',
+}
 export const providerQueryPath = {
   flag: 'providerQueryPath', width: 1000, List: ProviderQueryList,
   AddForm: ProviderQueryAddForm,
@@ -437,7 +461,7 @@ export const providerQueryPath = {
 
 
 export const providerControlPath = {
-  flag: 'providerControlPath', width: 1000, List: ProviderControlList,
+  flag: 'providerControlPath', width: 1000, List: ProviderControlList, haveChange: true,
   AddForm: ProviderControlAddForm,
   EditForm: ProviderControlAddForm,
   CheckForm: ProviderControlCheckForm,

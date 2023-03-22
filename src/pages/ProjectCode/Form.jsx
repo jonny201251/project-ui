@@ -1,10 +1,27 @@
-import { Cascader, Form, FormItem, FormLayout, Input, Select, FormGrid } from '@formily/antd'
+import {
+  Cascader,
+  Form,
+  FormButtonGroup,
+  FormDialog,
+  FormGrid,
+  FormItem,
+  FormLayout,
+  Input,
+  Select,
+} from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
-import { contextPath, session } from '../../utils'
+import { session } from '../../utils'
+import { InputButton, LoadingButton } from '../../components'
+import { Button, ConfigProvider, message } from 'antd'
+import DialogList from './DialogList'
+import DialogList2 from './DialogList2'
+import zhCN from 'antd/lib/locale/zh_CN'
+import styles from '../table-placeholder.less'
+import { onFieldReact } from '@formily/core'
 
 const SchemaField = createSchemaField({
-  components: { FormLayout, FormItem, Input, Select, Cascader, FormGrid },
+  components: { FormLayout, FormItem, Input, Select, InputButton, FormGrid, Cascader },
 })
 
 export default (props) => {
@@ -15,24 +32,31 @@ export default (props) => {
 
     if (record?.taskCode) {
       form.query('taskCode').take().setDisplay('visible')
-      if(user.displayName === '代佳宝'){
+      if (user.displayName === '代佳宝') {
         form.query('taskCode').take().setPattern('editable')
-      }else{
+      } else {
         form.query('taskCode').take().setPattern('disabled')
       }
     } else {
       form.query('taskCode').take().setDisplay('hidden')
     }
-    // form.query('taskCode').take().setState({ display: 'hidden', pattern: 'disabled' })
 
+    form.query('*(displayName,deptName,createDatetime,usee)').forEach(field => {
+      field.setPattern('disabled')
+    })
     if (type === 'add') {
       const user = session.getItem('user')
       form.setInitialValues({
         createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName, loginName: user.loginName,
+        displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
       })
+    } else {
+      if (record.projectProperty === '3') {
+        form.query('providerName').take()?.setState({ required: true })
+      }
     }
+
   }, [])
 
   const optionArr = [
@@ -123,48 +147,152 @@ export default (props) => {
     },
   ]
 
-  return <Form form={form} labelWrap={true} labelWidth={120}>
-    <SchemaField>
-      <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 2, strictAutoFit: true }}>
-        <SchemaField.String
-          name="projectName" required title="项目名称" x-decorator="FormItem"
-          x-component="Input.TextArea" x-component-props={{ rows: 2 }}
-        />
-        <SchemaField.String
-          name="projectProperty" required title="项目性质" x-decorator="FormItem" x-component="Select"
-          enum={[
-            { label: '一类', value: '1' },
-            { label: '二类', value: '2' },
-            { label: '三类', value: '3' },
-          ]}
-        />
-        <SchemaField.String name="customerName" required title="客户名称" x-decorator="FormItem" x-component="Input"/>
-        <SchemaField.String
-          name="customerProperty" required title="客户企业性质" x-decorator="FormItem" x-component="Select"
-          enum={[
-            { label: '非经营业务下无单位', value: '0' },
-            { label: '甲方国企', value: '1' },
-            { label: '甲方民企', value: '2' },
-          ]}
-        />
-        <SchemaField.String name="providerName" required title="战略伙伴名称" x-decorator="FormItem" x-component="Input"/>
-        <SchemaField.String
-          name="providerProperty" required title="战略伙伴性质" x-decorator="FormItem" x-component="Select"
-          enum={[
-            { label: '无合作方', value: '0' },
-            { label: '合作方国企', value: '1' },
-            { label: '合作方民企', value: '2' },
-          ]}
-        />
-        <SchemaField.String
-          name="businessTypeTmp" required title="业务类别" x-decorator="FormItem" x-component="Cascader"
-          enum={optionArr}
-        />
-      </SchemaField.Void>
-      <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 2, strictAutoFit: true }}>
-        <SchemaField.String name="taskCode" title="任务号/备案号" x-decorator="FormItem" x-component="Input"/>
-      </SchemaField.Void>
-    </SchemaField>
-  </Form>
+  form.addEffects('id', () => {
+    onFieldReact('projectProperty', (field) => {
+      let value = field.value
+      if (value) {
+        if (value === '3') {
+          form.query('providerName').take()?.setState({ required: true })
+        } else {
+          form.query('providerName').take()?.setState({ required: false })
+        }
+      }
+    })
+
+  })
+  const onClick = (flag) => {
+    if (flag === 'open') {
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
+        (form2) => {
+          return <>
+            <DialogList form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
+            <FormDialog.Footer>
+              <FormButtonGroup gutter={16} align={'right'}>
+                <Button onClick={() => dialog2.close()}>取消</Button>
+                <LoadingButton
+                  onClick={async () => {
+                    const values = await form2.submit()
+                    if (values.selectedRow) {
+                      form.setValues({
+                        customerId: values.selectedRow.id,
+                        customerName: values.selectedRow.name,
+                      })
+                      dialog2.close()
+                    } else {
+                      message.error('选择一条数据')
+                    }
+                  }}
+                  type={'primary'}
+                >
+                  确定
+                </LoadingButton>
+              </FormButtonGroup>
+            </FormDialog.Footer>
+          </>
+        },
+      )
+      dialog2.open({})
+    }
+  }
+
+  const onClick2 = (flag) => {
+    let field = form.query('projectProperty').take()
+    if (field?.value !== '3') return
+    if (flag === 'open') {
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
+        (form2) => {
+          return <>
+            <DialogList2 form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
+            <FormDialog.Footer>
+              <FormButtonGroup gutter={16} align={'right'}>
+                <Button onClick={() => dialog2.close()}>取消</Button>
+                <LoadingButton
+                  onClick={async () => {
+                    const values = await form2.submit()
+                    if (values.selectedRow) {
+                      form.setValues({
+                        providerId: values.selectedRow.id,
+                        providerName: values.selectedRow.name,
+                        providerUsee: values.selectedRow.usee,
+                      })
+                      dialog2.close()
+                    } else {
+                      message.error('选择一条数据')
+                    }
+                  }}
+                  type={'primary'}
+                >
+                  确定
+                </LoadingButton>
+              </FormButtonGroup>
+            </FormDialog.Footer>
+          </>
+        },
+      )
+      dialog2.open({})
+    }
+  }
+
+  return <ConfigProvider locale={zhCN}>
+    <Form form={form} labelWidth={110} className={styles.placeholder}>
+      <SchemaField>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.String name="displayName" title="创建人" x-component="Input" x-decorator="FormItem"/>
+          <SchemaField.String name="deptName" title="创建部门" x-component="Input" x-decorator="FormItem"/>
+          <SchemaField.String name="createDatetime" title="创建时间" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String
+            name="projectName" required title="项目名称"
+            x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+            x-component="Input"
+          />
+          <SchemaField.String
+            name="projectProperty" required title="项目性质" x-decorator="FormItem" x-component="Select"
+            enum={[
+              { label: '一类', value: '1' },
+              { label: '二类', value: '2' },
+              { label: '三类', value: '3' },
+            ]}
+          />
+          <SchemaField.String
+            name="customerName" required title="客户名称"
+            x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+            x-component="InputButton" x-component-props={{ onClick: onClick }}
+          />
+          <SchemaField.String
+            name="customerProperty" required title="客户企业性质"
+            x-decorator="FormItem" x-component="Select"
+            enum={[
+              { label: '非经营业务下无单位', value: '0' },
+              { label: '甲方国企', value: '1' },
+              { label: '甲方民企', value: '2' },
+            ]}
+          />
+          <SchemaField.String
+            name="providerName" title="供方名称"
+            x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+            x-component="InputButton" x-component-props={{ onClick: onClick2 }}/>
+          <SchemaField.String
+            name="providerProperty" required title="供方性质" x-decorator="FormItem" x-component="Select"
+            enum={[
+              { label: '无合作方', value: '0' },
+              { label: '合作方国企', value: '1' },
+              { label: '合作方民企', value: '2' },
+            ]}
+          />
+          <SchemaField.String
+            name="businessTypeTmp" required title="业务类别"
+            x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+            x-component="Cascader"
+            enum={optionArr}
+          />
+          <SchemaField.String name="taskCode" title="任务号/备案号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String
+            name="remark" title="备注" x-component="Input.TextArea"
+            x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+          />
+        </SchemaField.Void>
+      </SchemaField>
+    </Form>
+  </ConfigProvider>
 }
 

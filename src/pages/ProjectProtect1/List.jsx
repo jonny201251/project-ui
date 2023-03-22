@@ -7,13 +7,14 @@ export default () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const actionRef = useRef()
   const columns = [
+    { title: '项目类别', dataIndex: 'type', valueType: 'text' },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
     { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
-    { title: '业务状态', dataIndex: 'status', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
-    { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
-    { title: '申请时间', dataIndex: 'createDatetime', valueType: 'text' },
+    { title: '项目状态', dataIndex: 'status', valueType: 'text' },
+    { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
+    { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text' },
     {
       title: '操作',
       valueType: 'option',

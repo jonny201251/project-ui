@@ -107,7 +107,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,customerName,providerName)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime)').forEach(field => {
       field.setPattern('disabled')
     })
     form.query('remark2').take()?.setState({
@@ -577,6 +577,7 @@ export default (props) => {
                       form.setValues({
                         providerId: values.selectedRow.id,
                         providerName: values.selectedRow.name,
+                        providerUsee: values.selectedRow.usee,
                       })
                       dialog2.close()
                     } else {

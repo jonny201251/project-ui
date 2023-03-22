@@ -31,7 +31,7 @@ export default (props) => {
       params={{ list: path.list }}
       request={proTableRequest}
       //复选框
-      rowSelection={{ onChange: selectedRowKeys => setSelectedRowKeys(selectedRowKeys) }}
+      // rowSelection={{ onChange: selectedRowKeys => setSelectedRowKeys(selectedRowKeys) }}
       tableAlertRender={false}
       //
       options={{ density: false }}

@@ -81,11 +81,116 @@ export default (props) => {
 
   useEffect(async () => {
     if (haveEditForm === '否') {
-      // form.setPattern('disabled')
+      form.setPattern('readOnly')
       form.query('comment').take()?.setPattern('editable')
     }
   }, [])
 
+
+  form.addEffects('id', () => {
+    onFieldReact('haveBid', (field) => {
+      let value = field.value
+      if (value) {
+        if (value === '是') {
+          form.query('bidDate').take()?.setState({ required: true, pattern: 'editable' })
+        } else {
+          form.query('bidDate').take()?.setState({ pattern: 'disabled' })
+        }
+      }
+    })
+
+    onFieldReact('haveGiveMoney', (field) => {
+      let value = field.value
+      if (value) {
+        if (value === '是') {
+          form.query('*(giveMoney,giveMoneyCycle)').forEach(fieldd => fieldd.setState({
+            required: true,
+            pattern: 'editable',
+          }))
+        } else {
+          form.query('*(giveMoney,giveMoneyCycle)').forEach(fieldd => fieldd.setState({
+            pattern: 'disabled',
+            value: null,
+          }))
+        }
+      }
+    })
+
+
+  })
+
+  const onClick = (flag) => {
+    if (flag === 'open') {
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
+        (form2) => {
+          return <>
+            <DialogList form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
+            <FormDialog.Footer>
+              <FormButtonGroup gutter={16} align={'right'}>
+                <Button onClick={() => dialog2.close()}>取消</Button>
+                <LoadingButton
+                  onClick={async () => {
+                    const values = await form2.submit()
+                    if (values.selectedRow) {
+                      form.setValues({
+                        customerId: values.selectedRow.id,
+                        customerName: values.selectedRow.name,
+                      })
+                      dialog2.close()
+                    } else {
+                      message.error('选择一条数据')
+                    }
+                  }}
+                  type={'primary'}
+                >
+                  确定
+                </LoadingButton>
+              </FormButtonGroup>
+            </FormDialog.Footer>
+          </>
+        },
+      )
+      dialog2.open({})
+    }
+  }
+
+  const onClick2 = (flag) => {
+    let field = form.query('property').take()
+    if (field?.value !== '三类') return
+    if (flag === 'open') {
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
+        (form2) => {
+          return <>
+            <DialogList2 form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
+            <FormDialog.Footer>
+              <FormButtonGroup gutter={16} align={'right'}>
+                <Button onClick={() => dialog2.close()}>取消</Button>
+                <LoadingButton
+                  onClick={async () => {
+                    const values = await form2.submit()
+                    if (values.selectedRow) {
+                      form.setValues({
+                        providerId: values.selectedRow.id,
+                        providerName: values.selectedRow.name,
+                        providerUsee: values.selectedRow.usee,
+                      })
+                      dialog2.close()
+                    } else {
+                      message.error('选择一条数据')
+                    }
+                  }}
+                  type={'primary'}
+                >
+                  确定
+                </LoadingButton>
+              </FormButtonGroup>
+            </FormDialog.Footer>
+          </>
+        },
+      )
+      dialog2.open({})
+    }
+  }
 
   const onClick3 = (flag, type) => {
     if (flag === 'open') {
@@ -103,6 +208,7 @@ export default (props) => {
                       form.setValues({
                         providerId: values.selectedRow.id,
                         providerName: values.selectedRow.name,
+                        providerUsee: values.selectedRow.usee,
                       })
                       dialog2.close()
                     } else {
@@ -133,6 +239,7 @@ export default (props) => {
       </SchemaField.Void>
     }
   }
+
 
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>

@@ -23,7 +23,6 @@ export default (props) => {
                     onClick={async () => {
                       const values = await form.submit()
                       if (values) {
-                        console.log(values)
                         const data = await post(path.add, values)
                         if (data) {
                           actionRef.current.clearSelected()

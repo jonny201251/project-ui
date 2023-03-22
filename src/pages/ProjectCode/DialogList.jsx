@@ -1,26 +1,15 @@
-import ProTable from '@ant-design/pro-table'
-
+import { customer3Path } from '../../utils'
+import { BaseList } from '../../components'
 
 export default (props) => {
   const columns = [
-    { title: '相似度', dataIndex: 'likeValue', valueType: 'text' },
-    { title: '项目名称', dataIndex: 'projectName', valueType: 'text' },
-    { title: '任务号/备案号', dataIndex: 'taskCode', valueType: 'text' },
-    { title: '状态', dataIndex: 'status', valueType: 'text' },
-    { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
-    { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text' },
+    { title: '客户名称', dataIndex: 'name', valueType: 'text', colSize: 2 },
+    { title: '客户企业性质', dataIndex: 'property', valueType: 'text', colSize: 2 },
+    { title: '纳税人识别号', dataIndex: 'code', valueType: 'text', hideInSearch: true },
   ]
 
-  return <ProTable
-    bordered
-    rowKey="id"
-    columns={columns}
-    columnEmptyText={true}
-    dataSource={props.data.dataList}
-    tableAlertRender={false}
-    //
-    options={false}
-    search={false}
+  return <BaseList
+    form={props.form} selectedId={props.selectedId}
+    path={customer3Path} columns={columns} search={{ span: 8 }}
   />
 }

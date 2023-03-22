@@ -113,7 +113,8 @@ export default (props) => {
                     if (values.selectedRow) {
                       form.setValues({
                         providerId: values.selectedRow.id,
-                        providerName: values.selectedRow.name
+                        providerName: values.selectedRow.name,
+                        providerUsee: values.selectedRow.usee,
                       })
                       dialog2.close()
                     } else {

@@ -71,6 +71,14 @@ export default (props) => {
           <SchemaField.String
             name="projectRate" required title="项目毛利率" x-decorator="FormItem" x-component="Input"
             x-component-props={{ placeholder: '示例：3%' }}/>
+          <SchemaField.String
+            name="projectStatus" title="项目状态" x-decorator="FormItem"
+            x-component="Select" x-component-props={{ showSearch: true }}
+            enum={[
+              { label: '中标', value: '中标' },
+              { label: '未中标', value: '未中标' },
+              { label: '终止', value: '终止' },
+            ]}/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
           <SchemaField.String

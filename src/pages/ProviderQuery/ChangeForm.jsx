@@ -17,18 +17,7 @@ import { session } from '../../utils'
 import zhCN from 'antd/lib/locale/zh_CN'
 import styles from '../table-placeholder.less'
 import DialogList from './DialogList'
-import { File, LoadingButton } from '../../components'
-
-const InputButton = (props) => {
-  return <div style={{ display: 'inline-flex', width: '100%' }}>
-    <Input {...props} style={{ ...props.style }} disabled/>
-    <Button onClick={(e) => {
-      if (props.onClick) {
-        props.onClick('open')
-      }
-    }} icon={<SearchOutlined/>} type={'primary'}/>
-  </div>
-}
+import { File, LoadingButton,InputButton } from '../../components'
 
 const SchemaField = createSchemaField({
   components: {
@@ -41,7 +30,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,name)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime)').forEach(field => {
       field.setPattern('disabled')
     })
   }, [])

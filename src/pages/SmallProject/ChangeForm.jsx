@@ -21,9 +21,10 @@ import {
   ArrayTableAddition,
   ArrayTableIndex,
   ArrayTableRemove,
+  File,
   LoadingButton,
   MyCard,
-  NumberPicker, File,
+  NumberPicker,
 } from '../../components'
 import DialogList from './DialogList'
 import DialogList2 from './DialogList2'
@@ -173,6 +174,7 @@ export default (props) => {
                       form.setValues({
                         providerId: values.selectedRow.id,
                         providerName: values.selectedRow.name,
+                        providerUsee: values.selectedRow.usee,
                       })
                       dialog2.close()
                     } else {
@@ -208,6 +210,7 @@ export default (props) => {
                       form.setValues({
                         providerId: values.selectedRow.id,
                         providerName: values.selectedRow.name,
+                        providerUsee: values.selectedRow.usee,
                       })
                       dialog2.close()
                     } else {

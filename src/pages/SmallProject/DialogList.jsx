@@ -1,4 +1,4 @@
-import { customer2Path } from '../../utils'
+import { customer3Path } from '../../utils'
 import { BaseList } from '../../components'
 
 export default (props) => {
@@ -9,6 +9,6 @@ export default (props) => {
 
   return <BaseList
     form={props.form} selectedId={props.selectedId}
-    path={customer2Path} columns={columns} search={{ span: 8 }}
+    path={customer3Path} columns={columns} search={{ span: 8 }}
   />
 }

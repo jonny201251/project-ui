@@ -54,7 +54,7 @@ export default (props) => {
 
   const onClick = (flag) => {
     if (flag === 'open') {
-      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 950 },
         (form2) => {
           return <>
             <DialogList form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
@@ -71,10 +71,6 @@ export default (props) => {
                         name: values.selectedRow.name,
                         taskCode: values.selectedRow.taskCode,
                         property: values.selectedRow.property,
-                        invoiceRate: values.selectedRow.invoiceRate,
-                        projectRate: values.selectedRow.projectRate,
-                        customerId: values.selectedRow.customerId,
-                        customerName: values.selectedRow.customerName,
                       })
                       dialog2.close()
                     } else {
@@ -111,6 +107,7 @@ export default (props) => {
             name="status" required title="项目状态" x-decorator="FormItem"
             x-component="Select" x-component-props={{ showSearch: true }}
             enum={[
+              { label: '投标中', value: '投标中' },
               { label: '中标', value: '中标' },
               { label: '未中标', value: '未中标' },
               { label: '终止', value: '终止' },
@@ -140,7 +137,7 @@ export default (props) => {
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
-            name="userNameeTmp" required title="财务部" x-decorator="FormItem"
+            name="userNamee" required title="财务部" x-decorator="FormItem"
             x-decorator-props={{ tooltip: '流程审批节点' }}
             x-component="Select" x-component-props={{ showSearch: true }}
             enum={session.getItem('userList')}

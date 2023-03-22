@@ -10,6 +10,7 @@ export default () => {
     { title: '供方名称', dataIndex: 'providerName', valueType: 'text' },
     { title: '预计签约额', dataIndex: 'expectMoney', valueType: 'text' },
     { title: '预计签约日期', dataIndex: 'expectDate', valueType: 'text' },
+    { title: '项目状态', dataIndex: 'projectStatus', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
     { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '申请时间', dataIndex: 'createDatetime', valueType: 'text' },

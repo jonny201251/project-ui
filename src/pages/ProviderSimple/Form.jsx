@@ -21,21 +21,11 @@ import {
   ArrayTableAddition,
   ArrayTableIndex,
   ArrayTableRemove,
-  LoadingButton,
+  LoadingButton,InputButton,
   NumberPicker,
   File,
 } from '../../components'
 
-const InputButton = (props) => {
-  return <div style={{ display: 'inline-flex', width: '100%' }}>
-    <Input {...props} style={{ ...props.style }} disabled/>
-    <Button onClick={(e) => {
-      if (props.onClick) {
-        props.onClick('open')
-      }
-    }} icon={<SearchOutlined/>} type={'primary'}/>
-  </div>
-}
 
 const SchemaField = createSchemaField({
   components: {
@@ -48,7 +38,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,name,usee,address,registerMoney)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,usee,address,registerMoney)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {

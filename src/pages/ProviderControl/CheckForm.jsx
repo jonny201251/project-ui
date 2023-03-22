@@ -7,20 +7,9 @@ import { session } from '../../utils'
 import zhCN from 'antd/lib/locale/zh_CN'
 import styles from '../table-placeholder.less'
 import DialogList from './DialogList'
-import { File, LoadingButton } from '../../components'
+import { File, LoadingButton,InputButton } from '../../components'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
-
-const InputButton = (props) => {
-  return <div style={{ display: 'inline-flex', width: '100%' }}>
-    <Input {...props} style={{ ...props.style }} disabled/>
-    <Button onClick={(e) => {
-      if (props.onClick) {
-        props.onClick('open')
-      }
-    }} icon={<SearchOutlined/>} type={'primary'}/>
-  </div>
-}
 
 const SchemaField = createSchemaField({
   components: {

@@ -183,6 +183,7 @@ export default (props) => {
                       form.setValues({
                         providerId: values.selectedRow.id,
                         providerName: values.selectedRow.name,
+                        providerUsee: values.selectedRow.usee,
                       })
                       dialog2.close()
                     } else {
@@ -218,6 +219,7 @@ export default (props) => {
                       form.setValues({
                         providerId: values.selectedRow.id,
                         providerName: values.selectedRow.name,
+                        providerUsee: values.selectedRow.usee,
                       })
                       dialog2.close()
                     } else {
@@ -236,6 +238,7 @@ export default (props) => {
       dialog2.open({})
     }
   }
+
   return <ConfigProvider locale={zhCN}>
     <Form form={form} labelWidth={130} className={styles.placeholder}>
       <SchemaField>

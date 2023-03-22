@@ -1,13 +1,12 @@
 import { DatePicker, Form, FormButtonGroup, FormDialog, FormGrid, FormItem, FormLayout, Input } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
-import { Button, ConfigProvider, message, Tabs } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import { Button, ConfigProvider, message, Select, Tabs } from 'antd'
 import { session } from '../../utils'
 import zhCN from 'antd/lib/locale/zh_CN'
 import styles from '../table-placeholder.less'
 import DialogList from './DialogList'
-import { File, LoadingButton,InputButton } from '../../components'
+import { File, InputButton, LoadingButton } from '../../components'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
 
@@ -15,7 +14,7 @@ import ProcessInstNodeList from '../ProcessInstNode/List'
 const SchemaField = createSchemaField({
   components: {
     FormLayout, FormItem, FormGrid, Input, InputButton,
-    DatePicker, File,
+    DatePicker, File, Select,
   },
 })
 
@@ -31,7 +30,7 @@ export default (props) => {
 
   const onClick = (flag) => {
     if (flag === 'open') {
-      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 950 },
         (form2) => {
           return <>
             <DialogList form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
@@ -43,13 +42,11 @@ export default (props) => {
                     const values = await form2.submit()
                     if (values.selectedRow) {
                       form.setValues({
-                        providerId: values.selectedRow.providerId,
-                        usee: values.selectedRow.usee,
+                        projectId: values.selectedRow.id,
+                        type: values.selectedRow.projectType,
                         name: values.selectedRow.name,
+                        taskCode: values.selectedRow.taskCode,
                         property: values.selectedRow.property,
-                        address: values.selectedRow.address,
-                        registerMoney: values.selectedRow.registerMoney,
-                        result: values.selectedRow.result,
                       })
                       dialog2.close()
                     } else {
@@ -90,42 +87,44 @@ export default (props) => {
               <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
               <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String
-                name="name" required title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+                name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                 x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-              <SchemaField.String name="queryDate" required title="考察时间" x-decorator="FormItem"
-                                  x-component="DatePicker"/>
+              <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String name="property" x-decorator="FormItem" title="项目性质" x-component="Input"/>
               <SchemaField.String
-                name="scale" title="企业规模" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{
-                  rows: 3,
-                  placeholder: '人员总数，技术人员比例，各专业人员比例，考察办公区域规模，办公面积、在当地行业的影响力等。组织架构、经营机制。每年的业务量（合同金额）；现阶段的任务量，正在做设计的项目有哪些？',
-                }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="achievement" title="近年主要业绩" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{ rows: 2, placeholder: '是否有与本项目同类工程的业绩？' }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="quality" title="质量管理现状" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{ rows: 2, placeholder: '要求说明质量管理体系运行情况。' }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="product" title="生产检测条件" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{ rows: 2, placeholder: '要求说明生产检测条件实施情况。' }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="descc" title="业绩现场考察" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{ rows: 2, placeholder: '施工组织设计。' }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="service" title="后期服务" x-decorator="FormItem" x-component="Input.TextArea"
-                x-component-props={{ rows: 2, placeholder: '如何保证招标项目的全程服务。' }}
-                x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String
-                name="fileList" title="附件" x-decorator="FormItem"
-                x-component="File" x-decorator-props={{ gridSpan: 2 }}/>
+                name="status" required title="项目状态" x-decorator="FormItem"
+                x-component="Select" x-component-props={{ showSearch: true }}
+                enum={[
+                  { label: '投标中', value: '投标中' },
+                  { label: '中标', value: '中标' },
+                  { label: '未中标', value: '未中标' },
+                  { label: '终止', value: '终止' },
+                ]}/>
+              />
             </SchemaField.Void>
-            {showComment()}
+            <SchemaField.Void x-component="MyCard" x-component-props={{ title: '收付款信息' }}>
+              <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+                <SchemaField.String name="registeDate" required x-decorator="FormItem" title="日期"
+                                    x-component="DatePicker"/>
+                <SchemaField.Number name="money" required x-decorator="FormItem" title="金额" x-component="NumberPicker"/>
+              </SchemaField.Void>
+              <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+                <SchemaField.String
+                  name="outName" required title="付款单位" x-component="Input"
+                  x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+                />
+                <SchemaField.String
+                  name="inName" required title="收款单位" x-component="Input"
+                  x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+                />
+              </SchemaField.Void>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+              <SchemaField.String
+                name="remark" title="备注" x-component="Input.TextArea"
+                x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
+            </SchemaField.Void>
           </SchemaField>
         </Form>
       </Tabs.TabPane>
