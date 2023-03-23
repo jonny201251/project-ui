@@ -24,7 +24,7 @@ import {
   ArrayTableRemove,
   File,
   Line,
-  LoadingButton,
+  LoadingButton,InputButton,
   MyCard,
   NumberPicker,
 } from '../../components'
@@ -34,27 +34,6 @@ import { SearchOutlined } from '@ant-design/icons'
 import styles from '../table-placeholder.less'
 import { onFieldReact } from '@formily/core'
 
-const InputButton = (props) => {
-  return <div style={{ display: 'inline-flex', width: '100%' }}>
-    <Input {...props} style={{ ...props.style }}/>
-    <Button onClick={(e) => {
-      if (props.onClick) {
-        props.onClick('open')
-      }
-    }} icon={<SearchOutlined/>} type={'primary'}/>
-  </div>
-}
-
-const InputButton2 = (props) => {
-  return <div style={{ display: 'inline-flex', width: '100%' }}>
-    <Input {...props} style={{ ...props.style }}/>
-    <Button onClick={(e) => {
-      if (props.onClick) {
-        props.onClick('open')
-      }
-    }} icon={<SearchOutlined/>} type={'primary'}/>
-  </div>
-}
 
 const InputButton3 = (props) => {
   return <div style={{ display: 'inline-flex', width: '100%' }}>
@@ -71,7 +50,7 @@ const InputButton3 = (props) => {
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox, PreviewText,
-    Select, InputButton, InputButton2, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
+    Select, InputButton, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
     MyCard, Divider, InputButton3, Line, File,
   },
 })
@@ -582,7 +561,7 @@ export default (props) => {
                               x-component="InputButton" x-component-props={{ onClick: onClick }}/>
           <SchemaField.String name="providerName" title="供方名称" x-decorator="FormItem"
                               x-decorator-props={{ gridSpan: 2 }}
-                              x-component="InputButton2" x-component-props={{ onClick: onClick2 }}/>
+                              x-component="InputButton" x-component-props={{ onClick: onClick2 }}/>
           <SchemaField.String
             name="idTypeListTmp" required title="法人身份证类型" x-decorator="FormItem" x-component="Checkbox.Group"
             x-decorator-props={{ gridSpan: 4 }}
@@ -636,7 +615,7 @@ export default (props) => {
               </SchemaField.Void>
               <SchemaField.Void
                 x-component="ArrayTable.Column" x-component-props={{ title: '保证金(函)额度', align: 'center' }}>
-                <SchemaField.Number name="money" required x-decorator="FormItem" x-component="NumberPicker"/>
+                <SchemaField.Number name="money" required x-decorator="FormItem" x-component="Input"/>
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column"
                                 x-component-props={{ width: 80, title: '操作', dataIndex: 'operations' }}>

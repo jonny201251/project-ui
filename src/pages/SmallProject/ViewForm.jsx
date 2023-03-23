@@ -13,47 +13,23 @@ import {
   Select,
 } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, Divider, message, Tabs } from 'antd'
-import { get, projectCodePath, session } from '../../utils'
 import {
   ArrayTableAddition,
   ArrayTableIndex,
   ArrayTableRemove,
+  File,
+  InputButton,
   LoadingButton,
   MyCard,
-  NumberPicker,File
+  NumberPicker,
 } from '../../components'
-import DialogList from './DialogList'
 import DialogList2 from './DialogList2'
-import { SearchOutlined } from '@ant-design/icons'
 import styles from '../table-placeholder.less'
-import { onFieldReact } from '@formily/core'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
-
-const InputButton = (props) => {
-  return <div style={{ display: 'inline-flex', width: '100%' }}>
-    <Input {...props} style={{ ...props.style }}/>
-    <Button onClick={(e) => {
-      if (props.onClick) {
-        props.onClick('open')
-      }
-    }} icon={<SearchOutlined/>} type={'primary'}/>
-  </div>
-}
-
-const InputButton2 = (props) => {
-  return <div style={{ display: 'inline-flex', width: '100%' }}>
-    <Input {...props} style={{ ...props.style }}/>
-    <Button onClick={(e) => {
-      if (props.onClick) {
-        props.onClick('open')
-      }
-    }} icon={<SearchOutlined/>} type={'primary'}/>
-  </div>
-}
 
 const InputButton3 = (props) => {
   return <div style={{ display: 'inline-flex', width: '100%' }}>
@@ -70,8 +46,8 @@ const InputButton3 = (props) => {
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox,
-    Select, InputButton, InputButton2, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
-    MyCard, Divider, InputButton3,File
+    Select, InputButton, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
+    MyCard, Divider, InputButton3, File,
   },
 })
 
@@ -126,7 +102,6 @@ export default (props) => {
               <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
               <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
               <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
-              <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
                                   x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
               <SchemaField.String name="taskCode" required title="任务号" x-decorator="FormItem" x-component="Select"/>
@@ -197,7 +172,8 @@ export default (props) => {
                 ]}
               />
               <SchemaField.String name="bidDate" title="投标截止日期" x-decorator="FormItem" x-component="DatePicker"/>
-              <SchemaField.String name="workDate" required title="开竣工日期" x-decorator="FormItem" x-component="DatePicker"/>
+              <SchemaField.String name="workDate" required title="开竣工日期" x-decorator="FormItem"
+                                  x-component="DatePicker"/>
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
               <SchemaField.String
@@ -229,7 +205,7 @@ export default (props) => {
                   </SchemaField.Void>
                   <SchemaField.Void
                     x-component="ArrayTable.Column" x-component-props={{ title: '保证金(函)额度', align: 'center' }}>
-                    <SchemaField.Number name="money" required x-decorator="FormItem" x-component="NumberPicker"/>
+                    <SchemaField.Number name="money" required x-decorator="FormItem" x-component="Input"/>
                   </SchemaField.Void>
                   <SchemaField.Void x-component="ArrayTable.Column"
                                     x-component-props={{ width: 80, title: '操作', dataIndex: 'operations' }}>
@@ -257,7 +233,8 @@ export default (props) => {
                     { label: '否', value: '否' },
                   ]}
                 />
-                <SchemaField.String name="payStatus" required title="以往项目付款情况" x-decorator="FormItem" x-component="Input"/>
+                <SchemaField.String name="payStatus" required title="以往项目付款情况" x-decorator="FormItem"
+                                    x-component="Input"/>
                 <SchemaField.String
                   name="evaluate1" required title="客户目前的资信及履约能力综合评价" x-decorator="FormItem" x-component="Input"/>
               </SchemaField.Void>

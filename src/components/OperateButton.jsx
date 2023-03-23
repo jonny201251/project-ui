@@ -66,7 +66,7 @@ export default (props) => {
       }
       const dbRecord = await get(path.get, params)
       if (dbRecord) {
-        let dialog = FormDialog({ title: '浏览', footer: null, keyboard: false, maskClosable: false, width },
+        let dialog = FormDialog({ title: '查看', footer: null, keyboard: false, maskClosable: false, width },
           (form) => {
             form.setValues(dbRecord)
             return <path.Form form={form} type={type} record={dbRecord} dialog={dialog}/>
@@ -100,7 +100,7 @@ export default (props) => {
       }}>编辑</a>
       <a onClick={() => {
         onClick('preview')
-      }}>浏览</a>
+      }}>查看</a>
     </Space>
     // }
   }

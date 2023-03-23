@@ -14,7 +14,6 @@ export default (props) => {
       },
     },
     { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
-    { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     { title: '客户名称', dataIndex: 'customerName', valueType: 'text' },
     { title: '供方名称', dataIndex: 'providerName', valueType: 'text' },
     { title: '预计签约额', dataIndex: 'expectMoney', valueType: 'text' },

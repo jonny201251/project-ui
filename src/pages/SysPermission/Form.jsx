@@ -77,7 +77,7 @@ export default (props) => {
             enum={[
               { label: '新增', value: 'add' },
               { label: '编辑', value: 'edit' },
-              { label: '浏览', value: 'preview' },
+              { label: '查看', value: 'preview' },
               { label: '删除', value: 'delete' },
             ]}
           />

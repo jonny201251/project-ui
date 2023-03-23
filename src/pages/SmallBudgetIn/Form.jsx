@@ -39,9 +39,8 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(projectTaskCode)').forEach(field => {
-      field.setPattern('disabled')
-    })
+    form.query('taskCode').take()?.setPattern('disabled')
+
     if (type === 'add') {
       const user = session.getItem('user')
       form.setInitialValues({
@@ -49,10 +48,13 @@ export default (props) => {
         displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
       })
+    } else {
+      form.query('inType').take()?.setPattern('disabled')
     }
   }, [])
 
   const onClick = (flag) => {
+    if (type === 'edit') return
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {
@@ -64,14 +66,13 @@ export default (props) => {
                 <LoadingButton
                   onClick={async () => {
                     const values = await form2.submit()
-                    console.log(values)
                     if (values.selectedRow) {
                       form.setValues({
                         budgetId: values.selectedRow.id,
                         projectId: values.selectedRow.projectId,
+                        projectType: values.selectedRow.projectType,
                         name: values.selectedRow.name,
                         taskCode: values.selectedRow.taskCode,
-                        type: values.selectedRow.projectType,
                         haveDisplay: values.selectedRow.haveDisplay,
                         version: values.selectedRow.version,
                       })
@@ -135,12 +136,12 @@ export default (props) => {
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '回款日期', align: 'center' }}>
                 <SchemaField.String
-                  name="inDate" x-decorator="FormItem" x-component="DatePicker"
+                  name="inDate" required x-decorator="FormItem" x-component="DatePicker"
                   x-component-props={{ picker: 'month', format: 'YYYY年MM月' }}
                 />
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '金额', align: 'center' }}>
-                <SchemaField.Number name="money" x-decorator="FormItem" x-component="NumberPicker"/>
+                <SchemaField.Number name="money" required x-decorator="FormItem" x-component="NumberPicker"/>
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column"
                                 x-component-props={{ width: 80, title: '操作', dataIndex: 'operations' }}>

@@ -55,7 +55,7 @@ export default (props) => {
     } else if (type === 'preview') {
       const dbRecord = await get(path.get, params)
       if (dbRecord) {
-        let dialog = FormDialog({ title: '浏览', footer: null, keyboard: false, maskClosable: false, width },
+        let dialog = FormDialog({ title: '查看', footer: null, keyboard: false, maskClosable: false, width },
           (form) => {
             form.setValues(dbRecord)
             return <path.Form form={form} type={type} record={dbRecord} dialog={dialog}/>
@@ -86,7 +86,7 @@ export default (props) => {
     if(record.result!=='合格'){
       arr.push(<a onClick={() => {onClick('edit')}}>编辑</a>)
     }
-    arr.push(<a onClick={() => {onClick('preview')}}>浏览</a>)
+    arr.push(<a onClick={() => {onClick('preview')}}>查看</a>)
     if(record.version>0){
       arr.push(<a onClick={() => {onClick('viewHistory')}}>查看历史</a>)
     }

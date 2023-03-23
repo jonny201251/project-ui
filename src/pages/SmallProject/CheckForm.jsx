@@ -21,7 +21,7 @@ import {
   ArrayTableAddition,
   ArrayTableIndex,
   ArrayTableRemove,
-  LoadingButton,
+  LoadingButton,InputButton,
   MyCard,
   NumberPicker,File
 } from '../../components'
@@ -33,27 +33,6 @@ import { onFieldReact } from '@formily/core'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
 
-const InputButton = (props) => {
-  return <div style={{ display: 'inline-flex', width: '100%' }}>
-    <Input {...props} style={{ ...props.style }}/>
-    <Button onClick={(e) => {
-      if (props.onClick) {
-        props.onClick('open')
-      }
-    }} icon={<SearchOutlined/>} type={'primary'}/>
-  </div>
-}
-
-const InputButton2 = (props) => {
-  return <div style={{ display: 'inline-flex', width: '100%' }}>
-    <Input {...props} style={{ ...props.style }}/>
-    <Button onClick={(e) => {
-      if (props.onClick) {
-        props.onClick('open')
-      }
-    }} icon={<SearchOutlined/>} type={'primary'}/>
-  </div>
-}
 
 const InputButton3 = (props) => {
   return <div style={{ display: 'inline-flex', width: '100%' }}>
@@ -70,7 +49,7 @@ const InputButton3 = (props) => {
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox,
-    Select, InputButton, InputButton2, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
+    Select, InputButton, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
     MyCard, Divider, InputButton3,File
   },
 })
@@ -352,7 +331,7 @@ export default (props) => {
                   </SchemaField.Void>
                   <SchemaField.Void
                     x-component="ArrayTable.Column" x-component-props={{ title: '保证金(函)额度', align: 'center' }}>
-                    <SchemaField.Number name="money" required x-decorator="FormItem" x-component="NumberPicker"/>
+                    <SchemaField.Number name="money" required x-decorator="FormItem" x-component="Input"/>
                   </SchemaField.Void>
                   <SchemaField.Void x-component="ArrayTable.Column"
                                     x-component-props={{ width: 80, title: '操作', dataIndex: 'operations' }}>

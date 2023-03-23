@@ -353,6 +353,9 @@ export const smallBudgetProjectPath = {
   edit: contextPath + '/smallBudgetProject/edit',
   modify: contextPath + '/smallBudgetProject/modify',
 }
+export const smallBudgetProject2Path = {
+  list: contextPath + '/smallBudgetProject/list2',
+}
 export const smallBudgetInPath = {
   flag: 'smallBudgetInPath', width: 700, Form: SmallBudgetInForm, List: SmallBudgetInList,
   list: contextPath + '/smallBudgetIn/list',

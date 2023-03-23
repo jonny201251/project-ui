@@ -56,7 +56,6 @@ export default (props) => {
           <SchemaField.String name="displayName" title="创建人" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="deptName" title="创建部门" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="createDatetime" title="创建时间" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="wbs" title="WBS编号" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
                               x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
           <SchemaField.String name="taskCode" required title="任务号" x-decorator="FormItem" x-component="Select"/>

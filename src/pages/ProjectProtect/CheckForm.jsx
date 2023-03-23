@@ -89,7 +89,6 @@ export default (props) => {
               <SchemaField.String
                 name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                 x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-              <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String name="property" x-decorator="FormItem" title="项目性质" x-component="Input"/>
               <SchemaField.String
