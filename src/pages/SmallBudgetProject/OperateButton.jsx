@@ -1,5 +1,5 @@
 import { Button, message, Modal, Space } from 'antd'
-import { get, post } from '../../utils'
+import { contextPath, get, post } from '../../utils'
 import { FormButtonGroup, FormDialog } from '@formily/antd'
 import { LoadingButton } from '../../components'
 import { QuestionCircleOutlined } from '@ant-design/icons'
@@ -14,12 +14,6 @@ export default (props) => {
     params[rowKey || 'id'] = record[rowKey || 'id']
 
     if (type === 'edit') {
-      if (path.flag === 'smallBudgetInPath') {
-        params['inType'] = record.inType
-      }
-      if (path.flag === 'smallBudgetOutPath') {
-        params['costType'] = record.costType
-      }
       const dbRecord = await get(path.get, params)
       if (dbRecord) {
         let dialog = FormDialog(
@@ -59,12 +53,6 @@ export default (props) => {
         dialog.open()
       }
     } else if (type === 'preview') {
-      if (path.flag === 'smallBudgetInPath') {
-        params['inType'] = record.inType
-      }
-      if (path.flag === 'smallBudgetOutPath') {
-        params['costType'] = record.costType
-      }
       const dbRecord = await get(path.get, params)
       if (dbRecord) {
         let dialog = FormDialog({ title: '查看', footer: null, keyboard: false, maskClosable: false, width },
@@ -79,17 +67,34 @@ export default (props) => {
       Modal.confirm({
         okText: '确认', cancelText: '取消',
         icon: <QuestionCircleOutlined/>,
-        content: <p style={{ fontSize: 16 }}>确定要 调整项目预算?</p>,
+        content: <p style={{ fontSize: 16 }}>{'确定要 调整项目预算-' + record.contractName + '?'}</p>,
         onOk: async (close) => {
           const data = await get(path.modify, params)
           if (data) {
             actionRef.current.clearSelected()
             actionRef.current.reload()
             close()
-            message.success('复制成功')
+            message.success('调整成功')
           }
         },
       })
+    } else if (type === 'report') {
+      let dialog = FormDialog({ title: '预算表', footer: null, keyboard: false, maskClosable: false, width: '98%' },
+        (form) => {
+          if (record.version === 0) {
+            return <iframe
+              src={contextPath + '/jmreport/view/704922619257352192?budgetId=' + record.id}
+              style={{ border: 0, width: '100%', height: document.body.clientHeight - 100 }}
+              frameBorder="0"/>
+          } else {
+            return <iframe
+              src={contextPath + '/jmreport/view/758190413062881280?budgetId=' + record.id}
+              style={{ border: 0, width: '100%', height: document.body.clientHeight - 100 }}
+              frameBorder="0"/>
+          }
+        },
+      )
+      dialog.open({})
     }
   }
 
@@ -105,8 +110,8 @@ export default (props) => {
         onClick('modify')
       }}>调整预算</a>
       <a onClick={() => {
-        onClick('ViewHistory')
-      }}>查看历史</a>
+        onClick('report')
+      }}>预算表</a>
     </Space>
   }
 

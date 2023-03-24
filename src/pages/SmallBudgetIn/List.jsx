@@ -4,7 +4,7 @@ import { BaseProTable2 } from '../../components'
 export default () => {
   const columns = [
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
-    { title: '项目任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
     {
       title: '收入类型', dataIndex: 'inType', valueType: 'text',
       valueEnum: {

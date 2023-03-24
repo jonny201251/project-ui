@@ -364,7 +364,7 @@ export const smallBudgetInPath = {
   edit: contextPath + '/smallBudgetIn/edit',
 }
 export const smallBudgetOutPath = {
-  flag: 'smallBudgetOutPath', width: 800, Form: SmallBudgetOutForm, List: SmallBudgetOutList,
+  flag: 'smallBudgetOutPath', width: 900, Form: SmallBudgetOutForm, List: SmallBudgetOutList,
   list: contextPath + '/smallBudgetOut/list',
   get: contextPath + '/smallBudgetOut/get',
   add: contextPath + '/smallBudgetOut/add',

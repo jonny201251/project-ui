@@ -20,7 +20,7 @@ import {
   NumberPicker,
 } from '../../components'
 import { session } from '../../utils'
-import DialogList from './DialogList'
+import DialogList from '../SmallBudgetIn/DialogList'
 import styles from '../table-placeholder.less'
 import { Button, ConfigProvider, message } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
@@ -42,9 +42,8 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(taskCode)').forEach(field => {
-      field.setPattern('disabled')
-    })
+    form.query('taskCode').take()?.setPattern('disabled')
+
     if (type === 'add') {
       const user = session.getItem('user')
       form.setInitialValues({
@@ -56,6 +55,7 @@ export default (props) => {
   }, [])
 
   const onClick = (flag) => {
+    if (type === 'edit') return
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {
@@ -72,6 +72,7 @@ export default (props) => {
                       form.setValues({
                         budgetId: values.selectedRow.id,
                         projectId: values.selectedRow.projectId,
+                        projectType: values.selectedRow.projectType,
                         name: values.selectedRow.name,
                         taskCode: values.selectedRow.taskCode,
                         haveDisplay: values.selectedRow.haveDisplay,
@@ -121,7 +122,7 @@ export default (props) => {
           <SchemaField.String
             name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-          <SchemaField.String name="taskCode" title="项目任务号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="costType" required title="成本类型" x-decorator="FormItem" x-component="Select"
             enum={typeArr.map(item => ({ label: item, value: item }))}
@@ -141,12 +142,12 @@ export default (props) => {
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '支出日期', align: 'center' }}>
                 <SchemaField.String
-                  name="outDate" x-decorator="FormItem" x-component="DatePicker"
+                  name="outDate" required x-decorator="FormItem" x-component="DatePicker"
                   x-component-props={{ picker: 'month', format: 'YYYY年MM月' }}
                 />
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '金额', align: 'center' }}>
-                <SchemaField.Number name="money" x-decorator="FormItem" x-component="NumberPicker"/>
+                <SchemaField.Number name="money" required x-decorator="FormItem" x-component="NumberPicker"/>
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column"
                                 x-component-props={{ width: 80, title: '操作', dataIndex: 'operations' }}>

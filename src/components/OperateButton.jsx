@@ -19,6 +19,9 @@ export default (props) => {
       }
       if (path.flag === 'smallBudgetOutPath') {
         params['costType'] = record.costType
+        if (record.costRate) {
+          params['costRate'] = record.costRate
+        }
       }
       const dbRecord = await get(path.get, params)
       if (dbRecord) {
