@@ -1,8 +1,7 @@
-import { Button, message, Modal, Space } from 'antd'
-import { contextPath, get, post } from '../../utils'
+import { Button, message, Space } from 'antd'
+import { get, post } from '../../utils'
 import { FormButtonGroup, FormDialog } from '@formily/antd'
 import { LoadingButton } from '../../components'
-import { QuestionCircleOutlined } from '@ant-design/icons'
 import React from 'react'
 
 export default (props) => {
@@ -12,6 +11,15 @@ export default (props) => {
   const onClick = async (type) => {
     let params = {}
     params[rowKey || 'id'] = record[rowKey || 'id']
+
+    params['inType'] = record.inType
+
+
+    params['costType'] = record.costType
+    if (record.costRate) {
+      params['costRate'] = record.costRate
+    }
+
 
     if (type === 'edit') {
       const dbRecord = await get(path.get, params)
@@ -63,38 +71,6 @@ export default (props) => {
         )
         dialog.open()
       }
-    } else if (type === 'modify') {
-      Modal.confirm({
-        okText: '确认', cancelText: '取消',
-        icon: <QuestionCircleOutlined/>,
-        content: <p style={{ fontSize: 16 }}>{'确定要 调整项目预算-' + record.contractName + '?'}</p>,
-        onOk: async (close) => {
-          const data = await get(path.modify, params)
-          if (data) {
-            actionRef.current.clearSelected()
-            actionRef.current.reload()
-            close()
-            message.success('调整成功')
-          }
-        },
-      })
-    } else if (type === 'report') {
-      let dialog = FormDialog({ title: '预算表', footer: null, keyboard: false, maskClosable: false, width: '98%' },
-        (form) => {
-          if (record.version === 0) {
-            return <iframe
-              src={contextPath + '/jmreport/view/704922619257352192?budgetId=' + record.id}
-              style={{ border: 0, width: '100%', height: document.body.clientHeight - 100 }}
-              frameBorder="0"/>
-          } else {
-            return <iframe
-              src={contextPath + '/jmreport/view/758190413062881280?budgetId=' + record.id}
-              style={{ border: 0, width: '100%', height: document.body.clientHeight - 100 }}
-              frameBorder="0"/>
-          }
-        },
-      )
-      dialog.open({})
     }
   }
 
@@ -104,10 +80,6 @@ export default (props) => {
       arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
     }
     arr.push(<a onClick={() => onClick('view')}>查看</a>)
-    if (record?.processInst?.processStatus === '完成') {
-      arr.push(<a onClick={() => onClick('modify')}>调整预算</a>)
-    }
-    arr.push(<a onClick={() => onClick('report')}>预算表</a>)
     return <Space size={'middle'}>{arr}</Space>
   }
 

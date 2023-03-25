@@ -44,7 +44,7 @@ export default () => {
   }
 
   const renderMenu = (menuList) => {
-    if (utils.env === 'devv') {
+    if (utils.env === 'dev') {
       openKeys.push('xxxx')
       return (
         <Menu.SubMenu
@@ -224,7 +224,7 @@ export default () => {
           <Dropdown overlay={DropdownMenu} className="user">
             <span>
               <UserOutlined style={{ paddingRight: 5, fontSize: 20 }}/>
-              {utils.env === 'devv' ? 'xxx' : utils.session.getItem('displayName')}
+              {utils.env === 'dev' ? 'xxx' : utils.session.getItem('displayName')}
             </span>
           </Dropdown>
           <span className="user">

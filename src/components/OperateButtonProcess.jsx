@@ -1,8 +1,9 @@
 import { message, Modal, Space } from 'antd'
-import { get, post, processDesignPath, session } from '../utils'
+import { contextPath, get, post, processDesignPath } from '../utils'
 import { FormButtonGroup, FormDialog } from '@formily/antd'
 import { LoadingButton } from './index'
 import { QuestionCircleOutlined } from '@ant-design/icons'
+import React from 'react'
 
 export default (props) => {
   const { record, path, actionRef, rowKey, from } = props
@@ -16,7 +17,6 @@ export default (props) => {
           onClick={async () => {
             const formValue = await form.submit()
             if (formValue) {
-              console.log(formValue)
               let values = { formValue, buttonName, type, path: path.flag, haveEditForm, comment: formValue.comment }
               const data = await post(path.btnHandle, values)
               if (data) {
@@ -61,6 +61,7 @@ export default (props) => {
         dialog.open()
       }
     } else if (type === 'change') {
+      params['type'] = 'change'
       const dbRecord = await get(path.get, params)
       const processFormBefore = await post(processDesignPath.getProcessFormBefore, { path: path.flag, type })
       if (dbRecord && processFormBefore) {
@@ -142,6 +143,29 @@ export default (props) => {
           }
         },
       })
+    } else if (type === 'viewBudget') {
+      FormDialog({
+          style: { top: 20 },
+          title: '预算表',
+          footer: null,
+          keyboard: false,
+          maskClosable: false,
+          width: '98%',
+        },
+        (form) => {
+          if (record.version === 0) {
+            return <iframe
+              src={contextPath + '/jmreport/view/704922619257352192?budgetId=' + record.id}
+              style={{ border: 0, width: '100%', height: document.body.clientHeight - 100 }}
+              frameBorder="0"/>
+          } else {
+            return <iframe
+              src={contextPath + '/jmreport/view/758190413062881280?budgetId=' + record.id}
+              style={{ border: 0, width: '100%', height: document.body.clientHeight - 100 }}
+              frameBorder="0"/>
+          }
+        },
+      ).open({})
     }
   }
 
@@ -165,7 +189,14 @@ export default (props) => {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
         if (!path.haveChange) {
-          arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
+          console.log(record)
+          if (path.flag.indexOf('BudgetRunPath') > 0) {
+            if (record.newBudgetProject) {
+              arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
+            }
+          } else {
+            arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
+          }
         }
       } else if (processStatus === '退回' || processStatus === '退回申请人' || processStatus === '申请人撤回') {
         arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
@@ -179,6 +210,11 @@ export default (props) => {
       //草稿
       arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
       arr.push(<a onClick={() => onClick('delete')}>删除</a>)
+    }
+    console.log(record)
+    //预算表
+    if (record.viewBudget) {
+      arr.push(<a onClick={() => onClick('viewBudget')}>预算表</a>)
     }
     return <Space size={'middle'}>{arr}</Space>
   }

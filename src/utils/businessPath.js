@@ -82,6 +82,12 @@ import ProviderQueryViewHistory from '../pages/ProviderQuery/ViewHistory'
 import ProviderQueryViewForm from '../pages/ProviderQuery/ViewForm'
 import ProviderQueryChangeForm from '../pages/ProviderQuery/ChangeForm'
 
+import SmallBudgetRunList from '../pages/SmallBudgetRun/List'
+import SmallBudgetRunAddForm from '../pages/SmallBudgetRun/AddForm'
+import SmallBudgetRunCheckForm from '../pages/SmallBudgetRun/CheckForm'
+import SmallBudgetRunViewHistory from '../pages/SmallBudgetRun/ViewHistory'
+import SmallBudgetRunViewForm from '../pages/SmallBudgetRun/ViewForm'
+import SmallBudgetRunChangeForm from '../pages/SmallBudgetRun/ChangeForm'
 
 import ProjectProtectList from '../pages/ProjectProtect/List'
 import ProjectProtectAddForm from '../pages/ProjectProtect/AddForm'
@@ -450,8 +456,7 @@ export const projectDialogPath = {
 }
 export const providerQueryPath = {
   flag: 'providerQueryPath', width: 1000, List: ProviderQueryList,
-  AddForm: ProviderQueryAddForm,
-  EditForm: ProviderQueryAddForm,
+  AddForm: ProviderQueryAddForm, EditForm: ProviderQueryAddForm,
   CheckForm: ProviderQueryCheckForm,
   ViewHistory: ProviderQueryViewHistory,
   ViewForm: ProviderQueryViewForm,
@@ -460,6 +465,32 @@ export const providerQueryPath = {
   viewHistory: contextPath + '/providerQuery/viewHistory',
   get: contextPath + '/providerQuery/get',
   btnHandle: contextPath + '/providerQuery/btnHandle',
+}
+
+export const smallBudgetRunPath = {
+  flag: 'smallBudgetRunPath', width: 900, List: SmallBudgetRunList, changeButtonName: '调整',
+  AddForm: SmallBudgetRunAddForm, EditForm: SmallBudgetRunAddForm,
+  CheckForm: SmallBudgetRunCheckForm,
+  ViewHistory: SmallBudgetRunViewHistory,
+  ViewForm: SmallBudgetRunViewForm,
+  ChangeForm: SmallBudgetRunChangeForm,
+  list: contextPath + '/smallBudgetRun/list',
+  viewHistory: contextPath + '/smallBudgetRun/viewHistory',
+  get: contextPath + '/smallBudgetRun/get',
+  btnHandle: contextPath + '/smallBudgetRun/btnHandle',
+}
+
+export const bigBudgetRunPath = {
+  flag: 'bigBudgetRunPath', width: 900, List: SmallBudgetRunList, changeButtonName: '调整',
+  AddForm: SmallBudgetRunAddForm, EditForm: SmallBudgetRunAddForm,
+  CheckForm: SmallBudgetRunCheckForm,
+  ViewHistory: SmallBudgetRunViewHistory,
+  ViewForm: SmallBudgetRunViewForm,
+  ChangeForm: SmallBudgetRunChangeForm,
+  list: contextPath + '/smallBudgetRun/list',
+  viewHistory: contextPath + '/smallBudgetRun/viewHistory',
+  get: contextPath + '/smallBudgetRun/get',
+  btnHandle: contextPath + '/smallBudgetRun/btnHandle',
 }
 
 

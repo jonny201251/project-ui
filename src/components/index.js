@@ -37,6 +37,17 @@ const InputButton = (props) => {
 }
 export { InputButton }
 
+const OnlyButton = (props) => {
+  return <div style={{ display: 'inline-flex'}}>
+    <Button onClick={(e) => {
+      if (props.onClick) {
+        props.onClick('open')
+      }
+    }}>{props.name}</Button>
+  </div>
+}
+export { OnlyButton }
+
 //NumberPicker
 const NumberPicker = (props) => {
   return <InputNumber controls={false} {...props}/>

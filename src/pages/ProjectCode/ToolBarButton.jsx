@@ -66,7 +66,7 @@ export default (props) => {
   }
 
   const renderButton = () => {
-    if (env === 'dev') {
+    if (env === 'pro') {
       return <Space>
         <Button
           icon={<PlusOutlined/>} type="primary"

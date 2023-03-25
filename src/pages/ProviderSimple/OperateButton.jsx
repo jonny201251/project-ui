@@ -52,7 +52,7 @@ export default (props) => {
         )
         dialog.open()
       }
-    } else if (type === 'preview') {
+    } else if (type === 'view') {
       const dbRecord = await get(path.get, params)
       if (dbRecord) {
         let dialog = FormDialog({ title: '查看', footer: null, keyboard: false, maskClosable: false, width },
@@ -86,7 +86,7 @@ export default (props) => {
     if(record.result!=='合格'){
       arr.push(<a onClick={() => {onClick('edit')}}>编辑</a>)
     }
-    arr.push(<a onClick={() => {onClick('preview')}}>查看</a>)
+    arr.push(<a onClick={() => {onClick('view')}}>查看</a>)
     if(record.version>0){
       arr.push(<a onClick={() => {onClick('viewHistory')}}>查看历史</a>)
     }

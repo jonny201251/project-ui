@@ -60,7 +60,7 @@ export default (props) => {
         )
         dialog.open()
       }
-    } else if (type === 'preview') {
+    } else if (type === 'view') {
       if (path.flag === 'smallBudgetInPath') {
         params['inType'] = record.inType
       }
@@ -102,7 +102,7 @@ export default (props) => {
         onClick('edit')
       }}>编辑</a>
       <a onClick={() => {
-        onClick('preview')
+        onClick('view')
       }}>查看</a>
     </Space>
     // }

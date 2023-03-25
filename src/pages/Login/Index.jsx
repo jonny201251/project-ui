@@ -50,6 +50,7 @@ export default () => {
             <SchemaField.String
               name="loginName"
               title="用户名"
+              default="张强"
               required
               x-decorator="FormItem"
               x-component="Input"
