@@ -137,7 +137,10 @@ export default (props) => {
 
   const onClick2 = (flag) => {
     let field = form.query('property').take()
-    if (field?.value !== '三类') return
+    if (field?.value !== '三类') {
+      message.error('请选择 项目性质为三类')
+      return
+    }
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {

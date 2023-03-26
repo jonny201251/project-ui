@@ -1,20 +1,27 @@
 import { Form, FormItem, FormLayout, Input, Select } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
-import { NumberPicker,File } from '../../components'
+import { NumberPicker, File } from '../../components'
 
 const SchemaField = createSchemaField({
-  components: { FormLayout, FormItem, Input, NumberPicker, Select,File },
+  components: { FormLayout, FormItem, Input, NumberPicker, Select, File },
 })
 
 export default (props) => {
-  let { form, record } = props
+  let { form, record, type } = props
 
   useEffect(() => {
     if (record) {
       form.setValues(record)
     }
   }, [])
+
+  const show = () => {
+    if (type === 'view') {
+      return <SchemaField.String name="result" required title="结论" x-decorator="FormItem" x-component="Input"/>
+    }
+  }
+
 
   return <Form form={form}>
     <SchemaField>
@@ -40,6 +47,7 @@ export default (props) => {
         <SchemaField.Number
           name="registerMoney" required title="注册资本" x-decorator="FormItem" x-component="NumberPicker"/>
         <SchemaField.Number name="realMoney" title="实缴资本" x-decorator="FormItem" x-component="NumberPicker"/>
+        {show()}
         <SchemaField.String
           name="fileList" required title="附件" x-decorator="FormItem" x-component="File"
           x-decorator-props={{

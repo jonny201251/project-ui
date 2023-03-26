@@ -2,8 +2,6 @@ import { providerSimplePath2 } from '../../utils'
 import { BaseList } from '../../components'
 
 
-
-
 export default (props) => {
   const columns = [
     { title: '供方用途', dataIndex: 'usee', valueType: 'text'},
@@ -16,6 +14,6 @@ export default (props) => {
 
   return <BaseList
     form={props.form} selectedId={props.selectedId}
-    path={providerSimplePath2} columns={columns} search={{ span: 12 }}
+    path={providerSimplePath2} columns={columns} search={{ span: 12, defaultCollapsed: false }}
   />
 }

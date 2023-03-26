@@ -18,7 +18,6 @@ export default (props) => {
     { title: '部门打分', dataIndex: 'endScore', valueType: 'text' },
     { title: '部门等级', dataIndex: 'endResult', valueType: 'text' },
     { title: '结论', dataIndex: 'result', valueType: 'text' },
-    { title: '变更次数', dataIndex: ['processInst', 'businessVersion'], valueType: 'text' },
   ]
 
   return <ProTable

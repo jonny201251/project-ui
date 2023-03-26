@@ -13,7 +13,7 @@ export default () => {
     { title: '状态', dataIndex: 'status', valueType: 'text' },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
     { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
-    { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text' },
+    { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text', hideInSearch: true },
     {
       title: '操作',
       valueType: 'option',

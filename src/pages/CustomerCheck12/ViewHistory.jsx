@@ -17,7 +17,6 @@ export default (props) => {
     { title: '初评得分', dataIndex: 'startScore', valueType: 'text' },
     { title: '最终得分', dataIndex: 'endScore', valueType: 'text' },
     { title: '结论', dataIndex: 'result', valueType: 'text' },
-    { title: '变更次数', dataIndex: ['processInst', 'businessVersion'], valueType: 'text' },
   ]
 
   return <ProTable

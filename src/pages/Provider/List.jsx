@@ -12,10 +12,9 @@ export default () => {
     { title: '供方名称', dataIndex: 'name', valueType: 'text' },
     { title: '纳税人识别号', dataIndex: 'code', valueType: 'text' },
     { title: '结论', dataIndex: 'result', valueType: 'text' },
-    { title: '变更次数', dataIndex: 'version', valueType: 'text' },
-    { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
-    { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text' },
+    { title: '创建人', dataIndex: 'displayName', valueType: 'text', hideInSearch: true },
+    { title: '创建部门', dataIndex: 'deptName', valueType: 'text', hideInSearch: true },
+    { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text', hideInSearch: true },
     {
       title: '操作',
       valueType: 'option',
@@ -34,9 +33,6 @@ export default () => {
     //列表数据
     params={{ list: providerPath.list }}
     request={proTableRequest}
-    //复选框
-    rowSelection={{ onChange: selectedRowKeys => setSelectedRowKeys(selectedRowKeys) }}
-    tableAlertRender={false}
     //
     options={{ density: false }}
     //

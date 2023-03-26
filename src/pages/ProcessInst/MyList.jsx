@@ -41,7 +41,7 @@ export default () => {
     //
     tableAlertRender={false}
     options={{ density: false }}
-    search={true}
+    search={false}
     //
     headerTitle="待办流程"
   />

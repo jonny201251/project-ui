@@ -15,6 +15,6 @@ export default (props) => {
 
   return <BaseList
     form={props.form} selectedId={props.selectedId}
-    path={providerPath2} columns={columns} search={{ span: 12 }}
+    path={providerPath2} columns={columns} search={{ span: 12, defaultCollapsed: false }}
   />
 }

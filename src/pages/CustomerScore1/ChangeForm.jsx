@@ -354,7 +354,7 @@ export default (props) => {
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
-            name="comment" title="变更说明" required x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}
+            name="comment" title="复评说明" required x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}
             x-component="Input.TextArea"
           />
           <SchemaField.String name="displayName" title="申请人" x-decorator="FormItem" x-component="Input"/>

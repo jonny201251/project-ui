@@ -8,10 +8,16 @@ const SchemaField = createSchemaField({
 })
 
 export default (props) => {
-  let { form, record } = props
+  let { form, record, type } = props
 
   useEffect(() => {
   }, [])
+
+  const show = () => {
+    if (type === 'view') {
+      return <SchemaField.String name="result" required title="结论" x-decorator="FormItem" x-component="Input"/>
+    }
+  }
 
   return <Form form={form}>
     <SchemaField>
@@ -24,7 +30,7 @@ export default (props) => {
             { label: '重大项目立项时(三类)', value: '重大项目立项时(三类)' },
             { label: '重大项目立项后(其他方)', value: '重大项目立项后(其他方)' },
           ]}
-          x-decorator-props={{ tooltip: '三类:渠道方，其他方:采购方、施工方'}}
+          x-decorator-props={{ tooltip: '三类:渠道方，其他方:采购方、施工方' }}
         />
         <SchemaField.String name="name" required title="供方名称" x-decorator="FormItem" x-component="Input"/>
         <SchemaField.String
@@ -47,6 +53,7 @@ export default (props) => {
         <SchemaField.Number name="registerMoney" required title="注册资本" x-decorator="FormItem"
                             x-component="NumberPicker"/>
         <SchemaField.Number name="realMoney" title="实缴资本" x-decorator="FormItem" x-component="NumberPicker"/>
+        {show()}
         <SchemaField.String
           name="fileList" required title="附件" x-decorator="FormItem" x-component="File"
           x-decorator-props={{

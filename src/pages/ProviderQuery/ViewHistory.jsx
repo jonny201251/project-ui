@@ -15,7 +15,6 @@ export default (props) => {
       },
     },
     { title: '考察时间', dataIndex: 'queryDate', valueType: 'text' },
-    { title: '变更次数', dataIndex: ['processInst', 'businessVersion'], valueType: 'text' },
   ]
 
   return <ProTable
