@@ -33,9 +33,6 @@ export default () => {
     //列表数据
     params={{ list: projectCodePath.list }}
     request={proTableRequest}
-    //复选框
-    rowSelection={{ onChange: selectedRowKeys => setSelectedRowKeys(selectedRowKeys) }}
-    tableAlertRender={false}
     //
     options={{ density: false }}
     //

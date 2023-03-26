@@ -23,7 +23,7 @@ export default () => {
   return (
     <div className={'bg'}>
       <div className={'container'}>
-        <div className={'title'}>项目管理系统</div>
+        <div className={'title'}>项目管理系统1.0</div>
         <Form
           form={form}
           layout="vertical"
@@ -50,7 +50,7 @@ export default () => {
             <SchemaField.String
               name="loginName"
               title="用户名"
-              default="张强"
+              // default="张强"
               required
               x-decorator="FormItem"
               x-component="Input"

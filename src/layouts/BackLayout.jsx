@@ -228,7 +228,7 @@ export default () => {
             },
           },
         )}
-        <span className="web-name">项目管理系统</span>
+        <span className="web-name">项目管理系统1.0</span>
         <div className="right">
           <Dropdown overlay={DropdownMenu} className="user">
             <span>

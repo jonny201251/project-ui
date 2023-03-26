@@ -187,6 +187,7 @@ export default (props) => {
   }
 
   const onClick3 = (flag, type) => {
+    return
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {
