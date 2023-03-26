@@ -26,12 +26,21 @@ const { Header, Sider, Content } = Layout
 //为了解决关闭tab,setActiveKey没有起作用问题
 let flagKey
 
+const rootSubmenuKeys = ['27', '35', '40', '48', '53', '59', '63', '69']
+
 export default () => {
   const [collapsed, setCollapsed] = useState(false)
   const { tabPanes, setTabPanes, activeKey, setActiveKey } = useModel('useTabPanes')
   const [openKeys, setOpenKeys] = useState([])
 
-  let rootSubmenuKeys = []
+  const onOpenChange = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  }
 
   const onClick = ({ key }) => {
     setActiveKey(key)
@@ -257,7 +266,7 @@ export default () => {
             mode="inline"
             selectedKeys={[activeKey]}
             openKeys={openKeys}
-            onOpenChange={(openkeys) => setOpenKeys(openkeys)}
+            onOpenChange={onOpenChange}
             onClick={onClick}
           >
             {renderMenu(utils.session.getItem('menuList'))}

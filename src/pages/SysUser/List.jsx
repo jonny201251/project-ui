@@ -8,5 +8,5 @@ export default () => {
     { title: '所在部门', dataIndex: 'deptName', valueType: 'text' },
   ]
 
-  return <BaseProTable path={sysUserPath} columns={columns}/>
+  return <BaseProTable path={sysUserPath} columns={columns} search={true}/>
 }
