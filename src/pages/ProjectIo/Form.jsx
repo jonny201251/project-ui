@@ -8,8 +8,8 @@ import {
   FormItem,
   FormLayout,
   Input,
-  Select,
   Radio,
+  Select,
 } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import {
@@ -25,9 +25,9 @@ import styles from '../table-placeholder.less'
 import { Button, ConfigProvider, message } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import React, { useEffect } from 'react'
-import { onFieldReact } from '@formily/core'
 import { SearchOutlined } from '@ant-design/icons'
 import DialogList2 from '../SmallProject/DialogList2'
+import { session } from '../../utils'
 
 const InputButton2 = (props) => {
   return <div style={{ display: 'inline-flex', width: '100%' }}>
@@ -56,11 +56,19 @@ export default (props) => {
     form.query('*(taskCode,property,customerName,contractMoney,endMoney,contractName)').forEach(field => {
       field.setPattern('disabled')
     })
+    if (type === 'add') {
+      const user = session.getItem('user')
+      form.setInitialValues({
+        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
+        displayName: user.displayName, loginName: user.loginName,
+        deptId: user.deptId, deptName: user.deptName,
+      })
+    }
   }, [])
 
   const onClick = (flag) => {
     if (flag === 'open') {
-      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 1000 },
         (form2) => {
           return <>
             <DialogList form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
@@ -70,11 +78,11 @@ export default (props) => {
                 <LoadingButton
                   onClick={async () => {
                     const values = await form2.submit()
-                    console.log(values)
                     if (values.selectedRow) {
                       form.setValues({
-                        budgetId: values.selectedRow.id,
+                        budgetId: values.selectedRow.budgetId,
                         projectId: values.selectedRow.projectId,
+                        projectType: values.selectedRow.projectType,
                         name: values.selectedRow.name,
                         taskCode: values.selectedRow.taskCode,
                         property: values.selectedRow.property,
@@ -141,7 +149,7 @@ export default (props) => {
           <SchemaField.String
             name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-          <SchemaField.String name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="type2" required title='往来类型' x-decorator="FormItem"
             x-component="Radio.Group"
@@ -156,6 +164,7 @@ export default (props) => {
               { label: '是', value: '是' },
               { label: '否', value: '否' },
             ]}/>
+          <SchemaField.String name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="providerName" title="往来方名称" required x-decorator="FormItem"
             x-component="InputButton2" x-component-props={{ onClick: onClick2 }}

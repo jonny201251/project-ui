@@ -26,6 +26,7 @@ import { Button, ConfigProvider, message } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import React, { useEffect } from 'react'
 import { onFieldReact } from '@formily/core'
+import { session } from '../../utils'
 
 const SchemaField = createSchemaField({
   components: {
@@ -44,12 +45,20 @@ export default (props) => {
     form.query('*(taskCode,property,contractMoney,endMoney,contractName,providerName)').forEach(field => {
       field.setPattern('disabled')
     })
+    if (type === 'add') {
+      const user = session.getItem('user')
+      form.setInitialValues({
+        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
+        displayName: user.displayName, loginName: user.loginName,
+        deptId: user.deptId, deptName: user.deptName,
+      })
+    }
   }, [])
 
   const onClick = (flag) => {
     let value = form.query('haveContract').take()?.value
     if (flag === 'open') {
-      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 1000 },
         (form2) => {
           return <>
             <DialogList form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
@@ -63,8 +72,9 @@ export default (props) => {
                     if (values.selectedRow) {
                       if (value === '有') {
                         form.setValues({
-                          budgetId: values.selectedRow.id,
+                          budgetId: values.selectedRow.budgetId,
                           projectId: values.selectedRow.projectId,
+                          projectType: values.selectedRow.projectType,
                           name: values.selectedRow.name,
                           taskCode: values.selectedRow.taskCode,
                           property: values.selectedRow.property,
@@ -80,8 +90,9 @@ export default (props) => {
                         })
                       } else {
                         form.setValues({
-                          budgetId: values.selectedRow.id,
+                          budgetId: values.selectedRow.budgetId,
                           projectId: values.selectedRow.projectId,
+                          projectType: values.selectedRow.projectType,
                           name: values.selectedRow.name,
                           taskCode: values.selectedRow.taskCode,
                           property: values.selectedRow.property,
@@ -162,10 +173,11 @@ export default (props) => {
           <SchemaField.String
             name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-          <SchemaField.String name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="providerName" title="供方名称" x-decorator="FormItem" x-component="Input"
             x-decorator-props={{ gridSpan: 2 }}/>
+          <SchemaField.String name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="contractName" title="合同名称" x-decorator="FormItem" x-component="Input"
             x-decorator-props={{ gridSpan: 2 }}

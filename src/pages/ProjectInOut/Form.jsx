@@ -22,7 +22,7 @@ export default (props) => {
           <SchemaField.String
             name="name" title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="Input"/>
-          <SchemaField.String name="taskCode" title="项目任务号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="property" title="项目性质" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="customerName" title="客户名称" x-decorator="FormItem" x-component="Input"/>

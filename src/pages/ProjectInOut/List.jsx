@@ -9,7 +9,14 @@ export default () => {
   const render = (text, record) => {
     return [
       <a onClick={async () => {
-        let dialog = FormDialog({ title: '项目收支表', footer: null, keyboard: false, maskClosable: false, width: '98%' },
+        let dialog = FormDialog({
+            style: { top: 20 },
+            title: '项目收支表',
+            footer: null,
+            keyboard: false,
+            maskClosable: false,
+            width: '98%',
+          },
           (form) => {
             return <iframe
               src={contextPath + '/jmreport/view/679927289940082688?projectId=' + record.projectId}
@@ -20,7 +27,14 @@ export default () => {
         dialog.open({})
       }}>{'项目收支表'}</a>,
       <a onClick={async () => {
-        let dialog = FormDialog({ title: '收支明细表', footer: null, keyboard: false, maskClosable: false, width: '98%' },
+        let dialog = FormDialog({
+            style: { top: 20 },
+            title: '收支明细表',
+            footer: null,
+            keyboard: false,
+            maskClosable: false,
+            width: '98%',
+          },
           (form) => {
             return <iframe
               src={contextPath + '/jmreport/view/679996015666331648?projectId=' + record.projectId}
@@ -35,9 +49,9 @@ export default () => {
 
   const columns = [
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
-    { title: '项目任务号', dataIndex: 'taskCode', valueType: 'text' },
-    { title: '项目性质', dataIndex: 'property', valueType: 'text' },
+    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
+    { title: '项目性质', dataIndex: 'property', valueType: 'text' },
     { title: '客户名称', dataIndex: 'customerName', valueType: 'text' },
     { title: '收款合同编号', dataIndex: 'contractCode', valueType: 'text' },
     { title: '合同名称', dataIndex: 'contractName', valueType: 'text' },

@@ -76,9 +76,9 @@ export default () => {
 
   const columns = [
     { title: '项目名称', dataIndex: 'name', valueType: 'text', render: (text, record) => render(record) },
+    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     { title: '成本类型', dataIndex: 'costType', valueType: 'text' },
-    { title: '税率', dataIndex: 'costRate', valueType: 'text' },
     { title: '合同类型', dataIndex: 'contractType', valueType: 'text' },
     { title: '合同编号', dataIndex: 'contractCode', valueType: 'text' },
     { title: '合同名称', dataIndex: 'contractName', valueType: 'text' },
@@ -86,9 +86,11 @@ export default () => {
     { title: '结算金额', dataIndex: 'endMoney', valueType: 'text' },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
     { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text' },
   ]
 
   return <ProTable
+    headerTitle="补全-收付款合同号和WBS编号"
     bordered
     rowKey="id"
     actionRef={actionRef}
@@ -99,6 +101,6 @@ export default () => {
     request={proTableRequest}
     //
     options={{ density: false }}
-    search={{ span: 6 }}
+    search={false}
   />
 }

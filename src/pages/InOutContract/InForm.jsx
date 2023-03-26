@@ -43,9 +43,9 @@ export default (props) => {
           <SchemaField.String name="contractCode" required x-decorator="FormItem" title="合同编号" x-component="Input"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
-          <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
-          <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="displayName" title="创建人" x-component="Input" x-decorator="FormItem"/>
+          <SchemaField.String name="deptName" title="创建部门" x-component="Input" x-decorator="FormItem"/>
+          <SchemaField.String name="createDatetime" title="创建时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="name" title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }} x-component="Input"/>
           <SchemaField.String

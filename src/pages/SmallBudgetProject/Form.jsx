@@ -74,6 +74,7 @@ export default (props) => {
                         property: values.selectedRow.property,
                         customerId: values.selectedRow.customerId,
                         customerName: values.selectedRow.customerName,
+                        projectRatee: values.selectedRow.projectRate,
                       })
                       dialog2.close()
                     } else {
