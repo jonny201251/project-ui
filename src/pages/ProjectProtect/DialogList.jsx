@@ -24,9 +24,8 @@ export default (props) => {
     { title: '申请时间', dataIndex: 'createDatetime', valueType: 'text', hideInSearch: true },
   ]
 
-  //search={{ span: 8, defaultCollapsed: false }}
   return <BaseList
     form={props.form} selectedId={props.selectedId}
-    path={projectDialogPath} columns={columns} search={{ span: 8 }}
+    path={projectDialogPath} columns={columns} search={{ span: 12, defaultCollapsed: false }}
   />
 }

@@ -79,7 +79,14 @@ export default (props) => {
         },
       })
     } else if (type === 'report') {
-      let dialog = FormDialog({ title: '预算表', footer: null, keyboard: false, maskClosable: false, width: '98%' },
+      let dialog = FormDialog({
+          style: { top: 20 },
+          title: '预算表',
+          footer: null,
+          keyboard: false,
+          maskClosable: false,
+          width: '98%',
+        },
         (form) => {
           if (record.version === 0) {
             return <iframe

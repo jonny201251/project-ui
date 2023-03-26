@@ -16,6 +16,7 @@ import {
   ArrayTableAddition,
   ArrayTableIndex,
   ArrayTableRemove,
+  File,
   InputButton,
   LoadingButton,
   NumberPicker,
@@ -32,7 +33,7 @@ const SchemaField = createSchemaField({
   components: {
     FormLayout, FormItem, Input, FormGrid,
     ArrayTable, ArrayTableAddition, ArrayTableIndex, ArrayTableRemove,
-    LoadingButton, InputButton, NumberPicker, Select, DatePicker, Radio,
+    LoadingButton, InputButton, NumberPicker, Select, DatePicker, Radio, File,
   },
 })
 
@@ -40,14 +41,14 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,taskCode,property,contractCode,costType,costRate,endMoney,wbs)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,taskCode,property,costType,costRate,endMoney,wbs)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
       const user = session.getItem('user')
       form.setInitialValues({
         createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
+        displayName: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
       })
     }
@@ -65,20 +66,16 @@ export default (props) => {
                 <LoadingButton
                   onClick={async () => {
                     const values = await form2.submit()
-                    console.log(values)
                     if (values.selectedRow) {
                       form.setValues({
-                        type: values.selectedRow.type,
-                        wbs: values.selectedRow.wbs,
-                        budgetId: values.selectedRow.id,
+                        projectType: values.selectedRow.projectType,
                         projectId: values.selectedRow.projectId,
                         name: values.selectedRow.name,
+                        wbs: values.selectedRow.wbs,
                         taskCode: values.selectedRow.taskCode,
-                        property: values.selectedRow.property,
+                        budgetId: values.selectedRow.budgetId,
                         costType: values.selectedRow.costType,
                         costRate: values.selectedRow.costRate,
-                        providerId: values.selectedRow.companyId,
-                        providerName: values.selectedRow.companyName,
                       })
                       dialog2.close()
                     } else {
@@ -146,11 +143,17 @@ export default (props) => {
           <SchemaField.String
             name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
+          <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Input"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="costType" title="成本类型" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String
+             name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"
+            x-decorator-props={{
+              feedbackText: '必须有WBS编号，如果没有，合同签署情况->合同号和WBS号,进行补全',
+            }}
+          />
           <SchemaField.String
             name="providerName" required title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
             x-component="InputButton" x-component-props={{ onClick: onClick2 }}/>
@@ -159,11 +162,13 @@ export default (props) => {
             x-decorator-props={{ gridSpan: 2 }}/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="contractCode" x-decorator="FormItem" title="合同编号" x-component="Input"/>
+          <SchemaField.String name="contractCode" x-decorator="FormItem" title="付款合同编号" x-component="Input"/>
           <SchemaField.Number
-            name="contractMoney" required x-decorator="FormItem" title="合同金额" x-component="NumberPicker"/>
+            name="contractMoney" required x-decorator="FormItem" title="付款合同金额" x-component="NumberPicker"/>
           <SchemaField.Number
             name="endMoney" x-decorator="FormItem" title="结算金额" x-component="NumberPicker"/>
+          <SchemaField.String name="fileList" title="附件" x-decorator="FormItem" x-component="File"
+                              x-decorator-props={{ gridSpan: 2 }}/>
           <SchemaField.String
             x-decorator-props={{ gridSpan: 2 }}
             name="remark" title="备注" x-decorator="FormItem" x-component="Input.TextArea" x-component-props={{ rows: 2 }}

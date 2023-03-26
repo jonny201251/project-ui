@@ -102,18 +102,9 @@ import ProviderControlViewForm from '../pages/ProviderControl/ViewForm'
 
 import InContractList from '../pages/InContract/List'
 import InContractForm from '../pages/InContract/Form'
-import InContractAddForm from '../pages/InContract/AddForm'
-import InContractCheckForm from '../pages/InContract/CheckForm'
-import InContractChangeForm from '../pages/InContract/ChangeForm'
-import InContractViewForm from '../pages/InContract/ViewForm'
-import InContractViewHistory from '../pages/InContract/ViewHistory'
+
 import OutContractList from '../pages/OutContract/List'
 import OutContractForm from '../pages/OutContract/Form'
-import OutContractAddForm from '../pages/OutContract/AddForm'
-import OutContractCheckForm from '../pages/OutContract/CheckForm'
-import OutContractChangeForm from '../pages/OutContract/ChangeForm'
-import OutContractViewForm from '../pages/OutContract/ViewForm'
-import OutContractViewHistory from '../pages/OutContract/ViewHistory'
 import InOutContractList from '../pages/InOutContract/List'
 import ProjectEndForm from '../pages/ProjectEnd/Form'
 import ProjectEndList from '../pages/ProjectEnd/List'
@@ -124,8 +115,6 @@ import ProjectRunList from '../pages/ProjectRun/List'
 //
 import AForm from '../pages/A/Form'
 import AList from '../pages/A/List'
-import SysRoleForm from '../pages/SysRole/Form'
-import SysRoleList from '../pages/SysRole/List'
 
 export const aPath = {
   flag: 'aPath', width: 1000, Form: AForm, List: AList,
@@ -407,12 +396,6 @@ export const bigBudgetOutPath = {
   add: contextPath + '/bigBudgetOut/add',
   edit: contextPath + '/bigBudgetOut/edit',
 }
-export const budgetProjectDialogPath = {
-  list: contextPath + '/budgetProject/list',
-}
-export const budgetProjectDialog2Path = {
-  list: contextPath + '/budgetProject/list2',
-}
 export const projectInPath = {
   flag: 'projectInPath', width: 900, Form: ProjectInForm, List: ProjectInList,
   list: contextPath + '/projectIn/list',
@@ -453,6 +436,12 @@ export const providerSimplePath2 = {
 }
 export const projectDialogPath = {
   list: contextPath + '/projectDialog/list',
+}
+export const budgetDialogPath = {
+  list: contextPath + '/budgetDialog/list',
+}
+export const budgetDialog2Path = {
+  list: contextPath + '/budgetDialog/listCost',
 }
 export const providerQueryPath = {
   flag: 'providerQueryPath', width: 1000, List: ProviderQueryList,
@@ -512,6 +501,8 @@ export const inContractPath = {
   get: contextPath + '/inContract/get',
   add: contextPath + '/inContract/add',
   edit: contextPath + '/inContract/edit',
+  upload: contextPath + '/inContract/upload',
+  download: contextPath + '/inContract/download',
 }
 export const outContractPath = {
   flag: 'outContractPath', width: 900, List: OutContractList,
