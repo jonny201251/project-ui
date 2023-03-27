@@ -58,17 +58,31 @@ export default (props) => {
         displayName: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
         startScore: 0, startResult: ' ', endScore: 0, endResult: ' ',
+        desc3: '否',
       })
-      form.query('list').take().value = [
-        '企业性质', '注册资本', '资产负债率情况', '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)', '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)',
-        // '已实施项目中客户的付款情况', '付款结算周期', '回款及时率', '账目清晰程度', '其他信誉情况',
-      ].map(item => ({ kpi: item, standard: ' ' }))
     }
 
   }, [])
 
 
   form.addEffects('id', () => {
+    onFieldReact('desc3', (field) => {
+      let value = field.value
+      if (value) {
+        if (value === '是') {
+          form.query('list').take().value = [
+            '企业性质', '注册资本', '资产负债率情况', '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)', '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)',
+            '已实施项目中客户的付款情况', '付款结算周期', '回款及时率', '账目清晰程度', '其他信誉情况',
+          ].map(item => ({ kpi: item, standard: ' ' }))
+        } else {
+          form.query('list').take().value = [
+            '企业性质', '注册资本', '资产负债率情况', '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)', '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)',
+            // '已实施项目中客户的付款情况', '付款结算周期', '回款及时率', '账目清晰程度', '其他信誉情况',
+          ].map(item => ({ kpi: item, standard: ' ' }))
+        }
+      }
+    })
+
     onFieldReact('list.*.item', (field) => {
       if (session.getItem('user').loginName !== '宋思奇') {
         field.query('.endScore').take()?.setPattern('disabled')

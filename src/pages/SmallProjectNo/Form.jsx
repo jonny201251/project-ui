@@ -17,6 +17,7 @@ import { ConfigProvider, Divider } from 'antd'
 import { get, projectCodePath, session } from '../../utils'
 import { ArrayTableAddition, ArrayTableIndex, ArrayTableRemove, MyCard, NumberPicker } from '../../components'
 import styles from '../table-placeholder.less'
+import { onFieldReact } from '@formily/core'
 
 
 const SchemaField = createSchemaField({
@@ -41,13 +42,15 @@ export default (props) => {
         createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
         displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
+        flag: '新',
       })
     }
     const data = await get(projectCodePath.getLabelValue)
     if (data) {
-      form.query('taskCode').take().setDataSource(data)
+      form.query('taskCode').take()?.setDataSource(data)
     }
   }, [])
+
 
   return <ConfigProvider locale={zhCN}>
     <Form form={form} labelWidth={110} className={styles.placeholder}>
@@ -58,7 +61,7 @@ export default (props) => {
           <SchemaField.String name="createDatetime" title="创建时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
                               x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
-          <SchemaField.String name="taskCode" required title="任务号" x-decorator="FormItem" x-component="Select"/>
+          <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Select"/>
           <SchemaField.String
             name="property" required title="项目性质" x-decorator="FormItem" x-component="Select"
             enum={[
@@ -74,6 +77,7 @@ export default (props) => {
             name="projectStatus" title="项目状态" x-decorator="FormItem"
             x-component="Select" x-component-props={{ showSearch: true }}
             enum={[
+              { label: '投标中', value: '投标中' },
               { label: '中标', value: '中标' },
               { label: '未中标', value: '未中标' },
               { label: '终止', value: '终止' },

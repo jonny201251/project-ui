@@ -10,7 +10,6 @@ export default (props) => {
       title: '成本类型', dataIndex: 'costType', valueType: 'select',
       valueEnum: { 材料及设备费: { text: '材料及设备费' }, 劳务费: { text: '劳务费' }, 技术服务费: { text: '技术服务费' }, 工程款: { text: '工程款' } },
     },
-    { title: '支出金额', dataIndex: 'money', valueType: 'text', hideInSearch: true },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text', hideInSearch: true },
     { title: '申请部门', dataIndex: 'deptName', valueType: 'text', hideInSearch: true },
   ]

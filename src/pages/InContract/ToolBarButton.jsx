@@ -44,7 +44,38 @@ export default (props) => {
       )
       dialog.open({})
     } else if (type === 'upload') {
-
+      let dialog = FormDialog({ title: '', footer: null, keyboard: false, maskClosable: false, width: 500 },
+        (form) => {
+          return (
+            <>
+              <path.UploadForm form={form} type={type} dialog={dialog}/>
+              <FormDialog.Footer>
+                <FormButtonGroup gutter={16} align={'right'}>
+                  <Button onClick={() => dialog.close()}>取消</Button>
+                  <LoadingButton
+                    onClick={async () => {
+                      const values = await form.submit()
+                      if (values) {
+                        const data = await post(path.upload, values)
+                        if (data) {
+                          actionRef.current.clearSelected()
+                          actionRef.current.reload()
+                          dialog.close()
+                          message.success('导入成功')
+                        }
+                      }
+                    }}
+                    type={'primary'}
+                  >
+                    确定
+                  </LoadingButton>
+                </FormButtonGroup>
+              </FormDialog.Footer>
+            </>
+          )
+        },
+      )
+      dialog.open({})
     } else if (type === 'download') {
       window.location.href = path.download
       return

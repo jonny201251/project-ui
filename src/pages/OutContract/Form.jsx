@@ -41,7 +41,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,taskCode,property,costType,costRate,endMoney,wbs)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,taskCode,property,costType,costRate,endMoney)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
@@ -149,10 +149,7 @@ export default (props) => {
           <SchemaField.String name="costType" title="成本类型" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
-             name="wbs" title="WBS编号" x-decorator="FormItem" x-component="Input"
-            x-decorator-props={{
-              feedbackText: '必须有WBS编号，如果没有，合同签署情况->合同号和WBS号,进行补全',
-            }}
+             name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"
           />
           <SchemaField.String
             name="providerName" required title="供方名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}

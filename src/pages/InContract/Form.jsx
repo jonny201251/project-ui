@@ -69,13 +69,13 @@ export default (props) => {
                     const values = await form2.submit()
                     if (values.selectedRow) {
                       form.setValues({
+                        budgetId: values.selectedRow.id,
                         projectType: values.selectedRow.projectType,
                         projectId: values.selectedRow.projectId,
                         name: values.selectedRow.name,
                         wbs: values.selectedRow.wbs,
                         taskCode: values.selectedRow.taskCode,
                         property: values.selectedRow.property,
-                        budgetId: values.selectedRow.budgetId,
                         customerId: values.selectedRow.customerId,
                         customerName: values.selectedRow.customerName,
                         contractCode: values.selectedRow.contractCode,
@@ -166,9 +166,9 @@ export default (props) => {
             x-decorator-props={{ gridSpan: 2 }}/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="contractCode" x-decorator="FormItem" title="合同编号" x-component="Input"/>
+          <SchemaField.String name="contractCode" x-decorator="FormItem" title="收款合同编号" x-component="Input"/>
           <SchemaField.Number
-            name="contractMoney" required x-decorator="FormItem" title="合同金额" x-component="NumberPicker"/>
+            name="contractMoney" required x-decorator="FormItem" title="收款合同金额" x-component="NumberPicker"/>
           <SchemaField.Number
             name="endMoney" x-decorator="FormItem" title="结算金额" x-component="NumberPicker"/>
         </SchemaField.Void>

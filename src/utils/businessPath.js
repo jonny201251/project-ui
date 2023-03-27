@@ -102,6 +102,7 @@ import ProviderControlViewForm from '../pages/ProviderControl/ViewForm'
 
 import InContractList from '../pages/InContract/List'
 import InContractForm from '../pages/InContract/Form'
+import InContractUploadForm from '../pages/InContract/UploadForm'
 
 import OutContractList from '../pages/OutContract/List'
 import OutContractForm from '../pages/OutContract/Form'
@@ -497,6 +498,7 @@ export const providerControlPath = {
 export const inContractPath = {
   flag: 'inContractPath', width: 900, List: InContractList,
   Form: InContractForm,
+  UploadForm: InContractUploadForm,
   list: contextPath + '/inContract/list',
   get: contextPath + '/inContract/get',
   add: contextPath + '/inContract/add',

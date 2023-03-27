@@ -78,21 +78,20 @@ export default () => {
     { title: '项目名称', dataIndex: 'name', valueType: 'text', render: (text, record) => render(record) },
     { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
-    { title: '成本类型', dataIndex: 'costType', valueType: 'text' },
-    { title: '合同类型', dataIndex: 'contractType', valueType: 'text' },
+    { title: '成本类型', dataIndex: 'costType', valueType: 'text', hideInSearch: true },
+    { title: '合同类型', dataIndex: 'contractType', valueType: 'text' , hideInSearch: true},
     { title: '合同编号', dataIndex: 'contractCode', valueType: 'text' },
     { title: '合同名称', dataIndex: 'contractName', valueType: 'text' },
-    { title: '合同金额', dataIndex: 'contractMoney', valueType: 'text' },
-    { title: '结算金额', dataIndex: 'endMoney', valueType: 'text' },
+    { title: '合同金额', dataIndex: 'contractMoney', valueType: 'text', hideInSearch: true },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
     { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
-    { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text' },
+    { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text', hideInSearch: true },
   ]
 
   return <ProTable
     headerTitle="补全-收付款合同号和WBS编号"
     bordered
-    rowKey="id"
+    rowKey="idd"
     actionRef={actionRef}
     columns={columns}
     columnEmptyText={true}
@@ -101,6 +100,6 @@ export default () => {
     request={proTableRequest}
     //
     options={{ density: false }}
-    search={false}
+    search={true}
   />
 }
