@@ -243,8 +243,6 @@ export default (props) => {
         data.edgeList.push({ edgeId: edge.id, sourceTaskKey: edge.sourceNodeId, targetTaskKey: edge.targetNodeId })
       }
     })
-
-    console.log(data)
     const dataa = await post(data.processDesign.id ? processDesignPath.edit : processDesignPath.add, data)
     if (dataa) {
       actionRef.current.clearSelected()

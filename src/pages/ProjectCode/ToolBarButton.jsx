@@ -25,7 +25,6 @@ export default (props) => {
                       const values = await form.submit()
                       if (values) {
                         const data = await post(path.add, values)
-                        console.log(data.data)
                         if (data.data?.currentPage) {
 
                           let dialog = FormDialog({

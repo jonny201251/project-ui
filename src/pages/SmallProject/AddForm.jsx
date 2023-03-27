@@ -58,7 +58,6 @@ export default (props) => {
   let { form, type, record } = props
 
   useEffect(async () => {
-    console.log(record)
     form.query('*(displayName,deptName,createDatetime,startDisplay,endDisplay,bidDate,giveMoney,giveMoneyCycle)').forEach(field => {
       field.setPattern('disabled')
     })

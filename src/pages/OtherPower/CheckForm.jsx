@@ -99,7 +99,6 @@ export default (props) => {
       if (value) {
         const userMap = session.getItem('userMap')
         const user = userMap[value]
-        console.log(user)
         if (user) {
 
           form.setValues({ deptIdd: user.deptId, deptNamee: user.deptName })

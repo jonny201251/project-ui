@@ -189,7 +189,6 @@ export default (props) => {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
         if (!path.haveChange) {
-          console.log(record)
           if (path.flag.indexOf('BudgetRunPath') > 0) {
             if (record.newBudgetProject) {
               arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
@@ -211,7 +210,6 @@ export default (props) => {
       arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
       arr.push(<a onClick={() => onClick('delete')}>删除</a>)
     }
-    console.log(record)
     //预算表
     if (record.viewBudget) {
       arr.push(<a onClick={() => onClick('viewBudget')}>预算表</a>)

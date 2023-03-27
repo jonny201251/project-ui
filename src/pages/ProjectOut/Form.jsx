@@ -68,7 +68,6 @@ export default (props) => {
                 <LoadingButton
                   onClick={async () => {
                     const values = await form2.submit()
-                    console.log(values)
                     if (values.selectedRow) {
                       if (value === '有') {
                         form.setValues({

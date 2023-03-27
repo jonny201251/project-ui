@@ -17,7 +17,6 @@ export default (props) => {
           onClick={async () => {
             const formValue = await form.submit()
             if (formValue) {
-              console.log(formValue)
               let values = { formValue: formValue, buttonName: buttonName, type: type, path: path.flag }
               const data = await post(path.btnHandle, values)
               if (data) {

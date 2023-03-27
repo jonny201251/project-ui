@@ -208,7 +208,6 @@ export default (props) => {
       let desc1Value = field.query('.desc1').get('value')
       let desc2Value = field.query('.desc2').get('value')
       if (desc2Value) {
-        console.log(desc1Value)
         let desc2Field = field.query('.desc2').take()
         let scoreField = field.query('.score').take()
         // scoreField && scoreField.setValue(null)
@@ -363,7 +362,6 @@ export default (props) => {
       let desc1Value = field.query('.desc1').get('value')
       let desc2Value = field.query('.desc2').get('value')
       if (desc2Value) {
-        console.log(desc1Value)
         let desc2Field = field.query('.desc2').take()
         let scoreField = field.query('.score').take()
         // scoreField && scoreField.setValue(null)
@@ -457,7 +455,6 @@ export default (props) => {
       let desc1Value = field.query('.desc1').get('value')
       let desc2Value = field.query('.desc2').get('value')
       if (desc2Value) {
-        console.log(desc1Value)
         let desc2Field = field.query('.desc2').take()
         let scoreField = field.query('.score').take()
         // scoreField && scoreField.setValue(null)

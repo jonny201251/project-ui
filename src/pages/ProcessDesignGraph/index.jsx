@@ -32,7 +32,7 @@ export default (props) => {
         edgeTextDraggable: false,
         isSilentMode: true,
         width: document.documentElement.clientWidth,
-        height: document.documentElement.clientHeight,
+        height: 500,
       })
       lf.render(bpmnXml)
       //

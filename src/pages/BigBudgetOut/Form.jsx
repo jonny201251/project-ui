@@ -66,7 +66,6 @@ export default (props) => {
                 <LoadingButton
                   onClick={async () => {
                     const values = await form2.submit()
-                    console.log(values)
                     if (values.selectedRow) {
                       form.setValues({
                         budgetId: values.selectedRow.id,
