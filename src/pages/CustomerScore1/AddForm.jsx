@@ -1,5 +1,6 @@
 import {
   ArrayTable,
+  Checkbox,
   DatePicker,
   Form,
   FormButtonGroup,
@@ -11,13 +12,12 @@ import {
   PreviewText,
   Radio,
   Select,
-  Checkbox,
 } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, message } from 'antd'
-import { ArrayTableIndex, InputButton, LoadingButton, NumberPicker, Text, MyCard } from '../../components'
+import { ArrayTableIndex, InputButton, LoadingButton, MyCard, NumberPicker } from '../../components'
 import { session } from '../../utils'
 import { onFieldReact } from '@formily/core'
 import DialogList from './DialogList'
@@ -58,31 +58,21 @@ export default (props) => {
         displayName: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
         startScore: 0, startResult: ' ', endScore: 0, endResult: ' ',
-        desc3: '否',
+        desc3: '是',
       })
+      let field = form.query('list').take()
+      if (field) {
+        field.value = [
+          '企业性质', '注册资本', '资产负债率情况', '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)', '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)',
+          // '已实施项目中客户的付款情况', '付款结算周期', '回款及时率', '账目清晰程度', '其他信誉情况',
+        ].map(item => ({ kpi: item, standard: ' ' }))
+      }
     }
 
   }, [])
 
 
   form.addEffects('id', () => {
-    onFieldReact('desc3', (field) => {
-      let value = field.value
-      if (value) {
-        if (value === '是') {
-          form.query('list').take().value = [
-            '企业性质', '注册资本', '资产负债率情况', '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)', '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)',
-            '已实施项目中客户的付款情况', '付款结算周期', '回款及时率', '账目清晰程度', '其他信誉情况',
-          ].map(item => ({ kpi: item, standard: ' ' }))
-        } else {
-          form.query('list').take().value = [
-            '企业性质', '注册资本', '资产负债率情况', '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)', '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)',
-            // '已实施项目中客户的付款情况', '付款结算周期', '回款及时率', '账目清晰程度', '其他信誉情况',
-          ].map(item => ({ kpi: item, standard: ' ' }))
-        }
-      }
-    })
-
     onFieldReact('list.*.item', (field) => {
       if (session.getItem('user').loginName !== '宋思奇') {
         field.query('.endScore').take()?.setPattern('disabled')
@@ -363,6 +353,24 @@ export default (props) => {
     }
   }
 
+  const onChange = (e) => {
+    let value = e.target.value
+    let field = form.query('list').take()
+    if (field) {
+      if (value === '是') {
+        field.value = [
+          '企业性质', '注册资本', '资产负债率情况', '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)', '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)',
+          // '已实施项目中客户的付款情况', '付款结算周期', '回款及时率', '账目清晰程度', '其他信誉情况',
+        ].map(item => ({ kpi: item, standard: ' ' }))
+      } else {
+        field.value = [
+          '企业性质', '注册资本', '资产负债率情况', '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)', '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)',
+          '已实施项目中客户的付款情况', '付款结算周期', '回款及时率', '账目清晰程度', '其他信誉情况',
+        ].map(item => ({ kpi: item, standard: ' ' }))
+      }
+    }
+  }
+
   return <ConfigProvider locale={zhCN}>
     <Form form={form} labelWidth={120}>
       <SchemaField>
@@ -394,7 +402,7 @@ export default (props) => {
               ]}
             />
             <SchemaField.String
-              name="desc3" required title="是否首次合作" x-component="Radio.Group"
+              name="desc3" required title="是否首次合作" x-component="Radio.Group" x-component-props={{ onChange: onChange }}
               x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
               enum={[
                 { label: '是', value: '是' },

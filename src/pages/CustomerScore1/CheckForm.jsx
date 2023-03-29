@@ -351,6 +351,24 @@ export default (props) => {
     }
   }
 
+  const onChange = (e) => {
+    let value = e.target.value
+    let field = form.query('list').take()
+    if (field) {
+      if (value === '是') {
+        field.value = [
+          '企业性质', '注册资本', '资产负债率情况', '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)', '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)',
+          // '已实施项目中客户的付款情况', '付款结算周期', '回款及时率', '账目清晰程度', '其他信誉情况',
+        ].map(item => ({ kpi: item, standard: ' ' }))
+      } else {
+        field.value = [
+          '企业性质', '注册资本', '资产负债率情况', '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)', '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)',
+          '已实施项目中客户的付款情况', '付款结算周期', '回款及时率', '账目清晰程度', '其他信誉情况',
+        ].map(item => ({ kpi: item, standard: ' ' }))
+      }
+    }
+  }
+
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
       <Tabs.TabPane tab="表单数据" key="1">
@@ -384,7 +402,7 @@ export default (props) => {
                   ]}
                 />
                 <SchemaField.String
-                  name="desc3" required title="是否首次合作" x-component="Radio.Group"
+                  name="desc3" required title="是否首次合作" x-component="Radio.Group" x-component-props={{onChange:onChange}}
                   x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                   enum={[
                     { label: '是', value: '是' },
