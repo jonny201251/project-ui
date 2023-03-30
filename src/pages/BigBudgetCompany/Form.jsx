@@ -120,7 +120,8 @@ export default (props) => {
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
           <SchemaField.String name="projectTaskCode" title="项目任务号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
-            name="costType" required title="成本类型" x-decorator="FormItem" x-component="Select"
+            name="costType" required title="成本类型" x-decorator="FormItem"
+            x-component="Select" x-component-props={{ showSearch: true }}
             enum={typeArr.map(item => ({ label: item, value: item }))}
           />
           <SchemaField.String name="costRate" x-decorator="FormItem" title="税率" x-component="Input"/>

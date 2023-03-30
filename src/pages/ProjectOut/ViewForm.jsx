@@ -22,11 +22,13 @@ import {
 } from '../../components'
 import DialogList from './DialogList'
 import styles from '../table-placeholder.less'
-import { Button, ConfigProvider, message } from 'antd'
+import { Button, ConfigProvider, message, Tabs } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import React, { useEffect } from 'react'
 import { onFieldReact } from '@formily/core'
 import { session } from '../../utils'
+import ProcessDesignGraph from '../ProcessDesignGraph'
+import ProcessInstNodeList from '../ProcessInstNode/List'
 
 const SchemaField = createSchemaField({
   components: {
@@ -39,25 +41,15 @@ const SchemaField = createSchemaField({
 const typeArr1 = ['材料及设备费', '劳务费', '技术服务费', '工程款']
 const typeArr2 = ['税费', '投标费用', '现场管理费', '证书服务费', '资金成本', '交易服务费', '交通费', '餐费', '差旅费', '其他']
 export default (props) => {
-  let { form, type } = props
+  let { form, type, record, haveEditForm } = props
 
-  useEffect(async () => {
-    form.query('*(taskCode,property,contractMoney,endMoney,contractName,providerName)').forEach(field => {
-      field.setPattern('disabled')
-    })
-    if (type === 'add') {
-      const user = session.getItem('user')
-      form.setInitialValues({
-        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName, loginName: user.loginName,
-        deptId: user.deptId, deptName: user.deptName,
-      })
-    }
-  }, [])
 
   const onClick = (flag) => {
     let value = form.query('haveContract').take()?.value
     if (flag === 'open') {
+      if (haveEditForm === '否') {
+        return
+      }
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 1000 },
         (form2) => {
           return <>
@@ -120,6 +112,7 @@ export default (props) => {
       form.query('haveContract').take().validate()
     }
   }
+
   form.addEffects('id', () => {
     onFieldReact('haveContract', (field) => {
       if (field.value === '有') {
@@ -154,74 +147,93 @@ export default (props) => {
       }
     })
   })
+
   const onChange = (e) => {
     let value = e.target.value
     form.reset()
     form.setValues({ haveContract: value })
   }
 
+
   return <ConfigProvider locale={zhCN}>
-    <Form form={form} labelWidth={100} className={styles.placeholder}>
-      <SchemaField>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String
-            name="haveContract" required title="有无合同" x-decorator="FormItem" x-component="Radio.Group"
-            x-decorator-props={{ gridSpan: 2 }} default={'有'}
-            enum={[
-              { label: '有', value: '有' },
-              { label: '无', value: '无' },
-            ]}
-            x-component-props={{ onChange: onChange }}
-          />
-          <SchemaField.String
-            name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
-            x-component="InputButton" x-component-props={{ onClick: onClick }}/>
-          <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String
-            name="providerName" title="供方名称" x-decorator="FormItem" x-component="Input"
-            x-decorator-props={{ gridSpan: 2 }}/>
-          <SchemaField.String name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String
-            name="contractName" title="合同名称" x-decorator="FormItem" x-component="Input"
-            x-decorator-props={{ gridSpan: 2 }}
-          />
-        </SchemaField.Void>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="contractCode" required title="付款合同编号" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="contractMoney" title="付款合同金额" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="endMoney" title="结算金额" x-decorator="FormItem" x-component="Input"/>
-        </SchemaField.Void>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="costType" title="成本类型" x-decorator="FormItem" x-component="Select" x-component-props={{ showSearch: true }}/>
-          <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
-        </SchemaField.Void>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="outDate" title='日期' required x-decorator="FormItem" x-component="DatePicker"/>
-          <SchemaField.String
-            name="remark" title='摘要' x-decorator="FormItem" x-component="Input.TextArea"
-            x-component-props={{ rows: 2 }}/>
-          <SchemaField.Number name="money1" title='开票金额' x-decorator="FormItem" x-component="NumberPicker"/>
-          <SchemaField.Number name="money2" title='付款金额' x-decorator="FormItem" x-component="NumberPicker"/>
-          <SchemaField.String
-            name="outStyle" title='付款方式' x-decorator="FormItem" x-component="Select"
-            enum={[
-              { label: '支票', value: '支票' },
-              { label: '网银', value: '网银' },
-              { label: '银行承兑', value: '银行承兑' },
-              { label: '商业承兑', value: '商业承兑' },
-            ]}
-          />
-          <SchemaField.String
-            name="arriveDate" title='到期日' x-decorator="FormItem" x-component="DatePicker"
-            x-component-props={{ picker: 'month' }}/>
-          <SchemaField.String
-            x-decorator-props={{ gridSpan: 2 }}
-            name="remarkk" title="备注" x-decorator="FormItem" x-component="Input.TextArea"
-            x-component-props={{ rows: 2 }}
-          />
-        </SchemaField.Void>
-      </SchemaField>
-    </Form>
+    <Tabs animated={false} size={'small'}>
+      <Tabs.TabPane tab="表单数据" key="1">
+        <Form form={form} labelWidth={120} className={styles.placeholder}>
+          <SchemaField>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+              <SchemaField.String
+                name="haveContract" required title="有无合同" x-decorator="FormItem" x-component="Radio.Group"
+                x-decorator-props={{ gridSpan: 2 }} default={'有'}
+                enum={[
+                  { label: '有', value: '有' },
+                  { label: '无', value: '无' },
+                ]}
+                x-component-props={{ onChange: onChange }}
+              />
+              <SchemaField.String
+                name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+                x-component="InputButton" x-component-props={{ onClick: onClick }}/>
+              <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String
+                name="providerName" title="供方名称" x-decorator="FormItem" x-component="Input"
+                x-decorator-props={{ gridSpan: 2 }}/>
+              <SchemaField.String name="wbs" required title="WBS编号" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String
+                name="contractName" title="合同名称" x-decorator="FormItem" x-component="Input"
+                x-decorator-props={{ gridSpan: 2 }}
+              />
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+              <SchemaField.String name="contractCode" required title="付款合同编号" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String name="contractMoney" title="付款合同金额" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String name="endMoney" title="结算金额" x-decorator="FormItem" x-component="Input"/>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+              <SchemaField.String name="costType" title="成本类型" x-decorator="FormItem" x-component="Select"
+                                  x-component-props={{ showSearch: true }}/>
+              <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+              <SchemaField.String name="outDate" title='日期' required x-decorator="FormItem" x-component="DatePicker"/>
+              <SchemaField.String
+                name="remark" title='摘要' x-decorator="FormItem" x-component="Input.TextArea"
+                x-component-props={{ rows: 2 }}/>
+              <SchemaField.Number name="money1" title='开票金额' x-decorator="FormItem" x-component="NumberPicker"/>
+              <SchemaField.Number name="money2" title='付款金额' x-decorator="FormItem" x-component="NumberPicker"/>
+              <SchemaField.String
+                name="outStyle" title='付款方式' x-decorator="FormItem" x-component="Select"
+                enum={[
+                  { label: '支票', value: '支票' },
+                  { label: '网银', value: '网银' },
+                  { label: '银行承兑', value: '银行承兑' },
+                  { label: '商业承兑', value: '商业承兑' },
+                ]}
+              />
+              <SchemaField.String
+                name="arriveDate" title='到期日' x-decorator="FormItem" x-component="DatePicker"
+                x-component-props={{ picker: 'month' }}/>
+              <SchemaField.String
+                x-decorator-props={{ gridSpan: 2 }}
+                name="remarkk" title="备注" x-decorator="FormItem" x-component="Input.TextArea"
+                x-component-props={{ rows: 2 }}
+              />
+              <SchemaField.String
+                name="userNameeList" required title="财务部" x-decorator="FormItem"
+                x-decorator-props={{ gridSpan: 2, tooltip: '流程审批节点' }}
+                x-component="Select" x-component-props={{ showSearch: true, mode: 'multiple' }}
+                enum={session.getItem('userList')}
+              />
+            </SchemaField.Void>
+          </SchemaField>
+        </Form>
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="流程图" key="2">
+        <ProcessDesignGraph processInstId={record.processInstId}/>
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="审批记录" key="3">
+        <ProcessInstNodeList processInstId={record.processInstId}/>
+      </Tabs.TabPane>
+    </Tabs>
   </ConfigProvider>
 }
 

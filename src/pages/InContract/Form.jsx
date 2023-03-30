@@ -136,7 +136,7 @@ export default (props) => {
   }
 
   return <ConfigProvider locale={zhCN}>
-    <Form form={form} labelWidth={110} className={styles.placeholder}>
+    <Form form={form} labelWidth={120} className={styles.placeholder}>
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String name="displayName" title="创建人" x-component="Input" x-decorator="FormItem"/>

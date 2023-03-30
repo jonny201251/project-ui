@@ -114,7 +114,7 @@ export default (props) => {
   })
 
   return <ConfigProvider locale={zhCN}>
-    <Form form={form} labelWidth={100} className={styles.placeholder}>
+    <Form form={form} labelWidth={120} className={styles.placeholder}>
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
@@ -131,8 +131,8 @@ export default (props) => {
           />
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="contractCode" required title="合同编号" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="contractMoney" title="合同金额" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="contractCode" required title="收款合同编号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="contractMoney" title="收款合同金额" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="endMoney" title="结算金额" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="inDate" title='日期' required x-decorator="FormItem" x-component="DatePicker"/>
           <SchemaField.String

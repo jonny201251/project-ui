@@ -28,7 +28,8 @@ export default (props) => {
       <SchemaField.Void x-component="FormLayout" x-component-props={{ labelCol: 6, wrapperCol: 16 }}>
         <SchemaField.String name="name" required title="客户名称" x-decorator="FormItem" x-component="Input"/>
         <SchemaField.String
-          name="property" required title="客户企业性质" x-decorator="FormItem" x-component="Select"
+          name="property" required title="客户企业性质" x-decorator="FormItem"
+          x-component="Select" x-component-props={{ showSearch: true }}
           enum={[
             { label: '事业单位', value: '事业单位' },
             { label: '国有企业', value: '国有企业' },

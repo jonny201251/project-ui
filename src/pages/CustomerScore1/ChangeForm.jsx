@@ -17,16 +17,17 @@ import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, message } from 'antd'
-import { ArrayTableIndex, InputButton, LoadingButton, NumberPicker, Text, MyCard } from '../../components'
+import { ArrayTableIndex, InputButton, LoadingButton, NumberPicker, Text, MyCard,File } from '../../components'
 import { session } from '../../utils'
 import { onFieldReact } from '@formily/core'
 import DialogList from './DialogList'
+import _ from 'lodash'
 
 
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, PreviewText, Select, NumberPicker, ArrayTableIndex,
-    ArrayTable, FormGrid, DatePicker, InputButton, Radio, Checkbox, MyCard,
+    ArrayTable, FormGrid, DatePicker, InputButton, Radio, Checkbox, MyCard,File
   },
 })
 
@@ -255,11 +256,13 @@ export default (props) => {
       if (tmp && sum) {
         tmp.value = sum
         //
-        if (sum >= 40) {
+        let r = sum / (num * 10)
+        console.log(sum+"--"+r)
+        if (r >= 0.9) {
           tmp2.value = '优秀'
-        } else if (sum >= 30 && sum < 40) {
+        } else if (r >= 0.8 && r < 0.9) {
           tmp2.value = '良好'
-        } else if (sum >= 20 && sum < 30) {
+        } else if (r >= 0.6 && r < 0.8) {
           tmp2.value = '一般'
         } else {
           tmp2.value = '不良'
@@ -277,20 +280,27 @@ export default (props) => {
       })
       let tmp = form.query('endScore').take()
       let tmp2 = form.query('endResult').take()
+      let tmp3 = form.query('result').take()
       if (tmp && sum) {
         tmp.value = sum
         //
-        if (sum >= 40) {
+        let r = sum / (num * 10)
+        if (r >= 0.9) {
           tmp2.value = '优秀'
-        } else if (sum >= 30 && sum < 40) {
+          tmp3.value = '优秀'
+        } else if (r >= 0.8 && r < 0.9) {
           tmp2.value = '良好'
-        } else if (sum >= 20 && sum < 30) {
+          tmp3.value = '良好'
+        } else if (r >= 0.6 && r < 0.8) {
           tmp2.value = '一般'
+          tmp3.value = '一般'
         } else {
           tmp2.value = '不良'
+          tmp3.value = '不良'
         }
       }
     })
+
   })
 
   const onClick = () => {
@@ -409,6 +419,9 @@ export default (props) => {
               name="desc4" title="客户其他情况" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
               x-component="Input.TextArea" x-component-props={{ rows: 2 }}
             />
+            <SchemaField.String
+              name="fileList" title="附件" x-decorator="FormItem"
+              x-component="File" x-decorator-props={{ gridSpan: 2 }}/>
           </SchemaField.Void>
         </SchemaField.Void>
         <SchemaField.Array
@@ -437,7 +450,7 @@ export default (props) => {
               x-component="ArrayTable.Column"
               x-component-props={{ title: '评分项', align: 'center' }}
             >
-              <SchemaField.String name="item" required x-decorator="FormItem" x-component="Select"/>
+              <SchemaField.String name="item" x-decorator="FormItem" x-component="Select"/>
             </SchemaField.Void>
             <SchemaField.Void
               x-component="ArrayTable.Column"
@@ -449,7 +462,7 @@ export default (props) => {
               x-component="ArrayTable.Column"
               x-component-props={{ width: 120, title: '初评得分', align: 'center' }}
             >
-              <SchemaField.Number x-decorator="FormItem" required name="startScore" x-component="NumberPicker"/>
+              <SchemaField.Number x-decorator="FormItem" name="startScore" x-component="NumberPicker"/>
             </SchemaField.Void>
             <SchemaField.Void
               x-component="ArrayTable.Column"

@@ -22,9 +22,9 @@ import {
 import { session } from '../../utils'
 import DialogList from './DialogList'
 import styles from '../table-placeholder.less'
-import { Button, ConfigProvider, message } from 'antd'
+import { Button, ConfigProvider, message, Table } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { onFieldReact } from '@formily/core'
 
 const SchemaField = createSchemaField({
@@ -39,7 +39,9 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('taskCode').take()?.setPattern('disabled')
+    form.query('*(taskCode,sum)').forEach(field => {
+      field.setPattern('disabled')
+    })
 
     if (type === 'add') {
       const user = session.getItem('user')
@@ -105,6 +107,19 @@ export default (props) => {
         }
       }
     })
+
+    onFieldReact('list.*.money', (field) => {
+      let sum = 0
+      form.query('list.*.money').forEach(field => {
+        if (field.value) {
+          sum += field.value
+        }
+      })
+      let tmp = form.query('sum').take()
+      if (tmp && sum) {
+        tmp.setState({ value: sum, pattern: 'disabled' })
+      }
+    })
   })
 
   return <ConfigProvider locale={zhCN}>
@@ -152,6 +167,7 @@ export default (props) => {
             </SchemaField.Object>
             <SchemaField.Void x-component="ArrayTableAddition" x-component-props={{ width: 80 }}/>
           </SchemaField.Array>
+          <SchemaField.String name="sum" title="合计" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             x-decorator-props={{ gridSpan: 2 }}
             name="remark" title="备注" x-decorator="FormItem" x-component="Input.TextArea" x-component-props={{ rows: 2 }}

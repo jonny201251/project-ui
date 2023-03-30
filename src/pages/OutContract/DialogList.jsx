@@ -15,7 +15,7 @@ export default (props) => {
   ]
 
   return <BaseList
-    rowKey={'budgetId'}
+    rowKey={'costType'}
     form={props.form} selectedId={props.selectedId}
     path={budgetDialog2Path} columns={columns} search={{ span: 12, defaultCollapsed: false }}
   />

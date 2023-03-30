@@ -12,7 +12,7 @@ import {
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import { session } from '../../utils'
-import { InputButton, LoadingButton } from '../../components'
+import { InputButton, LoadingButton, NumberPicker } from '../../components'
 import { Button, ConfigProvider, message } from 'antd'
 import DialogList from './DialogList'
 import DialogList2 from './DialogList2'
@@ -21,7 +21,7 @@ import styles from '../table-placeholder.less'
 import { onFieldReact } from '@formily/core'
 
 const SchemaField = createSchemaField({
-  components: { FormLayout, FormItem, Input, Select, InputButton, FormGrid, Cascader },
+  components: { FormLayout, FormItem, Input, Select, InputButton, FormGrid, Cascader, NumberPicker },
 })
 
 export default (props) => {
@@ -243,6 +243,9 @@ export default (props) => {
           <SchemaField.String name="displayName" title="创建人" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="deptName" title="创建部门" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="createDatetime" title="创建时间" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="taskCode" title="任务号/备案号" x-decorator="FormItem" x-component="Input"/>
+        </SchemaField.Void>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
             name="projectName" required title="项目名称"
             x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
@@ -288,7 +291,12 @@ export default (props) => {
             x-component="Cascader"
             enum={optionArr}
           />
-          <SchemaField.String name="taskCode" title="任务号/备案号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String
+            name="projectLocation" title="项目地点" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
+            x-component="Input"
+          />
+          <SchemaField.String name="projectMoney" required title="项目金额" x-decorator="FormItem"
+                              x-component="NumberPicker"/>
           <SchemaField.String
             name="remark" title="备注" x-component="Input.TextArea"
             x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}

@@ -112,6 +112,19 @@ export default (props) => {
         form.setValues({ sort: index + 1 })
       }
     })
+
+    onFieldReact('list.*.money', (field) => {
+      let sum = 0
+      form.query('list.*.money').forEach(field => {
+        if (field.value) {
+          sum += field.value
+        }
+      })
+      let tmp = form.query('sum').take()
+      if (tmp && sum) {
+        tmp.setState({ value: sum, pattern: 'disabled' })
+      }
+    })
   })
 
   return <ConfigProvider locale={zhCN}>
@@ -123,7 +136,8 @@ export default (props) => {
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
           <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
-            name="costType" required title="成本类型" x-decorator="FormItem" x-component="Select"
+            name="costType" required title="成本类型" x-decorator="FormItem"
+            x-component="Select" x-component-props={{ showSearch: true }}
             enum={typeArr.map(item => ({ label: item, value: item }))}
           />
           <SchemaField.String name="costRate" x-decorator="FormItem" title="税率" x-component="Input"/>
@@ -157,6 +171,7 @@ export default (props) => {
             </SchemaField.Object>
             <SchemaField.Void x-component="ArrayTableAddition" x-component-props={{ width: 80 }}/>
           </SchemaField.Array>
+          <SchemaField.String name="sum" title="合计" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             x-decorator-props={{ gridSpan: 3 }}
             name="remark" title="备注" x-decorator="FormItem" x-component="Input.TextArea" x-component-props={{ rows: 2 }}

@@ -473,7 +473,7 @@ export default (props) => {
                   </SchemaField.Void>
                   <SchemaField.Void
                     x-component="ArrayTable.Column"
-                    x-component-props={{ title: '成本类型' }}
+                    x-component-props={{ title: '成本类型',showSearch: true }}
                   >
                     <SchemaField.String
                       name="costType"

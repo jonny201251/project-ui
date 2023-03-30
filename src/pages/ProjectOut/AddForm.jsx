@@ -51,6 +51,7 @@ export default (props) => {
         createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
         displayName: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
+        userNameeList: ['张慧', '宋燕蕾', '李冰'],
       })
     }
   }, [])
@@ -71,6 +72,7 @@ export default (props) => {
                     if (values.selectedRow) {
                       if (value === '有') {
                         form.setValues({
+                          outContractId: values.selectedRow.id,
                           budgetId: values.selectedRow.budgetId,
                           projectId: values.selectedRow.projectId,
                           projectType: values.selectedRow.projectType,
@@ -89,6 +91,7 @@ export default (props) => {
                         })
                       } else {
                         form.setValues({
+                          outContractId: values.selectedRow.id,
                           budgetId: values.selectedRow.budgetId,
                           projectId: values.selectedRow.projectId,
                           projectType: values.selectedRow.projectType,
@@ -161,7 +164,7 @@ export default (props) => {
   }
 
   return <ConfigProvider locale={zhCN}>
-    <Form form={form} labelWidth={100} className={styles.placeholder}>
+    <Form form={form} labelWidth={120} className={styles.placeholder}>
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
@@ -192,7 +195,8 @@ export default (props) => {
           <SchemaField.String name="endMoney" title="结算金额" x-decorator="FormItem" x-component="Input"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="costType" title="成本类型" x-decorator="FormItem" x-component="Select" x-component-props={{ showSearch: true }}/>
+          <SchemaField.String name="costType" title="成本类型" x-decorator="FormItem" x-component="Select"
+                              x-component-props={{ showSearch: true }}/>
           <SchemaField.String name="costRate" title="税费" x-decorator="FormItem" x-component="Input"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
@@ -218,6 +222,12 @@ export default (props) => {
             x-decorator-props={{ gridSpan: 2 }}
             name="remarkk" title="备注" x-decorator="FormItem" x-component="Input.TextArea"
             x-component-props={{ rows: 2 }}
+          />
+          <SchemaField.String
+            name="userNameeList" required title="财务部" x-decorator="FormItem"
+            x-decorator-props={{ gridSpan: 2, tooltip: '流程审批节点' }}
+            x-component="Select" x-component-props={{ showSearch: true, mode: 'multiple' }}
+            enum={session.getItem('userList')}
           />
         </SchemaField.Void>
       </SchemaField>

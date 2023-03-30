@@ -16,7 +16,7 @@ import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, message, Tabs } from 'antd'
-import { ArrayTableIndex, LoadingButton, NumberPicker } from '../../components'
+import { ArrayTableIndex, LoadingButton, NumberPicker,File } from '../../components'
 import { onFieldReact } from '@formily/core'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
@@ -27,7 +27,7 @@ import DialogList from './DialogList'
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, PreviewText, Select, NumberPicker, ArrayTableIndex,
-    ArrayTable, FormGrid, DatePicker, Space, Radio,Checkbox
+    ArrayTable, FormGrid, DatePicker, Space, Radio,Checkbox,File
   },
 })
 
@@ -92,6 +92,9 @@ export default (props) => {
                   name="desc4" title="客户其他情况" x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                   x-component="Input.TextArea" x-component-props={{ rows: 2 }}
                 />
+                <SchemaField.String
+                  name="fileList" title="附件" x-decorator="FormItem"
+                  x-component="File" x-decorator-props={{ gridSpan: 2 }}/>
               </SchemaField.Void>
             </SchemaField.Void>
             <SchemaField.Array

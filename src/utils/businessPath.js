@@ -67,8 +67,6 @@ import BigBudgetOutForm from '../pages/BigBudgetOut/Form'
 import BigBudgetOutList from '../pages/BigBudgetOut/List'
 import ProjectInForm from '../pages/ProjectIn/Form'
 import ProjectInList from '../pages/ProjectIn/List'
-import ProjectOutForm from '../pages/ProjectOut/Form'
-import ProjectOutList from '../pages/ProjectOut/List'
 import ProjectIoForm from '../pages/ProjectIo/Form'
 import ProjectIoList from '../pages/ProjectIo/List'
 import ProjectInOutList from '../pages/ProjectInOut/List'
@@ -99,6 +97,11 @@ import ProviderControlList from '../pages/ProviderControl/List'
 import ProviderControlAddForm from '../pages/ProviderControl/AddForm'
 import ProviderControlCheckForm from '../pages/ProviderControl/CheckForm'
 import ProviderControlViewForm from '../pages/ProviderControl/ViewForm'
+
+import ProjectOutList from '../pages/ProjectOut/List'
+import ProjectOutAddForm from '../pages/ProjectOut/AddForm'
+import ProjectOutCheckForm from '../pages/ProjectOut/CheckForm'
+import ProjectOutViewForm from '../pages/ProjectOut/ViewForm'
 
 import InContractList from '../pages/InContract/List'
 import InContractForm from '../pages/InContract/Form'
@@ -224,6 +227,9 @@ export const customerPath = {
   add: contextPath + '/customer/add',
   edit: contextPath + '/customer/edit',
   delete: contextPath + '/customer/delete',
+}
+export const customer2Path = {
+  list: contextPath + '/customer/list2',
 }
 export const customer3Path = {
   list: contextPath + '/customer/list3',
@@ -405,14 +411,7 @@ export const projectInPath = {
   edit: contextPath + '/projectIn/edit',
   delete: contextPath + '/projectIn/delete',
 }
-export const projectOutPath = {
-  flag: 'projectOutPath', width: 900, Form: ProjectOutForm, List: ProjectOutList,
-  list: contextPath + '/projectOut/list',
-  get: contextPath + '/projectOut/get',
-  add: contextPath + '/projectOut/add',
-  edit: contextPath + '/projectOut/edit',
-  delete: contextPath + '/projectOut/delete',
-}
+
 export const projectIoPath = {
   flag: 'projectIoPath', width: 900, Form: ProjectIoForm, List: ProjectIoList,
   list: contextPath + '/projectIo/list',
@@ -493,6 +492,17 @@ export const providerControlPath = {
   list: contextPath + '/providerControl/list',
   get: contextPath + '/providerControl/get',
   btnHandle: contextPath + '/providerControl/btnHandle',
+}
+
+export const projectOutPath = {
+  flag: 'projectOutPath', width: 1000, List: ProjectOutList, haveChange: true,
+  AddForm: ProjectOutAddForm,
+  EditForm: ProjectOutAddForm,
+  CheckForm: ProjectOutCheckForm,
+  ViewForm: ProjectOutViewForm,
+  list: contextPath + '/projectOut/list',
+  get: contextPath + '/projectOut/get',
+  btnHandle: contextPath + '/projectOut/btnHandle',
 }
 
 export const inContractPath = {
