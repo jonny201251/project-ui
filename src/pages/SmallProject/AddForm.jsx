@@ -22,16 +22,27 @@ import {
   ArrayTableIndex,
   ArrayTableRemove,
   File,
-  InputButton,
   LoadingButton,
   MyCard,
   NumberPicker,
 } from '../../components'
 import DialogList from './DialogList'
 import DialogList2 from './DialogList2'
+import DialogList4 from './DialogList4'
 import styles from '../table-placeholder.less'
 import { onFieldReact } from '@formily/core'
+import { SearchOutlined } from '@ant-design/icons'
 
+const InputButton = (props) => {
+  return <div style={{ display: 'inline-flex', width: '100%' }}>
+    <Input {...props} style={{ ...props.style }}/>
+    <Button onClick={(e) => {
+      if (props.onClick) {
+        props.onClick('open')
+      }
+    }} icon={<SearchOutlined/>} type={'primary'}/>
+  </div>
+}
 
 const InputButton3 = (props) => {
   return <div style={{ display: 'inline-flex', width: '100%' }}>
@@ -44,12 +55,22 @@ const InputButton3 = (props) => {
   </div>
 }
 
+const InputButton4 = (props) => {
+  return <div style={{ display: 'inline-flex', width: '100%' }}>
+    <Input {...props} style={{ ...props.style }} disabled/>
+    <Button onClick={(e) => {
+      if (props.onClick) {
+        props.onClick('open')
+      }
+    }} icon={<SearchOutlined/>} type={'primary'}/>
+  </div>
+}
 
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox,
     Select, InputButton, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
-    MyCard, Divider, InputButton3, File,
+    MyCard, Divider, InputButton3, File, InputButton4,
   },
 })
 
@@ -58,22 +79,18 @@ export default (props) => {
   let { form, type, record } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,startDisplay,endDisplay,bidDate,giveMoney,giveMoneyCycle)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,startDisplay,endDisplay,bidDate,giveMoney,giveMoneyCycle,powerDesc,powerCode)').forEach(field => {
       field.setPattern('disabled')
     })
+    form.query('userNamee').take()?.setDisplay('hidden')
     if (type === 'add') {
       const user = session.getItem('user')
       form.setInitialValues({
         createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
         displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
         deptId: user.deptId, deptName: user.deptName,
-        haveGiveMoney: '否',
+        // haveGiveMoney: '否',
       })
-    }
-    const data = await get(projectCodePath.getLabelValue)
-    if (data) {
-      let field = form.query('taskCode').take()
-      field && field.setDataSource(data)
     }
   }, [])
 
@@ -97,15 +114,35 @@ export default (props) => {
             required: true,
             pattern: 'editable',
           }))
+          form.query('userNamee').take()?.setState({ display: 'visible' })
         } else {
           form.query('*(giveMoney,giveMoneyCycle)').forEach(fieldd => fieldd.setState({
+            required: false,
+            pattern: 'disabled',
+            value: null,
+          }))
+          form.query('userNamee').take()?.setState({ display: 'hidden', value: null })
+        }
+      }
+    })
+
+    onFieldReact('havePower', (field) => {
+      let value = field.value
+      if (value) {
+        if (value === '是') {
+          form.query('*(powerDesc)').forEach(fieldd => fieldd.setState({
+            required: true,
+            pattern: 'editable',
+          }))
+        } else {
+          form.query('*(powerDesc)').forEach(fieldd => fieldd.setState({
+            required: false,
             pattern: 'disabled',
             value: null,
           }))
         }
       }
     })
-
 
   })
 
@@ -145,11 +182,11 @@ export default (props) => {
   }
 
   const onClick2 = (flag) => {
-    let field = form.query('property').take()
-    if (field?.value !== '三类') {
-      message.error('请选择 项目性质为三类')
-      return
-    }
+    /*    let field = form.query('property').take()
+        if (field?.value !== '三类') {
+          message.error('请选择 项目性质为三类')
+          return
+        }*/
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {
@@ -222,6 +259,40 @@ export default (props) => {
     }
   }
 
+  const onClick4 = (flag) => {
+    if (flag === 'open') {
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 1000 },
+        (form2) => {
+          return <>
+            <DialogList4 form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
+            <FormDialog.Footer>
+              <FormButtonGroup gutter={16} align={'right'}>
+                <Button onClick={() => dialog2.close()}>取消</Button>
+                <LoadingButton
+                  onClick={async () => {
+                    const values = await form2.submit()
+                    if (values.selectedRow) {
+                      form.setValues({
+                        taskCode: values.selectedRow.taskCode,
+                      })
+                      dialog2.close()
+                    } else {
+                      message.error('选择一条数据')
+                    }
+                  }}
+                  type={'primary'}
+                >
+                  确定
+                </LoadingButton>
+              </FormButtonGroup>
+            </FormDialog.Footer>
+          </>
+        },
+      )
+      dialog2.open({})
+    }
+  }
+
   return <ConfigProvider locale={zhCN}>
     <Form form={form} labelWidth={130} className={styles.placeholder}>
       <SchemaField>
@@ -230,8 +301,11 @@ export default (props) => {
           <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
-                              x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
-          <SchemaField.String name="taskCode" required title="任务号" x-decorator="FormItem" x-component="Select"/>
+                              x-component="Input" x-decorator-props={{ gridSpan: 2 }}/>
+          <SchemaField.String
+            name="taskCode" required title="任务号" x-decorator="FormItem"
+            x-component="InputButton4" x-component-props={{ onClick: onClick4 }}
+          />
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
           <SchemaField.String
@@ -343,7 +417,20 @@ export default (props) => {
             <SchemaField.Void x-component="ArrayTableAddition" x-component-props={{ width: 80 }}/>
           </SchemaField.Array>
         </SchemaField.Void>
-
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+          <SchemaField.String
+            name="havePower" required title="是否授权" x-decorator="FormItem" x-component="Radio.Group"
+            enum={[
+              { label: '是', value: '是' },
+              { label: '否', value: '否' },
+            ]}
+          />
+          <SchemaField.String
+            name="powerDesc" title="授权内容" x-component="Input.TextArea"
+            x-decorator-props={{ gridSpan: 2 }}
+            x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
+          <SchemaField.String name="powerCode" title="授权号" x-decorator="FormItem" x-component="Input"/>
+        </SchemaField.Void>
         <SchemaField.Void x-component="MyCard" x-component-props={{ title: '资信及履约能力调查-客户' }}>
           <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
             <SchemaField.String

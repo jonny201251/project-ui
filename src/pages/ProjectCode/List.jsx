@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import ProTable from '@ant-design/pro-table'
 import { proTableRequest, projectCodePath } from '../../utils'
-import { OperateButton } from '../../components'
+import  OperateButton  from './OperateButton'
 import ToolBarButton from './ToolBarButton'
 
 export default () => {

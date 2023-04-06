@@ -14,9 +14,9 @@ import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, message } from 'antd'
-import { session, contextPath } from '../../utils'
+import { contextPath, session } from '../../utils'
 import DialogList from './DialogList'
-import { LoadingButton, File } from '../../components'
+import { File, LoadingButton } from '../../components'
 import { onFieldReact } from '@formily/core'
 
 const SchemaField = createSchemaField({
@@ -127,6 +127,24 @@ export default (props) => {
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String name="fileList" required title="授权委托书" x-decorator="FormItem" x-component="File"/>
+        </SchemaField.Void>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.String
+            name="userNamee" required title="业务归口部门" x-decorator="FormItem"
+            x-decorator-props={{ tooltip: '流程审批节点' }}
+            x-component="Select" x-component-props={{ showSearch: true }}
+            enum={session.getItem('userList')}
+          />
+        </SchemaField.Void>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.String
+            name="endType" required title="授权人意见" x-decorator="FormItem" x-component="Radio.Group"
+            x-decorator-props={{ tooltip: '流程的最后一个审批节点', gridSpan: 2 }}
+            enum={[
+              { label: '业务主管领导', value: '业务主管领导' },
+              { label: '董事长', value: '董事长' },
+            ]}
+          />
         </SchemaField.Void>
       </SchemaField>
     </Form>

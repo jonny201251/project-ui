@@ -68,7 +68,7 @@ export default () => {
           <Menu.Item key="3-角色管理-sysRolePath">角色管理</Menu.Item>
           <Menu.Item key="3-用户管理-sysUserPath">用户管理</Menu.Item>
           <Menu.Item key="4-权限管理-sysPermissionPath">权限管理</Menu.Item>
-          <Menu.Item key="4-公司主管领导-chargeDeptLeaderPath">公司主管领导</Menu.Item>
+          <Menu.Item key="4-业务主管领导-chargeDeptLeaderPath">业务主管领导</Menu.Item>
           <Menu.SubMenu title="供方管理" key="供方管理">
             <Menu.Item key="566-供方动态监控-providerControlPath">供方动态监控</Menu.Item>
             <Menu.Item key="66-供方基本信息-providerPath">供方基本信息</Menu.Item>
@@ -228,7 +228,7 @@ export default () => {
             },
           },
         )}
-        <span className="web-name">项目管理系统1.0</span>
+        <span className="web-name">项目管理系统</span>
         <div className="right">
           <Dropdown overlay={DropdownMenu} className="user">
             <span>

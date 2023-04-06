@@ -105,7 +105,7 @@ export default (props) => {
               <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
                                   x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String name="taskCode" required title="任务号" x-decorator="FormItem" x-component="Select"/>
+              <SchemaField.String name="taskCode" required title="任务号" x-decorator="FormItem" x-component="Input"/>
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
               <SchemaField.String
@@ -218,7 +218,20 @@ export default (props) => {
                 <SchemaField.Void x-component="ArrayTableAddition" x-component-props={{ width: 80 }}/>
               </SchemaField.Array>
             </SchemaField.Void>
-
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+              <SchemaField.String
+                name="havePower" required title="是否授权" x-decorator="FormItem" x-component="Radio.Group"
+                enum={[
+                  { label: '是', value: '是' },
+                  { label: '否', value: '否' },
+                ]}
+              />
+              <SchemaField.String
+                name="powerDesc" title="授权内容" x-component="Input.TextArea"
+                x-decorator-props={{ gridSpan: 2 }}
+                x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
+              <SchemaField.String name="powerCode" title="授权号" x-decorator="FormItem" x-component="Input"/>
+            </SchemaField.Void>
             <SchemaField.Void x-component="MyCard" x-component-props={{ title: '资信及履约能力调查-客户' }}>
               <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
                 <SchemaField.String

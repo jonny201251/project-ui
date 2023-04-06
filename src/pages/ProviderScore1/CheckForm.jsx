@@ -15,18 +15,18 @@ import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, message, Tabs } from 'antd'
-import { ArrayTableIndex, InputButton, LoadingButton, NumberPicker,Text } from '../../components'
+import { ArrayTableIndex, InputButton, LoadingButton, NumberPicker, Text, OnlyButton } from '../../components'
 import { onFieldReact } from '@formily/core'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
-import { session } from '../../utils'
+import { get, post, session, providerPath } from '../../utils'
 import ProviderDialog from './DialogList'
 
 
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, PreviewText, Select, NumberPicker, ArrayTableIndex,
-    ArrayTable, FormGrid, DatePicker, Space, InputButton, Radio,Text
+    ArrayTable, FormGrid, DatePicker, Space, InputButton, Radio, Text, OnlyButton,
   },
 })
 
@@ -41,7 +41,7 @@ map.set('产品服务供货及使用情况', [
 ].map(item => ({ label: item, value: item })))
 
 export default (props) => {
-  let { form, record, type,haveEditForm } = props
+  let { form, record, type, haveEditForm } = props
 
   useEffect(async () => {
     if (haveEditForm === '否') {
@@ -93,15 +93,12 @@ export default (props) => {
           if (itemValue === '注册资本≥500万') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '500万>注册资本≥100万') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '注册资本<100万') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
           if (session.getItem('user').loginName === '孙欢') {
             endScoreField?.setPattern('editable')
@@ -111,15 +108,12 @@ export default (props) => {
           if (itemValue === '没有') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '有,但风险较小在可控范围内') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '有,且风险较大') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
           if (session.getItem('user').loginName === '孙欢') {
             endScoreField?.setPattern('editable')
@@ -129,15 +123,12 @@ export default (props) => {
           if (itemValue === '无') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '有,影响较小') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '有,影响较大') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
           if (session.getItem('user').loginName === '孙欢') {
             endScoreField?.setPattern('editable')
@@ -147,15 +138,12 @@ export default (props) => {
           if (itemValue === '与同类型供方相比性价比较高') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '与同类型供方相比性价比一般') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '与同类型供方相比性价比较差') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
           if (session.getItem('user').loginName === '孙欢' || session.getItem('user').loginName === '黄少芳' || session.getItem('user').loginName === '白晶') {
             endScoreField?.setPattern('editable')
@@ -165,15 +153,12 @@ export default (props) => {
           if (itemValue === '按约定供货及时,采购主体使用情况良好') {
             field.value = '8-10分'
             startScoreField && startScoreField.setValidator({ minimum: 8, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 8, maximum: 10, required: true })
           } else if (itemValue === '按约定供货及时,采购主体使用情况一般') {
             field.value = '6-7分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 7, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 7, required: true })
           } else if (itemValue === '未按约定及时供货,采购主体使用情况较差') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
           if (session.getItem('user').loginName === '孙欢' || session.getItem('user').loginName === '黄少芳' || session.getItem('user').loginName === '白晶') {
             endScoreField?.setPattern('editable')
@@ -246,6 +231,24 @@ export default (props) => {
     dialog2.open({})
   }
 
+  const onClick2 = async () => {
+    const dbRecord = await get(providerPath.get, { id: record.providerId })
+    if (dbRecord) {
+      let dialog = FormDialog(
+        { title: '查看', footer: null, keyboard: false, maskClosable: false, width: 520 },
+        (form) => {
+          form.setValues(dbRecord)
+          return (
+            <>
+              <providerPath.Form form={form} type={'view'} record={dbRecord} dialog={dialog}/>
+            </>
+          )
+        },
+      )
+      dialog.open()
+    }
+  }
+
   const showResult = () => {
     const user = session.getItem('user')
     if (user.loginName === '孙欢') {
@@ -303,9 +306,12 @@ export default (props) => {
                 name="providerName" required title="供方名称" x-component="InputButton" x-decorator="FormItem"
                 x-component-props={{ onClick: onClick }}
               />
+              {/*              <SchemaField.String
+                name="usee" title="供方用途" x-component="Input" x-decorator="FormItem"
+              />*/}
               <SchemaField.String
-                name="usee" required title="供方用途" x-component="Input" x-decorator="FormItem"
-              />
+                title="供方信息" x-decorator="FormItem"
+                x-component="OnlyButton" x-component-props={{ onClick: onClick2, name: '查看' }}/>
             </SchemaField.Void>
             <SchemaField.Array
               name="providerScore2List" x-decorator="FormItem" x-component="ArrayTable"

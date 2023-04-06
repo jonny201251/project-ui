@@ -663,6 +663,34 @@ export default (props) => {
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
               <SchemaField.String
+                name="havePower" required title="是否授权" x-decorator="FormItem" x-component="Radio.Group"
+                enum={[
+                  { label: '是', value: '是' },
+                  { label: '否', value: '否' },
+                ]}
+              />
+              <SchemaField.String
+                name="powerDesc" title="授权内容" x-component="Input.TextArea"
+                x-decorator-props={{ gridSpan: 2 }}
+                x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
+              <SchemaField.String name="powerCode" title="授权号" x-decorator="FormItem" x-component="Input"/>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+              <SchemaField.String
+                name="havePower" required title="是否授权" x-decorator="FormItem" x-component="Radio.Group"
+                enum={[
+                  { label: '是', value: '是' },
+                  { label: '否', value: '否' },
+                ]}
+              />
+              <SchemaField.String
+                name="powerDesc" title="授权内容" x-component="Input.TextArea"
+                x-decorator-props={{ gridSpan: 2 }}
+                x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
+              <SchemaField.String name="powerCode" title="授权号" x-decorator="FormItem" x-component="Input"/>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+              <SchemaField.String
                 name="fileList" title="附件" x-decorator="FormItem"
                 x-component="File" x-decorator-props={{ gridSpan: 2 }}/>
             </SchemaField.Void>

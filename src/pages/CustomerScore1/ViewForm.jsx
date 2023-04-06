@@ -16,18 +16,18 @@ import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, message, Tabs } from 'antd'
-import { ArrayTableIndex, LoadingButton, NumberPicker,File } from '../../components'
+import { ArrayTableIndex, LoadingButton, NumberPicker,File,OnlyButton } from '../../components'
 import { onFieldReact } from '@formily/core'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
-import { session } from '../../utils'
+import { customerPath, get, session } from '../../utils'
 import DialogList from './DialogList'
 
 
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, PreviewText, Select, NumberPicker, ArrayTableIndex,
-    ArrayTable, FormGrid, DatePicker, Space, Radio,Checkbox,File
+    ArrayTable, FormGrid, DatePicker, Space, Radio,Checkbox,File,OnlyButton
   },
 })
 
@@ -48,6 +48,23 @@ map.set('其他信誉情况', ['信誉高', '信誉中等', '信誉差'].map(ite
 export default (props) => {
   let { form, record } = props
 
+  const onClick2 = async () => {
+    const dbRecord = await get(customerPath.get, { id: record.customerId })
+    if (dbRecord) {
+      let dialog = FormDialog(
+        { title: '查看', footer: null, keyboard: false, maskClosable: false, width: 520 },
+        (form) => {
+          form.setValues(dbRecord)
+          return (
+            <>
+              <customerPath.Form form={form} type={'view'} record={dbRecord} dialog={dialog}/>
+            </>
+          )
+        },
+      )
+      dialog.open()
+    }
+  }
 
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
@@ -64,6 +81,9 @@ export default (props) => {
                 name="customerName" required title="客户名称" x-component="Input" x-decorator="FormItem"
                 x-decorator-props={{ gridSpan: 2 }}
               />
+              <SchemaField.String
+                title="客户信息" x-decorator="FormItem"
+                x-component="OnlyButton" x-component-props={{ onClick: onClick2, name: '查看' }}/>
             </SchemaField.Void>
             <SchemaField.Void x-component="MyCard" x-component-props={{ title: '与客户合作业务说明' }}>
               <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>

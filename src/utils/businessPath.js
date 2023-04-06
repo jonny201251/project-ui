@@ -291,6 +291,9 @@ export const projectCodePath = {
   delete: contextPath + '/projectCode/delete',
   getLabelValue: contextPath + '/projectCode/getLabelValue',
 }
+export const projectCode2Path = {
+  list: contextPath + '/projectCode/list2'
+}
 
 export const smallProjectNoPath = {
   flag: 'smallProjectNoPath', width: 1200, Form: SmallProjectNoForm, List: SmallProjectNoList,

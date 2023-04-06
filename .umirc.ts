@@ -9,7 +9,7 @@ export default defineConfig({
     { path: '/back', component: '@/layouts/BackLayout' },
   ],
   fastRefresh: {},
-  title: '项目管理系统1.0',
+  title: '项目管理系统',
   proxy: { '/project': { target: 'http://localhost:8082', changeOrigin: true } },
   /*
   部署时打开注释

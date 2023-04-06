@@ -130,10 +130,18 @@ export default (props) => {
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
+            name="userNamee" required title="业务归口部门" x-decorator="FormItem"
+            x-decorator-props={{ tooltip: '流程审批节点' }}
+            x-component="Select" x-component-props={{ showSearch: true }}
+            enum={session.getItem('userList')}
+          />
+        </SchemaField.Void>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.String
             name="endType" required title="授权人意见" x-decorator="FormItem" x-component="Radio.Group"
             x-decorator-props={{ tooltip: '流程的最后一个审批节点', gridSpan: 2 }}
             enum={[
-              {label:'公司主管领导',value:'公司主管领导'},
+              {label:'业务主管领导',value:'业务主管领导'},
               {label:'董事长',value:'董事长'},
             ]}
           />

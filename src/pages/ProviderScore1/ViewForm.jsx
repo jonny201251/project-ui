@@ -1,7 +1,7 @@
 import {
   ArrayTable,
   DatePicker,
-  Form,
+  Form, FormDialog,
   FormGrid,
   FormItem,
   FormLayout,
@@ -15,22 +15,41 @@ import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { ConfigProvider, Tabs } from 'antd'
-import { ArrayTableIndex, InputButton, NumberPicker } from '../../components'
+import { ArrayTableIndex, InputButton, NumberPicker, OnlyButton,Text } from '../../components'
 import { onFieldReact } from '@formily/core'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
+import { get, providerPath } from '../../utils'
 
 
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, PreviewText, Select, NumberPicker, ArrayTableIndex,
-    ArrayTable, FormGrid, DatePicker, Space, InputButton, Radio,
+    ArrayTable, FormGrid, DatePicker, Space, InputButton, Radio, OnlyButton,Text
   },
 })
 
 
 export default (props) => {
   let { form, record } = props
+
+  const onClick2 = async () => {
+    const dbRecord = await get(providerPath.get, { id: record.providerId })
+    if (dbRecord) {
+      let dialog = FormDialog(
+        { title: '查看', footer: null, keyboard: false, maskClosable: false, width: 520 },
+        (form) => {
+          form.setValues(dbRecord)
+          return (
+            <>
+              <providerPath.Form form={form} type={'view'} record={dbRecord} dialog={dialog}/>
+            </>
+          )
+        },
+      )
+      dialog.open()
+    }
+  }
 
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
@@ -55,8 +74,8 @@ export default (props) => {
                 name="providerName" required title="供方名称" x-component="Input" x-decorator="FormItem"
               />
               <SchemaField.String
-                name="usee" required title="供方用途" x-component="Input" x-decorator="FormItem"
-              />
+                title="供方信息" x-decorator="FormItem"
+                x-component="OnlyButton" x-component-props={{ onClick: onClick2, name: '查看' }}/>
             </SchemaField.Void>
             <SchemaField.Array
               name="providerScore2List" x-decorator="FormItem" x-component="ArrayTable"
@@ -111,7 +130,7 @@ export default (props) => {
               <SchemaField.Number name="endScore" title={<b>部门打分</b>}
                                   x-decorator="FormItem" x-component="PreviewText.Input"/>
               <SchemaField.String name="result" title={<b>结论</b>}
-                                  x-decorator="FormItem" x-component="PreviewText.Input"/>
+                                  x-decorator="FormItem" x-component="Text"/>
             </SchemaField.Void>
           </SchemaField>
         </Form>

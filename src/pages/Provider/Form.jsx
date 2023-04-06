@@ -57,9 +57,7 @@ export default (props) => {
         <SchemaField.String
           name="fileList" required title="附件" x-decorator="FormItem" x-component="File"
           x-decorator-props={{
-            feedbackText: '上传 营业执照、法人信息',
-            labelCol: 6,
-            wrapperCol: 10,
+            feedbackText: '上传 营业执照、法人信息、法人授权书',
           }}
           // x-decorator-props={{ tooltip: '营业执照、法人信息'}}
         />

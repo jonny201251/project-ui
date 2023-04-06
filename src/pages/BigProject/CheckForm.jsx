@@ -22,9 +22,9 @@ import {
   ArrayTableIndex,
   ArrayTableRemove,
   Line,
-  LoadingButton,InputButton,
+  LoadingButton,
   MyCard,
-  NumberPicker,File
+  NumberPicker, File,
 } from '../../components'
 import DialogList from './DialogList'
 import DialogList2 from './DialogList2'
@@ -33,13 +33,47 @@ import styles from '../table-placeholder.less'
 import { onFieldReact } from '@formily/core'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
+import DialogList4 from '../SmallProject/DialogList4'
+
+const InputButton = (props) => {
+  return <div style={{ display: 'inline-flex', width: '100%' }}>
+    <Input {...props} style={{ ...props.style }}/>
+    <Button onClick={(e) => {
+      if (props.onClick) {
+        props.onClick('open')
+      }
+    }} icon={<SearchOutlined/>} type={'primary'}/>
+  </div>
+}
+
+const InputButton3 = (props) => {
+  return <div style={{ display: 'inline-flex', width: '100%' }}>
+    <Input {...props} style={{ ...props.style }}/>
+    <Button onClick={(e) => {
+      if (props.onClick) {
+        props.onClick('open', props.type)
+      }
+    }} style={{ marginLeft: 5 }}>查看历史</Button>
+  </div>
+}
+
+const InputButton4 = (props) => {
+  return <div style={{ display: 'inline-flex', width: '100%' }}>
+    <Input {...props} style={{ ...props.style }} disabled/>
+    <Button onClick={(e) => {
+      if (props.onClick) {
+        props.onClick('open')
+      }
+    }} icon={<SearchOutlined/>} type={'primary'}/>
+  </div>
+}
 
 
 const SchemaField = createSchemaField({
   components: {
-    FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox,PreviewText,
+    FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox, PreviewText,
     Select, InputButton, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
-    MyCard, Divider, Line,File
+    MyCard, Divider, Line, File, InputButton4,
   },
 })
 
@@ -76,6 +110,10 @@ export default (props) => {
     if (haveEditForm === '否') {
       form.setPattern('readOnly')
       form.query('comment').take()?.setPattern('editable')
+    }
+
+    if (session.getItem('user').loginName === '祁瑛') {
+      form.query('powerCode').take()?.setState({ pattern: 'editable', required: true })
     }
 
     form.query('remark2').take().value = '1.评分权重\n' +
@@ -433,11 +471,6 @@ export default (props) => {
   }
 
   const onClick2 = (flag) => {
-    let field = form.query('property').take()
-    if (field?.value !== '三类') {
-      message.error('请选择 项目性质为三类')
-      return
-    }
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {
@@ -484,6 +517,41 @@ export default (props) => {
     }
   }
 
+
+  const onClick4 = (flag) => {
+    if (flag === 'open') {
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 1000 },
+        (form2) => {
+          return <>
+            <DialogList4 form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
+            <FormDialog.Footer>
+              <FormButtonGroup gutter={16} align={'right'}>
+                <Button onClick={() => dialog2.close()}>取消</Button>
+                <LoadingButton
+                  onClick={async () => {
+                    const values = await form2.submit()
+                    if (values.selectedRow) {
+                      form.setValues({
+                        taskCode: values.selectedRow.taskCode,
+                      })
+                      dialog2.close()
+                    } else {
+                      message.error('选择一条数据')
+                    }
+                  }}
+                  type={'primary'}
+                >
+                  确定
+                </LoadingButton>
+              </FormButtonGroup>
+            </FormDialog.Footer>
+          </>
+        },
+      )
+      dialog2.open({})
+    }
+  }
+
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
       <Tabs.TabPane tab="表单数据" key="1">
@@ -494,8 +562,11 @@ export default (props) => {
               <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
               <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
-                                  x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
-              <SchemaField.String name="taskCode" required title="任务号" x-decorator="FormItem" x-component="Select"/>
+                                  x-component="Input" x-decorator-props={{ gridSpan: 2 }}/>
+              <SchemaField.String
+                name="taskCode" required title="任务号" x-decorator="FormItem"
+                x-component="InputButton4" x-component-props={{ onClick: onClick4 }}
+              />
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
               <SchemaField.String
@@ -585,6 +656,34 @@ export default (props) => {
                 </SchemaField.Object>
                 <SchemaField.Void x-component="ArrayTableAddition" x-component-props={{ width: 80 }}/>
               </SchemaField.Array>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+              <SchemaField.String
+                name="havePower" required title="是否授权" x-decorator="FormItem" x-component="Radio.Group"
+                enum={[
+                  { label: '是', value: '是' },
+                  { label: '否', value: '否' },
+                ]}
+              />
+              <SchemaField.String
+                name="powerDesc" title="授权内容" x-component="Input.TextArea"
+                x-decorator-props={{ gridSpan: 2 }}
+                x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
+              <SchemaField.String name="powerCode" title="授权号" x-decorator="FormItem" x-component="Input"/>
+            </SchemaField.Void>
+            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+              <SchemaField.String
+                name="havePower" required title="是否授权" x-decorator="FormItem" x-component="Radio.Group"
+                enum={[
+                  { label: '是', value: '是' },
+                  { label: '否', value: '否' },
+                ]}
+              />
+              <SchemaField.String
+                name="powerDesc" title="授权内容" x-component="Input.TextArea"
+                x-decorator-props={{ gridSpan: 2 }}
+                x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
+              <SchemaField.String name="powerCode" title="授权号" x-decorator="FormItem" x-component="Input"/>
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
               <SchemaField.String

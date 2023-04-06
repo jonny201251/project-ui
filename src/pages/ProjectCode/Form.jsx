@@ -12,13 +12,25 @@ import {
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import { session } from '../../utils'
-import { InputButton, LoadingButton, NumberPicker } from '../../components'
+import { LoadingButton, NumberPicker } from '../../components'
 import { Button, ConfigProvider, message } from 'antd'
 import DialogList from './DialogList'
 import DialogList2 from './DialogList2'
 import zhCN from 'antd/lib/locale/zh_CN'
 import styles from '../table-placeholder.less'
 import { onFieldReact } from '@formily/core'
+import { SearchOutlined } from '@ant-design/icons'
+
+const InputButton = (props) => {
+  return <div style={{ display: 'inline-flex', width: '100%' }}>
+    <Input {...props} style={{ ...props.style }}/>
+    <Button onClick={(e) => {
+      if (props.onClick) {
+        props.onClick('open')
+      }
+    }} icon={<SearchOutlined/>} type={'primary'}/>
+  </div>
+}
 
 const SchemaField = createSchemaField({
   components: { FormLayout, FormItem, Input, Select, InputButton, FormGrid, Cascader, NumberPicker },
@@ -196,11 +208,11 @@ export default (props) => {
   }
 
   const onClick2 = (flag) => {
-    let field = form.query('projectProperty').take()
+/*    let field = form.query('projectProperty').take()
     if (field?.value !== '3') {
       message.error('请选择 项目性质为三类')
       return
-    }
+    }*/
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {

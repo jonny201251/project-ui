@@ -10,17 +10,17 @@ import {
   Radio,
   Select,
   Space,
-  Checkbox
+  Checkbox,
 } from '@formily/antd'
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, message, Tabs } from 'antd'
-import { ArrayTableIndex, LoadingButton, NumberPicker,Text,InputButton,File } from '../../components'
+import { ArrayTableIndex, LoadingButton, NumberPicker, Text, InputButton, File, OnlyButton } from '../../components'
 import { onFieldReact } from '@formily/core'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
-import { session } from '../../utils'
+import { get, customerPath, session } from '../../utils'
 import DialogList from './DialogList'
 import _ from 'lodash'
 
@@ -28,7 +28,7 @@ import _ from 'lodash'
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, PreviewText, Select, NumberPicker, ArrayTableIndex,
-    ArrayTable, FormGrid, DatePicker, Space, Radio,Checkbox,Text,InputButton,File
+    ArrayTable, FormGrid, DatePicker, Space, Radio, Checkbox, Text, InputButton, File, OnlyButton,
   },
 })
 
@@ -47,7 +47,7 @@ map.set('账目清晰程度', ['清晰', '比较清晰', '不清晰'].map(item =
 map.set('其他信誉情况', ['信誉高', '信誉中等', '信誉差'].map(item => ({ label: item, value: item })))
 
 export default (props) => {
-  let { form, record, type,haveEditForm } = props
+  let { form, record, type, haveEditForm } = props
 
   useEffect(async () => {
     if (haveEditForm === '否') {
@@ -249,7 +249,7 @@ export default (props) => {
         tmp.value = sum
         //
         let r = sum / (num * 10)
-        console.log(sum+"--"+r)
+        console.log(sum + '--' + r)
         if (r >= 0.9) {
           tmp2.value = '优秀'
         } else if (r >= 0.8 && r < 0.9) {
@@ -379,6 +379,24 @@ export default (props) => {
     }
   }
 
+  const onClick2 = async () => {
+    const dbRecord = await get(customerPath.get, { id: record.customerId })
+    if (dbRecord) {
+      let dialog = FormDialog(
+        { title: '查看', footer: null, keyboard: false, maskClosable: false, width: 520 },
+        (form) => {
+          form.setValues(dbRecord)
+          return (
+            <>
+              <customerPath.Form form={form} type={'view'} record={dbRecord} dialog={dialog}/>
+            </>
+          )
+        },
+      )
+      dialog.open()
+    }
+  }
+
   return <ConfigProvider locale={zhCN}>
     <Tabs animated={false} size={'small'}>
       <Tabs.TabPane tab="表单数据" key="1">
@@ -395,6 +413,9 @@ export default (props) => {
                 x-component-props={{ onClick: onClick }}
                 x-decorator-props={{ gridSpan: 2 }}
               />
+              <SchemaField.String
+                title="客户信息" x-decorator="FormItem"
+                x-component="OnlyButton" x-component-props={{ onClick: onClick2, name: '查看' }}/>
             </SchemaField.Void>
             <SchemaField.Void x-component="MyCard" x-component-props={{ title: '与客户合作业务说明' }}>
               <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
@@ -412,7 +433,8 @@ export default (props) => {
                   ]}
                 />
                 <SchemaField.String
-                  name="desc3" required title="是否首次合作" x-component="Radio.Group" x-component-props={{onChange:onChange}}
+                  name="desc3" required title="是否首次合作" x-component="Radio.Group"
+                  x-component-props={{ onChange: onChange }}
                   x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                   enum={[
                     { label: '是', value: '是' },
