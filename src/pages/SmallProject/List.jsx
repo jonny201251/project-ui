@@ -10,6 +10,7 @@ export default () => {
     { title: '预计签约额', dataIndex: 'expectMoney', valueType: 'text', hideInSearch: true  },
     { title: '预计签约日期', dataIndex: 'expectDate', valueType: 'text', hideInSearch: true  },
     { title: '预计毛利率', dataIndex: 'projectRate', valueType: 'text', hideInSearch: true  },
+    { title: '授权号', dataIndex: 'powerCode', valueType: 'text' },
     { title: '项目状态', dataIndex: 'projectStatus', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
     { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
