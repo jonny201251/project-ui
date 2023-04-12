@@ -184,8 +184,10 @@ export default (props) => {
         let list4Field = form.query('list4').take()
         if (value === '三类') {
           list4Field?.setDisplay('visible')
+          form.query('providerName').take()?.setState({ required: true })
         } else {
           list4Field?.setDisplay('none')
+          form.query('providerName').take()?.setState({ required: false })
         }
       }
     })
@@ -470,6 +472,7 @@ export default (props) => {
         tmp.setState({ value: sum, pattern: 'disabled' })
       }
     })
+
   })
 
   const onClick = (flag) => {
@@ -626,7 +629,7 @@ export default (props) => {
             ]}
           />
           <SchemaField.String name="expectMoney" required title="预计签约金额" x-decorator="FormItem"
-                              x-component="NumberPicker"/>
+                              x-component="NumberPicker" x-component-props={{ addonAfter: '元' }}/>
           <SchemaField.String name="expectDate" required title="预计签约日期" x-decorator="FormItem"
                               x-component="DatePicker"/>
           <SchemaField.String
@@ -649,7 +652,7 @@ export default (props) => {
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
           <SchemaField.Array
-            name="list" title={'保证金(函)'} required x-decorator="FormItem" x-component="ArrayTable"
+            name="list" title={'保证金(函)'} x-decorator="FormItem" x-component="ArrayTable"
             x-decorator-props={{ gridSpan: 2 }}
             x-component-props={{ size: 'small', sticky: true }}
           >
@@ -668,7 +671,7 @@ export default (props) => {
               </SchemaField.Void>
               <SchemaField.Void
                 x-component="ArrayTable.Column" x-component-props={{ title: '保证金(函)额度', align: 'center' }}>
-                <SchemaField.String name="money" required x-decorator="FormItem" x-component="Input"/>
+                <SchemaField.String name="money" required x-decorator="FormItem" x-component="Input" />
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column"
                                 x-component-props={{ width: 80, title: '操作', dataIndex: 'operations' }}>

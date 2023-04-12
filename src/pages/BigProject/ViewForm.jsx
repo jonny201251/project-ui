@@ -138,12 +138,6 @@ export default (props) => {
       list4Field?.setDisplay('none')
     }
 
-
-    const data = await get(projectCodePath.getLabelValue)
-    if (data) {
-      let field = form.query('taskCode').take()
-      field && field.setDataSource(data)
-    }
   }, [])
 
   form.addEffects('id', () => {
@@ -159,6 +153,24 @@ export default (props) => {
       }
     })
 
+    onFieldReact('havePower', (field) => {
+      let value = field.value
+      if (value) {
+        if (value === '是') {
+          form.query('*(powerDesc)').forEach(fieldd => fieldd.setState({
+            required: true,
+            pattern: 'editable',
+          }))
+        } else {
+          form.query('*(powerDesc)').forEach(fieldd => fieldd.setState({
+            required: false,
+            pattern: 'disabled',
+            value: null,
+          }))
+        }
+      }
+    })
+
     onFieldReact('list2.*.desc2', (field) => {
       let desc1Value = field.query('.desc1').get('value')
       if (desc1Value) {
@@ -169,31 +181,24 @@ export default (props) => {
       let standardField = field.query('.standard').take()
       if (desc1Value === '垫资额度(万元)') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 10, required: true })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '垫资期限/周期(日历天)') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 8, required: true })
         standardField && standardField.setValue('0-8分')
       } else if (desc1Value === '项目周期') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 6, required: true })
         standardField && standardField.setValue('0-6分')
       } else if (desc1Value === '履约保证金比例') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 6, required: true })
         standardField && standardField.setValue('0-6分')
       } else if (desc1Value === '质保金比例') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 3, required: true })
         standardField && standardField.setValue('0-3分')
       } else if (desc1Value === '一类项目条件') {
         field.setComponent('Input', { addonBefore: '毛利润率估算:', addonAfter: '%' })
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 8, required: true })
         standardField && standardField.setValue('0-8分')
       } else if (desc1Value === '其他因素') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 5, required: true })
         standardField && standardField.setValue('0-5分')
       } else if (desc1Value === '项目评分') {
         field.setValue('--')
@@ -214,39 +219,28 @@ export default (props) => {
         if (desc1Value === '资金来源') {
           if (desc2Value === '国拨') {
             field.value = '8-10分'
-            scoreField && scoreField.setValidator({ minimum: 8, maximum: 10, required: true })
           } else if (desc2Value === '自筹' || desc2Value === '地方政府') {
             field.value = '6-8分'
-            scoreField && scoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (desc2Value === '贷款' || desc2Value === '外资投资') {
             field.value = '0-6分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           } else if (desc2Value === '其他') {
             field.value = '0-8分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 8, required: true })
           }
         } else if (desc1Value === '资金落实情况') {
           if (desc2Value === '是') {
             field.value = '7-12分'
-            scoreField && scoreField.setValidator({ minimum: 7, maximum: 12, required: true })
           } else {
             field.value = '0-6分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
         } else if (desc1Value === '付款方式') {
           if (desc2Value === '进度付款' || desc2Value === '节点付款') {
             field.value = '5-11分'
-            scoreField && scoreField.setValidator({ minimum: 5, maximum: 11, required: true })
           } else if (desc2Value === '开工前一次性付款') {
             field.value = '12分'
-            scoreField && scoreField.setValidator({ minimum: 12, maximum: 12, required: true })
-            scoreField && scoreField.setValue(12)
           } else if (desc2Value === '完工后一次性付款') {
             field.value = '0-8分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 8, required: true })
           } else if (desc2Value === '') {
             field.value = '0-8分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 8, required: true })
           }
         } /*else if (desc1Value === '垫资额度(万元)') {
           scoreField && scoreField.setValidator({ minimum: 0, maximum: 10, required: true })
@@ -257,54 +251,31 @@ export default (props) => {
         } */ else if (desc1Value === '项目类型') {
           if (desc2Value === '综合体' || desc2Value === '市政工程') {
             field.value = '4-5分'
-            scoreField && scoreField.setValidator({ minimum: 4, maximum: 5, required: true })
           } else if (desc2Value === '园区' || desc2Value === '小区' || desc2Value === '其他') {
             field.value = '0-4分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 4, required: true })
           }
         } else if (desc1Value === '公司角色') {
           if (desc2Value === '总包') {
             field.value = '4-5分'
-            scoreField && scoreField.setValidator({ minimum: 4, maximum: 5, required: true })
           } else if (desc2Value === '分包') {
             field.value = '0-4分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 4, required: true })
           }
         } else if (desc1Value === '项目模式') {
           if (desc2Value === 'EPC') {
             field.value = '1-4分'
-            scoreField && scoreField.setValidator({ minimum: 1, maximum: 4, required: true })
           } else if (desc2Value === '其他') {
             field.value = '2-5分'
-            scoreField && scoreField.setValidator({ minimum: 2, maximum: 5, required: true })
           }
-        } else if (desc1Value === '履约保证金比例') {
-          scoreField && scoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-        } else if (desc1Value === '质保金比例') {
-          scoreField && scoreField.setValidator({ minimum: 0, maximum: 3, required: true })
         } else if (desc1Value === '标前项目进度') {
           if (desc2Value === '未开工') {
             field.value = '5分'
-            scoreField && scoreField.setValidator({ minimum: 5, maximum: 5, required: true })
-            scoreField && scoreField.setValue(5)
           } else if (desc2Value === '开工进度10%以内') {
             field.value = '3-4分'
-            scoreField && scoreField.setValidator({ minimum: 3, maximum: 4, required: true })
           } else if (desc2Value === '开工进度30%以内') {
             field.value = '2-3分'
-            scoreField && scoreField.setValidator({ minimum: 2, maximum: 3, required: true })
           } else if (desc2Value === '开工进度30%及以上') {
             field.value = '0-2分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 2, required: true })
           }
-        } else if (desc1Value === '一类项目条件') {
-          scoreField && scoreField.setValidator({ minimum: 0, maximum: 8, required: true })
-        } else if (desc1Value === '其他因素') {
-          scoreField && scoreField.setValidator({ minimum: 0, maximum: 5, required: true })
-        } else if (desc1Value === '项目评分') {
-
-        } else if (desc1Value === '否决项') {
-
         }
       }
     })
@@ -331,23 +302,18 @@ export default (props) => {
       let standardField = field.query('.standard').take()
       if (desc1Value === '客户注册时间') {
         field.setComponent('DatePicker')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 3, required: true })
         standardField && standardField.setValue('0-3分')
       } else if (desc1Value === '标的金额/客户注册资本') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 10, required: true })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '客户诉讼/失信事项') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 10, required: true })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '客户股权出质比例') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 10, required: true })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '其他因素') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 4, required: true })
         standardField && standardField.setValue('0-4分')
       } else if (desc1Value === '客户(业主)评分') {
         field.setValue('--')
@@ -368,27 +334,20 @@ export default (props) => {
         if (desc1Value === '客户角色') {
           if (desc2Value === '业主') {
             field.value = '8-10分'
-            scoreField && scoreField.setValidator({ minimum: 8, maximum: 10, required: true })
           } else if (desc2Value === '总包') {
             field.value = '5-8分'
-            scoreField && scoreField.setValidator({ minimum: 5, maximum: 8, required: true })
           } else if (desc2Value === '其他') {
             field.value = '0-8分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 8, required: true })
           }
         } else if (desc1Value === '客户企业性质') {
           if (desc2Value === '集团所属企业' || desc2Value === '地级市以上政府') {
             field.value = '8-10分'
-            scoreField && scoreField.setValidator({ minimum: 8, maximum: 10, required: true })
           } else if (desc2Value === '国企' || desc2Value === '县级以下政府') {
             field.value = '6-9分'
-            scoreField && scoreField.setValidator({ minimum: 6, maximum: 9, required: true })
           } else if (desc2Value === '民企') {
             field.value = '3-8分'
-            scoreField && scoreField.setValidator({ minimum: 3, maximum: 8, required: true })
           } else if (desc2Value === '其他') {
             field.value = '0-7分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 7, required: true })
           }
         }
       }
@@ -416,31 +375,24 @@ export default (props) => {
       let standardField = field.query('.standard').take()
       if (desc1Value === '注册时间') {
         field.setComponent('DatePicker')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 5, required: true })
         standardField && standardField.setValue('0-5分')
       } else if (desc1Value === '标的金额/注册资本') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 20, required: true })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '公司实缴金额/注册资本') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 20, required: true })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '诉讼/失信事项') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 16, required: true })
         standardField && standardField.setValue('0-16分')
       } else if (desc1Value === '合作业绩') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 12, required: true })
         standardField && standardField.setValue('0-12分')
       } else if (desc1Value === '项目实施能力') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 10, required: true })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '其他因素') {
         field.setComponent('Input')
-        scoreField && scoreField.setValidator({ minimum: 0, maximum: 4, required: true })
         standardField && standardField.setValue('0-4分')
       } else if (desc1Value === '供方评分') {
         field.setValue('--')
@@ -461,13 +413,10 @@ export default (props) => {
         if (desc1Value === '企业性质') {
           if (desc2Value === '集团所属企业' || desc2Value === '国企') {
             field.value = '8-12分'
-            scoreField && scoreField.setValidator({ minimum: 8, maximum: 12, required: true })
           } else if (desc2Value === '民企') {
             field.value = '3-10分'
-            scoreField && scoreField.setValidator({ minimum: 3, maximum: 10, required: true })
           } else if (desc2Value === '其他') {
             field.value = '0-9分'
-            scoreField && scoreField.setValidator({ minimum: 0, maximum: 9, required: true })
           }
         }
       }
@@ -484,6 +433,7 @@ export default (props) => {
         tmp.setState({ value: sum, pattern: 'disabled' })
       }
     })
+
   })
 
   const onClick = (flag) => {
@@ -660,20 +610,6 @@ export default (props) => {
                 </SchemaField.Object>
                 <SchemaField.Void x-component="ArrayTableAddition" x-component-props={{ width: 80 }}/>
               </SchemaField.Array>
-            </SchemaField.Void>
-            <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
-              <SchemaField.String
-                name="havePower" required title="是否授权" x-decorator="FormItem" x-component="Radio.Group"
-                enum={[
-                  { label: '是', value: '是' },
-                  { label: '否', value: '否' },
-                ]}
-              />
-              <SchemaField.String
-                name="powerDesc" title="授权内容" x-component="Input.TextArea"
-                x-decorator-props={{ gridSpan: 2 }}
-                x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
-              <SchemaField.String name="powerCode" title="授权号" x-decorator="FormItem" x-component="Input"/>
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
               <SchemaField.String

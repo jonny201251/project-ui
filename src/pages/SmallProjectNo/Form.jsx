@@ -2,7 +2,7 @@ import {
   ArrayTable,
   Checkbox,
   DatePicker,
-  Form,
+  Form, FormButtonGroup, FormDialog,
   FormGrid,
   FormItem,
   FormLayout,
@@ -13,18 +13,37 @@ import {
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
-import { ConfigProvider, Divider } from 'antd'
+import { Button, ConfigProvider, Divider, message } from 'antd'
 import { get, projectCodePath, session } from '../../utils'
-import { ArrayTableAddition, ArrayTableIndex, ArrayTableRemove, MyCard, NumberPicker } from '../../components'
+import {
+  ArrayTableAddition,
+  ArrayTableIndex,
+  ArrayTableRemove,
+  LoadingButton,
+  MyCard,
+  NumberPicker,
+} from '../../components'
 import styles from '../table-placeholder.less'
 import { onFieldReact } from '@formily/core'
+import { SearchOutlined } from '@ant-design/icons'
+import DialogList4 from '../SmallProject/DialogList4'
 
+const InputButton4 = (props) => {
+  return <div style={{ display: 'inline-flex', width: '100%' }}>
+    <Input {...props} style={{ ...props.style }} disabled/>
+    <Button onClick={(e) => {
+      if (props.onClick) {
+        props.onClick('open')
+      }
+    }} icon={<SearchOutlined/>} type={'primary'}/>
+  </div>
+}
 
 const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox,
     Select, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
-    MyCard, Divider,
+    MyCard, Divider,InputButton4
   },
 })
 
@@ -45,12 +64,42 @@ export default (props) => {
         flag: '新',
       })
     }
-    const data = await get(projectCodePath.getLabelValue)
-    if (data) {
-      form.query('taskCode').take()?.setDataSource(data)
-    }
   }, [])
 
+
+  const onClick4 = (flag) => {
+    if (flag === 'open') {
+      let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 1000 },
+        (form2) => {
+          return <>
+            <DialogList4 form={form2} dialog={dialog2} selectedId={form.values.customerId}/>
+            <FormDialog.Footer>
+              <FormButtonGroup gutter={16} align={'right'}>
+                <Button onClick={() => dialog2.close()}>取消</Button>
+                <LoadingButton
+                  onClick={async () => {
+                    const values = await form2.submit()
+                    if (values.selectedRow) {
+                      form.setValues({
+                        taskCode: values.selectedRow.taskCode,
+                      })
+                      dialog2.close()
+                    } else {
+                      message.error('选择一条数据')
+                    }
+                  }}
+                  type={'primary'}
+                >
+                  确定
+                </LoadingButton>
+              </FormButtonGroup>
+            </FormDialog.Footer>
+          </>
+        },
+      )
+      dialog2.open({})
+    }
+  }
 
   return <ConfigProvider locale={zhCN}>
     <Form form={form} labelWidth={110} className={styles.placeholder}>
@@ -61,7 +110,10 @@ export default (props) => {
           <SchemaField.String name="createDatetime" title="创建时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
                               x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
-          <SchemaField.String name="taskCode" title="任务号" x-decorator="FormItem" x-component="Select"/>
+          <SchemaField.String
+            name="taskCode" required title="任务号" x-decorator="FormItem"
+            x-component="InputButton4" x-component-props={{ onClick: onClick4 }}
+          />
           <SchemaField.String
             name="property" required title="项目性质" x-decorator="FormItem" x-component="Select"
             enum={[

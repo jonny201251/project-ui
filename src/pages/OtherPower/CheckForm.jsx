@@ -144,7 +144,7 @@ export default (props) => {
                 // x-component-props={{ format: 'YYYY年MM月DD日' }}
                 x-decorator="FormItem" x-decorator-props={{ tooltip: '双击鼠标进行选择', gridSpan: 2 }}
               />
-              <SchemaField.String name="code" required title="授权号" x-component="Input" x-decorator="FormItem"/>
+              <SchemaField.String name="code" title="授权号" x-component="Input" x-decorator="FormItem"/>
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
               <SchemaField.String name="fileList" required title="授权委托书" x-decorator="FormItem" x-component="File"/>

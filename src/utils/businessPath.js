@@ -188,6 +188,9 @@ export const providerPath3 = {
 export const providerPath4 = {
   list: contextPath + '/provider/list4',
 }
+export const providerPath5 = {
+  list: contextPath + '/provider/list5',
+}
 /*
   新增流程：AddForm，编辑：EditForm，审批流程：CheckForm，变更流程：ChangeForm
   查看：ViewHistory,ViewForm
@@ -433,9 +436,6 @@ export const providerSimplePath = {
   get: contextPath + '/providerSimple/get',
   add: contextPath + '/providerSimple/add',
   edit: contextPath + '/providerSimple/edit',
-}
-export const providerSimplePath2 = {
-  list: contextPath + '/providerSimple/list2',
 }
 export const projectDialogPath = {
   list: contextPath + '/projectDialog/list',

@@ -82,7 +82,6 @@ export default (props) => {
     form.query('*(displayName,deptName,createDatetime,startDisplay,endDisplay,bidDate,giveMoney,giveMoneyCycle,powerDesc,powerCode)').forEach(field => {
       field.setPattern('disabled')
     })
-    form.query('userNamee').take()?.setDisplay('hidden')
     if (type === 'add') {
       const user = session.getItem('user')
       form.setInitialValues({
@@ -95,6 +94,23 @@ export default (props) => {
   }, [])
 
   form.addEffects('id', () => {
+    onFieldReact('property', (field) => {
+      let value = field.value
+      if (value) {
+        if (value === '三类') {
+          form.query('providerName').take()?.setState({ required: true })
+          form.query('*(history2,haveProblem2,protectPerson,evaluate2)').forEach(field => {
+            field.setState({ required: true })
+          })
+        } else {
+          form.query('providerName').take()?.setState({ required: false })
+          form.query('*(history2,haveProblem2,protectPerson,evaluate2)').forEach(field => {
+            field.setState({ required: false })
+          })
+        }
+      }
+    })
+
     onFieldReact('haveBid', (field) => {
       let value = field.value
       if (value) {
@@ -114,14 +130,12 @@ export default (props) => {
             required: true,
             pattern: 'editable',
           }))
-          form.query('userNamee').take()?.setState({ display: 'visible' })
         } else {
           form.query('*(giveMoney,giveMoneyCycle)').forEach(fieldd => fieldd.setState({
             required: false,
             pattern: 'disabled',
             value: null,
           }))
-          form.query('userNamee').take()?.setState({ display: 'hidden', value: null })
         }
       }
     })
@@ -342,7 +356,7 @@ export default (props) => {
             ]}
           />
           <SchemaField.String name="expectMoney" required title="预计签约金额" x-decorator="FormItem"
-                              x-component="NumberPicker"/>
+                              x-component="NumberPicker" x-component-props={{ addonAfter: '元' }}/>
           <SchemaField.String name="expectDate" required title="预计签约日期" x-decorator="FormItem"
                               x-component="DatePicker"/>
           <SchemaField.String
@@ -373,7 +387,12 @@ export default (props) => {
             ]}
           />
           <SchemaField.String name="bidDate" title="投标截止日期" x-decorator="FormItem" x-component="DatePicker"/>
-          <SchemaField.String name="workDate" required title="开竣工日期" x-decorator="FormItem" x-component="DatePicker"/>
+          <SchemaField.String
+            name="workDateTmp" required title="开竣工日期"
+            x-component="DatePicker.RangePicker"
+            // x-component-props={{ format: 'YYYY年MM月DD日' }}
+            x-decorator="FormItem" x-decorator-props={{ tooltip: '双击鼠标进行选择', gridSpan: 2 }}
+          />
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
           <SchemaField.String
@@ -383,10 +402,11 @@ export default (props) => {
               { label: '否', value: '否' },
             ]}
           />
-          <SchemaField.String name="giveMoney" title="垫资额度" x-decorator="FormItem" x-component="NumberPicker"/>
+          <SchemaField.String name="giveMoney" title="垫资额度" x-decorator="FormItem" x-component="NumberPicker"
+                              x-component-props={{ addonAfter: '元' }}/>
           <SchemaField.String name="giveMoneyCycle" title="垫资周期" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.Array
-            name="list" title={'保证金(函)'} required x-decorator="FormItem" x-component="ArrayTable"
+            name="list" title={'保证金(函)'} x-decorator="FormItem" x-component="ArrayTable"
             x-decorator-props={{ gridSpan: 2 }}
             x-component-props={{ size: 'small', sticky: true }}
           >
@@ -454,22 +474,22 @@ export default (props) => {
         <SchemaField.Void x-component="MyCard" x-component-props={{ title: '资信及履约能力调查-供方' }}>
           <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
             <SchemaField.String
-              name="history2" required title="项目合作历史" x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}
+              name="history2" title="项目合作历史" x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}
               x-component="InputButton3" x-component-props={{ onClick: onClick3, type: '供方' }}
             />
           </SchemaField.Void>
           <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
             <SchemaField.String
-              name="haveProblem2" required title="是否存在纠纷" x-decorator="FormItem" x-component="Radio.Group"
+              name="haveProblem2" title="是否存在纠纷" x-decorator="FormItem" x-component="Radio.Group"
               enum={[
                 { label: '是', value: '是' },
                 { label: '否', value: '否' },
               ]}
             />
             <SchemaField.String
-              name="protectPerson" required title="供方保证人" x-decorator="FormItem" x-component="Input"/>
+              name="protectPerson" title="供方保证人" x-decorator="FormItem" x-component="Input"/>
             <SchemaField.String
-              name="evaluate2" required title="供方目前的资信及综合能力综合评价" x-decorator="FormItem" x-component="Input"/>
+              name="evaluate2" title="供方目前的资信及综合能力综合评价" x-decorator="FormItem" x-component="Input"/>
           </SchemaField.Void>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
