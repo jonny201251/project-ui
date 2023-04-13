@@ -356,7 +356,12 @@ export default (props) => {
             ]}
           />
           <SchemaField.String name="expectMoney" required title="预计签约金额" x-decorator="FormItem"
-                              x-component="NumberPicker" x-component-props={{ addonAfter: '元' }}/>
+                              x-component="NumberPicker"
+                              x-component-props={{
+                                addonAfter: '元',
+                                formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                              }}
+          />
           <SchemaField.String name="expectDate" required title="预计签约日期" x-decorator="FormItem"
                               x-component="DatePicker"/>
           <SchemaField.String
@@ -403,7 +408,11 @@ export default (props) => {
             ]}
           />
           <SchemaField.String name="giveMoney" title="垫资额度" x-decorator="FormItem" x-component="NumberPicker"
-                              x-component-props={{ addonAfter: '元' }}/>
+                              x-component-props={{
+                                addonAfter: '元',
+                                formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                              }}
+          />
           <SchemaField.String name="giveMoneyCycle" title="垫资周期" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.Array
             name="list" title={'保证金(函)'} x-decorator="FormItem" x-component="ArrayTable"

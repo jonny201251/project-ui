@@ -557,7 +557,12 @@ export default (props) => {
                 ]}
               />
               <SchemaField.String name="expectMoney" required title="预计签约金额" x-decorator="FormItem"
-                                  x-component="NumberPicker"/>
+                                  x-component="NumberPicker"
+                                  x-component-props={{
+                                    addonAfter: '元',
+                                    formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                                  }}
+              />
               <SchemaField.String name="expectDate" required title="预计签约日期" x-decorator="FormItem"
                                   x-component="DatePicker"/>
               <SchemaField.String

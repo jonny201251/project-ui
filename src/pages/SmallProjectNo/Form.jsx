@@ -102,18 +102,20 @@ export default (props) => {
   }
 
   return <ConfigProvider locale={zhCN}>
-    <Form form={form} labelWidth={110} className={styles.placeholder}>
+    <Form form={form} labelWidth={100} className={styles.placeholder}>
       <SchemaField>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String name="displayName" title="创建人" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="deptName" title="创建部门" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="createDatetime" title="创建时间" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
-                              x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
           <SchemaField.String
             name="taskCode" required title="任务号" x-decorator="FormItem"
             x-component="InputButton4" x-component-props={{ onClick: onClick4 }}
           />
+        </SchemaField.Void>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
+                              x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
           <SchemaField.String
             name="property" required title="项目性质" x-decorator="FormItem" x-component="Select"
             enum={[
@@ -135,13 +137,13 @@ export default (props) => {
               { label: '终止', value: '终止' },
             ]}/>
         </SchemaField.Void>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
             name="location" required title="项目地点" x-decorator="FormItem"
             x-component="Input" x-decorator-props={{ gridSpan: 2 }}
           />
         </SchemaField.Void>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
             name="remark" title="备注" x-component="Input.TextArea"
             x-decorator-props={{ gridSpan: 2 }}

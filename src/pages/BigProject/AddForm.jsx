@@ -73,7 +73,7 @@ const SchemaField = createSchemaField({
   components: {
     FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox, PreviewText,
     Select, InputButton, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
-    MyCard, Divider, InputButton3, Line, File,InputButton4
+    MyCard, Divider, InputButton3, Line, File, InputButton4,
   },
 })
 
@@ -629,7 +629,12 @@ export default (props) => {
             ]}
           />
           <SchemaField.String name="expectMoney" required title="预计签约金额" x-decorator="FormItem"
-                              x-component="NumberPicker" x-component-props={{ addonAfter: '元' }}/>
+                              x-component="NumberPicker"
+                              x-component-props={{
+                                addonAfter: '元',
+                                formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                              }}
+          />
           <SchemaField.String name="expectDate" required title="预计签约日期" x-decorator="FormItem"
                               x-component="DatePicker"/>
           <SchemaField.String
@@ -671,7 +676,7 @@ export default (props) => {
               </SchemaField.Void>
               <SchemaField.Void
                 x-component="ArrayTable.Column" x-component-props={{ title: '保证金(函)额度', align: 'center' }}>
-                <SchemaField.String name="money" required x-decorator="FormItem" x-component="Input" />
+                <SchemaField.String name="money" required x-decorator="FormItem" x-component="Input"/>
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column"
                                 x-component-props={{ width: 80, title: '操作', dataIndex: 'operations' }}>

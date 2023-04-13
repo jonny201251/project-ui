@@ -99,7 +99,13 @@ export default (props) => {
               <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
                 <SchemaField.String name="registeDate" required x-decorator="FormItem" title="日期"
                                     x-component="DatePicker"/>
-                <SchemaField.Number name="money" required x-decorator="FormItem" title="金额" x-component="NumberPicker"/>
+                <SchemaField.Number name="money" required x-decorator="FormItem" title="金额"
+                                    x-component="NumberPicker"
+                                    x-component-props={{
+                                      addonAfter: '元',
+                                      formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                                    }}
+                />
               </SchemaField.Void>
               <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
                 <SchemaField.String

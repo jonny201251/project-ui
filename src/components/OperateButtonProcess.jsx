@@ -1,5 +1,5 @@
 import { message, Modal, Space } from 'antd'
-import { contextPath, get, post, processDesignPath } from '../utils'
+import { contextPath, get, post, processDesignPath, session } from '../utils'
 import { FormButtonGroup, FormDialog } from '@formily/antd'
 import { LoadingButton } from './index'
 import { QuestionCircleOutlined } from '@ant-design/icons'
@@ -182,7 +182,12 @@ export default (props) => {
         if (version > 0) {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
-        arr.push(<a onClick={() => onClick('recall')}>撤回</a>)
+        if (record.displayName === (session.getItem('user')).displayName) {
+          arr.push(<a onClick={() => onClick('recall')}>撤回</a>)
+        }
+        console.log(record)
+        console.log(session.getItem('user'))
+
       } else if (processStatus === '完成') {
         arr.push(<a onClick={() => onClick('view')}>查看</a>)
         if (version > 0) {

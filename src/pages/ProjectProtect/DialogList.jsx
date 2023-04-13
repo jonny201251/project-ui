@@ -5,7 +5,7 @@ import { BaseList } from '../../components'
 export default (props) => {
   const columns = [
     {
-      title: '项目类别', dataIndex: 'projectType', valueType: 'text', initialValue: '一般项目',
+      title: '项目类别', dataIndex: 'projectType', valueType: 'text',
       valueEnum: {
         一般项目: { text: '一般项目' },
         重大项目: { text: '重大项目' },

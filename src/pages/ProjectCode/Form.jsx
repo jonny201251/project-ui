@@ -308,7 +308,12 @@ export default (props) => {
             x-component="Input"
           />
           <SchemaField.String name="projectMoney" required title="项目金额" x-decorator="FormItem"
-                              x-component="NumberPicker" x-component-props={{ addonAfter: '元' }}/>
+                              x-component="NumberPicker"
+                              x-component-props={{
+                                addonAfter: '元',
+                                formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                              }}
+          />
           <SchemaField.String
             name="remark" title="备注" x-component="Input.TextArea"
             x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}

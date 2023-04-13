@@ -55,6 +55,7 @@ export default (props) => {
             { label: '禁用', value: '禁用' },
           ]}
         />
+        <SchemaField.String name="position" required title="职位" x-decorator="FormItem" x-component="Input"/>
         <SchemaField.String
           name="remark" title="备注" x-decorator="FormItem"
           x-component="Input.TextArea"

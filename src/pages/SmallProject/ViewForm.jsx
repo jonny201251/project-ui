@@ -142,7 +142,12 @@ export default (props) => {
                 ]}
               />
               <SchemaField.String name="expectMoney" required title="预计签约金额" x-decorator="FormItem"
-                                  x-component="NumberPicker"/>
+                                  x-component="NumberPicker"
+                                  x-component-props={{
+                                    addonAfter: '元',
+                                    formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                                  }}
+              />
               <SchemaField.String name="expectDate" required title="预计签约日期" x-decorator="FormItem"
                                   x-component="DatePicker"/>
               <SchemaField.String
@@ -173,8 +178,7 @@ export default (props) => {
                 ]}
               />
               <SchemaField.String name="bidDate" title="投标截止日期" x-decorator="FormItem" x-component="DatePicker"/>
-              <SchemaField.String name="workDate" required title="开竣工日期" x-decorator="FormItem"
-                                  x-component="DatePicker"/>
+              <SchemaField.String name="workDateTmp" required title="开竣工日期" x-decorator="FormItem" x-component="DatePicker.RangePicker"/>
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
               <SchemaField.String
@@ -184,7 +188,13 @@ export default (props) => {
                   { label: '否', value: '否' },
                 ]}
               />
-              <SchemaField.String name="giveMoney" title="垫资额度" x-decorator="FormItem" x-component="NumberPicker"/>
+              <SchemaField.String name="giveMoney" title="垫资额度" x-decorator="FormItem"
+                                  x-component="NumberPicker"
+                                  x-component-props={{
+                                    addonAfter: '元',
+                                    formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                                  }}
+              />
               <SchemaField.String name="giveMoneyCycle" title="垫资周期" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.Array
                 name="list" title={'保证金(函)'} required x-decorator="FormItem" x-component="ArrayTable"

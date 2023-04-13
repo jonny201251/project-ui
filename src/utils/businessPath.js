@@ -80,6 +80,13 @@ import ProviderQueryViewHistory from '../pages/ProviderQuery/ViewHistory'
 import ProviderQueryViewForm from '../pages/ProviderQuery/ViewForm'
 import ProviderQueryChangeForm from '../pages/ProviderQuery/ChangeForm'
 
+import BudgetProjecttList from '../pages/BudgetProjectt/List'
+import BudgetProjecttAddForm from '../pages/BudgetProjectt/AddForm'
+import BudgetProjecttCheckForm from '../pages/BudgetProjectt/CheckForm'
+import BudgetProjecttViewHistory from '../pages/BudgetProjectt/ViewHistory'
+import BudgetProjecttViewForm from '../pages/BudgetProjectt/ViewForm'
+import BudgetProjecttChangeForm from '../pages/BudgetProjectt/ChangeForm'
+
 import SmallBudgetRunList from '../pages/SmallBudgetRun/List'
 import SmallBudgetRunAddForm from '../pages/SmallBudgetRun/AddForm'
 import SmallBudgetRunCheckForm from '../pages/SmallBudgetRun/CheckForm'
@@ -299,7 +306,7 @@ export const projectCode2Path = {
 }
 
 export const smallProjectNoPath = {
-  flag: 'smallProjectNoPath', width: 1200, Form: SmallProjectNoForm, List: SmallProjectNoList,
+  flag: 'smallProjectNoPath', width: 900, Form: SmallProjectNoForm, List: SmallProjectNoList,
   list: contextPath + '/smallProjectNo/list',
   get: contextPath + '/smallProjectNo/get',
   add: contextPath + '/smallProjectNo/add',
@@ -353,6 +360,34 @@ export const bigProjectPath = {
   get: contextPath + '/bigProject/get',
   btnHandle: contextPath + '/bigProject/btnHandle',
 }
+
+
+export const budgetProjecttPath = {
+  flag: 'budgetProjecttPath', width: 1000, List: BudgetProjecttList, changeButtonName: '调整',
+  AddForm: BudgetProjecttAddForm, EditForm: BudgetProjecttAddForm,
+  CheckForm: BudgetProjecttCheckForm,
+  ViewHistory: BudgetProjecttViewHistory,
+  ViewForm: BudgetProjecttViewForm,
+  ChangeForm: BudgetProjecttChangeForm,
+  list: contextPath + '/budgetProjectt/list',
+  viewHistory: contextPath + '/budgetProjectt/viewHistory',
+  get: contextPath + '/budgetProjectt/get',
+  btnHandle: contextPath + '/budgetProjectt/btnHandle',
+}
+
+export const bigBudgetProjecttPath = {
+  flag: 'bigBudgetProjecttPath', width: 1000, List: BudgetProjecttList, changeButtonName: '调整',
+  AddForm: BudgetProjecttAddForm, EditForm: BudgetProjecttAddForm,
+  CheckForm: BudgetProjecttCheckForm,
+  ViewHistory: BudgetProjecttViewHistory,
+  ViewForm: BudgetProjecttViewForm,
+  ChangeForm: BudgetProjecttChangeForm,
+  list: contextPath + '/budgetProjectt/list',
+  viewHistory: contextPath + '/budgetProjectt/viewHistory',
+  get: contextPath + '/budgetProjectt/get',
+  btnHandle: contextPath + '/budgetProjectt/btnHandle',
+}
+
 export const smallBudgetProjectPath = {
   flag: 'smallBudgetProjectPath', width: 1000, Form: SmallBudgetProjectForm, List: SmallBudgetProjectList,
   list: contextPath + '/smallBudgetProject/list',
