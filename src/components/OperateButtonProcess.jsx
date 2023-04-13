@@ -185,22 +185,13 @@ export default (props) => {
         if (record.displayName === (session.getItem('user')).displayName) {
           arr.push(<a onClick={() => onClick('recall')}>撤回</a>)
         }
-        console.log(record)
-        console.log(session.getItem('user'))
-
       } else if (processStatus === '完成') {
         arr.push(<a onClick={() => onClick('view')}>查看</a>)
         if (version > 0) {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
         if (!path.haveChange) {
-          if (path.flag.indexOf('BudgetRunPath') > 0) {
-            if (record.newBudgetProject) {
-              arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
-            }
-          } else {
-            arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
-          }
+          arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
         }
       } else if (processStatus === '退回' || processStatus === '退回申请人' || processStatus === '申请人撤回') {
         arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
@@ -212,12 +203,18 @@ export default (props) => {
       }
     } else {
       //草稿
-      arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
-      arr.push(<a onClick={() => onClick('delete')}>删除</a>)
-    }
-    //预算表
-    if (record.viewBudget) {
-      arr.push(<a onClick={() => onClick('viewBudget')}>预算表</a>)
+      if (record.processInstId === 0) {
+        arr.push(<a onClick={() => onClick('view')}>查看</a>)
+        if (version > 0) {
+          arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
+        }
+        if (!path.haveChange) {
+          arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
+        }
+      } else {
+        arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
+        arr.push(<a onClick={() => onClick('delete')}>删除</a>)
+      }
     }
     return <Space size={'middle'}>{arr}</Space>
   }

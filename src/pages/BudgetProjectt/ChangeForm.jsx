@@ -182,26 +182,7 @@ export default (props) => {
             x-component="Input" x-decorator-props={{ gridSpan: 2 }}
           />
         </SchemaField.Void>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String
-            name="fileList" required title="附件" x-decorator="FormItem" x-component="File"
-            x-decorator-props={{
-              gridSpan: 2,
-              feedbackText: '上传 预算表'
-            }}
-          />
-          <SchemaField.String
-            name="userNamee" required title="财务部" x-decorator="FormItem"
-            x-decorator-props={{ gridSpan: 2, tooltip: '流程审批节点' }}
-            x-component="Select" x-component-props={{ showSearch: true }}
-            enum={session.getItem('userList')}
-          />
-          {showHaveThree()}
-          <SchemaField.String
-            x-decorator-props={{ gridSpan: 2 }}
-            name="remark" title="备注" x-decorator="FormItem" x-component="Input.TextArea" x-component-props={{ rows: 2 }}
-          />
-        </SchemaField.Void>
+
         <SchemaField.Array
           name="protectList" x-decorator="FormItem" x-component="ArrayTable"
           x-component-props={{ size: 'small', sticky: true, title: () => (<b>{'担保'}</b>) }}
@@ -374,6 +355,26 @@ export default (props) => {
 
         </SchemaField.Void>
 
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.String
+            name="fileList" required title="附件" x-decorator="FormItem" x-component="File"
+            x-decorator-props={{
+              gridSpan: 2,
+              feedbackText: '上传 预算表'
+            }}
+          />
+          <SchemaField.String
+            name="userNamee" required title="财务部" x-decorator="FormItem"
+            x-decorator-props={{ gridSpan: 2, tooltip: '流程审批节点' }}
+            x-component="Select" x-component-props={{ showSearch: true }}
+            enum={session.getItem('userList')}
+          />
+          {showHaveThree()}
+          <SchemaField.String
+            x-decorator-props={{ gridSpan: 2 }}
+            name="remark" title="备注" x-decorator="FormItem" x-component="Input.TextArea" x-component-props={{ rows: 2 }}
+          />
+        </SchemaField.Void>
 
       </SchemaField>
     </Form>

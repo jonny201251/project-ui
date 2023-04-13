@@ -17,7 +17,7 @@ export default () => {
     { title: '申请时间', dataIndex: 'createDatetime', valueType: 'text', hideInSearch: true  },
     {
       title: '流程状态', valueType: 'text',
-      renderText: (text, record) => (record.processInst ? record.processInst.processStatus : '草稿'),
+      renderText: (text, record) => (record.processInst ? record.processInst.processStatus : record.processInstId === 0 ? '完成' : '草稿'),
       valueEnum: {
         草稿: { text: '草稿', status: 'Default' },
         审批中: { text: '审批中', status: 'Processing' },

@@ -22,7 +22,7 @@ export default () => {
         三类: { text: '三类' },
       },
     },
-    { title: '预计毛利率', dataIndex: 'projectRate', valueType: 'text', hideInSearch: true  },
+    { title: '预计毛利率', dataIndex: 'projectRate', valueType: 'text', hideInSearch: true },
     { title: '成本总预算', dataIndex: 'totalCost', valueType: 'text', hideInSearch: true },
     { title: '合同编号', dataIndex: 'contractCode', valueType: 'text' },
     { title: '合同金额', dataIndex: 'contractMoney', valueType: 'text', hideInSearch: true },
@@ -32,7 +32,7 @@ export default () => {
     { title: '申请时间', dataIndex: 'createDatetime', valueType: 'text', hideInSearch: true },
     {
       title: '流程状态', valueType: 'text',
-      renderText: (text, record) => (record.processInst ? record.processInst.processStatus : '草稿'),
+      renderText: (text, record) => (record.processInst ? record.processInst.processStatus : record.processInstId === 0 ? '完成' : '草稿'),
       valueEnum: {
         草稿: { text: '草稿', status: 'Default' },
         审批中: { text: '审批中', status: 'Processing' },

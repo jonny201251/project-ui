@@ -197,7 +197,7 @@ export default (props) => {
               />
               <SchemaField.String name="giveMoneyCycle" title="垫资周期" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.Array
-                name="list" title={'保证金(函)'} required x-decorator="FormItem" x-component="ArrayTable"
+                name="list" title={'保证金(函)'}  x-decorator="FormItem" x-component="ArrayTable"
                 x-decorator-props={{ gridSpan: 2 }}
                 x-component-props={{ size: 'small', sticky: true }}
               >

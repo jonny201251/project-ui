@@ -585,7 +585,7 @@ export default (props) => {
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
               <SchemaField.Array
-                name="list" title={'保证金(函)'} required x-decorator="FormItem" x-component="ArrayTable"
+                name="list" title={'保证金(函)'} x-decorator="FormItem" x-component="ArrayTable"
                 x-decorator-props={{ gridSpan: 2 }}
                 x-component-props={{ size: 'small', sticky: true }}
               >
