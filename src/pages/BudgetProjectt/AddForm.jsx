@@ -42,7 +42,7 @@ export default (props) => {
   let { form, type } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,taskCode,property,totalCost,endMoney,inChangeMoney,outChangeMoney,customerName,inSum,outSum)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,taskCode,property,totalCost,endMoney,inChangeMoney,outChangeMoney,customerName,inSum,outSum,projectRate)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
@@ -99,28 +99,54 @@ export default (props) => {
 
   form.addEffects('id', () => {
     onFieldReact('innList.*.money', (field) => {
-      let sum = 0
+      let inSum = 0
       form.query('innList.*.money').forEach(field => {
         if (field.value) {
-          sum += field.value
+          inSum += field.value
         }
       })
       let tmp = form.query('inSum').take()
-      if (tmp && sum) {
-        tmp.setState({ value: sum, pattern: 'disabled' })
+      if (tmp && inSum) {
+        tmp.setState({ value: inSum, pattern: 'disabled' })
+      }
+      //
+      let outSum = 0
+      form.query('outList.*.money').forEach(field => {
+        if (field.value) {
+          outSum += field.value
+        }
+      })
+      if (inSum > 0 && outSum > 0) {
+        let rate = ((inSum - outSum) / inSum).toFixed(2)
+        rate = rate * 100 + '%'
+        form.query('projectRate').take()?.setState({ value: rate })
       }
     })
 
     onFieldReact('outList.*.money', (field) => {
-      let sum = 0
+      let outSum = 0
       form.query('outList.*.money').forEach(field => {
         if (field.value) {
-          sum += field.value
+          outSum += field.value
         }
       })
       let tmp = form.query('outSum').take()
-      if (tmp && sum) {
-        tmp.setState({ value: sum, pattern: 'disabled' })
+      let tmp2 = form.query('totalCost').take()
+      if (tmp && outSum) {
+        tmp.setState({ value: outSum, pattern: 'disabled' })
+        tmp2.setState({ value: outSum })
+      }
+      //
+      let inSum = 0
+      form.query('innList.*.money').forEach(field => {
+        if (field.value) {
+          inSum += field.value
+        }
+      })
+      if (inSum > 0 && outSum > 0) {
+        let rate = ((inSum - outSum) / inSum).toFixed(2)
+        rate = rate * 100 + '%'
+        form.query('projectRate').take()?.setState({ value: rate })
       }
     })
 
@@ -145,9 +171,6 @@ export default (props) => {
     <Form form={form} labelWidth={110} className={styles.placeholder}>
       <SchemaField>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
-          <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
-          <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String
             name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}
             x-component="InputButton" x-component-props={{ onClick: onClick }}/>
@@ -158,15 +181,6 @@ export default (props) => {
             x-component="Select" x-component-props={{ showSearch: true }}
             enum={session.getItem('userList')}/>
           />
-          <SchemaField.String name="protectRate" required x-decorator="FormItem" title="质保金比例" x-component="Input"/>
-          <SchemaField.String name="invoiceRate" required x-decorator="FormItem" title="税率" x-component="Input"/>
-          <SchemaField.String name="projectRate" required x-decorator="FormItem" title="预计毛利率" x-component="Input"/>
-          <SchemaField.String name="totalCost" x-decorator="FormItem" title="成本总预算" x-component="Input"/>
-          <SchemaField.String name="startDate" required x-decorator="FormItem" title="开工日期" x-component="DatePicker"/>
-          <SchemaField.String name="endDate" required x-decorator="FormItem" title="预计完工日期" x-component="DatePicker"/>
-          <SchemaField.String name="endMoney" x-decorator="FormItem" title="结算金额" x-component="Input"/>
-          <SchemaField.String name="inChangeMoney" x-decorator="FormItem" title="收入调整金额" x-component="Input"/>
-          <SchemaField.String name="outChangeMoney" x-decorator="FormItem" title="支出调整金额" x-component="Input"/>
           <SchemaField.String name="contractCode" x-decorator="FormItem" title="合同编号" x-component="Input"/>
           <SchemaField.Number
             name="contractMoney" required x-decorator="FormItem" title="合同金额" x-component="NumberPicker"
@@ -177,12 +191,32 @@ export default (props) => {
           />
           <SchemaField.String
             name="contractName" required x-decorator="FormItem" title="合同名称"
-            x-component="Input"
+            x-component="Input.TextArea" x-component-props={{ rows: 2 }}
           />
+          <SchemaField.String
+            name="protectRate" required x-decorator="FormItem" title="质保金比例"
+            x-component="Input" x-component-props={{ placeholder: '示例：3%' }}
+          />
+          <SchemaField.String
+            name="invoiceRate" required x-decorator="FormItem" title="税率"
+            x-component="Input" x-component-props={{ placeholder: '示例：3%，6%，13%' }}
+          />
+          <SchemaField.String name="projectRate" x-decorator="FormItem" title="预计毛利率" x-component="Input"/>
+          <SchemaField.String name="totalCost" x-decorator="FormItem" title="成本总预算" x-component="Input"/>
+          <SchemaField.String name="startDate" required x-decorator="FormItem" title="开工日期" x-component="DatePicker"/>
+          <SchemaField.String name="endDate" required x-decorator="FormItem" title="预计完工日期" x-component="DatePicker"/>
+          <SchemaField.String name="endMoney" x-decorator="FormItem" title="结算金额" x-component="Input"/>
+          <SchemaField.String name="inChangeMoney" x-decorator="FormItem" title="收入调整金额" x-component="Input"/>
+          <SchemaField.String name="outChangeMoney" x-decorator="FormItem" title="支出调整金额" x-component="Input"/>
           <SchemaField.String
             name="customerName" x-decorator="FormItem" title="客户名称"
             x-component="Input" x-decorator-props={{ gridSpan: 2 }}
           />
+        </SchemaField.Void>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
+          <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
+          <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
         </SchemaField.Void>
 
         <SchemaField.Array
@@ -361,7 +395,7 @@ export default (props) => {
             name="fileList" required title="附件" x-decorator="FormItem" x-component="File"
             x-decorator-props={{
               gridSpan: 2,
-              feedbackText: '上传 预算表'
+              feedbackText: '上传 预算表',
             }}
           />
           <SchemaField.String
