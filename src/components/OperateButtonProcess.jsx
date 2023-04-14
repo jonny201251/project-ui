@@ -191,7 +191,9 @@ export default (props) => {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
         if (!path.haveChange) {
-          arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
+          if (record.displayName === (session.getItem('user')).displayName) {
+            arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
+          }
         }
       } else if (processStatus === '退回' || processStatus === '退回申请人' || processStatus === '申请人撤回') {
         if (record.displayName === (session.getItem('user')).displayName) {
@@ -215,7 +217,9 @@ export default (props) => {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
         if (!path.haveChange) {
-          arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
+          if (record.displayName === (session.getItem('user')).displayName) {
+            arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
+          }
         }
       } else {
         arr.push(<a onClick={() => onClick('edit')}>编辑</a>)

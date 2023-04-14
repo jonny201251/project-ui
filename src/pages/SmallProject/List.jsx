@@ -3,8 +3,8 @@ import { BaseProTableProcess } from '../../components'
 
 export default () => {
   const columns = [
-    { title: '项目名称', dataIndex: 'name', valueType: 'text',ellipsis:true },
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text',copyable:true },
+    { title: '项目名称', dataIndex: 'name', valueType: 'text',width:'20%' },
+    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '客户名称', dataIndex: 'customerName', valueType: 'text',ellipsis:true },
     { title: '供方名称', dataIndex: 'providerName', valueType: 'text',ellipsis:true },
     { title: '预计签约额', dataIndex: 'expectMoney', valueType: 'text', hideInSearch: true  },
