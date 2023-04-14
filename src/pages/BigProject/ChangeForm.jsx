@@ -17,7 +17,7 @@ import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { Button, ConfigProvider, Divider, message } from 'antd'
-import { get, projectCodePath } from '../../utils'
+import { get, projectCodePath, session } from '../../utils'
 import {
   ArrayTableAddition,
   ArrayTableIndex,
@@ -86,7 +86,7 @@ export default (props) => {
   let { form, type, record } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,customerName,providerName)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,powerDesc,powerCode)').forEach(field => {
       field.setPattern('disabled')
     })
     form.query('remark2').take()?.setState({
@@ -97,6 +97,14 @@ export default (props) => {
         '评分 90 分（含）以上为低风险项目；评分 70 分（含）以上为中等风险项目；评分 70 分以下为高风险项目',
     })
 
+    if (type === 'change') {
+      const user = session.getItem('user')
+      form.setInitialValues({
+        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
+        displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
+        deptId: user.deptId, deptName: user.deptName,
+      })
+    }
   }, [])
 
   form.addEffects('id', () => {

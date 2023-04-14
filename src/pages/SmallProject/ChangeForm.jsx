@@ -58,13 +58,16 @@ export default (props) => {
   let { form, type, record } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,startDisplay,endDisplay,bidDate,giveMoney,giveMoneyCycle,providerName,customerName)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,startDisplay,endDisplay,bidDate,giveMoney,giveMoneyCycle,powerDesc,powerCode)').forEach(field => {
       field.setPattern('disabled')
     })
-    const data = await get(projectCodePath.getLabelValue)
-    if (data) {
-      let field = form.query('taskCode').take()
-      field && field.setDataSource(data)
+    if (type === 'change') {
+      const user = session.getItem('user')
+      form.setInitialValues({
+        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
+        displayName: user.displayName, displayNamee: user.displayName, loginName: user.loginName,
+        deptId: user.deptId, deptName: user.deptName,
+      })
     }
   }, [])
 

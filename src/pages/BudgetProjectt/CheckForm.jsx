@@ -152,9 +152,9 @@ export default (props) => {
         <Form form={form} labelWidth={110} className={styles.placeholder}>
           <SchemaField>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-              <SchemaField.String name="displayName" title="创建人" x-component="Input" x-decorator="FormItem"/>
-              <SchemaField.String name="deptName" title="创建部门" x-component="Input" x-decorator="FormItem"/>
-              <SchemaField.String name="createDatetime" title="创建时间" x-decorator="FormItem" x-component="Input"/>
+              <SchemaField.String name="displayName" title="申请人" x-component="Input" x-decorator="FormItem"/>
+              <SchemaField.String name="deptName" title="申请部门" x-component="Input" x-decorator="FormItem"/>
+              <SchemaField.String name="createDatetime" title="申请时间" x-decorator="FormItem" x-component="Input"/>
               <SchemaField.String
                 name="name" required title="项目名称" x-decorator="FormItem" x-decorator-props={{ gridSpan: 3 }}
                 x-component="InputButton" x-component-props={{ onClick: onClick }}/>
