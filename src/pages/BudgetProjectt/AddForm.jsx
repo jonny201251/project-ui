@@ -98,6 +98,7 @@ export default (props) => {
   }
 
   form.addEffects('id', () => {
+
     onFieldReact('innList.*.money', (field) => {
       let inSum = 0
       form.query('innList.*.money').forEach(field => {
@@ -107,7 +108,7 @@ export default (props) => {
       })
       let tmp = form.query('inSum').take()
       if (tmp && inSum) {
-        tmp.setState({ value: inSum, pattern: 'disabled' })
+        tmp.setState({ value: inSum.toFixed(2), pattern: 'disabled' })
       }
       //
       let outSum = 0
@@ -133,8 +134,8 @@ export default (props) => {
       let tmp = form.query('outSum').take()
       let tmp2 = form.query('totalCost').take()
       if (tmp && outSum) {
-        tmp.setState({ value: outSum, pattern: 'disabled' })
-        tmp2.setState({ value: outSum })
+        tmp.setState({ value: outSum.toFixed(2), pattern: 'disabled' })
+        tmp2.setState({ value: outSum.toFixed(2) })
       }
       //
       let inSum = 0
@@ -149,7 +150,6 @@ export default (props) => {
         form.query('projectRate').take()?.setState({ value: rate })
       }
     })
-
 
   })
 
@@ -283,7 +283,7 @@ export default (props) => {
 
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.Array
-            name="innList" required x-decorator="FormItem" x-component="ArrayTable" x-decorator-props={{ gridSpan: 2 }}
+            name="innList" required x-decorator="FormItem" x-component="ArrayTable" x-decorator-props={{ gridSpan: 3 }}
             x-component-props={{ size: 'small', sticky: true, title: () => (<b>{'预计收入'}</b>) }}
           >
             <SchemaField.Object>
@@ -302,7 +302,15 @@ export default (props) => {
                   ]}
                 />
               </SchemaField.Void>
-              <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '合计', align: 'center' }}>
+
+              <SchemaField.Void x-component="ArrayTable.Column"
+                                x-component-props={{ width: 120, title: '税率', align: 'center' }}>
+                <SchemaField.String name="rate" x-decorator="FormItem"
+                                    x-component="Input" x-component-props={{ placeholder: '示例：3%' }}/>
+              </SchemaField.Void>
+
+
+              <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '金额', align: 'center' }}>
                 <SchemaField.Number
                   name="money" x-decorator="FormItem" x-component="NumberPicker"
                   x-component-props={{
@@ -310,6 +318,10 @@ export default (props) => {
                     formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
                   }}
                 />
+              </SchemaField.Void>
+              <SchemaField.Void x-component="ArrayTable.Column"
+                                x-component-props={{ title: '备注', align: 'center' }}>
+                <SchemaField.String name="remark" x-decorator="FormItem" x-component="Input"/>
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column"
                                 x-component-props={{ width: 80, title: '操作', dataIndex: 'operations' }}>
@@ -328,7 +340,7 @@ export default (props) => {
           />
 
           <SchemaField.Array
-            name="outList" required x-decorator="FormItem" x-component="ArrayTable" x-decorator-props={{ gridSpan: 2 }}
+            name="outList" required x-decorator="FormItem" x-component="ArrayTable" x-decorator-props={{ gridSpan: 3 }}
             x-component-props={{ size: 'small', sticky: true, title: () => (<b>{'预计支出'}</b>) }}
           >
             <SchemaField.Object>
@@ -364,7 +376,7 @@ export default (props) => {
                 <SchemaField.String name="rate" x-decorator="FormItem"
                                     x-component="Input" x-component-props={{ placeholder: '示例：3%' }}/>
               </SchemaField.Void>
-              <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '合计', align: 'center' }}>
+              <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '金额', align: 'center' }}>
                 <SchemaField.Number
                   name="money" x-decorator="FormItem" x-component="NumberPicker"
                   x-component-props={{
@@ -372,6 +384,10 @@ export default (props) => {
                     formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
                   }}
                 />
+              </SchemaField.Void>
+              <SchemaField.Void x-component="ArrayTable.Column"
+                                x-component-props={{ title: '备注', align: 'center' }}>
+                <SchemaField.String name="remark" x-decorator="FormItem" x-component="Input"/>
               </SchemaField.Void>
               <SchemaField.Void x-component="ArrayTable.Column"
                                 x-component-props={{ width: 80, title: '操作', dataIndex: 'operations' }}>

@@ -4,7 +4,7 @@ import { OperateButtonProcess, ToolBarButtonProcess } from './index'
 import { proTableRequest } from '../utils'
 
 export default (props) => {
-  const { columns, path, rowKey = 'id', search = true, options = true } = props
+  const { columns, path, rowKey = 'id', search = true, options = true,scroll } = props
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const actionRef = useRef()
@@ -31,6 +31,8 @@ export default (props) => {
     tableAlertRender={false}
     options={{ density: false }}
     search={search}
+    scroll={scroll}
+    sticky
     //
     headerTitle={
       <ToolBarButtonProcess

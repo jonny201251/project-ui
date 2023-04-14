@@ -108,14 +108,15 @@ export default (props) => {
           <SchemaField.String name="displayName" title="创建人" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="deptName" title="创建部门" x-component="Input" x-decorator="FormItem"/>
           <SchemaField.String name="createDatetime" title="创建时间" x-decorator="FormItem" x-component="Input"/>
+
+        </SchemaField.Void>
+        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
+          <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
+                              x-component="Input" x-decorator-props={{ gridSpan: 2 }}/>
           <SchemaField.String
             name="taskCode" required title="任务号" x-decorator="FormItem"
             x-component="InputButton4" x-component-props={{ onClick: onClick4 }}
           />
-        </SchemaField.Void>
-        <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="name" required title="项目名称" x-decorator="FormItem"
-                              x-component="Input" x-decorator-props={{ gridSpan: 3 }}/>
           <SchemaField.String
             name="property" required title="项目性质" x-decorator="FormItem" x-component="Select"
             enum={[

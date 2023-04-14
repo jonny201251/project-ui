@@ -306,7 +306,7 @@ export const projectCode2Path = {
 }
 
 export const smallProjectNoPath = {
-  flag: 'smallProjectNoPath', width: 900, Form: SmallProjectNoForm, List: SmallProjectNoList,
+  flag: 'smallProjectNoPath', width: 950, Form: SmallProjectNoForm, List: SmallProjectNoList,
   list: contextPath + '/smallProjectNo/list',
   get: contextPath + '/smallProjectNo/get',
   add: contextPath + '/smallProjectNo/add',

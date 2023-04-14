@@ -7,7 +7,12 @@ export default () => {
     { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '客户名称', dataIndex: 'customerName', valueType: 'text', ellipsis: true },
     { title: '供方名称', dataIndex: 'providerName', valueType: 'text', ellipsis: true },
-    { title: '预计签约额', dataIndex: 'expectMoney', valueType: 'text', hideInSearch: true },
+    {
+      title: '预计签约额', dataIndex: 'expectMoney', valueType: 'text', hideInSearch: true,
+      render: (text, record, _, action) => {
+        return record.expectMoney>0 ? (record.expectMoney+'').replace(/\B(?=(\d{3})+(?!\d))/g, ',') : ''
+      },
+    },
     { title: '预计签约日期', dataIndex: 'expectDate', valueType: 'text', hideInSearch: true },
     { title: '预计毛利率', dataIndex: 'projectRate', valueType: 'text', hideInSearch: true },
     { title: '授权号', dataIndex: 'powerCode', valueType: 'text' },

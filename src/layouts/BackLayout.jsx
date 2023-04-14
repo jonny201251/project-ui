@@ -272,7 +272,7 @@ export default () => {
             {renderMenu(utils.session.getItem('menuList'))}
           </Menu>
         </Sider>
-        <Content style={{ minHeight: document.body.clientHeight - 70 }}>
+        <Content>
           <Tabs
             tabBarStyle={{ background: '#fff', height: 60 }}
             tabBarGutter={0}

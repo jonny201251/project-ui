@@ -199,7 +199,6 @@ export default (props) => {
         if (record.displayName === (session.getItem('user')).displayName) {
           arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
         }
-
         arr.push(<a onClick={() => onClick('view')}>查看</a>)
         if (version > 0) {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
@@ -207,7 +206,6 @@ export default (props) => {
         if (record.displayName === (session.getItem('user')).displayName) {
           arr.push(<a onClick={() => onClick('delete')}>删除</a>)
         }
-
       }
     } else {
       //草稿

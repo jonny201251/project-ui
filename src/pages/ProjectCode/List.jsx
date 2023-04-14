@@ -11,6 +11,12 @@ export default () => {
     { title: '项目名称', dataIndex: 'projectName', valueType: 'text', width: '30%' },
     { title: '任务号/备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '状态', dataIndex: 'status', valueType: 'text' },
+    {
+      title: '项目金额', dataIndex: 'projectMoney', valueType: 'text',
+      render: (text, record, _, action) => {
+        return record.projectMoney>0 ? (record.projectMoney+'').replace(/\B(?=(\d{3})+(?!\d))/g, ',') : ''
+      },
+    },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
     { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text', hideInSearch: true },
