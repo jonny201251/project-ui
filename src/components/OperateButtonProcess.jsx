@@ -194,12 +194,18 @@ export default (props) => {
           arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
         }
       } else if (processStatus === '退回' || processStatus === '退回申请人' || processStatus === '申请人撤回') {
-        arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
+        if (record.displayName === (session.getItem('user')).displayName) {
+          arr.push(<a onClick={() => onClick('edit')}>编辑</a>)
+        }
+
         arr.push(<a onClick={() => onClick('view')}>查看</a>)
         if (version > 0) {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
-        arr.push(<a onClick={() => onClick('delete')}>删除</a>)
+        if (record.displayName === (session.getItem('user')).displayName) {
+          arr.push(<a onClick={() => onClick('delete')}>删除</a>)
+        }
+
       }
     } else {
       //草稿

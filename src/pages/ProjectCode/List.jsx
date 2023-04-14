@@ -8,8 +8,8 @@ export default () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const actionRef = useRef()
   const columns = [
-    { title: '项目名称', dataIndex: 'projectName', valueType: 'text' },
-    { title: '任务号/备案号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '项目名称', dataIndex: 'projectName', valueType: 'text',ellipsis:true },
+    { title: '任务号/备案号', dataIndex: 'taskCode', valueType: 'text',copyable:true },
     { title: '状态', dataIndex: 'status', valueType: 'text' },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
     { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
