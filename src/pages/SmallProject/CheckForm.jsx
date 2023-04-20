@@ -88,12 +88,12 @@ export default (props) => {
       let value = field.value
       if (value) {
         if (value === '三类') {
-          form.query('providerName').take()?.setState({ required: true })
+          form.query('providerName').take()?.setState({ required: true, pattern: 'editable' })
           form.query('*(history2,haveProblem2,protectPerson,evaluate2)').forEach(field => {
             field.setState({ required: true })
           })
         } else {
-          form.query('providerName').take()?.setState({ required: false })
+          form.query('providerName').take()?.setState({ required: false, pattern: 'disabled' })
           form.query('*(history2,haveProblem2,protectPerson,evaluate2)').forEach(field => {
             field.setState({ required: false })
           })

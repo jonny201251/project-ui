@@ -68,6 +68,10 @@ export default (props) => {
 
 
   const onClick4 = (flag) => {
+    if(type==='edit'){
+      message.error('编辑时不允许重新选择任务号')
+      return
+    }
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 1000 },
         (form2) => {

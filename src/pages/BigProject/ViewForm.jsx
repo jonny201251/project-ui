@@ -39,9 +39,9 @@ import ProcessInstNodeList from '../ProcessInstNode/List'
 
 const SchemaField = createSchemaField({
   components: {
-    FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox,PreviewText,
+    FormItem, FormLayout, Input, DatePicker, Radio, FormGrid, NumberPicker, Checkbox, PreviewText,
     Select, InputButton, ArrayTable, ArrayTableIndex, ArrayTableRemove, ArrayTableAddition,
-    MyCard, Divider, Line,File
+    MyCard, Divider, Line, File,
   },
 })
 
@@ -116,6 +116,11 @@ export default (props) => {
         { desc1: '标的金额/客户注册资本', scoreDesc: '政府部门得满分；比值≤1 得分8～10；比值≤5 得分 5～7；比值＞5 得分 0～4' },
         { desc1: '客户诉讼/失信事项', scoreDesc: '无相关事项得满分；近一年内有相关事项得分 0～6；近三年内有相关事项得分 0～8；近五年内有相关事项得分 0～9' },
         { desc1: '客户股权出质比例', scoreDesc: '未出质得满分；比例 1/3 以下得分 7～9；比例 2/3 以下得分 4～6；比例 2/3 及以上得分 0～3' },
+        { desc1: '业主企业性质', scoreDesc: '集团所属企业、地级市以上政府得分 8～10；国企、县级以下政府得分 6～9；民企得分 3～8；其他得分 0～7' },
+        { desc1: '业主注册时间', scoreDesc: '一年以下得分 0～1；两年以下得分 1～2；两年及以上得满分' },
+        { desc1: '标的金额/业主注册资本', scoreDesc: '政府部门得满分；比值≤1 得分8～10；比值≤5 得分 5～7；比值＞5 得分 0～4' },
+        { desc1: '业主诉讼/失信事项', scoreDesc: '无相关事项得满分；近一年内有相关事项得分 0～6；近三年内有相关事项得分 0～8；近五年内有相关事项得分 0～9' },
+        { desc1: '业主股权出质比例', scoreDesc: '未出质得满分；比例 1/3 以下得分 7～9；比例 2/3 以下得分 4～6；比例 2/3 及以上得分 0～3' },
         { desc1: '其他因素', scoreDesc: '无其他因素得满分；有其他因素适情评分' },
         { desc1: '客户(业主)评分', scoreDesc: '  ' },
         { desc1: '否决项', scoreDesc: '集团、三院、公司黑灰名单；评分低于 60 分' },
@@ -147,8 +152,10 @@ export default (props) => {
         let list4Field = form.query('list4').take()
         if (value === '三类') {
           list4Field?.setDisplay('visible')
+          form.query('providerName').take()?.setState({ required: true, pattern: 'editable' })
         } else {
           list4Field?.setDisplay('none')
+          form.query('providerName').take()?.setState({ required: false, pattern: 'disabled' })
         }
       }
     })
@@ -312,6 +319,18 @@ export default (props) => {
       } else if (desc1Value === '客户股权出质比例') {
         field.setComponent('Input')
         standardField && standardField.setValue('0-10分')
+      } else if (desc1Value === '业主注册时间') {
+        field.setComponent('DatePicker')
+        standardField && standardField.setValue('0-3分')
+      } else if (desc1Value === '标的金额/业主注册资本') {
+        field.setComponent('Input')
+        standardField && standardField.setValue('0-10分')
+      } else if (desc1Value === '业主诉讼/失信事项') {
+        field.setComponent('Input')
+        standardField && standardField.setValue('0-10分')
+      } else if (desc1Value === '业主股权出质比例') {
+        field.setComponent('Input')
+        standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '其他因素') {
         field.setComponent('Input')
         standardField && standardField.setValue('0-4分')
@@ -472,8 +491,12 @@ export default (props) => {
   }
 
   const onClick2 = (flag) => {
+
     let field = form.query('property').take()
-    if (field?.value !== '三类') return
+    if (field?.value !== '三类') {
+      message.error('请选择 项目性质为三类')
+      return
+    }
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {

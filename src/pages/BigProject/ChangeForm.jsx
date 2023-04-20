@@ -114,10 +114,10 @@ export default (props) => {
         let list4Field = form.query('list4').take()
         if (value === '三类') {
           list4Field?.setDisplay('visible')
-          form.query('providerName').take()?.setState({ required: true })
+          form.query('providerName').take()?.setState({ required: true, pattern: 'editable' })
         } else {
           list4Field?.setDisplay('none')
-          form.query('providerName').take()?.setState({ required: false })
+          form.query('providerName').take()?.setState({ required: false, pattern: 'disabled' })
         }
       }
     })
@@ -279,6 +279,18 @@ export default (props) => {
         field.setComponent('Input')
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '客户股权出质比例') {
+        field.setComponent('Input')
+        standardField && standardField.setValue('0-10分')
+      } else if (desc1Value === '业主注册时间') {
+        field.setComponent('DatePicker')
+        standardField && standardField.setValue('0-3分')
+      } else if (desc1Value === '标的金额/业主注册资本') {
+        field.setComponent('Input')
+        standardField && standardField.setValue('0-10分')
+      } else if (desc1Value === '业主诉讼/失信事项') {
+        field.setComponent('Input')
+        standardField && standardField.setValue('0-10分')
+      } else if (desc1Value === '业主股权出质比例') {
         field.setComponent('Input')
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '其他因素') {

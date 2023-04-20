@@ -79,7 +79,7 @@ export default (props) => {
   let { form, type, record } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,startDisplay,endDisplay,bidDate,giveMoney,giveMoneyCycle,powerDesc,powerCode)').forEach(field => {
+    form.query('*(displayName,deptName,createDatetime,startDisplay,endDisplay,bidDate,giveMoney,giveMoneyCycle,powerDesc,powerCode,providerName)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
@@ -98,12 +98,12 @@ export default (props) => {
       let value = field.value
       if (value) {
         if (value === '三类') {
-          form.query('providerName').take()?.setState({ required: true })
+          form.query('providerName').take()?.setState({ required: true, pattern: 'editable' })
           form.query('*(history2,haveProblem2,protectPerson,evaluate2)').forEach(field => {
             field.setState({ required: true })
           })
         } else {
-          form.query('providerName').take()?.setState({ required: false })
+          form.query('providerName').take()?.setState({ required: false, pattern: 'disabled' })
           form.query('*(history2,haveProblem2,protectPerson,evaluate2)').forEach(field => {
             field.setState({ required: false })
           })
@@ -196,11 +196,11 @@ export default (props) => {
   }
 
   const onClick2 = (flag) => {
-    /*    let field = form.query('property').take()
-        if (field?.value !== '三类') {
-          message.error('请选择 项目性质为三类')
-          return
-        }*/
+    let field = form.query('property').take()
+    if (field?.value !== '三类') {
+      message.error('请选择 项目性质为三类')
+      return
+    }
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {
@@ -237,7 +237,11 @@ export default (props) => {
   }
 
   const onClick3 = (flag, type) => {
-    return
+    let field = form.query('property').take()
+    if (field?.value !== '三类') {
+      message.error('请选择 项目性质为三类')
+      return
+    }
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {

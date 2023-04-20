@@ -130,11 +130,11 @@ export default (props) => {
       if (value) {
         let list4Field = form.query('list4').take()
         if (value === '三类') {
-          list4Field && list4Field.setDisplay('visible')
-          form.query('providerName').take()?.setState({ required: true })
+          list4Field?.setDisplay('visible')
+          form.query('providerName').take()?.setState({ required: true, pattern: 'editable' })
         } else {
-          list4Field && list4Field.setDisplay('none')
-          form.query('providerName').take()?.setState({ required: false })
+          list4Field?.setDisplay('none')
+          form.query('providerName').take()?.setState({ required: false, pattern: 'disabled' })
         }
       }
     })
@@ -298,6 +298,18 @@ export default (props) => {
       } else if (desc1Value === '客户股权出质比例') {
         field.setComponent('Input')
         standardField && standardField.setValue('0-10分')
+      }else if (desc1Value === '业主注册时间') {
+        field.setComponent('DatePicker')
+        standardField && standardField.setValue('0-3分')
+      } else if (desc1Value === '标的金额/业主注册资本') {
+        field.setComponent('Input')
+        standardField && standardField.setValue('0-10分')
+      } else if (desc1Value === '业主诉讼/失信事项') {
+        field.setComponent('Input')
+        standardField && standardField.setValue('0-10分')
+      } else if (desc1Value === '业主股权出质比例') {
+        field.setComponent('Input')
+        standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '其他因素') {
         field.setComponent('Input')
         standardField && standardField.setValue('0-4分')
@@ -458,6 +470,11 @@ export default (props) => {
   }
 
   const onClick2 = (flag) => {
+    let field = form.query('property').take()
+    if (field?.value !== '三类') {
+      message.error('请选择 项目性质为三类')
+      return
+    }
     if (flag === 'open') {
       let dialog2 = FormDialog({ footer: null, keyboard: false, maskClosable: false, width: 800 },
         (form2) => {

@@ -38,8 +38,8 @@ export default (props) => {
       //
       if (taskKeyList.length > 0) {
         taskKeyList.forEach(nodeId => {
-          lf.getNodeModelById(nodeId).setProperties({ statu: 'check' })
-          lf.getNodeModelById(nodeId).setSelected(true)
+          lf.getNodeModelById(nodeId)?.setProperties({ statu: 'check' })
+          lf.getNodeModelById(nodeId)?.setSelected(true)
         })
       }
     }
