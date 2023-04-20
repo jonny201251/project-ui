@@ -378,7 +378,7 @@ export default (props) => {
           } else if (desc2Value === '其他') {
             field.value = '0-8分'
           }
-        } else if (desc1Value === '客户企业性质') {
+        } else if (desc1Value === '客户企业性质' || desc1Value === '业主企业性质') {
           if (desc2Value === '集团所属企业' || desc2Value === '地级市以上政府') {
             field.value = '8-10分'
           } else if (desc2Value === '国企' || desc2Value === '县级以下政府') {
@@ -769,7 +769,7 @@ export default (props) => {
             size: 'small',
             pagination: { pageSize: 200 },
             sticky: true,
-            title: () => <div style={{ textAlign: 'center', fontWeight: 'bolder' }}>客户(业务)评估</div>,
+            title: () => <div style={{ textAlign: 'center', fontWeight: 'bolder' }}>客户(业主)评估</div>,
           }}
         >
           <SchemaField.Object>

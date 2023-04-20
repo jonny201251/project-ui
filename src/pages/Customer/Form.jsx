@@ -46,8 +46,19 @@ export default (props) => {
         />
         <SchemaField.String name="code" required title="纳税人识别号" x-decorator="FormItem" x-component="Input"/>
         <SchemaField.Number
-          name="registerMoney" required title="注册资本" x-decorator="FormItem" x-component="NumberPicker"/>
-        <SchemaField.Number name="realMoney" title="实缴资本" x-decorator="FormItem" x-component="NumberPicker"/>
+          name="registerMoney" required title="注册资本" x-decorator="FormItem" x-component="NumberPicker"
+          x-component-props={{
+            // addonAfter: '元',
+            formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+          }}
+        />
+        <SchemaField.Number
+          name="realMoney" title="实缴资本" x-decorator="FormItem" x-component="NumberPicker"
+          x-component-props={{
+            // addonAfter: '元',
+            formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+          }}
+        />
         {show()}
         <SchemaField.String
           name="fileList" required title="附件" x-decorator="FormItem" x-component="File"

@@ -26,7 +26,7 @@ import {
   InputButton,
   LoadingButton,
   OnlyButton,
-  NumberPicker
+  NumberPicker,
 } from '../../components'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
@@ -35,7 +35,7 @@ import { onFieldReact } from '@formily/core'
 
 const SchemaField = createSchemaField({
   components: {
-    FormLayout, FormItem, FormGrid, Input, InputButton,NumberPicker,
+    FormLayout, FormItem, FormGrid, Input, InputButton, NumberPicker,
     DatePicker, File, Radio, OnlyButton, Select, ArrayTable, ArrayTableAddition, ArrayTableIndex, ArrayTableRemove,
   },
 })
@@ -84,6 +84,17 @@ export default (props) => {
   }
 
   form.addEffects('id', () => {
+    onFieldReact('innList.*.rate', (field) => {
+      let rate = []
+      form.query('innList.*.rate').forEach(field => {
+        if (field.value) {
+          rate.push(field.value)
+        }
+      })
+      if (rate.length > 0) {
+        form.query('invoiceRate').take()?.setState({ value: rate.join('，') })
+      }
+    })
     onFieldReact('innList.*.money', (field) => {
       let inSum = 0
       form.query('innList.*.money').forEach(field => {
@@ -103,8 +114,8 @@ export default (props) => {
         }
       })
       if (inSum > 0 && outSum > 0) {
-        let rate = ((inSum - outSum) / inSum).toFixed(2)
-        rate = rate * 100 + '%'
+        let rate = (inSum - outSum) / inSum
+        rate = (rate * 100).toFixed(2) + '%'
         form.query('projectRate').take()?.setState({ value: rate })
       }
     })
@@ -130,8 +141,8 @@ export default (props) => {
         }
       })
       if (inSum > 0 && outSum > 0) {
-        let rate = ((inSum - outSum) / inSum).toFixed(2)
-        rate = rate * 100 + '%'
+        let rate = (inSum - outSum) / inSum
+        rate = (rate * 100).toFixed(2) + '%'
         form.query('projectRate').take()?.setState({ value: rate })
       }
     })
@@ -182,9 +193,15 @@ export default (props) => {
                 x-component="Input.TextArea" x-component-props={{ rows: 2 }}
               />
               <SchemaField.String name="protectRate" required x-decorator="FormItem" title="质保金比例" x-component="Input"/>
-              <SchemaField.String name="invoiceRate" required x-decorator="FormItem" title="税率" x-component="Input"/>
+              <SchemaField.String name="invoiceRate" x-decorator="FormItem" title="预计收入税率" x-component="Input"/>
               <SchemaField.String name="projectRate" x-decorator="FormItem" title="预计毛利率" x-component="Input"/>
-              <SchemaField.String name="totalCost" x-decorator="FormItem" title="成本总预算" x-component="Input"/>
+              <SchemaField.Number
+                name="totalCost" required x-decorator="FormItem" title="成本总预算" x-component="NumberPicker"
+                x-component-props={{
+                  addonAfter: '元',
+                  formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                }}
+              />
               <SchemaField.String name="startDate" required x-decorator="FormItem" title="开工日期"
                                   x-component="DatePicker"/>
               <SchemaField.String name="endDate" required x-decorator="FormItem" title="预计完工日期"
@@ -268,7 +285,8 @@ export default (props) => {
 
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
               <SchemaField.Array
-                name="innList" required x-decorator="FormItem" x-component="ArrayTable" x-decorator-props={{ gridSpan: 3 }}
+                name="innList" required x-decorator="FormItem" x-component="ArrayTable"
+                x-decorator-props={{ gridSpan: 3 }}
                 x-component-props={{ size: 'small', sticky: true, title: () => (<b>{'预计收入'}</b>) }}
               >
                 <SchemaField.Object>
@@ -278,7 +296,8 @@ export default (props) => {
                   >
                     <SchemaField.Void x-decorator="FormItem" x-component="ArrayTable.SortHandle"/>
                   </SchemaField.Void>
-                  <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '收入类型', align: 'center' }}>
+                  <SchemaField.Void x-component="ArrayTable.Column"
+                                    x-component-props={{ title: '收入类型', align: 'center' }}>
                     <SchemaField.String
                       name="inType" x-decorator="FormItem" x-component="Select"
                       enum={[
@@ -295,7 +314,8 @@ export default (props) => {
                   </SchemaField.Void>
 
 
-                  <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '金额', align: 'center' }}>
+                  <SchemaField.Void x-component="ArrayTable.Column"
+                                    x-component-props={{ title: '金额', align: 'center' }}>
                     <SchemaField.Number
                       name="money" x-decorator="FormItem" x-component="NumberPicker"
                       x-component-props={{
@@ -325,7 +345,8 @@ export default (props) => {
               />
 
               <SchemaField.Array
-                name="outList" required x-decorator="FormItem" x-component="ArrayTable" x-decorator-props={{ gridSpan: 3 }}
+                name="outList" required x-decorator="FormItem" x-component="ArrayTable"
+                x-decorator-props={{ gridSpan: 3 }}
                 x-component-props={{ size: 'small', sticky: true, title: () => (<b>{'预计支出'}</b>) }}
               >
                 <SchemaField.Object>
@@ -335,9 +356,11 @@ export default (props) => {
                   >
                     <SchemaField.Void x-decorator="FormItem" x-component="ArrayTable.SortHandle"/>
                   </SchemaField.Void>
-                  <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '成本类型', align: 'center' }}>
+                  <SchemaField.Void x-component="ArrayTable.Column"
+                                    x-component-props={{ title: '成本类型', align: 'center' }}>
                     <SchemaField.String
-                      name="outType" x-decorator="FormItem" x-component="Select" x-component-props={{ showSearch: true }}
+                      name="outType" x-decorator="FormItem" x-component="Select"
+                      x-component-props={{ showSearch: true }}
                       enum={[
                         { label: '材料及设备费', value: '材料及设备费' },
                         { label: '劳务费', value: '劳务费' },
@@ -361,7 +384,8 @@ export default (props) => {
                     <SchemaField.String name="rate" x-decorator="FormItem"
                                         x-component="Input" x-component-props={{ placeholder: '示例：3%' }}/>
                   </SchemaField.Void>
-                  <SchemaField.Void x-component="ArrayTable.Column" x-component-props={{ title: '金额', align: 'center' }}>
+                  <SchemaField.Void x-component="ArrayTable.Column"
+                                    x-component-props={{ title: '金额', align: 'center' }}>
                     <SchemaField.Number
                       name="money" x-decorator="FormItem" x-component="NumberPicker"
                       x-component-props={{
@@ -416,11 +440,11 @@ export default (props) => {
           </SchemaField>
         </Form>
       </Tabs.TabPane>
-      <Tabs.TabPane tab="流程图" key="2">
-        <ProcessDesignGraph processInstId={record.processInstId}/>
-      </Tabs.TabPane>
       <Tabs.TabPane tab="审批记录" key="3">
         <ProcessInstNodeList processInstId={record.processInstId}/>
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="流程图" key="2">
+        <ProcessDesignGraph processInstId={record.processInstId}/>
       </Tabs.TabPane>
     </Tabs>
   </ConfigProvider>

@@ -43,7 +43,7 @@ export default (props) => {
                     const values = await form2.submit()
                     if (values.selectedRow) {
                       form.setValues({
-                        providerId: values.selectedRow.providerId,
+                        providerId: values.selectedRow.id,
                         usee: values.selectedRow.usee,
                         name: values.selectedRow.name,
                         property: values.selectedRow.property,
@@ -129,11 +129,11 @@ export default (props) => {
           </SchemaField>
         </Form>
       </Tabs.TabPane>
-      <Tabs.TabPane tab="流程图" key="2">
-        <ProcessDesignGraph processInstId={record.processInstId}/>
-      </Tabs.TabPane>
       <Tabs.TabPane tab="审批记录" key="3">
         <ProcessInstNodeList processInstId={record.processInstId}/>
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="流程图" key="2">
+        <ProcessDesignGraph processInstId={record.processInstId}/>
       </Tabs.TabPane>
     </Tabs>
   </ConfigProvider>

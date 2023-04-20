@@ -191,7 +191,7 @@ export default (props) => {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
         if (!path.haveChange) {
-          if (record.displayName === (session.getItem('user')).displayName) {
+          if (record.deptName === (session.getItem('user')).deptName) {
             arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
           }
         }
@@ -215,7 +215,7 @@ export default (props) => {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>)
         }
         if (!path.haveChange) {
-          if (record.displayName === (session.getItem('user')).displayName) {
+          if (record.deptName === (session.getItem('user')).deptName) {
             arr.push(<a onClick={() => onClick('change')}>{path.changeButtonName || '变更'}</a>)
           }
         }

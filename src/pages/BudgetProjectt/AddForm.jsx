@@ -39,10 +39,10 @@ const SchemaField = createSchemaField({
 
 
 export default (props) => {
-  let { form, type } = props
+  let { form, type,haveEditForm } = props
 
   useEffect(async () => {
-    form.query('*(displayName,deptName,createDatetime,taskCode,property,totalCost,endMoney,inChangeMoney,outChangeMoney,customerName,inSum,outSum,projectRate)').forEach(field => {
+    form.query('*(invoiceRate,displayName,deptName,createDatetime,taskCode,property,totalCost,endMoney,inChangeMoney,outChangeMoney,customerName,inSum,outSum,projectRate)').forEach(field => {
       field.setPattern('disabled')
     })
     if (type === 'add') {
@@ -98,59 +98,71 @@ export default (props) => {
   }
 
   form.addEffects('id', () => {
+    if (haveEditForm === '是') {
+      onFieldReact('innList.*.rate', (field) => {
+        let rate = []
+        form.query('innList.*.rate').forEach(field => {
+          if (field.value) {
+            rate.push(field.value)
+          }
+        })
+        if (rate.length > 0) {
+          form.query('invoiceRate').take()?.setState({ value: rate.join('，') })
+        }
+      })
 
-    onFieldReact('innList.*.money', (field) => {
-      let inSum = 0
-      form.query('innList.*.money').forEach(field => {
-        if (field.value) {
-          inSum += field.value
+      onFieldReact('innList.*.money', (field) => {
+        let inSum = 0
+        form.query('innList.*.money').forEach(field => {
+          if (field.value) {
+            inSum += field.value
+          }
+        })
+        let tmp = form.query('inSum').take()
+        if (tmp && inSum) {
+          tmp.setState({ value: inSum.toFixed(2), pattern: 'disabled' })
+        }
+        //
+        let outSum = 0
+        form.query('outList.*.money').forEach(field => {
+          if (field.value) {
+            outSum += field.value
+          }
+        })
+        if (inSum > 0 && outSum > 0) {
+          let rate = (inSum - outSum) / inSum
+          rate = (rate * 100).toFixed(2) + '%'
+          form.query('projectRate').take()?.setState({ value: rate })
         }
       })
-      let tmp = form.query('inSum').take()
-      if (tmp && inSum) {
-        tmp.setState({ value: inSum.toFixed(2), pattern: 'disabled' })
-      }
-      //
-      let outSum = 0
-      form.query('outList.*.money').forEach(field => {
-        if (field.value) {
-          outSum += field.value
-        }
-      })
-      if (inSum > 0 && outSum > 0) {
-        let rate = ((inSum - outSum) / inSum).toFixed(2)
-        rate = rate * 100 + '%'
-        form.query('projectRate').take()?.setState({ value: rate })
-      }
-    })
 
-    onFieldReact('outList.*.money', (field) => {
-      let outSum = 0
-      form.query('outList.*.money').forEach(field => {
-        if (field.value) {
-          outSum += field.value
+      onFieldReact('outList.*.money', (field) => {
+        let outSum = 0
+        form.query('outList.*.money').forEach(field => {
+          if (field.value) {
+            outSum += field.value
+          }
+        })
+        let tmp = form.query('outSum').take()
+        let tmp2 = form.query('totalCost').take()
+        if (tmp && outSum) {
+          tmp.setState({ value: outSum.toFixed(2), pattern: 'disabled' })
+          tmp2.setState({ value: outSum.toFixed(2) })
+        }
+        //
+        let inSum = 0
+        form.query('innList.*.money').forEach(field => {
+          if (field.value) {
+            inSum += field.value
+          }
+        })
+        if (inSum > 0 && outSum > 0) {
+          let rate = (inSum - outSum) / inSum
+          rate = (rate * 100).toFixed(2) + '%'
+          form.query('projectRate').take()?.setState({ value: rate })
         }
       })
-      let tmp = form.query('outSum').take()
-      let tmp2 = form.query('totalCost').take()
-      if (tmp && outSum) {
-        tmp.setState({ value: outSum.toFixed(2), pattern: 'disabled' })
-        tmp2.setState({ value: outSum.toFixed(2) })
-      }
-      //
-      let inSum = 0
-      form.query('innList.*.money').forEach(field => {
-        if (field.value) {
-          inSum += field.value
-        }
-      })
-      if (inSum > 0 && outSum > 0) {
-        let rate = ((inSum - outSum) / inSum).toFixed(2)
-        rate = rate * 100 + '%'
-        form.query('projectRate').take()?.setState({ value: rate })
-      }
-    })
-
+    }
   })
 
   const showHaveThree = () => {
@@ -197,12 +209,15 @@ export default (props) => {
             name="protectRate" required x-decorator="FormItem" title="质保金比例"
             x-component="Input" x-component-props={{ placeholder: '示例：3%' }}
           />
-          <SchemaField.String
-            name="invoiceRate" required x-decorator="FormItem" title="税率"
-            x-component="Input" x-component-props={{ placeholder: '示例：3%，6%，13%' }}
-          />
+          <SchemaField.String name="invoiceRate" x-decorator="FormItem" title="预计收入税率" x-component="Input"/>
           <SchemaField.String name="projectRate" x-decorator="FormItem" title="预计毛利率" x-component="Input"/>
-          <SchemaField.String name="totalCost" x-decorator="FormItem" title="成本总预算" x-component="Input"/>
+          <SchemaField.Number
+            name="totalCost" required x-decorator="FormItem" title="成本总预算" x-component="NumberPicker"
+            x-component-props={{
+              addonAfter: '元',
+              formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+            }}
+          />
           <SchemaField.String name="startDate" required x-decorator="FormItem" title="开工日期" x-component="DatePicker"/>
           <SchemaField.String name="endDate" required x-decorator="FormItem" title="预计完工日期" x-component="DatePicker"/>
           <SchemaField.String name="endMoney" x-decorator="FormItem" title="结算金额" x-component="Input"/>

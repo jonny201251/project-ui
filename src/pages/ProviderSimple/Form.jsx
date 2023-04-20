@@ -12,7 +12,6 @@ import {
 import { createSchemaField } from '@formily/react'
 import React, { useEffect } from 'react'
 import { Button, ConfigProvider, message } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
 import { session } from '../../utils'
 import zhCN from 'antd/lib/locale/zh_CN'
 import styles from '../table-placeholder.less'
@@ -21,9 +20,10 @@ import {
   ArrayTableAddition,
   ArrayTableIndex,
   ArrayTableRemove,
-  LoadingButton,InputButton,
-  NumberPicker,
   File,
+  InputButton,
+  LoadingButton,
+  NumberPicker,
 } from '../../components'
 
 
@@ -107,15 +107,15 @@ export default (props) => {
           <SchemaField.String
             name="address" title="注册地址" x-decorator="FormItem" x-component="Input" x-decorator-props={{ gridSpan: 2 }}/>
           <SchemaField.String
-            name="address2" title="生产经营地址" x-decorator="FormItem" x-component="Input"
+            name="address2" required title="生产经营地址" x-decorator="FormItem" x-component="Input"
             x-decorator-props={{ gridSpan: 2 }}/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="telephone" title="电话及区号" x-decorator="FormItem" x-component="Input"/>
-          <SchemaField.String name="code" title="邮政编码" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="telephone" required title="电话及区号" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="code" required title="邮政编码" x-decorator="FormItem" x-component="Input"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.String name="economy" title="经济性质" x-decorator="FormItem" x-component="Input"/>
+          <SchemaField.String name="economy" required title="经济性质" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.String name="registerMoney" title="注册资本" x-decorator="FormItem" x-component="Input"/>
           <SchemaField.Array
             name="list" title={'供方人员'} required x-decorator="FormItem" x-component="ArrayTable"
@@ -140,7 +140,7 @@ export default (props) => {
               <SchemaField.Void x-component="ArrayTable.Column"
                                 x-component-props={{ width: 150, title: '学历', align: 'center' }}>
                 <SchemaField.String
-                  name="education" required x-decorator="FormItem" x-component="Select"
+                  name="education" x-decorator="FormItem" x-component="Select"
                   enum={[
                     { label: '专科', value: '专科' },
                     { label: '本科', value: '本科' },
@@ -164,21 +164,21 @@ export default (props) => {
           </SchemaField.Array>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.Number name="workCount" title="职工总数" x-decorator="FormItem" x-component="NumberPicker"/>
-          <SchemaField.Number name="highCount" title="高工人数" x-decorator="FormItem" x-component="NumberPicker"/>
+          <SchemaField.Number name="workCount" required title="职工总数" x-decorator="FormItem" x-component="NumberPicker"/>
+          <SchemaField.Number name="highCount" required title="高工人数" x-decorator="FormItem" x-component="NumberPicker"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.Number name="techCount" title="技术人数" x-decorator="FormItem" x-component="NumberPicker"/>
-          <SchemaField.Number name="helpCount" title="助工人数" x-decorator="FormItem" x-component="NumberPicker"/>
+          <SchemaField.Number name="techCount" required title="技术人数" x-decorator="FormItem" x-component="NumberPicker"/>
+          <SchemaField.Number name="helpCount" required title="助工人数" x-decorator="FormItem" x-component="NumberPicker"/>
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
-          <SchemaField.Number name="device1" title="机械设备总台(件)数" x-decorator="FormItem" x-component="NumberPicker"/>
-          <SchemaField.Number name="device2" title="检验仪器(表)总台(件)数" x-decorator="FormItem" x-component="NumberPicker"/>
+          <SchemaField.Number name="device1" required title="机械设备总台(件)数" x-decorator="FormItem" x-component="NumberPicker"/>
+          <SchemaField.Number name="device2" required title="检验仪器(表)总台(件)数" x-decorator="FormItem" x-component="NumberPicker"/>
           <SchemaField.String
-            name="descc" title="相关企业资质情况" x-decorator="FormItem" x-component="Input.TextArea"
+            name="descc" required title="相关企业资质情况" x-decorator="FormItem" x-component="Input.TextArea"
             x-component-props={{ rows: 2 }} x-decorator-props={{ gridSpan: 2 }}/>
           <SchemaField.String
-            name="scope" title="主要经营范围" x-decorator="FormItem" x-component="Input.TextArea"
+            name="scope" required title="主要经营范围" x-decorator="FormItem" x-component="Input.TextArea"
             x-component-props={{ rows: 2 }} x-decorator-props={{ gridSpan: 2 }}/>
           <SchemaField.String name="fileList" title="附件" x-decorator="FormItem" x-component="File"
                               x-decorator-props={{ gridSpan: 2 }}/>

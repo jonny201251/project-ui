@@ -23,7 +23,12 @@ export default () => {
       },
     },
     { title: '预计毛利率', dataIndex: 'projectRate', valueType: 'text', hideInSearch: true },
-    { title: '成本总预算', dataIndex: 'totalCost', valueType: 'text', hideInSearch: true },
+    {
+      title: '成本总预算', dataIndex: 'totalCost', valueType: 'text', hideInSearch: true,
+      render: (text, record, _, action) => {
+        return record.totalCost > 0 ? (record.totalCost + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',') : ''
+      },
+    },
     { title: '合同编号', dataIndex: 'contractCode', valueType: 'text' },
     {
       title: '合同金额', dataIndex: 'contractMoney', valueType: 'text', hideInSearch: true,

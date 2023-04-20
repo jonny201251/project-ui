@@ -13,11 +13,11 @@ export default (props) => {
       <Tabs.TabPane tab="表单数据" key="1">
 
       </Tabs.TabPane>
-      <Tabs.TabPane tab="流程图" key="2">
-        <ProcessDesignGraph processInstId={record.processInstId}/>
-      </Tabs.TabPane>
       <Tabs.TabPane tab="审批记录" key="3">
         <ProcessInstNodeList processInstId={record.processInstId}/>
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="流程图" key="2">
+        <ProcessDesignGraph processInstId={record.processInstId}/>
       </Tabs.TabPane>
     </Tabs>
   </ConfigProvider>
