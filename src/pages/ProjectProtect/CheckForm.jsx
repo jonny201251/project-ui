@@ -116,11 +116,11 @@ export default (props) => {
               </SchemaField.Void>
               <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
                 <SchemaField.String
-                  name="outName" required title="付款单位" x-component="Input"
+                  name="outName" title="付款单位" x-component="Input"
                   x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                 />
                 <SchemaField.String
-                  name="inName" required title="收款单位" x-component="Input"
+                  name="inName" title="收款单位" x-component="Input"
                   x-decorator="FormItem" x-decorator-props={{ gridSpan: 2 }}
                 />
               </SchemaField.Void>

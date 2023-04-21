@@ -65,6 +65,7 @@ map.set('否决项', ['是', '否'].map(item => ({ label: item, value: item })))
 
 map.set('客户角色', ['业主', '总包', '其他'].map(item => ({ label: item, value: item })))
 map.set('客户企业性质', ['集团所属企业', '地级市以上政府', '国企', '县级以下政府', '民企', '其他'].map(item => ({ label: item, value: item })))
+map.set('业主企业性质', ['集团所属企业', '地级市以上政府', '国企', '县级以下政府', '民企', '其他'].map(item => ({ label: item, value: item })))
 map.set('客户(业主)评分', ['--'].map(item => ({ label: item, value: item })))
 
 
@@ -311,7 +312,7 @@ export default (props) => {
         field.setComponent('DatePicker')
         standardField && standardField.setValue('0-3分')
       } else if (desc1Value === '标的金额/客户注册资本') {
-        field.setComponent('Input')
+        field.setComponent('Input', { placeholder: '示例：3000万/10000万' })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '客户诉讼/失信事项') {
         field.setComponent('Input')
@@ -323,7 +324,7 @@ export default (props) => {
         field.setComponent('DatePicker')
         standardField && standardField.setValue('0-3分')
       } else if (desc1Value === '标的金额/业主注册资本') {
-        field.setComponent('Input')
+        field.setComponent('Input', { placeholder: '示例：3000万/10000万' })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '业主诉讼/失信事项') {
         field.setComponent('Input')

@@ -39,7 +39,7 @@ const SchemaField = createSchemaField({
 
 
 export default (props) => {
-  let { form, type,haveEditForm } = props
+  let { form, type, haveEditForm } = props
 
   useEffect(async () => {
     form.query('*(invoiceRate,displayName,deptName,createDatetime,taskCode,property,totalCost,endMoney,inChangeMoney,outChangeMoney,customerName,inSum,outSum,projectRate)').forEach(field => {
@@ -98,71 +98,69 @@ export default (props) => {
   }
 
   form.addEffects('id', () => {
-    if (haveEditForm === '是') {
-      onFieldReact('innList.*.rate', (field) => {
-        let rate = []
-        form.query('innList.*.rate').forEach(field => {
-          if (field.value) {
-            rate.push(field.value)
-          }
-        })
-        if (rate.length > 0) {
-          form.query('invoiceRate').take()?.setState({ value: rate.join('，') })
+    onFieldReact('innList.*.rate', (field) => {
+      let rate = []
+      form.query('innList.*.rate').forEach(field => {
+        if (field.value) {
+          rate.push(field.value)
         }
       })
+      if (rate.length > 0) {
+        form.query('invoiceRate').take()?.setState({ value: rate.join('，') })
+      }
+    })
 
-      onFieldReact('innList.*.money', (field) => {
-        let inSum = 0
-        form.query('innList.*.money').forEach(field => {
-          if (field.value) {
-            inSum += field.value
-          }
-        })
-        let tmp = form.query('inSum').take()
-        if (tmp && inSum) {
-          tmp.setState({ value: inSum.toFixed(2), pattern: 'disabled' })
-        }
-        //
-        let outSum = 0
-        form.query('outList.*.money').forEach(field => {
-          if (field.value) {
-            outSum += field.value
-          }
-        })
-        if (inSum > 0 && outSum > 0) {
-          let rate = (inSum - outSum) / inSum
-          rate = (rate * 100).toFixed(2) + '%'
-          form.query('projectRate').take()?.setState({ value: rate })
+    onFieldReact('innList.*.money', (field) => {
+      let inSum = 0
+      form.query('innList.*.money').forEach(field => {
+        if (field.value) {
+          inSum += field.value
         }
       })
+      let tmp = form.query('inSum').take()
+      if (tmp && inSum) {
+        tmp.setState({ value: inSum.toFixed(2), pattern: 'disabled' })
+      }
+      //
+      let outSum = 0
+      form.query('outList.*.money').forEach(field => {
+        if (field.value) {
+          outSum += field.value
+        }
+      })
+      if (inSum > 0 && outSum > 0) {
+        let rate = (inSum - outSum) / inSum
+        rate = (rate * 100).toFixed(2) + '%'
+        form.query('projectRate').take()?.setState({ value: rate })
+      }
+    })
 
-      onFieldReact('outList.*.money', (field) => {
-        let outSum = 0
-        form.query('outList.*.money').forEach(field => {
-          if (field.value) {
-            outSum += field.value
-          }
-        })
-        let tmp = form.query('outSum').take()
-        let tmp2 = form.query('totalCost').take()
-        if (tmp && outSum) {
-          tmp.setState({ value: outSum.toFixed(2), pattern: 'disabled' })
-          tmp2.setState({ value: outSum.toFixed(2) })
-        }
-        //
-        let inSum = 0
-        form.query('innList.*.money').forEach(field => {
-          if (field.value) {
-            inSum += field.value
-          }
-        })
-        if (inSum > 0 && outSum > 0) {
-          let rate = (inSum - outSum) / inSum
-          rate = (rate * 100).toFixed(2) + '%'
-          form.query('projectRate').take()?.setState({ value: rate })
+    onFieldReact('outList.*.money', (field) => {
+      let outSum = 0
+      form.query('outList.*.money').forEach(field => {
+        if (field.value) {
+          outSum += field.value
         }
       })
-    }
+      let tmp = form.query('outSum').take()
+      let tmp2 = form.query('totalCost').take()
+      if (tmp && outSum) {
+        tmp.setState({ value: outSum.toFixed(2), pattern: 'disabled' })
+        tmp2.setState({ value: outSum.toFixed(2) })
+      }
+      //
+      let inSum = 0
+      form.query('innList.*.money').forEach(field => {
+        if (field.value) {
+          inSum += field.value
+        }
+      })
+      if (inSum > 0 && outSum > 0) {
+        let rate = (inSum - outSum) / inSum
+        rate = (rate * 100).toFixed(2) + '%'
+        form.query('projectRate').take()?.setState({ value: rate })
+      }
+    })
   })
 
   const showHaveThree = () => {
