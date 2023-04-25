@@ -80,15 +80,15 @@ export default (props) => {
           if (itemValue === '国有军工系统企业') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '国有其他企业') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '民营等企业') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
           if (session.getItem('user').loginName !== '宋思奇') {
             endScoreField?.setPattern('disabled')
@@ -98,15 +98,15 @@ export default (props) => {
           if (itemValue === '注册资本≥1000万') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '1000万>注册资本≥300万') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '注册资本<300万') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
           if (session.getItem('user').loginName !== '宋思奇') {
             endScoreField?.setPattern('disabled')
@@ -116,120 +116,120 @@ export default (props) => {
           if (itemValue === '负债率≤50%(较低)') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '50%<负债率≤75%(一般)') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '75%<负债率(较高)') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
         }
         if (kpiValue === '是否经营风险性项目(比如期货、股票交易或价格波动较大的产品)') {
           if (itemValue === '没有') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '有，但资金占用很小，不超过 流动资产的 20%') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '有且规模较大或为主营业务') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
         }
         if (kpiValue === '不良记录情况(比如恶意欠款，恶意因质量问题拒付客户账款、法院裁决、被法院强制执行信息、其他)') {
           if (itemValue === '无') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '有，但体量小，有争议') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '有，影响较大') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
         }
         if (kpiValue === '已实施项目中客户的付款情况') {
           if (itemValue === '按约定付款，非常及时') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '催促后基本能够按时付款') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '拖欠时间较长，付款较难') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
         }
         if (kpiValue === '付款结算周期') {
           if (itemValue === '周期短(一个月内)') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '周期中等(1-3个月)') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '周期长(超3个月)') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
         }
         if (kpiValue === '回款及时率') {
           if (itemValue === '按约定回款') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '不超过约定3个月') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '超过约定3个月') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
         }
         if (kpiValue === '账目清晰程度') {
           if (itemValue === '清晰') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '比较清晰') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '不清晰') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
         }
         if (kpiValue === '其他信誉情况') {
           if (itemValue === '信誉高') {
             field.value = '9-10分'
             startScoreField && startScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 9, maximum: 10, required: true })
           } else if (itemValue === '信誉中等') {
             field.value = '6-8分'
             startScoreField && startScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 6, maximum: 8, required: true })
           } else if (itemValue === '信誉差') {
             field.value = '<6分'
             startScoreField && startScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
-            endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
+            // endScoreField && endScoreField.setValidator({ minimum: 0, maximum: 6, required: true })
           }
         }
       }

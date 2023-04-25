@@ -128,7 +128,9 @@ export default (props) => {
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
               <SchemaField.String
                 name="remark" title="备注" x-component="Input.TextArea"
-                x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
+                x-component-props={{ rows: 2 }} x-decorator="FormItem"
+                x-decorator-props={{ gridSpan: 2 }}
+              />
             </SchemaField.Void>
           </SchemaField>
         </Form>

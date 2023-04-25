@@ -138,13 +138,15 @@ export default (props) => {
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
             name="remark" title="备注" x-component="Input.TextArea"
-            x-component-props={{ rows: 2 }} x-decorator="FormItem"/>
+            x-component-props={{ rows: 2 }} x-decorator="FormItem"
+            x-decorator-props={{ gridSpan: 2 }}
+          />
         </SchemaField.Void>
         <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 3, strictAutoFit: true }}>
           <SchemaField.String
-            name="userNamee" required title="财务部" x-decorator="FormItem"
-            x-decorator-props={{ tooltip: '流程审批节点' }}
-            x-component="Select" x-component-props={{ showSearch: true }}
+            name="userNameeList" required title="财务部" x-decorator="FormItem"
+            x-decorator-props={{ gridSpan: 2, tooltip: '流程审批节点' }}
+            x-component="Select" x-component-props={{ showSearch: true,mode:'multiple'  }}
             enum={session.getItem('userList')}
           />
         </SchemaField.Void>
