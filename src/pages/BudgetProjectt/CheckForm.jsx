@@ -92,7 +92,6 @@ export default (props) => {
 
 
   form.addEffects('id', () => {
-    if (haveEditForm === '是') {
       onFieldReact('innList.*.rate', (field) => {
         let rate = []
         form.query('innList.*.rate').forEach(field => {
@@ -156,8 +155,6 @@ export default (props) => {
           form.query('projectRate').take()?.setState({ value: rate })
         }
       })
-
-    }
   })
 
   const showHaveThree = () => {

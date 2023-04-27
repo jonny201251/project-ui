@@ -291,7 +291,7 @@ export default (props) => {
         field.setComponent('DatePicker')
         standardField && standardField.setValue('0-3分')
       } else if (desc1Value === '标的金额/客户注册资本') {
-        field.setComponent('Input', { placeholder: '示例：3000万/10000万' })
+        field.setComponent('Input',{ placeholder: '示例：3000万/10000万' })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '客户诉讼/失信事项') {
         field.setComponent('Input')
@@ -299,11 +299,11 @@ export default (props) => {
       } else if (desc1Value === '客户股权出质比例') {
         field.setComponent('Input')
         standardField && standardField.setValue('0-10分')
-      }else if (desc1Value === '业主注册时间') {
+      } else if (desc1Value === '业主注册时间') {
         field.setComponent('DatePicker')
         standardField && standardField.setValue('0-3分')
-      } else if (desc1Value === '标的金额/业主注册资本', { placeholder: '示例：3000万/10000万' }) {
-        field.setComponent('Input')
+      } else if (desc1Value === '标的金额/业主注册资本') {
+        field.setComponent('Input', { placeholder: '示例：3000万/10000万' })
         standardField && standardField.setValue('0-10分')
       } else if (desc1Value === '业主诉讼/失信事项') {
         field.setComponent('Input')
@@ -321,7 +321,7 @@ export default (props) => {
       } else if (desc1Value === '否决项') {
         standardField && standardField.setValue('--')
       }
-
+      // scoreField?.setPattern('disabled')
     })
     onFieldReact('list3.*.standard', (field) => {
       let desc1Value = field.query('.desc1').get('value')
@@ -351,14 +351,14 @@ export default (props) => {
         }
       }
     })
-    onFieldReact('list3.*(0,1,2,3,4,5,6).score', (field) => {
+    onFieldReact('list3.*(0,1,2,3,4,5,6,7,8,9,10,11).score', (field) => {
       let sum = 0
-      form.query('list3.*(0,1,2,3,4,5,6).score').forEach(field => {
+      form.query('list3.*(0,1,2,3,4,5,6,7,8,9,10,11).score').forEach(field => {
         if (field.value) {
           sum += field.value
         }
       })
-      let tmp = form.query('list3.7.score').take()
+      let tmp = form.query('list3.12.score').take()
       if (tmp && sum) {
         tmp.setState({ value: sum, pattern: 'disabled' })
       }
@@ -614,7 +614,7 @@ export default (props) => {
                                     formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
                                   }}
               />
-              <SchemaField.String name="expectDate" required title="预计签约日期" x-decorator="FormItem"
+              <SchemaField.String name="expectDate" required title="预计投标日期" x-decorator="FormItem"
                                   x-component="DatePicker"/>
               <SchemaField.String
                 name="invoiceType" title="发票类型" required x-decorator="FormItem" x-component="Select"
@@ -731,7 +731,7 @@ export default (props) => {
                   x-component="ArrayTable.Column"
                   x-component-props={{ width: 120, title: '评分', align: 'center' }}
                 >
-                  <SchemaField.Number x-decorator="FormItem" required name="score" x-component="NumberPicker"/>
+                  <SchemaField.Number x-decorator="FormItem" name="score" x-component="NumberPicker"/>
                 </SchemaField.Void>
                 <SchemaField.Void
                   x-component="ArrayTable.Column"
@@ -780,7 +780,7 @@ export default (props) => {
                   x-component="ArrayTable.Column"
                   x-component-props={{ width: 120, title: '评分', align: 'center' }}
                 >
-                  <SchemaField.Number x-decorator="FormItem" required name="score" x-component="NumberPicker"/>
+                  <SchemaField.Number x-decorator="FormItem" name="score" x-component="NumberPicker"/>
                 </SchemaField.Void>
                 <SchemaField.Void
                   x-component="ArrayTable.Column"
@@ -829,7 +829,7 @@ export default (props) => {
                   x-component="ArrayTable.Column"
                   x-component-props={{ width: 120, title: '评分', align: 'center' }}
                 >
-                  <SchemaField.Number x-decorator="FormItem" required name="score" x-component="NumberPicker"/>
+                  <SchemaField.Number x-decorator="FormItem" name="score" x-component="NumberPicker"/>
                 </SchemaField.Void>
                 <SchemaField.Void
                   x-component="ArrayTable.Column"

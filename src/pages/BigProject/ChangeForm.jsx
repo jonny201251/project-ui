@@ -552,7 +552,7 @@ export default (props) => {
                                 formatter: (value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
                               }}
           />
-          <SchemaField.String name="expectDate" required title="预计签约日期" x-decorator="FormItem"
+          <SchemaField.String name="expectDate" required title="预计投标日期" x-decorator="FormItem"
                               x-component="DatePicker"/>
           <SchemaField.String
             name="invoiceType" title="发票类型" required x-decorator="FormItem" x-component="Select"
