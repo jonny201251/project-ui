@@ -6,7 +6,7 @@ import { session } from '../../utils'
 import zhCN from 'antd/lib/locale/zh_CN'
 import styles from '../table-placeholder.less'
 import DialogList from './DialogList'
-import { File, InputButton, LoadingButton } from '../../components'
+import { File, InputButton, LoadingButton,NumberPicker } from '../../components'
 import ProcessDesignGraph from '../ProcessDesignGraph'
 import ProcessInstNodeList from '../ProcessInstNode/List'
 
@@ -14,7 +14,7 @@ import ProcessInstNodeList from '../ProcessInstNode/List'
 const SchemaField = createSchemaField({
   components: {
     FormLayout, FormItem, FormGrid, Input, InputButton,
-    DatePicker, File, Select,
+    DatePicker, File, Select,NumberPicker
   },
 })
 

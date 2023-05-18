@@ -178,7 +178,12 @@ export default (props) => {
                 ]}
               />
               <SchemaField.String name="bidDate" title="投标截止日期" x-decorator="FormItem" x-component="DatePicker"/>
-              <SchemaField.String name="workDateTmp" required title="开竣工日期" x-decorator="FormItem" x-component="DatePicker.RangePicker"/>
+              <SchemaField.String
+                name="workDateTmp" required title="开竣工日期"
+                x-component="DatePicker.RangePicker"
+                // x-component-props={{ format: 'YYYY年MM月DD日' }}
+                x-decorator="FormItem" x-decorator-props={{ tooltip: '双击鼠标进行选择', gridSpan: 2 }}
+              />
             </SchemaField.Void>
             <SchemaField.Void x-component="FormGrid" x-component-props={{ maxColumns: 4, strictAutoFit: true }}>
               <SchemaField.String
