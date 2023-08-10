@@ -80,6 +80,11 @@ import ProviderQueryViewHistory from '../pages/ProviderQuery/ViewHistory';
 import ProviderQueryViewForm from '../pages/ProviderQuery/ViewForm';
 import ProviderQueryChangeForm from '../pages/ProviderQuery/ChangeForm';
 
+import ProviderCancelList from '../pages/ProviderCancel/List';
+import ProviderCancelAddForm from '../pages/ProviderCancel/AddForm';
+import ProviderCancelCheckForm from '../pages/ProviderCancel/CheckForm';
+import ProviderCancelViewForm from '../pages/ProviderCancel/ViewForm';
+
 import BudgetProjecttList from '../pages/BudgetProjectt/List';
 import BudgetProjecttAddForm from '../pages/BudgetProjectt/AddForm';
 import BudgetProjecttCheckForm from '../pages/BudgetProjectt/CheckForm';
@@ -294,7 +299,7 @@ export const customerCheck12Path = {
 export const projectPowerPath = {
   flag: 'projectPowerPath',
   width: 1000,
-  haveChange: '无',
+  haveChange: 'no',
   List: ProjectPowerList,
   AddForm: ProjectPowerAddForm,
   EditForm: ProjectPowerAddForm,
@@ -307,6 +312,7 @@ export const projectPowerPath = {
 export const otherPowerPath = {
   flag: 'otherPowerPath',
   width: 1000,
+  haveChange: 'no',
   List: OtherPowerList,
   AddForm: OtherPowerAddForm,
   EditForm: OtherPowerAddForm,
@@ -350,7 +356,7 @@ export const projectProtectPath = {
   flag: 'projectProtectPath',
   width: 1000,
   List: ProjectProtectList,
-  haveChange: true,
+  haveChange: 'no',
   AddForm: ProjectProtectAddForm,
   EditForm: ProjectProtectAddForm,
   CheckForm: ProjectProtectCheckForm,
@@ -575,7 +581,19 @@ export const providerQueryPath = {
   get: contextPath + '/providerQuery/get',
   btnHandle: contextPath + '/providerQuery/btnHandle',
 };
-
+export const providerCancelPath = {
+  flag: 'providerCancelPath',
+  width: 1000,
+  haveChange: 'no',
+  List: ProviderCancelList,
+  AddForm: ProviderCancelAddForm,
+  EditForm: ProviderCancelAddForm,
+  CheckForm: ProviderCancelCheckForm,
+  ViewForm: ProviderCancelViewForm,
+  list: contextPath + '/providerCancel/list',
+  get: contextPath + '/providerCancel/get',
+  btnHandle: contextPath + '/providerCancel/btnHandle',
+};
 export const smallBudgetRunPath = {
   flag: 'smallBudgetRunPath',
   width: 900,
@@ -614,7 +632,7 @@ export const providerControlPath = {
   flag: 'providerControlPath',
   width: 1000,
   List: ProviderControlList,
-  haveChange: true,
+  haveChange: 'no',
   AddForm: ProviderControlAddForm,
   EditForm: ProviderControlAddForm,
   CheckForm: ProviderControlCheckForm,
@@ -628,7 +646,7 @@ export const projectOutPath = {
   flag: 'projectOutPath',
   width: 1000,
   List: ProjectOutList,
-  haveChange: true,
+  haveChange: 'no',
   AddForm: ProjectOutAddForm,
   EditForm: ProjectOutAddForm,
   CheckForm: ProjectOutCheckForm,

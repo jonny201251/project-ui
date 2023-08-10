@@ -419,7 +419,7 @@ export default (props) => {
         if (version > 0) {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>);
         }
-        if (!path.haveChange && path.flag !== 'otherPowerPath') {
+        if (!path.haveChange) {
           if (record.deptName === session.getItem('user').deptName) {
             arr.push(
               <a onClick={() => onClick('change')}>
@@ -460,7 +460,7 @@ export default (props) => {
         if (version > 0) {
           arr.push(<a onClick={() => onClick('viewHistory')}>查看历史</a>);
         }
-        if (!path.haveChange && path.flag !== 'otherPowerPath') {
+        if (!path.haveChange) {
           if (record.deptName === session.getItem('user').deptName) {
             arr.push(
               <a onClick={() => onClick('change')}>
