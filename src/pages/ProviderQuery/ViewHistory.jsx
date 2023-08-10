@@ -6,8 +6,8 @@ import { OperateButtonProcess } from '../../components';
 export default (props) => {
   const actionRef = useRef();
   const columns = [
-    { title: '供方用途', dataIndex: 'usee', valueType: 'text' },
-    { title: '项目类别', dataIndex: 'type', valueType: 'text' },
+    { title: '项目类别', dataIndex: 'usee', valueType: 'text' },
+    { title: '项目大小', dataIndex: 'type', valueType: 'text' },
     {
       title: '供方名称',
       dataIndex: 'name',

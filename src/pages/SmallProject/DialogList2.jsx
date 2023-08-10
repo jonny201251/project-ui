@@ -4,14 +4,14 @@ import { BaseList } from '../../components';
 export default (props) => {
   const columns = [
     {
-      title: '供方用途',
+      title: '项目类别',
       dataIndex: 'usee',
       valueType: 'text',
       colSize: 2,
       hideInSearch: true,
     },
     {
-      title: '项目类别',
+      title: '项目大小',
       dataIndex: 'type',
       valueType: 'text',
       colSize: 2,

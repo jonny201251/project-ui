@@ -70,7 +70,7 @@ export default (props) => {
           <SchemaField.String
             name="usee"
             required
-            title="供方用途"
+            title="项目类别"
             x-decorator="FormItem"
             x-component="Select"
             enum={[
@@ -85,7 +85,7 @@ export default (props) => {
           <SchemaField.String
             name="type"
             required
-            title="项目类别"
+            title="项目大小"
             x-decorator="FormItem"
             x-component="Radio.Group"
             enum={[

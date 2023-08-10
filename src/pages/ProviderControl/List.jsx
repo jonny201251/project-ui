@@ -1,16 +1,18 @@
-import { providerControlPath } from '../../utils'
-import { BaseProTableProcess } from '../../components'
+import { providerControlPath } from '../../utils';
+import { BaseProTableProcess } from '../../components';
 
 export default () => {
   const columns = [
-    { title: '供方用途', dataIndex: 'usee', valueType: 'text' },
+    { title: '项目类别', dataIndex: 'usee', valueType: 'text' },
     { title: '供方名称', dataIndex: 'name', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
     { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '申请时间', dataIndex: 'createDatetime', valueType: 'text' },
     {
-      title: '流程状态', valueType: 'text',
-      renderText: (text, record) => (record.processInst ? record.processInst.processStatus : '草稿'),
+      title: '流程状态',
+      valueType: 'text',
+      renderText: (text, record) =>
+        record.processInst ? record.processInst.processStatus : '草稿',
       valueEnum: {
         草稿: { text: '草稿', status: 'Default' },
         审批中: { text: '审批中', status: 'Processing' },
@@ -20,8 +22,18 @@ export default () => {
         申请人撤回: { text: '申请人撤回', status: 'Error' },
       },
     },
-    { title: '当前步骤', dataIndex: ['processInst', 'displayProcessStep'], valueType: 'text' },
-  ]
+    {
+      title: '当前步骤',
+      dataIndex: ['processInst', 'displayProcessStep'],
+      valueType: 'text',
+    },
+  ];
 
-  return <BaseProTableProcess path={providerControlPath} columns={columns} search={true}/>
-}
+  return (
+    <BaseProTableProcess
+      path={providerControlPath}
+      columns={columns}
+      search={true}
+    />
+  );
+};

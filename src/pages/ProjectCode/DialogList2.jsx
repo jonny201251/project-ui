@@ -4,7 +4,7 @@ import { BaseList } from '../../components';
 export default (props) => {
   const columns = [
     {
-      title: '供方用途',
+      title: '项目类别',
       dataIndex: 'usee',
       valueType: 'text',
       colSize: 2,

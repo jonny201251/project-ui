@@ -429,7 +429,7 @@ export default (props) => {
             />
             <SchemaField.String
               name="usee"
-              title="供方用途"
+              title="项目类别"
               x-decorator="FormItem"
               x-component="Select"
               enum={[
@@ -443,7 +443,7 @@ export default (props) => {
             />
             <SchemaField.String
               name="type"
-              title="项目类别"
+              title="项目大小"
               x-decorator="FormItem"
               x-component="Input"
             />

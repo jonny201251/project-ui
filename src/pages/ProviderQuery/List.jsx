@@ -3,8 +3,8 @@ import { BaseProTableProcess } from '../../components';
 
 export default () => {
   const columns = [
-    { title: '供方用途', dataIndex: 'usee', valueType: 'text' },
-    { title: '项目类别', dataIndex: 'type', valueType: 'text' },
+    { title: '项目类别', dataIndex: 'usee', valueType: 'text' },
+    { title: '项目大小', dataIndex: 'type', valueType: 'text' },
     { title: '供方名称', dataIndex: 'name', valueType: 'text' },
     {
       title: '考察时间',
@@ -12,6 +12,13 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
     },
+    {
+      title: '得分',
+      dataIndex: 'score',
+      valueType: 'text',
+      hideInSearch: true,
+    },
+    { title: '结论', dataIndex: 'result', valueType: 'text' },
     {
       title: '申请人',
       dataIndex: 'displayName',
