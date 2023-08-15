@@ -233,8 +233,8 @@ export const providerScorePath = {
   get: contextPath + '/providerScore1/get',
   btnHandle: contextPath + '/providerScore1/btnHandle',
 };
-export const providerScore1Path2 = {
-  flag: 'providerScore1Path2',
+export const providerScorePath2 = {
+  flag: 'providerScorePath2',
   width: 1100,
   List: ProviderScore1List,
   AddForm: ProviderScore1AddForm,
