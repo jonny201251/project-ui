@@ -206,7 +206,7 @@ export default (props) => {
                 />
                 <SchemaField.String
                   name="providerName"
-                  title="供方名称"
+                  title="战略伙伴名称"
                   x-decorator="FormItem"
                   x-decorator-props={{ gridSpan: 2 }}
                   x-component="Input"
