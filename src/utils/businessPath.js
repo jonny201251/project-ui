@@ -685,6 +685,7 @@ export const inContractPath = {
   edit: contextPath + '/inContract/edit',
   upload: contextPath + '/inContract/upload',
   download: contextPath + '/inContract/download',
+  dialog: contextPath + '/inContract/dialog',
 };
 export const outContractPath = {
   flag: 'outContractPath',
