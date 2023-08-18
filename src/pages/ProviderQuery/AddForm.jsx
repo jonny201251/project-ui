@@ -150,7 +150,7 @@ export default (props) => {
               x-decorator="FormItem"
               x-component="Input.TextArea"
               x-component-props={{
-                rows: 3,
+                rows: 5,
                 placeholder:
                   '人员总数，技术人员比例，各专业人员比例，考察办公区域规模，办公面积、在当地行业的影响力等。组织架构、经营机制。每年的业务量（合同金额）；现阶段的任务量，正在做设计的项目有哪些？',
               }}
@@ -162,7 +162,7 @@ export default (props) => {
               x-decorator="FormItem"
               x-component="Input.TextArea"
               x-component-props={{
-                rows: 2,
+                rows: 5,
                 placeholder: '是否有与本项目同类工程的业绩？',
               }}
               x-decorator-props={{ gridSpan: 3 }}

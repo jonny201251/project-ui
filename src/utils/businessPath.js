@@ -73,6 +73,8 @@ import ProjectInOutList from '../pages/ProjectInOut/List';
 import ProviderSimpleList from '../pages/ProviderSimple/List';
 import ProviderSimpleForm from '../pages/ProviderSimple/Form';
 
+import Price1List from '../pages/Price1/List';
+
 import ProviderQueryList from '../pages/ProviderQuery/List';
 import ProviderQueryAddForm from '../pages/ProviderQuery/AddForm';
 import ProviderQueryCheckForm from '../pages/ProviderQuery/CheckForm';
@@ -565,6 +567,21 @@ export const budgetDialogPath = {
 };
 export const budgetDialog2Path = {
   list: contextPath + '/budgetDialog/listCost',
+};
+export const price1Path = {
+  flag: 'price1Path',
+  width: 1000,
+  List: Price1List,
+  AddForm: ProviderQueryAddForm,
+  EditForm: ProviderQueryAddForm,
+  CheckForm: ProviderQueryCheckForm,
+  ViewHistory: ProviderQueryViewHistory,
+  ViewForm: ProviderQueryViewForm,
+  ChangeForm: ProviderQueryChangeForm,
+  list: contextPath + '/providerQuery/list',
+  viewHistory: contextPath + '/providerQuery/viewHistory',
+  get: contextPath + '/providerQuery/get',
+  btnHandle: contextPath + '/providerQuery/btnHandle',
 };
 export const providerQueryPath = {
   flag: 'providerQueryPath',
