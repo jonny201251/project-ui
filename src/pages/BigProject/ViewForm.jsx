@@ -391,23 +391,13 @@ export default (props) => {
   }, []);
 
   form.addEffects('id', () => {
-    onFieldReact('property', (field) => {
+    onFieldReact('providerName', (field) => {
       let value = field.value;
+      let list4Field = form.query('list4').take();
       if (value) {
-        let list4Field = form.query('list4').take();
-        if (value === '三类') {
-          list4Field?.setDisplay('visible');
-          form
-            .query('providerName')
-            .take()
-            ?.setState({ required: true, pattern: 'editable' });
-        } else {
-          list4Field?.setDisplay('none');
-          form
-            .query('providerName')
-            .take()
-            ?.setState({ required: false, pattern: 'disabled' });
-        }
+        list4Field?.setDisplay('visible');
+      } else {
+        list4Field?.setDisplay('none');
       }
     });
 
@@ -415,14 +405,14 @@ export default (props) => {
       let value = field.value;
       if (value) {
         if (value === '是') {
-          form.query('*(powerDesc)').forEach((fieldd) =>
+          form.query('*(powerDesc,timeLimitTmp)').forEach((fieldd) =>
             fieldd.setState({
               required: true,
               pattern: 'editable',
             }),
           );
         } else {
-          form.query('*(powerDesc)').forEach((fieldd) =>
+          form.query('*(powerDesc,timeLimitTmp)').forEach((fieldd) =>
             fieldd.setState({
               required: false,
               pattern: 'disabled',
@@ -766,11 +756,6 @@ export default (props) => {
   };
 
   const onClick2 = (flag) => {
-    let field = form.query('property').take();
-    if (field?.value !== '三类') {
-      message.error('请选择 项目性质为三类');
-      return;
-    }
     if (flag === 'open') {
       let dialog2 = FormDialog(
         { footer: null, keyboard: false, maskClosable: false, width: 800 },
@@ -849,29 +834,17 @@ export default (props) => {
                   x-component="Input"
                   x-decorator-props={{ gridSpan: 3 }}
                 />
-                <SchemaField.String
-                  name="taskCode"
-                  required
-                  title="任务号"
-                  x-decorator="FormItem"
-                  x-component="Select"
-                />
               </SchemaField.Void>
               <SchemaField.Void
                 x-component="FormGrid"
                 x-component-props={{ maxColumns: 4, strictAutoFit: true }}
               >
                 <SchemaField.String
-                  name="property"
+                  name="taskCode"
                   required
-                  title="项目性质"
+                  title="任务号"
                   x-decorator="FormItem"
                   x-component="Select"
-                  enum={[
-                    { label: '一类', value: '一类' },
-                    { label: '二类', value: '二类' },
-                    { label: '三类', value: '三类' },
-                  ]}
                 />
                 <SchemaField.String
                   name="projectRate"
@@ -888,6 +861,31 @@ export default (props) => {
                   x-decorator="FormItem"
                   x-component="Input"
                   x-decorator-props={{ gridSpan: 2 }}
+                />
+                <SchemaField.String
+                  name="projectUser1"
+                  required
+                  title="项目经理"
+                  x-decorator="FormItem"
+                  x-component="Input"
+                />
+                <SchemaField.String
+                  name="projectUser2"
+                  required
+                  title="项目负责人"
+                  x-decorator="FormItem"
+                  x-component="Input"
+                />
+                <SchemaField.String
+                  name="haveMerge"
+                  required
+                  title="军民融合项目"
+                  x-decorator="FormItem"
+                  x-component="Radio.Group"
+                  enum={[
+                    { label: '是', value: '是' },
+                    { label: '否', value: '否' },
+                  ]}
                 />
               </SchemaField.Void>
               <SchemaField.Void
@@ -1053,6 +1051,17 @@ export default (props) => {
                   ]}
                 />
                 <SchemaField.String
+                  name="powerCode"
+                  title="授权号"
+                  x-decorator="FormItem"
+                  x-component="Input"
+                />
+              </SchemaField.Void>
+              <SchemaField.Void
+                x-component="FormGrid"
+                x-component-props={{ maxColumns: 4, strictAutoFit: true }}
+              >
+                <SchemaField.String
                   name="powerDesc"
                   title="授权内容"
                   x-component="Input.TextArea"
@@ -1061,10 +1070,15 @@ export default (props) => {
                   x-decorator="FormItem"
                 />
                 <SchemaField.String
-                  name="powerCode"
-                  title="授权号"
+                  name="timeLimitTmp"
+                  required
+                  title="授权期限"
+                  x-component="DatePicker.RangePicker"
                   x-decorator="FormItem"
-                  x-component="Input"
+                  x-decorator-props={{
+                    tooltip: '双击鼠标进行选择',
+                    gridSpan: 2,
+                  }}
                 />
               </SchemaField.Void>
               <SchemaField.Void

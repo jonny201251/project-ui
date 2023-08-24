@@ -523,7 +523,7 @@ export default (props) => {
                     x-decorator="FormItem"
                     x-decorator-props={{ gridSpan: 3 }}
                     x-component="InputButton3"
-                    x-component-props={{ onClick: onClick3, type: '供方' }}
+                    x-component-props={{ onClick: onClick3, type: '战略伙伴' }}
                   />
                 </SchemaField.Void>
                 <SchemaField.Void
@@ -544,14 +544,14 @@ export default (props) => {
                   <SchemaField.String
                     name="protectPerson"
                     required
-                    title="供方保证人"
+                    title="战略伙伴保证人"
                     x-decorator="FormItem"
                     x-component="Input"
                   />
                   <SchemaField.String
                     name="evaluate2"
                     required
-                    title="供方目前的资信及综合能力综合评价"
+                    title="战略伙伴目前的资信及综合能力综合评价"
                     x-decorator="FormItem"
                     x-component="Input"
                   />

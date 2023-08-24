@@ -99,30 +99,20 @@ export default (props) => {
   }, []);
 
   form.addEffects('id', () => {
-    onFieldReact('property', (field) => {
+    onFieldReact('providerName', (field) => {
       let value = field.value;
       if (value) {
-        if (value === '三类') {
-          form
-            .query('providerName')
-            .take()
-            ?.setState({ required: true, pattern: 'editable' });
-          form
-            .query('*(history2,haveProblem2,protectPerson,evaluate2)')
-            .forEach((field) => {
-              field.setState({ required: true });
-            });
-        } else {
-          form
-            .query('providerName')
-            .take()
-            ?.setState({ required: false, pattern: 'disabled' });
-          form
-            .query('*(history2,haveProblem2,protectPerson,evaluate2)')
-            .forEach((field) => {
-              field.setState({ required: false });
-            });
-        }
+        form
+          .query('*(history2,haveProblem2,protectPerson,evaluate2)')
+          .forEach((field) => {
+            field.setState({ required: true });
+          });
+      } else {
+        form
+          .query('*(history2,haveProblem2,protectPerson,evaluate2)')
+          .forEach((field) => {
+            field.setState({ required: false });
+          });
       }
     });
 
@@ -205,11 +195,6 @@ export default (props) => {
   };
 
   const onClick2 = (flag) => {
-    let field = form.query('property').take();
-    if (field?.value !== '三类') {
-      message.error('请选择 项目性质为三类');
-      return;
-    }
     if (flag === 'open') {
       let dialog2 = FormDialog(
         { footer: null, keyboard: false, maskClosable: false, width: 800 },
@@ -706,7 +691,7 @@ export default (props) => {
                 x-decorator="FormItem"
                 x-decorator-props={{ gridSpan: 3 }}
                 x-component="InputButton3"
-                x-component-props={{ onClick: onClick3, type: '供方' }}
+                x-component-props={{ onClick: onClick3, type: '战略伙伴' }}
               />
             </SchemaField.Void>
             <SchemaField.Void
@@ -727,14 +712,14 @@ export default (props) => {
               <SchemaField.String
                 name="protectPerson"
                 required
-                title="供方保证人"
+                title="战略伙伴保证人"
                 x-decorator="FormItem"
                 x-component="Input"
               />
               <SchemaField.String
                 name="evaluate2"
                 required
-                title="供方目前的资信及综合能力综合评价"
+                title="战略伙伴目前的资信及综合能力综合评价"
                 x-decorator="FormItem"
                 x-component="Input"
               />

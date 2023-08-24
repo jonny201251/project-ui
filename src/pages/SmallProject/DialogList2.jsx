@@ -19,8 +19,14 @@ export default (props) => {
     },
     { title: '战略伙伴名称', dataIndex: 'name', valueType: 'text', colSize: 2 },
     {
-      title: '纳税人识别号',
-      dataIndex: 'code',
+      title: '结论',
+      dataIndex: 'result',
+      valueType: 'text',
+      hideInSearch: true,
+    },
+    {
+      title: '创建人',
+      dataIndex: 'loginName',
       valueType: 'text',
       hideInSearch: true,
     },

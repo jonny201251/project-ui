@@ -72,11 +72,11 @@ export default () => {
           <Menu.Item key="4-业务主管领导-chargeDeptLeaderPath">
             业务主管领导
           </Menu.Item>
-          <Menu.SubMenu title="供方管理" key="供方管理">
-            <Menu.Item key="566-供方动态监控-providerControlPath">
+          <Menu.SubMenu title="战略伙伴管理" key="战略伙伴管理">
+            <Menu.Item key="566-战略伙伴动态监控-providerControlPath">
               供方动态监控
             </Menu.Item>
-            <Menu.Item key="66-供方基本信息-providerPath">
+            <Menu.Item key="66-战略伙伴基本信息-providerPath">
               供方基本信息
             </Menu.Item>
             <Menu.Item key="66-供方情况简表-providerSimplePath">
