@@ -151,29 +151,17 @@ export default (props) => {
                   x-component="Input"
                   x-decorator-props={{ gridSpan: 3 }}
                 />
-                <SchemaField.String
-                  name="taskCode"
-                  required
-                  title="任务号"
-                  x-decorator="FormItem"
-                  x-component="Input"
-                />
               </SchemaField.Void>
               <SchemaField.Void
                 x-component="FormGrid"
                 x-component-props={{ maxColumns: 4, strictAutoFit: true }}
               >
                 <SchemaField.String
-                  name="property"
+                  name="taskCode"
                   required
-                  title="项目性质"
+                  title="任务号"
                   x-decorator="FormItem"
                   x-component="Select"
-                  enum={[
-                    { label: '一类', value: '一类' },
-                    { label: '二类', value: '二类' },
-                    { label: '三类', value: '三类' },
-                  ]}
                 />
                 <SchemaField.String
                   name="projectRate"
@@ -190,6 +178,31 @@ export default (props) => {
                   x-decorator="FormItem"
                   x-component="Input"
                   x-decorator-props={{ gridSpan: 2 }}
+                />
+                <SchemaField.String
+                  name="projectUser1"
+                  required
+                  title="项目经理"
+                  x-decorator="FormItem"
+                  x-component="Input"
+                />
+                <SchemaField.String
+                  name="projectUser2"
+                  required
+                  title="项目负责人"
+                  x-decorator="FormItem"
+                  x-component="Input"
+                />
+                <SchemaField.String
+                  name="haveMerge"
+                  required
+                  title="军民融合项目"
+                  x-decorator="FormItem"
+                  x-component="Radio.Group"
+                  enum={[
+                    { label: '是', value: '是' },
+                    { label: '否', value: '否' },
+                  ]}
                 />
               </SchemaField.Void>
               <SchemaField.Void
@@ -416,6 +429,17 @@ export default (props) => {
                   ]}
                 />
                 <SchemaField.String
+                  name="powerCode"
+                  title="授权号"
+                  x-decorator="FormItem"
+                  x-component="Input"
+                />
+              </SchemaField.Void>
+              <SchemaField.Void
+                x-component="FormGrid"
+                x-component-props={{ maxColumns: 4, strictAutoFit: true }}
+              >
+                <SchemaField.String
                   name="powerDesc"
                   title="授权内容"
                   x-component="Input.TextArea"
@@ -424,10 +448,15 @@ export default (props) => {
                   x-decorator="FormItem"
                 />
                 <SchemaField.String
-                  name="powerCode"
-                  title="授权号"
+                  name="timeLimitTmp"
+                  required
+                  title="授权期限"
+                  x-component="DatePicker.RangePicker"
                   x-decorator="FormItem"
-                  x-component="Input"
+                  x-decorator-props={{
+                    tooltip: '双击鼠标进行选择',
+                    gridSpan: 2,
+                  }}
                 />
               </SchemaField.Void>
               <SchemaField.Void
@@ -481,7 +510,7 @@ export default (props) => {
               </SchemaField.Void>
               <SchemaField.Void
                 x-component="MyCard"
-                x-component-props={{ title: '资信及履约能力调查-供方' }}
+                x-component-props={{ title: '资信及履约能力调查-战略伙伴' }}
               >
                 <SchemaField.Void
                   x-component="FormGrid"
