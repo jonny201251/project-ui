@@ -162,6 +162,28 @@ export default (props) => {
         }
       }
     });
+
+    onFieldReact('havePower', (field) => {
+      let value = field.value;
+      if (value) {
+        if (value === '是') {
+          form.query('*(powerDesc,timeLimitTmp)').forEach((fieldd) =>
+            fieldd.setState({
+              required: true,
+              pattern: 'editable',
+            }),
+          );
+        } else {
+          form.query('*(powerDesc,timeLimitTmp)').forEach((fieldd) =>
+            fieldd.setState({
+              required: false,
+              pattern: 'disabled',
+              value: null,
+            }),
+          );
+        }
+      }
+    });
   });
 
   const onClick = (flag) => {
@@ -683,7 +705,6 @@ export default (props) => {
                 />
                 <SchemaField.String
                   name="timeLimitTmp"
-                  required
                   title="授权期限"
                   x-component="DatePicker.RangePicker"
                   x-decorator="FormItem"

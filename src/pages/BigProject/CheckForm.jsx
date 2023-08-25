@@ -253,6 +253,10 @@ export default (props) => {
       form.query('powerCode').take()?.setPattern('editable');
     }
 
+    if (user.displayName === '于欣坤') {
+      form.setPattern('editable');
+    }
+
     form.query('remark2').take().value =
       '1.评分权重\n' +
       '一、二类项目：项目、甲方（业主）评分占比为 6:4；三类项目：项目、甲方（业主）、战略伙伴评分占比为 4:2:4。\n' +
