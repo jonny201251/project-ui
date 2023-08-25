@@ -14,6 +14,11 @@ export default (props) => {
 
   let width = path.width || 520;
 
+  const name = (buttonName) => {
+    let arr = buttonName.split('_');
+    return arr[arr.length - 1];
+  };
+
   const formButton = (buttonList, haveEditForm, dialog, form, type) => {
     let btnArr = [];
     buttonList.forEach((buttonName) => {
@@ -41,7 +46,7 @@ export default (props) => {
           }}
           type={'primary'}
         >
-          {buttonName.replace(/\w+_/i, '')}
+          {name(buttonName)}
         </LoadingButton>,
       );
     });
