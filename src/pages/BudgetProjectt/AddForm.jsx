@@ -17,8 +17,8 @@ import {
   ArrayTableIndex,
   ArrayTableRemove,
   File,
-  InputButton,
   LoadingButton,
+  MyInput,
   NumberPicker,
 } from '../../components';
 import { session } from '../../utils';
@@ -28,6 +28,24 @@ import { Button, ConfigProvider, message } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import React, { useEffect } from 'react';
 import { onFieldReact } from '@formily/core';
+import { SearchOutlined } from '@ant-design/icons';
+
+const InputButton = (props) => {
+  return (
+    <div style={{ display: 'inline-flex', width: '100%' }}>
+      <Input {...props} style={{ ...props.style }} />
+      <Button
+        onClick={(e) => {
+          if (props.onClick) {
+            props.onClick('open');
+          }
+        }}
+        icon={<SearchOutlined />}
+        type={'primary'}
+      />
+    </div>
+  );
+};
 
 const SchemaField = createSchemaField({
   components: {
@@ -46,6 +64,7 @@ const SchemaField = createSchemaField({
     DatePicker,
     Radio,
     File,
+    MyInput,
   },
 });
 
@@ -55,7 +74,7 @@ export default (props) => {
   useEffect(async () => {
     form
       .query(
-        '*(invoiceRate,displayName,deptName,createDatetime,taskCode,property,totalCost,endMoney,inChangeMoney,outChangeMoney,customerName,inSum,outSum,projectRate)',
+        '*(invoiceRate,displayName,deptName,createDatetime,property,totalCost,endMoney,inChangeMoney,outChangeMoney,customerName,inSum,outSum,projectRate)',
       )
       .forEach((field) => {
         field.setPattern('disabled');
@@ -227,16 +246,16 @@ export default (props) => {
               required
               title="项目名称"
               x-decorator="FormItem"
-              x-decorator-props={{ gridSpan: 3 }}
               x-component="InputButton"
               x-component-props={{ onClick: onClick }}
+              x-decorator-props={{ gridSpan: 3 }}
             />
             <SchemaField.String
               required
               name="taskCode"
               title="任务号"
               x-decorator="FormItem"
-              x-component="Input"
+              x-component="MyInput"
             />
             <SchemaField.String
               required

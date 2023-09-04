@@ -11,7 +11,7 @@ export default (props) => {
       hideInSearch: true,
     },
     {
-      title: '项目类别',
+      title: '项目大小',
       dataIndex: 'type',
       valueType: 'text',
       colSize: 2,

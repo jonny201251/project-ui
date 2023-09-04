@@ -193,6 +193,7 @@ export const providerPath = {
   edit: contextPath + '/provider/edit',
   delete: contextPath + '/provider/delete',
   modify: contextPath + '/provider/modify',
+  export: contextPath + '/provider/export',
 };
 export const providerCodePath = {
   list: contextPath + '/provider/dialog',
@@ -260,6 +261,7 @@ export const customerPath = {
   add: contextPath + '/customer/add',
   edit: contextPath + '/customer/edit',
   delete: contextPath + '/customer/delete',
+  export: contextPath + '/customer/export',
 };
 export const customer2Path = {
   list: contextPath + '/customer/list2',
@@ -673,9 +675,13 @@ export const projectOutPath = {
   btnHandle: contextPath + '/projectOut/btnHandle',
 };
 
+export const contractMoneyPath = {
+  list: contextPath + '/contractMoney/list',
+};
+
 export const inContractPath = {
   flag: 'inContractPath',
-  width: 900,
+  width: 1000,
   List: InContractList,
   Form: InContractForm,
   UploadForm: InContractUploadForm,
