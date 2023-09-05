@@ -164,6 +164,7 @@ export const processInstPath = {
   list: contextPath + '/processInst/list',
   getRunTaskKeyList: contextPath + '/processInst/getRunTaskKeyList',
   myList: contextPath + '/processInst/myList',
+  myList2: contextPath + '/processInst/myList2',
 };
 export const processInstNodePath = {
   flag: 'processInstPath',
@@ -395,6 +396,7 @@ export const smallProjectPath = {
   list: contextPath + '/smallProject/list',
   viewHistory: contextPath + '/smallProject/viewHistory',
   get: contextPath + '/smallProject/get',
+  edit: contextPath + '/smallProject/edit',
   btnHandle: contextPath + '/smallProject/btnHandle',
 };
 export const bigProjectPath = {
@@ -410,6 +412,7 @@ export const bigProjectPath = {
   list: contextPath + '/bigProject/list',
   viewHistory: contextPath + '/bigProject/viewHistory',
   get: contextPath + '/bigProject/get',
+  edit: contextPath + '/bigProject/edit',
   btnHandle: contextPath + '/bigProject/btnHandle',
 };
 

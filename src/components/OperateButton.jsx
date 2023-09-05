@@ -1,50 +1,61 @@
-import { Button, message, Modal, Space } from 'antd'
-import { get, post } from '../utils'
-import { FormButtonGroup, FormDialog } from '@formily/antd'
-import { LoadingButton } from './index'
-import { QuestionCircleOutlined } from '@ant-design/icons'
-import React from 'react'
+import { Button, message, Modal, Space } from 'antd';
+import { get, post } from '../utils';
+import { FormButtonGroup, FormDialog } from '@formily/antd';
+import { LoadingButton } from './index';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import React from 'react';
 
 export default (props) => {
-  const { record, path, actionRef, rowKey } = props
-  let width = path.width || 520
+  const { record, path, actionRef, rowKey } = props;
+  let width = path.width || 520;
 
   const onClick = async (type) => {
-    let params = {}
-    params[rowKey || 'id'] = record[rowKey || 'id']
+    let params = {};
+    params[rowKey || 'id'] = record[rowKey || 'id'];
 
     if (type === 'edit') {
       if (path.flag === 'smallBudgetInPath') {
-        params['inType'] = record.inType
+        params['inType'] = record.inType;
       }
       if (path.flag === 'smallBudgetOutPath') {
-        params['costType'] = record.costType
+        params['costType'] = record.costType;
         if (record.costRate) {
-          params['costRate'] = record.costRate
+          params['costRate'] = record.costRate;
         }
       }
-      const dbRecord = await get(path.get, params)
+      const dbRecord = await get(path.get, params);
       if (dbRecord) {
         let dialog = FormDialog(
-          { title: '编辑', footer: null, keyboard: false, maskClosable: false, width },
+          {
+            title: '编辑',
+            footer: null,
+            keyboard: false,
+            maskClosable: false,
+            width,
+          },
           (form) => {
-            form.setValues(dbRecord)
+            form.setValues(dbRecord);
             return (
               <>
-                <path.Form form={form} type={type} record={dbRecord} dialog={dialog}/>
+                <path.Form
+                  form={form}
+                  type={type}
+                  record={dbRecord}
+                  dialog={dialog}
+                />
                 <FormDialog.Footer>
                   <FormButtonGroup gutter={16} align={'right'}>
                     <Button onClick={() => dialog.close()}>取消</Button>
                     <LoadingButton
                       onClick={async () => {
-                        const values = await form.submit()
+                        const values = await form.submit();
                         if (values) {
-                          const data = await post(path.edit, values)
+                          const data = await post(path.edit, values);
                           if (data) {
-                            actionRef.current.clearSelected()
-                            actionRef.current.reload()
-                            dialog.close()
-                            message.success('编辑成功')
+                            actionRef.current.clearSelected();
+                            actionRef.current.reload();
+                            dialog.close();
+                            message.success('编辑成功');
                           }
                         }
                       }}
@@ -55,58 +66,83 @@ export default (props) => {
                   </FormButtonGroup>
                 </FormDialog.Footer>
               </>
-            )
+            );
           },
-        )
-        dialog.open()
+        );
+        dialog.open();
       }
     } else if (type === 'view') {
       if (path.flag === 'smallBudgetInPath') {
-        params['inType'] = record.inType
+        params['inType'] = record.inType;
       }
       if (path.flag === 'smallBudgetOutPath') {
-        params['costType'] = record.costType
+        params['costType'] = record.costType;
       }
-      const dbRecord = await get(path.get, params)
+      const dbRecord = await get(path.get, params);
       if (dbRecord) {
-        let dialog = FormDialog({ title: '查看', footer: null, keyboard: false, maskClosable: false, width },
-          (form) => {
-            form.setValues(dbRecord)
-            return <path.Form form={form} type={type} record={dbRecord} dialog={dialog}/>
+        let dialog = FormDialog(
+          {
+            title: '查看',
+            footer: null,
+            keyboard: false,
+            maskClosable: false,
+            width,
           },
-        )
-        dialog.open()
+          (form) => {
+            form.setValues(dbRecord);
+            return (
+              <path.Form
+                form={form}
+                type={type}
+                record={dbRecord}
+                dialog={dialog}
+              />
+            );
+          },
+        );
+        dialog.open();
       }
     } else if (type === 'copy') {
       Modal.confirm({
-        okText: '确认', cancelText: '取消',
-        icon: <QuestionCircleOutlined/>,
+        okText: '确认',
+        cancelText: '取消',
+        icon: <QuestionCircleOutlined />,
         content: <p style={{ fontSize: 16 }}>确定要复制该条数据?</p>,
         onOk: async (close) => {
-          const data = await get(path.copy, params)
+          const data = await get(path.copy, params);
           if (data) {
-            actionRef.current.clearSelected()
-            actionRef.current.reload()
-            close()
-            message.success('复制成功')
+            actionRef.current.clearSelected();
+            actionRef.current.reload();
+            close();
+            message.success('复制成功');
           }
         },
-      })
+      });
     }
-  }
+  };
 
   const renderButton = () => {
     // if (env === 'dev') {
-    return <Space size={'middle'}>
-      <a onClick={() => {
-        onClick('edit')
-      }}>编辑</a>
-      <a onClick={() => {
-        onClick('view')
-      }}>查看</a>
-    </Space>
+    return (
+      <Space size={'middle'}>
+        <a
+          onClick={() => {
+            onClick('edit');
+          }}
+        >
+          编辑
+        </a>
+        <a
+          onClick={() => {
+            onClick('view');
+          }}
+        >
+          查看
+        </a>
+      </Space>
+    );
     // }
-  }
+  };
 
-  return <>{renderButton()}</>
+  return <>{renderButton()}</>;
 };

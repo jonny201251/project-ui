@@ -20,6 +20,7 @@ import * as utils from '../utils';
 import ChangePassword from './ChangePassword';
 
 import MyList from '../pages/ProcessInst/MyList';
+import MyList2 from '../pages/ProcessInst/MyList2';
 
 const { Header, Sider, Content } = Layout;
 
@@ -318,6 +319,11 @@ export default () => {
             <Tabs.TabPane tab="我的桌面" key="我的桌面">
               <div style={{ padding: '0px 12px' }}>
                 <MyList />
+              </div>
+              <div style={{ padding: '10px 12px' }}>
+                {utils.session.getItem('user').loginName === '祁瑛' && (
+                  <MyList2 />
+                )}
               </div>
             </Tabs.TabPane>
             {renderTabPane()}

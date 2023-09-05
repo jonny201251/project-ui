@@ -3,7 +3,6 @@ import {
   contextPath,
   get,
   pdfPost,
-  pdfGet,
   post,
   processDesignPath,
   session,
@@ -393,6 +392,34 @@ export default (props) => {
         params,
         record.name + '(项目预算)',
       );
+    } else if (type === 'customerScore1Path') {
+      let params = {
+        excelConfigId: '858890718131027968',
+        queryParam: {
+          id: record.id,
+          customerScore1Id: record.id,
+          processInstId: record.processInst.id,
+        },
+      };
+      const data = await pdfPost(
+        contextPath + '/jmreport/exportPdfStream',
+        params,
+        record.customerName + '(客户评分)',
+      );
+    } else if (type === 'providerScorePath') {
+      let params = {
+        excelConfigId: '858890739186434048',
+        queryParam: {
+          id: record.id,
+          providerScore1Id: record.id,
+          processInstId: record.processInst.id,
+        },
+      };
+      const data = await pdfPost(
+        contextPath + '/jmreport/exportPdfStream',
+        params,
+        record.providerName + '(供方评分)',
+      );
     }
   };
 
@@ -433,7 +460,9 @@ export default (props) => {
           path.flag === 'smallProjectPath' ||
           path.flag === 'bigProjectPath' ||
           path.flag === 'budgetProjecttPath' ||
-          path.flag === 'bigBudgetProjecttPath'
+          path.flag === 'bigBudgetProjecttPath' ||
+          path.flag === 'customerScore1Path' ||
+          path.flag === 'providerScorePath'
         ) {
           arr.push(<a onClick={() => onClick(path.flag)}>导出</a>);
         }
