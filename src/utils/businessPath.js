@@ -690,6 +690,7 @@ export const inContractPath = {
   UploadForm: InContractUploadForm,
   list: contextPath + '/inContract/list',
   get: contextPath + '/inContract/get',
+  get2: contextPath + '/inContract/get2',
   add: contextPath + '/inContract/add',
   edit: contextPath + '/inContract/edit',
   upload: contextPath + '/inContract/upload',
@@ -698,7 +699,7 @@ export const inContractPath = {
 };
 export const outContractPath = {
   flag: 'outContractPath',
-  width: 900,
+  width: 1000,
   List: OutContractList,
   Form: OutContractForm,
   list: contextPath + '/outContract/list',
