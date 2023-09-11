@@ -74,6 +74,7 @@ import ProviderSimpleList from '../pages/ProviderSimple/List';
 import ProviderSimpleForm from '../pages/ProviderSimple/Form';
 
 import Price1List from '../pages/Price1/List';
+import Price1AddForm from '../pages/Price1/AddForm';
 
 import ProviderQueryList from '../pages/ProviderQuery/List';
 import ProviderQueryAddForm from '../pages/ProviderQuery/AddForm';
@@ -577,7 +578,7 @@ export const price1Path = {
   flag: 'price1Path',
   width: 1000,
   List: Price1List,
-  AddForm: ProviderQueryAddForm,
+  AddForm: Price1AddForm,
   EditForm: ProviderQueryAddForm,
   CheckForm: ProviderQueryCheckForm,
   ViewHistory: ProviderQueryViewHistory,

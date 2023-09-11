@@ -3,9 +3,9 @@ import { BaseProTableProcess } from '../../components';
 
 export default () => {
   const columns = [
-    { title: '项目名称', dataIndex: 'projectName', valueType: 'text' },
     { title: '项目类别', dataIndex: 'projectType', valueType: 'text' },
     { title: '合同类别', dataIndex: 'contractType', valueType: 'text' },
+    { title: '项目名称', dataIndex: 'projectName', valueType: 'text' },
     { title: '收款合同名称', dataIndex: 'inContractName', valueType: 'text' },
     { title: '收款合同编号', dataIndex: 'inContractCode', valueType: 'text' },
     {
