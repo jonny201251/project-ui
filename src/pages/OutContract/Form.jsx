@@ -22,7 +22,7 @@ import {
   NumberPicker,
   OnlyButton,
 } from '../../components';
-import { inContractPath, get, session } from '../../utils';
+import { get, inContractPath } from '../../utils';
 import DialogList from './DialogList';
 import DialogList2 from './DialogList2';
 import styles from '../table-placeholder.less';
@@ -81,22 +81,12 @@ export default (props) => {
       .forEach((field) => {
         field.setPattern('disabled');
       });
-    if (type === 'add') {
-      const user = session.getItem('user');
-      form.setInitialValues({
-        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName,
-        loginName: user.loginName,
-        deptId: user.deptId,
-        deptName: user.deptName,
-      });
-    }
   }, []);
 
   const onClick = (flag) => {
     if (flag === 'open') {
       let dialog2 = FormDialog(
-        { footer: null, keyboard: false, maskClosable: false, width: 800 },
+        { footer: null, keyboard: false, maskClosable: false, width: 1000 },
         (form2) => {
           return (
             <>
@@ -113,14 +103,18 @@ export default (props) => {
                       const values = await form2.submit();
                       if (values.selectedRow) {
                         form.setValues({
+                          budgetId: values.selectedRow.budgetId,
                           projectType: values.selectedRow.projectType,
-                          projectId: values.selectedRow.projectId,
                           name: values.selectedRow.name,
                           wbs: values.selectedRow.wbs,
                           taskCode: values.selectedRow.taskCode,
-                          budgetId: values.selectedRow.budgetId,
-                          costType: values.selectedRow.costType,
-                          costRate: values.selectedRow.costRate,
+                          costType: values.selectedRow.outType,
+                          costRate: values.selectedRow.rate,
+                          deptId: values.selectedRow.deptId,
+                          deptName: values.selectedRow.deptName,
+                          loginName: values.selectedRow.loginName,
+                          displayName: values.selectedRow.loginName,
+                          createDatetime: values.selectedRow.createDatetime,
                         });
                         dialog2.close();
                       } else {
@@ -163,7 +157,6 @@ export default (props) => {
                         form.setValues({
                           providerId: values.selectedRow.id,
                           providerName: values.selectedRow.name,
-                          providerUsee: values.selectedRow.usee,
                         });
                         dialog2.close();
                       } else {
@@ -186,17 +179,17 @@ export default (props) => {
 
   const onClick3 = async () => {
     if (!form.values.taskCode) return;
-    const dbRecord = await get(inContractPath.get, {
+    const dbRecord = await get(inContractPath.get2, {
       taskCode: form.values.taskCode,
     });
     if (dbRecord) {
       let dialog = FormDialog(
         {
-          title: '查看',
+          title: '收款合同',
           footer: null,
           keyboard: false,
           maskClosable: false,
-          width: 520,
+          width: 1000,
         },
         (form) => {
           form.setValues(dbRecord);

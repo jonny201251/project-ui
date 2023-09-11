@@ -3,7 +3,6 @@ import { BaseProTable2 } from '../../components';
 
 export default () => {
   const columns = [
-    { title: '项目类别', dataIndex: 'projectTypee', valueType: 'text' },
     { title: '项目立项', dataIndex: 'projectType', valueType: 'text' },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
     { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
@@ -29,7 +28,6 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
     },
-    { title: '供方名称', dataIndex: 'providerName', valueType: 'text' },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
     { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
     {

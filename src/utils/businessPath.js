@@ -699,7 +699,7 @@ export const inContractPath = {
 };
 export const outContractPath = {
   flag: 'outContractPath',
-  width: 1000,
+  width: 1100,
   List: OutContractList,
   Form: OutContractForm,
   list: contextPath + '/outContract/list',
