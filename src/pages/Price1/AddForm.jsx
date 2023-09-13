@@ -271,6 +271,10 @@ export default (props) => {
                     required
                     x-decorator="FormItem"
                     x-component="Select"
+                    enum={[
+                      { label: '增值税专票', value: '增值税专票' },
+                      { label: '增值税普票', value: '增值税普票' },
+                    ]}
                   />
                 </SchemaField.Void>
                 <SchemaField.Void
