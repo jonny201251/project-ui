@@ -42,6 +42,7 @@ const SchemaField = createSchemaField({
     ArrayTableIndex,
     ArrayTableRemove,
     ArrayTableAddition,
+    NumberPicker,
   },
 });
 
