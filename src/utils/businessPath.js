@@ -78,6 +78,16 @@ import Price1AddForm from '../pages/Price1/AddForm';
 import Price1CheckForm from '../pages/Price1/CheckForm';
 import Price1ViewForm from '../pages/Price1/ViewForm';
 
+import Price2List from '../pages/Price2/List';
+import Price2AddForm from '../pages/Price2/AddForm';
+import Price2CheckForm from '../pages/Price2/CheckForm';
+import Price2ViewForm from '../pages/Price2/ViewForm';
+
+import Price3List from '../pages/Price3/List';
+import Price3AddForm from '../pages/Price3/AddForm';
+import Price3CheckForm from '../pages/Price3/CheckForm';
+import Price3ViewForm from '../pages/Price3/ViewForm';
+
 import ProviderQueryList from '../pages/ProviderQuery/List';
 import ProviderQueryAddForm from '../pages/ProviderQuery/AddForm';
 import ProviderQueryCheckForm from '../pages/ProviderQuery/CheckForm';
@@ -588,6 +598,32 @@ export const price1Path = {
   list: contextPath + '/price1/list',
   get: contextPath + '/price1/get',
   btnHandle: contextPath + '/price1/btnHandle',
+};
+export const price2Path = {
+  flag: 'price2Path',
+  width: 1000,
+  haveChange: 'no',
+  List: Price2List,
+  AddForm: Price2AddForm,
+  EditForm: Price2AddForm,
+  CheckForm: Price2CheckForm,
+  ViewForm: Price2ViewForm,
+  list: contextPath + '/price2/list',
+  get: contextPath + '/price2/get',
+  btnHandle: contextPath + '/price2/btnHandle',
+};
+export const price3Path = {
+  flag: 'price3Path',
+  width: 1000,
+  haveChange: 'no',
+  List: Price3List,
+  AddForm: Price3AddForm,
+  EditForm: Price3AddForm,
+  CheckForm: Price3CheckForm,
+  ViewForm: Price3ViewForm,
+  list: contextPath + '/price3/list',
+  get: contextPath + '/price3/get',
+  btnHandle: contextPath + '/price3/btnHandle',
 };
 export const providerQueryPath = {
   flag: 'providerQueryPath',

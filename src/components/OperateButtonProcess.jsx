@@ -462,7 +462,10 @@ export default (props) => {
           path.flag === 'budgetProjecttPath' ||
           path.flag === 'bigBudgetProjecttPath' ||
           path.flag === 'customerScore1Path' ||
-          path.flag === 'providerScorePath'
+          path.flag === 'providerScorePath' ||
+          path.flag === 'price1Path' ||
+          path.flag === 'price2Path' ||
+          path.flag === 'price3Path'
         ) {
           arr.push(<a onClick={() => onClick(path.flag)}>导出</a>);
         }

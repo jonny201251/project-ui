@@ -298,7 +298,8 @@ export default (props) => {
                 />
                 <SchemaField.Array
                   name="list"
-                  title={'比价信息'}
+                  title={'比价单位信息'}
+                  required
                   x-decorator="FormItem"
                   x-component="ArrayTable"
                   x-decorator-props={{ gridSpan: 3 }}
@@ -409,7 +410,8 @@ export default (props) => {
                 </SchemaField.Array>
                 <SchemaField.String
                   name="descc"
-                  title="备注"
+                  title="比价人员意见"
+                  required
                   x-decorator="FormItem"
                   x-component="Input.TextArea"
                   x-component-props={{

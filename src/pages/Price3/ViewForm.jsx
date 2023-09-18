@@ -275,9 +275,32 @@ export default (props) => {
                   x-decorator="FormItem"
                   x-component="Input"
                 />
+                <SchemaField.String
+                  name="method"
+                  title="拟采用的评审方法"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Select"
+                  enum={[
+                    { label: '最低评标价法', value: '最低评标价法' },
+                    { label: '综合评标法', value: '综合评标法' },
+                  ]}
+                />
+                <SchemaField.String
+                  name="contractPrice"
+                  title="合同估价"
+                  required
+                  x-decorator="FormItem"
+                  x-component="NumberPicker"
+                  x-component-props={{
+                    addonAfter: '万元',
+                    formatter: (value) =>
+                      `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                  }}
+                />
                 <SchemaField.Array
                   name="list"
-                  title={'比价单位信息'}
+                  title={'评审单位信息'}
                   x-decorator="FormItem"
                   x-component="ArrayTable"
                   x-decorator-props={{ gridSpan: 3 }}
@@ -287,8 +310,9 @@ export default (props) => {
                     <SchemaField.Void
                       x-component="ArrayTable.Column"
                       x-component-props={{
-                        title: '报价单位',
+                        title: '拟邀请单位',
                         align: 'center',
+                        width: 300,
                       }}
                     >
                       <SchemaField.String
@@ -302,70 +326,16 @@ export default (props) => {
                     <SchemaField.Void
                       x-component="ArrayTable.Column"
                       x-component-props={{
-                        title: '报价',
-                        width: 170,
+                        title: '资质情况',
                         align: 'center',
                       }}
                     >
                       <SchemaField.String
-                        name="price"
+                        name="descc"
                         required
                         x-decorator="FormItem"
-                        x-component="NumberPicker"
-                        x-component-props={{
-                          addonAfter: '元',
-                          formatter: (value) =>
-                            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-                        }}
-                      />
-                    </SchemaField.Void>
-                    <SchemaField.Void
-                      x-component="ArrayTable.Column"
-                      x-component-props={{
-                        title: '税率',
-                        width: 90,
-                        align: 'center',
-                      }}
-                    >
-                      <SchemaField.String
-                        name="rate"
-                        required
-                        x-decorator="FormItem"
-                        x-component="Input"
-                      />
-                    </SchemaField.Void>
-                    <SchemaField.Void
-                      x-component="ArrayTable.Column"
-                      x-component-props={{
-                        title: '发票种类',
-                        width: 150,
-                        align: 'center',
-                      }}
-                    >
-                      <SchemaField.String
-                        name="invoiceType"
-                        required
-                        x-decorator="FormItem"
-                        x-component="Select"
-                        enum={[
-                          { label: '增值税专票', value: '增值税专票' },
-                          { label: '增值税普票', value: '增值税普票' },
-                        ]}
-                      />
-                    </SchemaField.Void>
-                    <SchemaField.Void
-                      x-component="ArrayTable.Column"
-                      x-component-props={{
-                        title: '排名',
-                        width: 60,
-                        align: 'center',
-                      }}
-                    >
-                      <SchemaField.String
-                        name="sort"
-                        required
-                        x-decorator="FormItem"
-                        x-component="Input"
+                        x-component="Input.TextArea"
+                        x-component-props={{ rows: 2 }}
                       />
                     </SchemaField.Void>
                     <SchemaField.Void
@@ -388,14 +358,11 @@ export default (props) => {
                 </SchemaField.Array>
                 <SchemaField.String
                   name="descc"
-                  title="比价人员意见"
-                  required
+                  title="评审实施计划安排"
                   x-decorator="FormItem"
                   x-component="Input.TextArea"
-                  x-component-props={{
-                    rows: 2,
-                  }}
-                  x-decorator-props={{ gridSpan: 2 }}
+                  x-component-props={{ rows: 3 }}
+                  x-decorator-props={{ gridSpan: 3 }}
                 />
                 <SchemaField.String
                   name="fileList"

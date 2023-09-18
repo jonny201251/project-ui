@@ -112,6 +112,7 @@ export default (props) => {
   });
 
   const onClick = (flag) => {
+    if (type === 'check') return;
     if (flag === 'open') {
       let dialog2 = FormDialog(
         { footer: null, keyboard: false, maskClosable: false, width: 900 },
@@ -156,38 +157,62 @@ export default (props) => {
     }
   };
 
-  const onClick2 = (index, row) => {
-    let dialog2 = FormDialog(
-      { footer: null, keyboard: false, maskClosable: false, width: 800 },
-      (form2) => {
-        return (
-          <>
-            <DialogList2 form={form2} dialog={dialog2} selectedId={row?.id} />
-            <FormDialog.Footer>
-              <FormButtonGroup gutter={16} align={'right'}>
-                <Button onClick={() => dialog2.close()}>取消</Button>
-                <LoadingButton
-                  onClick={async () => {
-                    const values = await form2.submit();
-                    if (values.selectedRow) {
-                      row['providerId'] = values.selectedRow.id;
-                      row['providerName'] = values.selectedRow.name;
-                      dialog2.close();
-                    } else {
-                      message.error('选择一条数据');
-                    }
-                  }}
-                  type={'primary'}
-                >
-                  确定
-                </LoadingButton>
-              </FormButtonGroup>
-            </FormDialog.Footer>
-          </>
-        );
-      },
-    );
-    dialog2.open({});
+  const onClick2 = (flag) => {
+    if (type === 'check') return;
+    if (flag === 'open') {
+      let dialog2 = FormDialog(
+        { footer: null, keyboard: false, maskClosable: false, width: 800 },
+        (form2) => {
+          return (
+            <>
+              <DialogList2 form={form2} dialog={dialog2} />
+              <FormDialog.Footer>
+                <FormButtonGroup gutter={16} align={'right'}>
+                  <Button onClick={() => dialog2.close()}>取消</Button>
+                  <LoadingButton
+                    onClick={async () => {
+                      const values = await form2.submit();
+                      if (values.selectedRow) {
+                        form.setValues({
+                          providerId: values.selectedRow.id,
+                          providerName: values.selectedRow.name,
+                        });
+                        dialog2.close();
+                      } else {
+                        message.error('选择一条数据');
+                      }
+                    }}
+                    type={'primary'}
+                  >
+                    确定
+                  </LoadingButton>
+                </FormButtonGroup>
+              </FormDialog.Footer>
+            </>
+          );
+        },
+      );
+      dialog2.open({});
+    }
+  };
+
+  const showComment = () => {
+    if (type === 'check') {
+      return (
+        <SchemaField.Void
+          x-component="FormGrid"
+          x-component-props={{ maxColumns: 3, strictAutoFit: true }}
+        >
+          <SchemaField.String
+            name="comment"
+            title="审批意见"
+            x-decorator="FormItem"
+            x-component="Input.TextArea"
+            x-component-props={{ placeholder: '请输入意见' }}
+          />
+        </SchemaField.Void>
+      );
+    }
   };
 
   return (
@@ -275,127 +300,105 @@ export default (props) => {
                   x-decorator="FormItem"
                   x-component="Input"
                 />
-                <SchemaField.Array
-                  name="list"
-                  title={'比价单位信息'}
-                  x-decorator="FormItem"
-                  x-component="ArrayTable"
-                  x-decorator-props={{ gridSpan: 3 }}
-                  x-component-props={{ size: 'small', sticky: true }}
-                >
-                  <SchemaField.Object>
-                    <SchemaField.Void
-                      x-component="ArrayTable.Column"
-                      x-component-props={{
-                        title: '报价单位',
-                        align: 'center',
-                      }}
-                    >
-                      <SchemaField.String
-                        name="providerName"
-                        required
-                        x-decorator="FormItem"
-                        x-component="InputButton2"
-                        x-component-props={{ onClick: onClick2, form: form }}
-                      />
-                    </SchemaField.Void>
-                    <SchemaField.Void
-                      x-component="ArrayTable.Column"
-                      x-component-props={{
-                        title: '报价',
-                        width: 170,
-                        align: 'center',
-                      }}
-                    >
-                      <SchemaField.String
-                        name="price"
-                        required
-                        x-decorator="FormItem"
-                        x-component="NumberPicker"
-                        x-component-props={{
-                          addonAfter: '元',
-                          formatter: (value) =>
-                            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-                        }}
-                      />
-                    </SchemaField.Void>
-                    <SchemaField.Void
-                      x-component="ArrayTable.Column"
-                      x-component-props={{
-                        title: '税率',
-                        width: 90,
-                        align: 'center',
-                      }}
-                    >
-                      <SchemaField.String
-                        name="rate"
-                        required
-                        x-decorator="FormItem"
-                        x-component="Input"
-                      />
-                    </SchemaField.Void>
-                    <SchemaField.Void
-                      x-component="ArrayTable.Column"
-                      x-component-props={{
-                        title: '发票种类',
-                        width: 150,
-                        align: 'center',
-                      }}
-                    >
-                      <SchemaField.String
-                        name="invoiceType"
-                        required
-                        x-decorator="FormItem"
-                        x-component="Select"
-                        enum={[
-                          { label: '增值税专票', value: '增值税专票' },
-                          { label: '增值税普票', value: '增值税普票' },
-                        ]}
-                      />
-                    </SchemaField.Void>
-                    <SchemaField.Void
-                      x-component="ArrayTable.Column"
-                      x-component-props={{
-                        title: '排名',
-                        width: 60,
-                        align: 'center',
-                      }}
-                    >
-                      <SchemaField.String
-                        name="sort"
-                        required
-                        x-decorator="FormItem"
-                        x-component="Input"
-                      />
-                    </SchemaField.Void>
-                    <SchemaField.Void
-                      x-component="ArrayTable.Column"
-                      x-component-props={{
-                        width: 80,
-                        title: '操作',
-                        dataIndex: 'operations',
-                      }}
-                    >
-                      <SchemaField.Void x-component="FormItem">
-                        <SchemaField.Void x-component="ArrayTableRemove" />
-                      </SchemaField.Void>
-                    </SchemaField.Void>
-                  </SchemaField.Object>
-                  <SchemaField.Void
-                    x-component="ArrayTableAddition"
-                    x-component-props={{ width: 80 }}
-                  />
-                </SchemaField.Array>
                 <SchemaField.String
-                  name="descc"
-                  title="比价人员意见"
+                  name="providerName"
+                  required
+                  title="谈判单位名称"
+                  x-decorator="FormItem"
+                  x-decorator-props={{ gridSpan: 2 }}
+                  x-component="InputButton"
+                  x-component-props={{ onClick: onClick2 }}
+                />
+                <SchemaField.String
+                  name="limitt"
+                  title="符合条款"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Input"
+                  default={'十二条(一)'}
+                />
+                <SchemaField.String
+                  name="invoiceType"
+                  title="发票种类"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Select"
+                  enum={[
+                    { label: '专票', value: '专票' },
+                    { label: '普票', value: '普票' },
+                    { label: '财政收据', value: '财政收据' },
+                    { label: '其他', value: '其他' },
+                  ]}
+                />
+                <SchemaField.String
+                  name="rate"
+                  title="税率"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Input"
+                />
+              </SchemaField.Void>
+              <SchemaField.Void
+                x-component="FormGrid"
+                x-component-props={{ maxColumns: 3, strictAutoFit: true }}
+              >
+                <SchemaField.String
+                  name="price1"
+                  title="预算控制价"
+                  required
+                  x-decorator="FormItem"
+                  x-component="NumberPicker"
+                  x-component-props={{
+                    addonAfter: '元',
+                    formatter: (value) =>
+                      `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                  }}
+                />
+                <SchemaField.String
+                  name="price2"
+                  title="预期谈判底价"
+                  required
+                  x-decorator="FormItem"
+                  x-component="NumberPicker"
+                  x-component-props={{
+                    addonAfter: '元',
+                    formatter: (value) =>
+                      `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                  }}
+                />
+                <SchemaField.String
+                  name="price3"
+                  title="最终谈判价格"
+                  required
+                  x-decorator="FormItem"
+                  x-component="NumberPicker"
+                  x-component-props={{
+                    addonAfter: '元',
+                    formatter: (value) =>
+                      `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                  }}
+                />
+                <SchemaField.String
+                  name="good"
+                  title="谈判单位概况及业务（产品）竞争优势"
                   required
                   x-decorator="FormItem"
                   x-component="Input.TextArea"
                   x-component-props={{
                     rows: 2,
                   }}
-                  x-decorator-props={{ gridSpan: 2 }}
+                  x-decorator-props={{ gridSpan: 3 }}
+                />
+                <SchemaField.String
+                  name="descc"
+                  title="谈判人员意见"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Input.TextArea"
+                  x-component-props={{
+                    rows: 2,
+                  }}
+                  x-decorator-props={{ gridSpan: 3 }}
                 />
                 <SchemaField.String
                   name="fileList"
@@ -404,17 +407,8 @@ export default (props) => {
                   x-component="File"
                   x-decorator-props={{ gridSpan: 2 }}
                 />
-                <SchemaField.String
-                  name="userNamee"
-                  required
-                  title="归口管理部门"
-                  x-decorator="FormItem"
-                  x-decorator-props={{ gridSpan: 2 }}
-                  x-component="Select"
-                  x-component-props={{ showSearch: true }}
-                  enum={session.getItem('userList')}
-                />
               </SchemaField.Void>
+              {showComment()}
             </SchemaField>
           </Form>
         </Tabs.TabPane>

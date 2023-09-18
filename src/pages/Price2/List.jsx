@@ -1,4 +1,4 @@
-import { price1Path } from '../../utils';
+import { price2Path } from '../../utils';
 import { BaseProTableProcess } from '../../components';
 
 export default () => {
@@ -51,6 +51,6 @@ export default () => {
   ];
 
   return (
-    <BaseProTableProcess path={price1Path} columns={columns} search={true} />
+    <BaseProTableProcess path={price2Path} columns={columns} search={true} />
   );
 };
