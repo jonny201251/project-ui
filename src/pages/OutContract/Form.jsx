@@ -22,7 +22,7 @@ import {
   NumberPicker,
   OnlyButton,
 } from '../../components';
-import { get, inContractPath } from '../../utils';
+import { contractMoneyPath, get, inContractPath, post } from '../../utils';
 import DialogList from './DialogList';
 import DialogList2 from './DialogList2';
 import styles from '../table-placeholder.less';
@@ -30,6 +30,7 @@ import { Button, ConfigProvider, message } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import React, { useEffect } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
+import DialogList3 from './DialogList3';
 
 const InputButton2 = (props) => {
   return (
@@ -209,6 +210,32 @@ export default (props) => {
     }
   };
 
+  const onClick4 = async (flag) => {
+    const data = await post(contractMoneyPath.list, {
+      contractCode: record?.contractCode,
+      type: '付款合同',
+    });
+    if (flag === 'open' && data) {
+      let dialog3 = FormDialog(
+        {
+          footer: null,
+          keyboard: false,
+          maskClosable: false,
+          width: 800,
+          title: '修改记录',
+        },
+        (form3) => {
+          return (
+            <>
+              <DialogList3 form={form3} dialog={dialog3} data={data} />
+            </>
+          );
+        },
+      );
+      dialog3.open({});
+    }
+  };
+
   return (
     <ConfigProvider locale={zhCN}>
       <Form form={form} labelWidth={110} className={styles.placeholder}>
@@ -313,7 +340,12 @@ export default (props) => {
               required
               x-decorator="FormItem"
               title="付款合同金额"
-              x-component="NumberPicker"
+              x-component="InputButton2"
+              x-component-props={{
+                onClick: onClick4,
+                formatter: (value) =>
+                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+              }}
             />
             <SchemaField.Number
               name="endMoney"

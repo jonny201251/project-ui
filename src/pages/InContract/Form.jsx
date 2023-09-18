@@ -187,6 +187,7 @@ export default (props) => {
   const onClick3 = async (flag) => {
     const data = await post(contractMoneyPath.list, {
       contractCode: record?.contractCode,
+      type: '收款合同',
     });
     if (flag === 'open' && data) {
       let dialog3 = FormDialog(
