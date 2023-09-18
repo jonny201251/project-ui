@@ -11,12 +11,14 @@ import {
   Select,
 } from '@formily/antd';
 import { createSchemaField } from '@formily/react';
+import { SearchOutlined } from '@ant-design/icons';
 import React, { useEffect } from 'react';
 import { Button, ConfigProvider, message } from 'antd';
 import { session } from '../../utils';
 import zhCN from 'antd/lib/locale/zh_CN';
 import styles from '../table-placeholder.less';
 import DialogList from './DialogList';
+import DialogList2 from './DialogList2';
 import {
   ArrayTableAddition,
   ArrayTableIndex,
@@ -28,6 +30,28 @@ import {
 } from '../../components';
 import { onFieldReact } from '@formily/core';
 
+//文本框+按钮
+const InputButton2 = (props) => {
+  const index = ArrayTable.useIndex();
+  const row = ArrayTable.useRecord();
+  return (
+    <div style={{ display: 'inline-flex', width: '100%' }}>
+      <Input {...props} style={{ ...props.style }} disabled />
+      <Button
+        onClick={(e) => {
+          if (props.onClick) {
+            console.log(index);
+            console.log(row);
+            props.onClick(index, row);
+          }
+        }}
+        icon={<SearchOutlined />}
+        type={'primary'}
+      />
+    </div>
+  );
+};
+
 const SchemaField = createSchemaField({
   components: {
     FormLayout,
@@ -35,6 +59,7 @@ const SchemaField = createSchemaField({
     FormGrid,
     Input,
     InputButton,
+    InputButton2,
     DatePicker,
     File,
     Select,
@@ -71,8 +96,11 @@ export default (props) => {
   form.addEffects('id', () => {
     onFieldReact('projectType', (field) => {
       let value = field.value;
+      let f = form.query('projectName').take();
       if (value === '民用产业') {
+        f?.setComponent('InputButton');
       } else {
+        f?.setComponent('Input');
       }
     });
   });
@@ -97,14 +125,11 @@ export default (props) => {
                       const values = await form2.submit();
                       if (values.selectedRow) {
                         form.setValues({
-                          providerId: values.selectedRow.id,
-                          usee: values.selectedRow.usee,
-                          type: values.selectedRow.type,
-                          name: values.selectedRow.name,
-                          property: values.selectedRow.property,
-                          address: values.selectedRow.address,
-                          registerMoney: values.selectedRow.registerMoney,
-                          result: values.selectedRow.result,
+                          projectName: values.selectedRow.name,
+                          taskCode: values.selectedRow.taskCode,
+                          inContractId: values.selectedRow.id,
+                          inContractName: values.selectedRow.contractName,
+                          inContractCode: values.selectedRow.contractCode,
                         });
                         dialog2.close();
                       } else {
@@ -123,6 +148,40 @@ export default (props) => {
       );
       dialog2.open({});
     }
+  };
+
+  const onClick2 = (index, row) => {
+    let dialog2 = FormDialog(
+      { footer: null, keyboard: false, maskClosable: false, width: 800 },
+      (form2) => {
+        return (
+          <>
+            <DialogList2 form={form2} dialog={dialog2} selectedId={row?.id} />
+            <FormDialog.Footer>
+              <FormButtonGroup gutter={16} align={'right'}>
+                <Button onClick={() => dialog2.close()}>取消</Button>
+                <LoadingButton
+                  onClick={async () => {
+                    const values = await form2.submit();
+                    if (values.selectedRow) {
+                      row['providerId'] = values.selectedRow.id;
+                      row['providerName'] = values.selectedRow.name;
+                      dialog2.close();
+                    } else {
+                      message.error('选择一条数据');
+                    }
+                  }}
+                  type={'primary'}
+                >
+                  确定
+                </LoadingButton>
+              </FormButtonGroup>
+            </FormDialog.Footer>
+          </>
+        );
+      },
+    );
+    dialog2.open({});
   };
 
   return (
@@ -228,14 +287,15 @@ export default (props) => {
                     name="providerName"
                     required
                     x-decorator="FormItem"
-                    x-component="InputButton"
-                    x-component-props={{ onClick: onClick }}
+                    x-component="InputButton2"
+                    x-component-props={{ onClick: onClick2, form: form }}
                   />
                 </SchemaField.Void>
                 <SchemaField.Void
                   x-component="ArrayTable.Column"
                   x-component-props={{
-                    title: '报价(元)',
+                    title: '报价',
+                    width: 170,
                     align: 'center',
                   }}
                 >
@@ -244,12 +304,18 @@ export default (props) => {
                     required
                     x-decorator="FormItem"
                     x-component="NumberPicker"
+                    x-component-props={{
+                      addonAfter: '元',
+                      formatter: (value) =>
+                        `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                    }}
                   />
                 </SchemaField.Void>
                 <SchemaField.Void
                   x-component="ArrayTable.Column"
                   x-component-props={{
                     title: '税率',
+                    width: 90,
                     align: 'center',
                   }}
                 >
@@ -264,6 +330,7 @@ export default (props) => {
                   x-component="ArrayTable.Column"
                   x-component-props={{
                     title: '发票种类',
+                    width: 150,
                     align: 'center',
                   }}
                 >
@@ -276,6 +343,21 @@ export default (props) => {
                       { label: '增值税专票', value: '增值税专票' },
                       { label: '增值税普票', value: '增值税普票' },
                     ]}
+                  />
+                </SchemaField.Void>
+                <SchemaField.Void
+                  x-component="ArrayTable.Column"
+                  x-component-props={{
+                    title: '排名',
+                    width: 60,
+                    align: 'center',
+                  }}
+                >
+                  <SchemaField.String
+                    name="sort"
+                    required
+                    x-decorator="FormItem"
+                    x-component="Input"
                   />
                 </SchemaField.Void>
                 <SchemaField.Void

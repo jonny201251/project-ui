@@ -75,6 +75,8 @@ import ProviderSimpleForm from '../pages/ProviderSimple/Form';
 
 import Price1List from '../pages/Price1/List';
 import Price1AddForm from '../pages/Price1/AddForm';
+import Price1CheckForm from '../pages/Price1/CheckForm';
+import Price1ViewForm from '../pages/Price1/ViewForm';
 
 import ProviderQueryList from '../pages/ProviderQuery/List';
 import ProviderQueryAddForm from '../pages/ProviderQuery/AddForm';
@@ -577,17 +579,15 @@ export const budgetDialog2Path = {
 export const price1Path = {
   flag: 'price1Path',
   width: 1000,
+  haveChange: 'no',
   List: Price1List,
   AddForm: Price1AddForm,
-  EditForm: ProviderQueryAddForm,
-  CheckForm: ProviderQueryCheckForm,
-  ViewHistory: ProviderQueryViewHistory,
-  ViewForm: ProviderQueryViewForm,
-  ChangeForm: ProviderQueryChangeForm,
-  list: contextPath + '/providerQuery/list',
-  viewHistory: contextPath + '/providerQuery/viewHistory',
-  get: contextPath + '/providerQuery/get',
-  btnHandle: contextPath + '/providerQuery/btnHandle',
+  EditForm: Price1AddForm,
+  CheckForm: Price1CheckForm,
+  ViewForm: Price1ViewForm,
+  list: contextPath + '/price1/list',
+  get: contextPath + '/price1/get',
+  btnHandle: contextPath + '/price1/btnHandle',
 };
 export const providerQueryPath = {
   flag: 'providerQueryPath',

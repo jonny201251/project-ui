@@ -32,7 +32,6 @@ export function post(url, values) {
   return request
     .post(url, { data: values })
     .then((res) => {
-      console.log(res);
       if (res.msg === '用户未登录') {
         history.push('/login');
       } else if (res.code === 200) {
