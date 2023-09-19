@@ -420,6 +420,47 @@ export default (props) => {
         params,
         record.providerName + '(供方评分)',
       );
+    } else if (type === 'price1Path') {
+      let params = {
+        excelConfigId: '863923860684439552',
+        queryParam: {
+          id: record.id,
+          price1Id: record.id,
+          processInstId: record.processInst.id,
+        },
+      };
+      const data = await pdfPost(
+        contextPath + '/jmreport/exportPdfStream',
+        params,
+        record.projectName + '(比价单)',
+      );
+    } else if (type === 'price2Path') {
+      let params = {
+        excelConfigId: '863923904703660032',
+        queryParam: {
+          id: record.id,
+          processInstId: record.processInst.id,
+        },
+      };
+      const data = await pdfPost(
+        contextPath + '/jmreport/exportPdfStream',
+        params,
+        record.projectName + '(竞争性谈判表)',
+      );
+    } else if (type === 'price3Path') {
+      let params = {
+        excelConfigId: '863923919790571520',
+        queryParam: {
+          id: record.id,
+          price3Id: record.id,
+          processInstId: record.processInst.id,
+        },
+      };
+      const data = await pdfPost(
+        contextPath + '/jmreport/exportPdfStream',
+        params,
+        record.projectName + '(评审方案审批表)',
+      );
     }
   };
 
