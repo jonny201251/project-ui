@@ -24,16 +24,6 @@ export default () => {
     { title: '任务号', dataIndex: 'taskCode', valueType: 'text', width: 120 },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     {
-      title: '项目性质',
-      dataIndex: 'property',
-      valueType: 'text',
-      valueEnum: {
-        一类: { text: '一类' },
-        二类: { text: '二类' },
-        三类: { text: '三类' },
-      },
-    },
-    {
       title: '预计毛利率',
       dataIndex: 'projectRate',
       valueType: 'text',

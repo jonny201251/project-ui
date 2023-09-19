@@ -149,7 +149,20 @@ export default (props) => {
                   title="项目名称"
                   x-decorator="FormItem"
                   x-component="Input"
-                  x-decorator-props={{ gridSpan: 3 }}
+                  x-decorator-props={{ gridSpan: 2 }}
+                />
+                <SchemaField.String
+                  name="projectLevel"
+                  required
+                  title="项目密级"
+                  x-decorator="FormItem"
+                  x-component="Select"
+                  enum={[
+                    { label: '非密', value: '非密' },
+                    { label: '内部', value: '内部' },
+                    { label: '秘密', value: '秘密' },
+                    { label: '机密', value: '机密' },
+                  ]}
                 />
               </SchemaField.Void>
               <SchemaField.Void
@@ -220,6 +233,13 @@ export default (props) => {
                 <SchemaField.String
                   name="providerName"
                   title="战略伙伴名称"
+                  x-decorator="FormItem"
+                  x-decorator-props={{ gridSpan: 2 }}
+                  x-component="Input"
+                />
+                <SchemaField.String
+                  name="owerName"
+                  title="业主名称"
                   x-decorator="FormItem"
                   x-decorator-props={{ gridSpan: 2 }}
                   x-component="Input"

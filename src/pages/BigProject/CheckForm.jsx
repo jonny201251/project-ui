@@ -259,7 +259,7 @@ export default (props) => {
 
     form.query('remark2').take().value =
       '1.评分权重\n' +
-      '一、二类项目：项目、甲方（业主）评分占比为 6:4；三类项目：项目、甲方（业主）、战略伙伴评分占比为 4:2:4。\n' +
+      '(一)：项目、客户（业主）评分占比为 6:4；(二)：项目、客户（业主）、战略伙伴评分占比为 4:2:4。\n' +
       '2.评估结论\n' +
       '评分 90 分（含）以上为低风险项目；评分 70 分（含）以上为中等风险项目；评分 70 分以下为高风险项目';
   }, []);
@@ -769,6 +769,19 @@ export default (props) => {
                   x-component="Input"
                   x-decorator-props={{ gridSpan: 2 }}
                 />
+                <SchemaField.String
+                  name="projectLevel"
+                  required
+                  title="项目密级"
+                  x-decorator="FormItem"
+                  x-component="Select"
+                  enum={[
+                    { label: '非密', value: '非密' },
+                    { label: '内部', value: '内部' },
+                    { label: '秘密', value: '秘密' },
+                    { label: '机密', value: '机密' },
+                  ]}
+                />
               </SchemaField.Void>
               <SchemaField.Void
                 x-component="FormGrid"
@@ -844,6 +857,13 @@ export default (props) => {
                   x-decorator-props={{ gridSpan: 2 }}
                   x-component="InputButton"
                   x-component-props={{ onClick: onClick2 }}
+                />
+                <SchemaField.String
+                  name="owerName"
+                  title="业主名称"
+                  x-decorator="FormItem"
+                  x-decorator-props={{ gridSpan: 2 }}
+                  x-component="Input"
                 />
                 <SchemaField.String
                   name="idTypeListTmp"
