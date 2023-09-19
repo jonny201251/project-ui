@@ -149,12 +149,10 @@ export default (props) => {
                 maximum: 10,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 9,
-              maximum: 10,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           } else if (itemValue === '有,但风险较小在可控范围内') {
             field.value = '6-8分';
             startScoreField &&
@@ -163,12 +161,10 @@ export default (props) => {
                 maximum: 8,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 6,
-              maximum: 8,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           } else if (itemValue === '有,且风险较大') {
             field.value = '<6分';
             startScoreField &&
@@ -177,12 +173,10 @@ export default (props) => {
                 maximum: 6,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 0,
-              maximum: 6,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           }
           if (session.getItem('user').loginName === '祁瑛') {
             endScoreField?.setPattern('editable');
@@ -199,12 +193,10 @@ export default (props) => {
                 maximum: 10,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 9,
-              maximum: 10,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           } else if (itemValue === '有,影响较小') {
             field.value = '6-8分';
             startScoreField &&
@@ -213,12 +205,10 @@ export default (props) => {
                 maximum: 8,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 6,
-              maximum: 8,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           } else if (itemValue === '有,影响较大') {
             field.value = '<6分';
             startScoreField &&
@@ -227,12 +217,10 @@ export default (props) => {
                 maximum: 6,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 0,
-              maximum: 6,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           }
           if (
             session.getItem('user').loginName === '孙欢' ||
@@ -252,12 +240,10 @@ export default (props) => {
                 maximum: 10,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 9,
-              maximum: 10,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           } else if (itemValue === '500万>注册资本≥100万') {
             field.value = '6-8分';
             startScoreField &&
@@ -266,12 +252,10 @@ export default (props) => {
                 maximum: 8,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 6,
-              maximum: 8,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           } else if (itemValue === '注册资本<100万') {
             field.value = '<6分';
             startScoreField &&
@@ -280,12 +264,10 @@ export default (props) => {
                 maximum: 6,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 0,
-              maximum: 6,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           }
           if (
             session.getItem('user').loginName === '孙欢' ||
@@ -305,12 +287,10 @@ export default (props) => {
                 maximum: 10,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 9,
-              maximum: 10,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           } else if (itemValue === '与公司首次合作，配合度存在提升空间') {
             field.value = '6-8分';
             startScoreField &&
@@ -319,12 +299,10 @@ export default (props) => {
                 maximum: 8,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 6,
-              maximum: 8,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           } else if (itemValue === '与公司合作深度较低配合度较差') {
             field.value = '<6分';
             startScoreField &&
@@ -333,12 +311,10 @@ export default (props) => {
                 maximum: 6,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 0,
-              maximum: 6,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           }
           if (
             session.getItem('user').loginName === '孙欢' ||
@@ -358,12 +334,10 @@ export default (props) => {
                 maximum: 10,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 8,
-              maximum: 10,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           } else if (itemValue === '按约定供货及时,采购主体使用情况一般') {
             field.value = '6-7分';
             startScoreField &&
@@ -372,12 +346,10 @@ export default (props) => {
                 maximum: 7,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 6,
-              maximum: 7,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           } else if (itemValue === '未按约定及时供货,采购主体使用情况较差') {
             field.value = '<6分';
             startScoreField &&
@@ -386,12 +358,10 @@ export default (props) => {
                 maximum: 6,
                 required: true,
               });
-            /*            endScoreField &&
-            endScoreField.setValidator({
-              minimum: 0,
-              maximum: 6,
-              required: true,
-            })*/
+            endScoreField &&
+              endScoreField.setValidator({
+                required: true,
+              });
           }
           if (
             session.getItem('user').loginName === '孙欢' ||

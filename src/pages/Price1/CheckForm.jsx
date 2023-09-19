@@ -203,6 +203,7 @@ export default (props) => {
             name="comment"
             title="审批意见"
             x-decorator="FormItem"
+            x-decorator-props={{ gridSpan: 2 }}
             x-component="Input.TextArea"
             x-component-props={{ placeholder: '请输入意见' }}
           />

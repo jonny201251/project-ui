@@ -25,7 +25,9 @@ export default (props) => {
       btnArr.push(
         <LoadingButton
           onClick={async () => {
-            const formValue = await form.submit();
+            const formValue = buttonName.includes('退回申请人')
+              ? form.values
+              : await form.submit();
             if (formValue) {
               let values = {
                 formValue,
