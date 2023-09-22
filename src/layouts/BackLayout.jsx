@@ -22,6 +22,8 @@ import ChangePassword from './ChangePassword';
 import MyList from '../pages/ProcessInst/MyList';
 import MyList2 from '../pages/ProcessInst/MyList2';
 
+import MyList3 from '../pages/InOutContract/Listt';
+
 const { Header, Sider, Content } = Layout;
 
 //为了解决关闭tab,setActiveKey没有起作用问题
@@ -324,6 +326,14 @@ export default () => {
                 {utils.session.getItem('user').loginName === '祁瑛' && (
                   <MyList2 />
                 )}
+              </div>
+              <div style={{ padding: '10px 12px' }}>
+                {utils.session.getItem('user').deptName !== '综合计划部' &&
+                  (utils.session.getItem('user').position === '一般管理人员' ||
+                    utils.session.getItem('user').position === '班组长' ||
+                    utils.session.getItem('user').position === '班组成员') && (
+                    <MyList3 />
+                  )}
               </div>
             </Tabs.TabPane>
             {renderTabPane()}
