@@ -394,7 +394,8 @@ export default (props) => {
             </SchemaField.Array>
             <SchemaField.String
               name="descc"
-              title="备注"
+              title="比价人员意见"
+              required
               x-decorator="FormItem"
               x-component="Input.TextArea"
               x-component-props={{

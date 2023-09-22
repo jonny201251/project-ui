@@ -53,7 +53,7 @@ export default (props) => {
   useEffect(async () => {
     form
       .query(
-        '*(invoiceRate,displayName,deptName,createDatetime,taskCode,property,totalCost,endMoney,inChangeMoney,outChangeMoney,customerName,inSum,outSum,projectRate)',
+        '*(invoiceRate,displayName,deptName,createDatetime,taskCode,totalCost,endMoney,inChangeMoney,outChangeMoney,customerName,inSum,outSum,projectRate)',
       )
       .forEach((field) => {
         field.setPattern('disabled');
@@ -96,7 +96,6 @@ export default (props) => {
                           projectType: values.selectedRow.projectType,
                           name: values.selectedRow.name,
                           taskCode: values.selectedRow.taskCode,
-                          property: values.selectedRow.property,
                           customerId: values.selectedRow.customerId,
                           customerName: values.selectedRow.customerName,
                           projectRatee: values.selectedRow.projectRate,
@@ -225,20 +224,21 @@ export default (props) => {
               required
               title="项目名称"
               x-decorator="FormItem"
-              x-decorator-props={{ gridSpan: 3 }}
-              x-component="Input"
+              x-component="InputButton"
+              x-component-props={{ onClick: onClick }}
+              x-decorator-props={{ gridSpan: 2 }}
             />
+          </SchemaField.Void>
+          <SchemaField.Void
+            x-component="FormGrid"
+            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
+          >
             <SchemaField.String
+              required
               name="taskCode"
               title="任务号"
               x-decorator="FormItem"
-              x-component="Input"
-            />
-            <SchemaField.String
-              name="property"
-              x-decorator="FormItem"
-              title="项目性质"
-              x-component="Input"
+              x-component="MyInput"
             />
             <SchemaField.String
               name="projectLoginName"
@@ -249,7 +249,11 @@ export default (props) => {
               x-component-props={{ showSearch: true }}
               enum={session.getItem('userList')}
             />
-            />
+          </SchemaField.Void>
+          <SchemaField.Void
+            x-component="FormGrid"
+            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
+          >
             <SchemaField.String
               name="contractCode"
               x-decorator="FormItem"
@@ -383,19 +387,6 @@ export default (props) => {
             <SchemaField.Object>
               <SchemaField.Void
                 x-component="ArrayTable.Column"
-                x-component-props={{
-                  width: 80,
-                  title: '排序',
-                  align: 'center',
-                }}
-              >
-                <SchemaField.Void
-                  x-decorator="FormItem"
-                  x-component="ArrayTable.SortHandle"
-                />
-              </SchemaField.Void>
-              <SchemaField.Void
-                x-component="ArrayTable.Column"
                 x-component-props={{ title: '名称', align: 'center' }}
               >
                 <SchemaField.String
@@ -499,19 +490,6 @@ export default (props) => {
               <SchemaField.Object>
                 <SchemaField.Void
                   x-component="ArrayTable.Column"
-                  x-component-props={{
-                    width: 80,
-                    title: '排序',
-                    align: 'center',
-                  }}
-                >
-                  <SchemaField.Void
-                    x-decorator="FormItem"
-                    x-component="ArrayTable.SortHandle"
-                  />
-                </SchemaField.Void>
-                <SchemaField.Void
-                  x-component="ArrayTable.Column"
                   x-component-props={{ title: '收入类型', align: 'center' }}
                 >
                   <SchemaField.String
@@ -608,19 +586,6 @@ export default (props) => {
               }}
             >
               <SchemaField.Object>
-                <SchemaField.Void
-                  x-component="ArrayTable.Column"
-                  x-component-props={{
-                    width: 80,
-                    title: '排序',
-                    align: 'center',
-                  }}
-                >
-                  <SchemaField.Void
-                    x-decorator="FormItem"
-                    x-component="ArrayTable.SortHandle"
-                  />
-                </SchemaField.Void>
                 <SchemaField.Void
                   x-component="ArrayTable.Column"
                   x-component-props={{ title: '成本类型', align: 'center' }}

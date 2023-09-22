@@ -85,10 +85,6 @@ export default (props) => {
         deptId: user.deptId,
         deptName: user.deptName,
       });
-    } else {
-      if (record.projectProperty === '3') {
-        form.query('providerName').take()?.setState({ required: true });
-      }
     }
   }, []);
 
@@ -189,18 +185,6 @@ export default (props) => {
     },
   ];
 
-  form.addEffects('id', () => {
-    onFieldReact('projectProperty', (field) => {
-      let value = field.value;
-      if (value) {
-        if (value === '3') {
-          form.query('providerName').take()?.setState({ required: true });
-        } else {
-          form.query('providerName').take()?.setState({ required: false });
-        }
-      }
-    });
-  });
   const onClick = (flag) => {
     if (flag === 'open') {
       let dialog2 = FormDialog(
@@ -244,11 +228,6 @@ export default (props) => {
   };
 
   const onClick2 = (flag) => {
-    /*    let field = form.query('projectProperty').take()
-        if (field?.value !== '3') {
-          message.error('请选择 项目性质为三类')
-          return
-        }*/
     if (flag === 'open') {
       let dialog2 = FormDialog(
         { footer: null, keyboard: false, maskClosable: false, width: 800 },
@@ -317,12 +296,6 @@ export default (props) => {
               x-decorator="FormItem"
               x-component="Input"
             />
-            <SchemaField.String
-              name="taskCode"
-              title="任务号/备案号"
-              x-decorator="FormItem"
-              x-component="Input"
-            />
           </SchemaField.Void>
           <SchemaField.Void
             x-component="FormGrid"
@@ -337,16 +310,10 @@ export default (props) => {
               x-component="Input"
             />
             <SchemaField.String
-              name="projectProperty"
-              required
-              title="项目性质"
+              name="taskCode"
+              title="任务号/备案号"
               x-decorator="FormItem"
-              x-component="Select"
-              enum={[
-                { label: '一类', value: '1' },
-                { label: '二类', value: '2' },
-                { label: '三类', value: '3' },
-              ]}
+              x-component="Input"
             />
             <SchemaField.String
               name="customerName"
