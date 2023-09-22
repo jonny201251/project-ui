@@ -737,6 +737,9 @@ export const inContractPath = {
 export const inContractPath2 = {
   list: contextPath + '/inContract/dialog',
 };
+export const inContractPath3 = {
+  list: contextPath + '/inContract/dialog3',
+};
 export const outContractPath = {
   flag: 'outContractPath',
   width: 1100,

@@ -8,7 +8,12 @@ export default () => {
   const actionRef = useRef();
 
   const columns = [
-    { title: '项目类别', dataIndex: 'projectTypee', valueType: 'text' },
+    {
+      title: '项目类别',
+      dataIndex: 'projectTypee',
+      valueType: 'text',
+      hideInSearch: true,
+    },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
     { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },

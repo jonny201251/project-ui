@@ -21,10 +21,11 @@ import {
   NumberPicker,
 } from '../../components';
 import DialogList from './DialogList';
+import DialogList2 from './DialogList2';
 import styles from '../table-placeholder.less';
 import { Button, ConfigProvider, message } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { onFieldReact } from '@formily/core';
 import { session } from '../../utils';
 
@@ -90,21 +91,21 @@ export default (props) => {
       let dialog2 = FormDialog(
         { footer: null, keyboard: false, maskClosable: false, width: 1000 },
         (form2) => {
-          return (
-            <>
-              <DialogList
-                form={form2}
-                dialog={dialog2}
-                selectedId={form.values.customerId}
-              />
-              <FormDialog.Footer>
-                <FormButtonGroup gutter={16} align={'right'}>
-                  <Button onClick={() => dialog2.close()}>取消</Button>
-                  <LoadingButton
-                    onClick={async () => {
-                      const values = await form2.submit();
-                      if (values.selectedRow) {
-                        if (value === '有') {
+          if (value === '有') {
+            return (
+              <>
+                <DialogList
+                  form={form2}
+                  dialog={dialog2}
+                  selectedId={form.values.customerId}
+                />
+                <FormDialog.Footer>
+                  <FormButtonGroup gutter={16} align={'right'}>
+                    <Button onClick={() => dialog2.close()}>取消</Button>
+                    <LoadingButton
+                      onClick={async () => {
+                        const values = await form2.submit();
+                        if (values.selectedRow) {
                           form.setValues({
                             outContractId: values.selectedRow.id,
                             budgetId: values.selectedRow.budgetId,
@@ -123,9 +124,35 @@ export default (props) => {
                             costType: values.selectedRow.costType,
                             costRate: values.selectedRow.costRate,
                           });
+                          dialog2.close();
                         } else {
+                          message.error('选择一条数据');
+                        }
+                      }}
+                      type={'primary'}
+                    >
+                      确定
+                    </LoadingButton>
+                  </FormButtonGroup>
+                </FormDialog.Footer>
+              </>
+            );
+          } else {
+            return (
+              <>
+                <DialogList2
+                  form={form2}
+                  dialog={dialog2}
+                  selectedId={form.values.customerId}
+                />
+                <FormDialog.Footer>
+                  <FormButtonGroup gutter={16} align={'right'}>
+                    <Button onClick={() => dialog2.close()}>取消</Button>
+                    <LoadingButton
+                      onClick={async () => {
+                        const values = await form2.submit();
+                        if (values.selectedRow) {
                           form.setValues({
-                            outContractId: values.selectedRow.id,
                             budgetId: values.selectedRow.budgetId,
                             projectId: values.selectedRow.projectId,
                             projectType: values.selectedRow.projectType,
@@ -133,24 +160,21 @@ export default (props) => {
                             taskCode: values.selectedRow.taskCode,
                             property: values.selectedRow.property,
                             wbs: values.selectedRow.wbs,
-                            costType: values.selectedRow.costType,
-                            costRate: values.selectedRow.costRate,
-                            endMoney: values.selectedRow.endMoney,
                           });
+                          dialog2.close();
+                        } else {
+                          message.error('选择一条数据');
                         }
-                        dialog2.close();
-                      } else {
-                        message.error('选择一条数据');
-                      }
-                    }}
-                    type={'primary'}
-                  >
-                    确定
-                  </LoadingButton>
-                </FormButtonGroup>
-              </FormDialog.Footer>
-            </>
-          );
+                      }}
+                      type={'primary'}
+                    >
+                      确定
+                    </LoadingButton>
+                  </FormButtonGroup>
+                </FormDialog.Footer>
+              </>
+            );
+          }
         },
       );
       dialog2.open({});
@@ -158,6 +182,7 @@ export default (props) => {
       form.query('haveContract').take().validate();
     }
   };
+
   form.addEffects('id', () => {
     onFieldReact('haveContract', (field) => {
       if (field.value === '有') {
@@ -301,6 +326,10 @@ export default (props) => {
               title="付款合同金额"
               x-decorator="FormItem"
               x-component="NumberPicker"
+              x-component-props={{
+                formatter: (value) =>
+                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+              }}
             />
             <SchemaField.Number
               name="endMoney"
