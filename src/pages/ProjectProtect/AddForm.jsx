@@ -66,6 +66,7 @@ export default (props) => {
         loginName: user.loginName,
         deptId: user.deptId,
         deptName: user.deptName,
+        userNameeList: ['张慧'],
       });
     }
   }, []);
@@ -219,6 +220,14 @@ export default (props) => {
               <SchemaField.String
                 name="inName"
                 title="收款单位"
+                x-component="Input"
+                x-decorator="FormItem"
+                x-decorator-props={{ gridSpan: 2 }}
+              />
+              <SchemaField.String
+                name="code"
+                title="单据单号"
+                description="财务共享系统里的单据单号"
                 x-component="Input"
                 x-decorator="FormItem"
                 x-decorator-props={{ gridSpan: 2 }}

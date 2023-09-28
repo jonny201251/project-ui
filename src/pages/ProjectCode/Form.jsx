@@ -84,6 +84,7 @@ export default (props) => {
         loginName: user.loginName,
         deptId: user.deptId,
         deptName: user.deptName,
+        haveMoreBudget: '否',
       });
     }
   }, []);
@@ -368,8 +369,9 @@ export default (props) => {
             <SchemaField.String
               name="haveMoreBudget"
               required
-              title="一个任务号是否有多个预算表"
+              title="多个预算表"
               x-decorator="FormItem"
+              description="一个任务号是否有多个预算表"
               x-component="Radio.Group"
               enum={[
                 { label: '是', value: '是' },

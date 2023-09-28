@@ -222,6 +222,14 @@ export default (props) => {
                     x-decorator="FormItem"
                     x-decorator-props={{ gridSpan: 2 }}
                   />
+                  <SchemaField.String
+                    name="code"
+                    title="单据单号"
+                    description="财务共享系统里的单据单号"
+                    x-component="Input"
+                    x-decorator="FormItem"
+                    x-decorator-props={{ gridSpan: 2 }}
+                  />
                 </SchemaField.Void>
               </SchemaField.Void>
               <SchemaField.Void

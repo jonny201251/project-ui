@@ -152,6 +152,7 @@ export default (props) => {
                       onClick={async () => {
                         const values = await form2.submit();
                         if (values.selectedRow) {
+                          console.log(values.selectedRow);
                           form.setValues({
                             budgetId: values.selectedRow.budgetId,
                             projectId: values.selectedRow.projectId,
