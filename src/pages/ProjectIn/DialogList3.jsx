@@ -2,7 +2,9 @@ import ProTable from '@ant-design/pro-table';
 
 export default (props) => {
   const columns = [
-    { title: '序号', dataIndex: 'index', valueType: 'index' },
+    { title: '序号', dataIndex: 'id' },
+    { title: '项目名称', dataIndex: 'name', valueType: 'text' },
+    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '收款合同编号', dataIndex: 'contractCode', valueType: 'text' },
     {
       title: '收款合同金额',
@@ -14,9 +16,9 @@ export default (props) => {
           : '';
       },
     },
-    { title: '修改人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '修改部门', dataIndex: 'deptName', valueType: 'text' },
-    { title: '修改时间', dataIndex: 'createDatetime', valueType: 'text' },
+    { title: '日期', dataIndex: 'inDate', valueType: 'text' },
+    { title: '开票金额', dataIndex: 'money1', valueType: 'text' },
+    { title: '收款金额', dataIndex: 'money2', valueType: 'text' },
   ];
 
   return (
@@ -25,11 +27,12 @@ export default (props) => {
       rowKey="id"
       columns={columns}
       columnEmptyText={true}
-      dataSource={props.data?.dataList}
+      dataSource={props?.data?.dataList}
       tableAlertRender={false}
       //
       options={false}
       search={false}
+      pagination={false}
     />
   );
 };

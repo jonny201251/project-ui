@@ -329,6 +329,7 @@ export default () => {
               </div>
               <div style={{ padding: '10px 12px' }}>
                 {utils.session.getItem('user').deptName !== '综合计划部' &&
+                  utils.session.getItem('user').deptName !== '财务部' &&
                   (utils.session.getItem('user').position === '一般管理人员' ||
                     utils.session.getItem('user').position === '班组长' ||
                     utils.session.getItem('user').position === '班组成员') && (

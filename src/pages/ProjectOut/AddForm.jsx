@@ -19,6 +19,7 @@ import {
   InputButton,
   LoadingButton,
   NumberPicker,
+  OnlyButton,
 } from '../../components';
 import DialogList from './DialogList';
 import DialogList2 from './DialogList2';
@@ -27,7 +28,8 @@ import { Button, ConfigProvider, message } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import React, { useEffect, useState } from 'react';
 import { onFieldReact } from '@formily/core';
-import { session } from '../../utils';
+import { post, projectOutPath, session } from '../../utils';
+import DialogList3 from './DialogList3';
 
 const SchemaField = createSchemaField({
   components: {
@@ -45,6 +47,7 @@ const SchemaField = createSchemaField({
     NumberPicker,
     Select,
     DatePicker,
+    OnlyButton,
   },
 });
 
@@ -80,7 +83,7 @@ export default (props) => {
         loginName: user.loginName,
         deptId: user.deptId,
         deptName: user.deptName,
-        userNameeList: ['张慧', '宋燕蕾', '李冰'],
+        userNameeList: ['张慧'],
       });
     }
   }, []);
@@ -252,6 +255,37 @@ export default (props) => {
     form.setValues({ haveContract: value });
   };
 
+  const onClick3 = async (flag) => {
+    if (!form.values.taskCode) return;
+    const data = await post(projectOutPath.list2, {
+      haveContract: form.values.haveContract,
+      taskCode: form.values.taskCode,
+      contractCode: form.values.contractCode,
+      costType: form.values.costType,
+      costRate: form.values.costRate,
+      type: '支出信息',
+    });
+    if (flag === 'open') {
+      let dialog3 = FormDialog(
+        {
+          footer: null,
+          keyboard: false,
+          maskClosable: false,
+          width: 1000,
+          title: '已付款信息',
+        },
+        (form3) => {
+          return (
+            <>
+              <DialogList3 form={form3} dialog={dialog3} data={data} />
+            </>
+          );
+        },
+      );
+      dialog3.open({});
+    }
+  };
+
   return (
     <ConfigProvider locale={zhCN}>
       <Form form={form} labelWidth={120} className={styles.placeholder}>
@@ -418,6 +452,11 @@ export default (props) => {
               x-component="DatePicker"
               x-component-props={{ picker: 'month' }}
             />
+          </SchemaField.Void>
+          <SchemaField.Void
+            x-component="FormGrid"
+            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
+          >
             <SchemaField.String
               x-decorator-props={{ gridSpan: 2 }}
               name="remarkk"
@@ -425,6 +464,13 @@ export default (props) => {
               x-decorator="FormItem"
               x-component="Input.TextArea"
               x-component-props={{ rows: 2 }}
+            />
+            <SchemaField.String
+              name="code"
+              title="单据单号"
+              description="财务共享里的单据单号"
+              x-component="Input"
+              x-decorator="FormItem"
             />
             <SchemaField.String
               name="userNameeList"
@@ -435,6 +481,12 @@ export default (props) => {
               x-component="Select"
               x-component-props={{ showSearch: true, mode: 'multiple' }}
               enum={session.getItem('userList')}
+            />
+            <SchemaField.String
+              x-decorator="FormItem"
+              title="已付款信息"
+              x-component="OnlyButton"
+              x-component-props={{ onClick: onClick3, name: '查看' }}
             />
           </SchemaField.Void>
         </SchemaField>

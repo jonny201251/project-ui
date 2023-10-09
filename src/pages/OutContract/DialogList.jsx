@@ -29,6 +29,11 @@ export default (props) => {
       dataIndex: 'money',
       valueType: 'text',
       hideInSearch: true,
+      render: (text, record, _, action) => {
+        return record.money > 0
+          ? (record.money + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          : '';
+      },
     },
     {
       title: '创建部门',

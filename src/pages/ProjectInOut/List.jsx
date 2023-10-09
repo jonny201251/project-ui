@@ -86,7 +86,16 @@ export default () => {
     { title: '客户名称', dataIndex: 'customerName', valueType: 'text' },
     { title: '收款合同编号', dataIndex: 'contractCode', valueType: 'text' },
     { title: '合同名称', dataIndex: 'contractName', valueType: 'text' },
-    { title: '合同额', dataIndex: 'contractMoney', valueType: 'text' },
+    {
+      title: '合同额',
+      dataIndex: 'contractMoney',
+      valueType: 'text',
+      render: (text, record, _, action) => {
+        return record.contractMoney > 0
+          ? (record.contractMoney + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          : '';
+      },
+    },
     {
       title: '操作',
       valueType: 'option',

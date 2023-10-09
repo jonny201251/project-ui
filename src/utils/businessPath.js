@@ -546,6 +546,7 @@ export const projectInPath = {
   Form: ProjectInForm,
   List: ProjectInList,
   list: contextPath + '/projectIn/list',
+  list2: contextPath + '/projectIn/list2',
   get: contextPath + '/projectIn/get',
   add: contextPath + '/projectIn/add',
   edit: contextPath + '/projectIn/edit',
@@ -601,7 +602,7 @@ export const price1Path = {
 };
 export const price2Path = {
   flag: 'price2Path',
-  width: 1000,
+  width: 1150,
   haveChange: 'no',
   List: Price2List,
   AddForm: Price2AddForm,
@@ -711,6 +712,7 @@ export const projectOutPath = {
   CheckForm: ProjectOutCheckForm,
   ViewForm: ProjectOutViewForm,
   list: contextPath + '/projectOut/list',
+  list2: contextPath + '/projectOut/list2',
   get: contextPath + '/projectOut/get',
   btnHandle: contextPath + '/projectOut/btnHandle',
 };

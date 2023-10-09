@@ -98,14 +98,22 @@ export default (props) => {
       return (
         <SchemaField.Void
           x-component="FormGrid"
-          x-component-props={{ maxColumns: 2, strictAutoFit: true }}
+          x-component-props={{ maxColumns: 3, strictAutoFit: true }}
         >
           <SchemaField.String
+            required
             name="comment"
             title="审批意见"
             x-decorator="FormItem"
             x-component="Input.TextArea"
-            x-component-props={{ placeholder: '请输入意见' }}
+            x-component-props={{
+              rows: 4,
+              placeholder:
+                '意见参考如下写法：\n' +
+                '1.付款了,输入 实际付款日期。\n' +
+                '2.未支付,输入 实际未支付。',
+            }}
+            x-decorator-props={{ gridSpan: 2 }}
           />
         </SchemaField.Void>
       );
@@ -245,6 +253,7 @@ export default (props) => {
                   x-decorator-props={{ gridSpan: 2 }}
                 />
               </SchemaField.Void>
+              {showComment()}
             </SchemaField>
           </Form>
         </Tabs.TabPane>

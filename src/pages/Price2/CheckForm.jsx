@@ -315,6 +315,58 @@ export default (props) => {
                   x-component="Input"
                 />
                 <SchemaField.String
+                  name="limitt"
+                  title="符合条款"
+                  required
+                  x-decorator="FormItem"
+                  x-decorator-props={{ gridSpan: 3 }}
+                  x-component="Select"
+                  enum={[
+                    {
+                      label:
+                        '十二条(一)具体事项涉及国家秘密或商业秘密，比价或评审过程中秘密无法或很难保全的',
+                      value:
+                        '十二条(一)具体事项涉及国家秘密或商业秘密，比价或评审过程中秘密无法或很难保全的',
+                    },
+                    {
+                      label:
+                        '十二条(二)主要工艺、技术需要 用特定专利或者专有技术的',
+                      value:
+                        '十二条(二)主要工艺、技术需要 用特定专利或者专有技术的',
+                    },
+                    {
+                      label:
+                        '十二条(三)潜在承包商、供应商或服务提供者少于3家的',
+                      value:
+                        '十二条(三)潜在承包商、供应商或服务提供者少于3家的',
+                    },
+                    {
+                      label:
+                        '十二条(四)在合同执行过程中或合同执行完毕后需要追加工程、服务或材料，追加合同金额不超过原合同金额 30%，且追加金额累计不超过 200 万元的',
+                      value:
+                        '十二条(四)在合同执行过程中或合同执行完毕后需要追加工程、服务或材料，追加合同金额不超过原合同金额 30%，且追加金额累计不超过 200 万元的',
+                    },
+                    {
+                      label:
+                        '十二条(五)在原有工程、系统等基础上进行升级改造的(如改变承包商、供应商、服务提供者，将明显影响功能配套要求)',
+                      value:
+                        '十二条(五)在原有工程、系统等基础上进行升级改造的(如改变承包商、供应商、服务提供者，将明显影响功能配套要求)',
+                    },
+                    {
+                      label:
+                        '十二条(六)上级单位以正式文件形式明确了产品或服务集中选型的',
+                      value:
+                        '十二条(六)上级单位以正式文件形式明确了产品或服务集中选型的',
+                    },
+                    {
+                      label:
+                        '十二条(七)承包单位或销售单位与公司签订了战略合作协议，明确双方业务捆绑共同开发市场、承揽项目的',
+                      value:
+                        '十二条(七)承包单位或销售单位与公司签订了战略合作协议，明确双方业务捆绑共同开发市场、承揽项目的',
+                    },
+                  ]}
+                />
+                <SchemaField.String
                   name="providerName"
                   required
                   title="谈判单位名称"
@@ -323,14 +375,11 @@ export default (props) => {
                   x-component="InputButton"
                   x-component-props={{ onClick: onClick2 }}
                 />
-                <SchemaField.String
-                  name="limitt"
-                  title="符合条款"
-                  required
-                  x-decorator="FormItem"
-                  x-component="Input"
-                  default={'十二条(一)'}
-                />
+              </SchemaField.Void>
+              <SchemaField.Void
+                x-component="FormGrid"
+                x-component-props={{ maxColumns: 3, strictAutoFit: true }}
+              >
                 <SchemaField.String
                   name="invoiceType"
                   title="发票种类"
@@ -399,9 +448,9 @@ export default (props) => {
                   x-decorator="FormItem"
                   x-component="Input.TextArea"
                   x-component-props={{
-                    rows: 2,
+                    rows: 3,
                   }}
-                  x-decorator-props={{ gridSpan: 3 }}
+                  x-decorator-props={{ gridSpan: 3, labelWrap: true }}
                 />
                 <SchemaField.String
                   name="descc"

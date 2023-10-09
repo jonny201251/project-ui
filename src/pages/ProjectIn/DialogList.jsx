@@ -13,6 +13,11 @@ export default (props) => {
       dataIndex: 'contractMoney',
       valueType: 'text',
       hideInSearch: true,
+      render: (text, record, _, action) => {
+        return record.contractMoney > 0
+          ? (record.contractMoney + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          : '';
+      },
     },
     {
       title: '创建人',

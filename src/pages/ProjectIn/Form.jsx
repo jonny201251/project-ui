@@ -18,14 +18,16 @@ import {
   InputButton,
   LoadingButton,
   NumberPicker,
+  OnlyButton,
 } from '../../components';
 import DialogList from './DialogList';
+import DialogList3 from './DialogList3';
 import styles from '../table-placeholder.less';
 import { Button, ConfigProvider, message } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import React, { useEffect } from 'react';
 import { onFieldReact } from '@formily/core';
-import { session } from '../../utils';
+import { contractMoneyPath, post, session, projectInPath } from '../../utils';
 
 const SchemaField = createSchemaField({
   components: {
@@ -42,6 +44,7 @@ const SchemaField = createSchemaField({
     NumberPicker,
     Select,
     DatePicker,
+    OnlyButton,
   },
 });
 
@@ -118,6 +121,34 @@ export default (props) => {
         },
       );
       dialog2.open({});
+    }
+  };
+
+  const onClick3 = async (flag) => {
+    if (!form.values.taskCode && !form.values.contractCode) return;
+    const data = await post(projectInPath.list2, {
+      taskCode: form.values.taskCode,
+      contractCode: form.values.contractCode,
+      type: '收入信息',
+    });
+    if (flag === 'open') {
+      let dialog3 = FormDialog(
+        {
+          footer: null,
+          keyboard: false,
+          maskClosable: false,
+          width: 1000,
+          title: '已收款信息',
+        },
+        (form3) => {
+          return (
+            <>
+              <DialogList3 form={form3} dialog={dialog3} data={data} />
+            </>
+          );
+        },
+      );
+      dialog3.open({});
     }
   };
 
@@ -281,6 +312,19 @@ export default (props) => {
               x-decorator="FormItem"
               x-component="Input.TextArea"
               x-component-props={{ rows: 2 }}
+            />
+            <SchemaField.String
+              name="code"
+              title="单据单号"
+              description="财务共享里的单据单号"
+              x-component="Input"
+              x-decorator="FormItem"
+            />
+            <SchemaField.String
+              x-decorator="FormItem"
+              title="已收款信息"
+              x-component="OnlyButton"
+              x-component-props={{ onClick: onClick3, name: '查看' }}
             />
           </SchemaField.Void>
         </SchemaField>

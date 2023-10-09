@@ -402,6 +402,11 @@ export default (props) => {
                 <SchemaField.String
                   name="descc"
                   title="比价人员意见"
+                  description={
+                    '示例：比价人员意见。' +
+                    session.getItem('user')?.loginName +
+                    new Date().Format('yyyy.M.d')
+                  }
                   required
                   x-decorator="FormItem"
                   x-component="Input.TextArea"

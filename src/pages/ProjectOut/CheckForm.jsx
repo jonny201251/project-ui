@@ -244,14 +244,21 @@ export default (props) => {
       return (
         <SchemaField.Void
           x-component="FormGrid"
-          x-component-props={{ maxColumns: 2, strictAutoFit: true }}
+          x-component-props={{ maxColumns: 3, strictAutoFit: true }}
         >
           <SchemaField.String
             name="comment"
             title="审批意见"
             x-decorator="FormItem"
             x-component="Input.TextArea"
-            x-component-props={{ placeholder: '请输入意见' }}
+            x-component-props={{ placeholder: '请输入意见', rows: 2 }}
+          />
+          <SchemaField.String
+            name="comment"
+            title="审批意见"
+            x-decorator="FormItem"
+            x-component="Input.TextArea"
+            x-component-props={{ placeholder: '请输入意见', rows: 2 }}
           />
         </SchemaField.Void>
       );
@@ -426,6 +433,11 @@ export default (props) => {
                   x-component="DatePicker"
                   x-component-props={{ picker: 'month' }}
                 />
+              </SchemaField.Void>
+              <SchemaField.Void
+                x-component="FormGrid"
+                x-component-props={{ maxColumns: 3, strictAutoFit: true }}
+              >
                 <SchemaField.String
                   x-decorator-props={{ gridSpan: 2 }}
                   name="remarkk"
@@ -433,6 +445,13 @@ export default (props) => {
                   x-decorator="FormItem"
                   x-component="Input.TextArea"
                   x-component-props={{ rows: 2 }}
+                />
+                <SchemaField.String
+                  name="code"
+                  title="单据单号"
+                  description="财务共享里的单据单号"
+                  x-component="Input"
+                  x-decorator="FormItem"
                 />
                 <SchemaField.String
                   name="userNameeList"

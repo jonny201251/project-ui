@@ -681,7 +681,6 @@ export default (props) => {
                   x-component="File"
                   x-decorator-props={{
                     gridSpan: 2,
-                    feedbackText: '上传 预算表',
                   }}
                 />
                 <SchemaField.String
