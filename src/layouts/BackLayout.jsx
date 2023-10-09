@@ -232,7 +232,7 @@ export default () => {
     });
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     // setOpenKeys(rootSubmenuKeys)
     //
     // await utils.get(utils.checkUserPath.haveLogin)
@@ -323,16 +323,16 @@ export default () => {
                 <MyList />
               </div>
               <div style={{ padding: '10px 12px' }}>
-                {utils.session.getItem('user').loginName === '祁瑛' && (
+                {utils.session.getItem('user')?.loginName === '祁瑛' && (
                   <MyList2 />
                 )}
               </div>
               <div style={{ padding: '10px 12px' }}>
-                {utils.session.getItem('user').deptName !== '综合计划部' &&
-                  utils.session.getItem('user').deptName !== '财务部' &&
-                  (utils.session.getItem('user').position === '一般管理人员' ||
-                    utils.session.getItem('user').position === '班组长' ||
-                    utils.session.getItem('user').position === '班组成员') && (
+                {utils.session.getItem('user')?.deptName !== '综合计划部' &&
+                  utils.session.getItem('user')?.deptName !== '财务部' &&
+                  (utils.session.getItem('user')?.position === '一般管理人员' ||
+                    utils.session.getItem('user')?.position === '班组长' ||
+                    utils.session.getItem('user')?.position === '班组成员') && (
                     <MyList3 />
                   )}
               </div>

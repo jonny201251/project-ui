@@ -65,7 +65,7 @@ export default (props) => {
     if (type === 'check') return;
     if (flag === 'open') {
       let dialog2 = FormDialog(
-        { footer: null, keyboard: false, maskClosable: false, width: 800 },
+        { footer: null, keyboard: false, maskClosable: false, width: 950 },
         (form2) => {
           return (
             <>
