@@ -29,6 +29,23 @@ import { onFieldReact } from '@formily/core';
 import DialogList from '../ProjectProtect/DialogList';
 import { SearchOutlined } from '@ant-design/icons';
 
+const InputButton = (props) => {
+  return (
+    <div style={{ display: 'inline-flex', width: '100%' }}>
+      <Input {...props} style={{ ...props.style }} />
+      <Button
+        onClick={(e) => {
+          if (props.onClick) {
+            props.onClick('open');
+          }
+        }}
+        icon={<SearchOutlined />}
+        type={'primary'}
+      />
+    </div>
+  );
+};
+
 const SchemaField = createSchemaField({
   components: {
     FormLayout,
@@ -44,6 +61,7 @@ const SchemaField = createSchemaField({
     ArrayTableAddition,
     ArrayTableIndex,
     ArrayTableRemove,
+    InputButton,
   },
 });
 
@@ -238,7 +256,7 @@ export default (props) => {
               name="taskCode"
               title="任务号"
               x-decorator="FormItem"
-              x-component="MyInput"
+              x-component="Input"
             />
             <SchemaField.String
               name="projectLoginName"

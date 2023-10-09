@@ -125,6 +125,11 @@ export default () => {
       dataIndex: 'contractMoney',
       valueType: 'text',
       hideInSearch: true,
+      render: (text, record, _, action) => {
+        return record.contractMoney > 0
+          ? (record.contractMoney + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          : '';
+      },
     },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
     { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
