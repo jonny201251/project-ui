@@ -242,8 +242,8 @@ export default (props) => {
               required
               title="项目名称"
               x-decorator="FormItem"
-              x-component="InputButton"
-              x-component-props={{ onClick: onClick }}
+              x-component="Input"
+              // x-component-props={{ onClick: onClick }}
               x-decorator-props={{ gridSpan: 2 }}
             />
           </SchemaField.Void>
