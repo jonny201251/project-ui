@@ -18,7 +18,7 @@ export default (props) => {
     },
     { title: '成本类型', dataIndex: 'costType', valueType: 'text' },
     { title: '税率', dataIndex: 'costRate', valueType: 'text' },
-    { title: '日期', dataIndex: 'inDate', valueType: 'text' },
+    { title: '日期', dataIndex: 'outDate', valueType: 'text' },
     {
       title: '付款金额',
       dataIndex: 'money2',
