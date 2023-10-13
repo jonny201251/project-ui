@@ -219,6 +219,7 @@ export default (props) => {
                   <SchemaField.String
                     name="outName"
                     title="付款单位"
+                    required
                     x-component="Input"
                     x-decorator="FormItem"
                     x-decorator-props={{ gridSpan: 2 }}
@@ -226,6 +227,7 @@ export default (props) => {
                   <SchemaField.String
                     name="inName"
                     title="收款单位"
+                    required
                     x-component="Input"
                     x-decorator="FormItem"
                     x-decorator-props={{ gridSpan: 2 }}
@@ -233,6 +235,7 @@ export default (props) => {
                   <SchemaField.String
                     name="code"
                     title="单据单号"
+                    required
                     description="财务共享系统里的单据单号"
                     x-component="Input"
                     x-decorator="FormItem"

@@ -201,13 +201,13 @@ export default (props) => {
             x-component-props={{ maxColumns: 3, strictAutoFit: true }}
           >
             <SchemaField.String
-              name="userNamee"
+              name="userNameeList"
               required
               title="业务归口部门"
               x-decorator="FormItem"
-              x-decorator-props={{ tooltip: '流程审批节点' }}
+              x-decorator-props={{ gridSpan: 2, tooltip: '流程审批节点' }}
               x-component="Select"
-              x-component-props={{ showSearch: true }}
+              x-component-props={{ showSearch: true, mode: 'multiple' }}
               enum={session.getItem('userList')}
             />
           </SchemaField.Void>
