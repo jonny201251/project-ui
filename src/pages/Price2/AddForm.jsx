@@ -20,6 +20,7 @@ import DialogList2 from './DialogList2';
 import {
   File,
   InputButton,
+  InputButton2,
   LoadingButton,
   NumberPicker,
 } from '../../components';
@@ -32,6 +33,7 @@ const SchemaField = createSchemaField({
     FormGrid,
     Input,
     InputButton,
+    InputButton2,
     DatePicker,
     File,
     Select,
@@ -65,10 +67,16 @@ export default (props) => {
     onFieldReact('projectType', (field) => {
       let value = field.value;
       let f = form.query('projectName').take();
-      if (value === '民用产业') {
-        f?.setComponent('InputButton');
+      if (value === '民用产业' || !value) {
+        f?.setComponent('InputButton2');
+        form.query('*(inContractName,inContractCode)').forEach((field) => {
+          field.setState({ required: true });
+        });
       } else {
         f?.setComponent('Input');
+        form.query('*(inContractName,inContractCode)').forEach((field) => {
+          field.setState({ required: false });
+        });
       }
     });
   });
@@ -229,7 +237,7 @@ export default (props) => {
               title="项目名称"
               x-decorator="FormItem"
               x-decorator-props={{ gridSpan: 2 }}
-              x-component="InputButton"
+              x-component="InputButton2"
               x-component-props={{ onClick: onClick }}
             />
             <SchemaField.String
@@ -409,7 +417,11 @@ export default (props) => {
               title="附件"
               x-decorator="FormItem"
               x-component="File"
-              x-decorator-props={{ gridSpan: 2 }}
+              x-decorator-props={{ gridSpan: 3 }}
+              required
+              description={
+                '需包括参与供应商的报价(须填写报价日期）及资格审查(包括营业执照，相关资质文件等）资料'
+              }
             />
             <SchemaField.String
               name="userNamee"

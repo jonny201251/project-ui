@@ -16,7 +16,12 @@ export default () => {
       hideInSearch: true,
     },
     { title: '项目名称', dataIndex: 'projectName', valueType: 'text' },
-    { title: '项目密级', dataIndex: 'projectLevel', valueType: 'text' },
+    {
+      title: '项目密级',
+      dataIndex: 'projectLevel',
+      valueType: 'text',
+      hideInSearch: true,
+    },
     { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '收款合同名称', dataIndex: 'inContractName', valueType: 'text' },
     { title: '收款合同编号', dataIndex: 'inContractCode', valueType: 'text' },

@@ -24,14 +24,14 @@ import {
   ArrayTableIndex,
   ArrayTableRemove,
   File,
-  InputButton,
+  InputButton2,
   LoadingButton,
   NumberPicker,
 } from '../../components';
 import { onFieldReact } from '@formily/core';
 
 //文本框+按钮
-const InputButton2 = (props) => {
+const InputButton = (props) => {
   const index = ArrayTable.useIndex();
   const row = ArrayTable.useRecord();
   return (
@@ -40,8 +40,6 @@ const InputButton2 = (props) => {
       <Button
         onClick={(e) => {
           if (props.onClick) {
-            console.log(index);
-            console.log(row);
             props.onClick(index, row);
           }
         }}
@@ -97,10 +95,17 @@ export default (props) => {
     onFieldReact('projectType', (field) => {
       let value = field.value;
       let f = form.query('projectName').take();
-      if (value === '民用产业') {
-        f?.setComponent('InputButton');
+      if (value === '民用产业' || !value) {
+        f?.setComponent('InputButton2');
+        form.query('*(inContractName,inContractCode)').forEach((field) => {
+          field.setState({ required: true });
+        });
       } else {
+        console.log(value);
         f?.setComponent('Input');
+        form.query('*(inContractName,inContractCode)').forEach((field) => {
+          field.setState({ required: false });
+        });
       }
     });
   });
@@ -257,7 +262,7 @@ export default (props) => {
               title="项目名称"
               x-decorator="FormItem"
               x-decorator-props={{ gridSpan: 2 }}
-              x-component="InputButton"
+              x-component="InputButton2"
               x-component-props={{ onClick: onClick }}
             />
             <SchemaField.String
@@ -301,7 +306,7 @@ export default (props) => {
                     name="providerName"
                     required
                     x-decorator="FormItem"
-                    x-component="InputButton2"
+                    x-component="InputButton"
                     x-component-props={{ onClick: onClick2, form: form }}
                   />
                 </SchemaField.Void>
@@ -404,7 +409,7 @@ export default (props) => {
               x-decorator="FormItem"
               x-component="Input.TextArea"
               x-component-props={{
-                rows: 2,
+                rows: 4,
               }}
               x-decorator-props={{ gridSpan: 2 }}
             />
@@ -413,7 +418,11 @@ export default (props) => {
               title="附件"
               x-decorator="FormItem"
               x-component="File"
-              x-decorator-props={{ gridSpan: 2 }}
+              x-decorator-props={{ gridSpan: 3 }}
+              required
+              description={
+                '需包括参与供应商的报价(须填写报价日期）及资格审查(包括营业执照，相关资质文件等）资料'
+              }
             />
             <SchemaField.String
               name="userNamee"

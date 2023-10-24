@@ -50,6 +50,24 @@ const InputButton = (props) => {
 };
 export { InputButton };
 
+const InputButton2 = (props) => {
+  return (
+    <div style={{ display: 'inline-flex', width: '100%' }}>
+      <Input {...props} style={{ ...props.style }} />
+      <Button
+        onClick={(e) => {
+          if (props.onClick) {
+            props.onClick('open');
+          }
+        }}
+        icon={<SearchOutlined />}
+        type={'primary'}
+      />
+    </div>
+  );
+};
+export { InputButton2 };
+
 const MyInput = (props) => {
   return <Input {...props} style={{ ...props.style }} disabled />;
 };
