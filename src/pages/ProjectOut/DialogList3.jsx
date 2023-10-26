@@ -4,7 +4,7 @@ export default (props) => {
   const columns = [
     { title: '序号', dataIndex: 'id' },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '付款合同编号', dataIndex: 'contractCode', valueType: 'text' },
     {
       title: '付款合同金额',

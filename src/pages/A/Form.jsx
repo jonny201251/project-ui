@@ -13,103 +13,149 @@ import {
   Radio,
   Select,
   Space,
-} from '@formily/antd'
-import { createSchemaField } from '@formily/react'
-import React, { useEffect } from 'react'
-import { ConfigProvider } from 'antd'
-import zhCN from 'antd/lib/locale/zh_CN'
-import styles from '../table-placeholder.less'
-import { onFieldReact } from '@formily/core'
-import { ArrayTableAddition, ArrayTableIndex, ArrayTableRemove, InputButton } from '../../components'
+} from '@formily/antd';
+import { createSchemaField } from '@formily/react';
+import React, { useEffect } from 'react';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/lib/locale/zh_CN';
+import styles from '../table-placeholder.less';
+import { onFieldReact } from '@formily/core';
+import {
+  ArrayTableAddition,
+  ArrayTableIndex,
+  ArrayTableRemove,
+  InputButton,
+} from '../../components';
 
-const formTab = FormTab.createFormTab()
+const formTab = FormTab.createFormTab();
 
-
-const typeArr = ['材料及设备费', '劳务费', '技术服务费', '工程款', '税费', '投标费用', '现场管理费', '证书服务费', '资金成本', '交易服务费', '交通费', '餐费', '差旅费','其他']
+const typeArr = [
+  '材料及设备费',
+  '劳务费',
+  '技术服务费',
+  '工程款',
+  '税费',
+  '投标费用',
+  '现场管理费',
+  '证书服务费',
+  '资金成本',
+  '交易服务费',
+  '交通费',
+  '餐费',
+  '差旅费',
+  '其他',
+];
 export default (props) => {
-  let { form, record } = props
+  let { form, record } = props;
 
   const aa = () => {
-    form.query('a').take().value = 'aaa'
-  }
+    form.query('a').take().value = 'aaa';
+  };
 
   const SchemaField = createSchemaField({
     components: {
-      FormLayout, FormItem, Input, ArrayItems, Select, Radio, DatePicker, FormGrid,
-      ArrayTable, NumberPicker, PreviewText, Space, ArrayTableIndex, InputButton,
-      ArrayTableRemove, ArrayTableAddition, FormTab,
+      FormLayout,
+      FormItem,
+      Input,
+      ArrayItems,
+      Select,
+      Radio,
+      DatePicker,
+      FormGrid,
+      ArrayTable,
+      NumberPicker,
+      PreviewText,
+      Space,
+      ArrayTableIndex,
+      InputButton,
+      ArrayTableRemove,
+      ArrayTableAddition,
+      FormTab,
     },
-  })
-
+  });
 
   useEffect(async () => {
-    form.query('*(a,b)').forEach(field => {
-      field.setPattern('disabled')
-    })
+    form.query('*(a,b)').forEach((field) => {
+      field.setPattern('disabled');
+    });
     //构建数据
-    let inList = []
-    let inList21 = []
+    let inList = [];
+    let inList21 = [];
     for (let i = 1; i <= 9; i++) {
-      inList21.push({ expectDate: '2022-0' + i, money: i })
+      inList21.push({ expectDate: '2022-0' + i, money: i });
     }
-    inList21.push({ expectDate: '2022-10', money: 10 })
-    inList21.push({ expectDate: '2022-11', money: 11 })
-    inList21.push({ expectDate: '2022-12', money: 12 })
+    inList21.push({ expectDate: '2022-10', money: 10 });
+    inList21.push({ expectDate: '2022-11', money: 11 });
+    inList21.push({ expectDate: '2022-12', money: 12 });
 
-    let outList = []
-    let outList21 = []
+    let outList = [];
+    let outList21 = [];
     for (let i = 1; i <= 9; i++) {
-      outList21.push({ expectDate: '2022-0' + i, money: i })
+      outList21.push({ expectDate: '2022-0' + i, money: i });
     }
-    outList21.push({ expectDate: '2022-10', money: 10 })
-    outList21.push({ expectDate: '2022-11', money: 11 })
-    outList21.push({ expectDate: '2022-12', money: 12 })
+    outList21.push({ expectDate: '2022-10', money: 10 });
+    outList21.push({ expectDate: '2022-11', money: 11 });
+    outList21.push({ expectDate: '2022-12', money: 12 });
 
-    let outList22 = []
+    let outList22 = [];
     for (let i = 1; i <= 9; i++) {
-      outList22.push({ expectDate: '2022-0' + i, money: i })
+      outList22.push({ expectDate: '2022-0' + i, money: i });
     }
-    outList22.push({ expectDate: '2022-10', money: 10 })
-    outList22.push({ expectDate: '2022-11', money: 11 })
-    outList22.push({ expectDate: '2022-12', money: 12 })
+    outList22.push({ expectDate: '2022-10', money: 10 });
+    outList22.push({ expectDate: '2022-11', money: 11 });
+    outList22.push({ expectDate: '2022-12', money: 12 });
 
-    let outList23 = []
+    let outList23 = [];
     for (let i = 1; i <= 9; i++) {
-      outList23.push({ expectDate: '2022-0' + i, money: i })
+      outList23.push({ expectDate: '2022-0' + i, money: i });
     }
-    outList23.push({ expectDate: '2022-10', money: 10 })
-    outList23.push({ expectDate: '2022-11', money: 11 })
-    outList23.push({ expectDate: '2022-12', money: 12 })
+    outList23.push({ expectDate: '2022-10', money: 10 });
+    outList23.push({ expectDate: '2022-11', money: 11 });
+    outList23.push({ expectDate: '2022-12', money: 12 });
 
-    outList.push({ costType: '材料及设备费', taxRate: '13%', outList2: outList21 })
-    outList.push({ costType: '材料及设备费', taxRate: '13%', outList2: outList21 })
-    outList.push({ costType: '劳务费', taxRate: '3%', outList2: outList22 })
-    outList.push({ costType: '劳务费', taxRate: '3%', outList2: outList22 })
-    outList.push({ costType: '技术服务费', taxRate: '1%', outList2: outList23 })
-    outList.push({ costType: '技术服务费', taxRate: '1%', outList2: outList23 })
-    inList.push({ name: '项目收入', inList2: inList21 })
+    outList.push({
+      costType: '材料及设备费',
+      taxRate: '13%',
+      outList2: outList21,
+    });
+    outList.push({
+      costType: '材料及设备费',
+      taxRate: '13%',
+      outList2: outList21,
+    });
+    outList.push({ costType: '劳务费', taxRate: '3%', outList2: outList22 });
+    outList.push({ costType: '劳务费', taxRate: '3%', outList2: outList22 });
+    outList.push({
+      costType: '技术服务费',
+      taxRate: '1%',
+      outList2: outList23,
+    });
+    outList.push({
+      costType: '技术服务费',
+      taxRate: '1%',
+      outList2: outList23,
+    });
+    inList.push({ name: '项目收入', inList2: inList21 });
 
-
-    form.setValues({ inList: inList, outList: outList })
-  }, [])
+    form.setValues({ inList: inList, outList: outList });
+  }, []);
 
   form.addEffects('id', () => {
     //被动联动模式
     onFieldReact('outList.*.taxRate', (field) => {
-      let costType = field.query('.costType').get('value')
-      field.setDisplay('visible')
+      let costType = field.query('.costType').get('value');
+      field.setDisplay('visible');
       if (costType === '材料及设备费') {
-        field.value = '13%'
+        field.value = '13%';
       } else if (costType === '劳务费') {
-        field.value = '3%'
+        field.value = '3%';
       } else if (costType === '技术服务费') {
-        field.value = '1%'
+        field.value = '1%';
       } else {
-        field.setDisplay('hidden')
+        field.setDisplay('hidden');
       }
-
-    })
-  })
+    });
+  });
 
   return (
     <ConfigProvider locale={zhCN}>
@@ -145,7 +191,7 @@ export default (props) => {
                 />
                 <SchemaField.String
                   name="b1"
-                  title="项目任务号"
+                  title="项目备案号"
                   x-decorator="FormItem"
                   x-component="Input"
                 />
@@ -238,13 +284,17 @@ export default (props) => {
                 x-component-props={{
                   size: 'small',
                   sticky: true,
-                  title: () => (<b>{'担保'}</b>),
+                  title: () => <b>{'担保'}</b>,
                 }}
               >
                 <SchemaField.Object>
                   <SchemaField.Void
                     x-component="ArrayTable.Column"
-                    x-component-props={{ width: 80, title: '排序', align: 'center' }}
+                    x-component-props={{
+                      width: 80,
+                      title: '排序',
+                      align: 'center',
+                    }}
                   >
                     <SchemaField.Void
                       x-decorator="FormItem"
@@ -318,11 +368,11 @@ export default (props) => {
                     x-component-props={{ width: 80, title: '操作' }}
                   >
                     <SchemaField.Void x-component="FormItem">
-                      <SchemaField.Void x-component="ArrayTableRemove"/>
+                      <SchemaField.Void x-component="ArrayTableRemove" />
                     </SchemaField.Void>
                   </SchemaField.Void>
                 </SchemaField.Object>
-                <SchemaField.Void x-component="ArrayTableAddition"/>
+                <SchemaField.Void x-component="ArrayTableAddition" />
               </SchemaField.Array>
             </SchemaField.Void>
             <SchemaField.Void
@@ -343,7 +393,11 @@ export default (props) => {
                 <SchemaField.Object>
                   <SchemaField.Void
                     x-component="ArrayTable.Column"
-                    x-component-props={{ width: 80, title: '排序', align: 'center' }}
+                    x-component-props={{
+                      width: 80,
+                      title: '排序',
+                      align: 'center',
+                    }}
                   >
                     <SchemaField.Void
                       x-decorator="FormItem"
@@ -352,9 +406,16 @@ export default (props) => {
                   </SchemaField.Void>
                   <SchemaField.Void
                     x-component="ArrayTable.Column"
-                    x-component-props={{ width: 80, title: '序号', align: 'center' }}
+                    x-component-props={{
+                      width: 80,
+                      title: '序号',
+                      align: 'center',
+                    }}
                   >
-                    <SchemaField.Void x-decorator="FormItem" x-component="ArrayTableIndex"/>
+                    <SchemaField.Void
+                      x-decorator="FormItem"
+                      x-component="ArrayTableIndex"
+                    />
                   </SchemaField.Void>
                   <SchemaField.Void
                     x-component="ArrayTable.Column"
@@ -372,7 +433,10 @@ export default (props) => {
                   </SchemaField.Void>
                   <SchemaField.Void
                     x-component="ArrayTable.Column"
-                    x-component-props={{ width: 500, title: '预计回款日期和金额' }}
+                    x-component-props={{
+                      width: 500,
+                      title: '预计回款日期和金额',
+                    }}
                   >
                     <SchemaField.Array
                       name="inList2"
@@ -386,7 +450,11 @@ export default (props) => {
                       <SchemaField.Object>
                         <SchemaField.Void
                           x-component="ArrayTable.Column"
-                          x-component-props={{ width: 80, title: '排序', align: 'center' }}
+                          x-component-props={{
+                            width: 80,
+                            title: '排序',
+                            align: 'center',
+                          }}
                         >
                           <SchemaField.Void
                             x-decorator="FormItem"
@@ -419,11 +487,14 @@ export default (props) => {
                           x-component-props={{ width: 80, title: '操作' }}
                         >
                           <SchemaField.Void x-component="FormItem">
-                            <SchemaField.Void x-component="ArrayTableRemove"/>
+                            <SchemaField.Void x-component="ArrayTableRemove" />
                           </SchemaField.Void>
                         </SchemaField.Void>
                       </SchemaField.Object>
-                      <SchemaField.Void x-component="ArrayTableAddition" x-component-props={{ style: { width: 80 } }}/>
+                      <SchemaField.Void
+                        x-component="ArrayTableAddition"
+                        x-component-props={{ style: { width: 80 } }}
+                      />
                     </SchemaField.Array>
                   </SchemaField.Void>
                   <SchemaField.Void
@@ -431,12 +502,13 @@ export default (props) => {
                     x-component-props={{ width: 80, title: '操作' }}
                   >
                     <SchemaField.Void x-component="FormItem">
-                      <SchemaField.Void x-component="ArrayTableRemove"/>
+                      <SchemaField.Void x-component="ArrayTableRemove" />
                     </SchemaField.Void>
                   </SchemaField.Void>
                 </SchemaField.Object>
                 <SchemaField.Void
-                  x-component="ArrayTableAddition" x-component-props={{ width: 80 }}
+                  x-component="ArrayTableAddition"
+                  x-component-props={{ width: 80 }}
                 />
               </SchemaField.Array>
             </SchemaField.Void>
@@ -458,7 +530,11 @@ export default (props) => {
                 <SchemaField.Object>
                   <SchemaField.Void
                     x-component="ArrayTable.Column"
-                    x-component-props={{ width: 50, title: '排序', align: 'center' }}
+                    x-component-props={{
+                      width: 50,
+                      title: '排序',
+                      align: 'center',
+                    }}
                   >
                     <SchemaField.Void
                       x-decorator="FormItem"
@@ -467,19 +543,29 @@ export default (props) => {
                   </SchemaField.Void>
                   <SchemaField.Void
                     x-component="ArrayTable.Column"
-                    x-component-props={{ width: 50, title: '序号', align: 'center' }}
+                    x-component-props={{
+                      width: 50,
+                      title: '序号',
+                      align: 'center',
+                    }}
                   >
-                    <SchemaField.Void x-decorator="FormItem" x-component="ArrayTableIndex"/>
+                    <SchemaField.Void
+                      x-decorator="FormItem"
+                      x-component="ArrayTableIndex"
+                    />
                   </SchemaField.Void>
                   <SchemaField.Void
                     x-component="ArrayTable.Column"
-                    x-component-props={{ title: '成本类型',showSearch: true }}
+                    x-component-props={{ title: '成本类型', showSearch: true }}
                   >
                     <SchemaField.String
                       name="costType"
                       x-decorator="FormItem"
                       x-component="Select"
-                      enum={typeArr.map(item => ({ label: item, value: item }))}
+                      enum={typeArr.map((item) => ({
+                        label: item,
+                        value: item,
+                      }))}
                     />
                   </SchemaField.Void>
                   <SchemaField.Void
@@ -513,7 +599,11 @@ export default (props) => {
                       <SchemaField.Object>
                         <SchemaField.Void
                           x-component="ArrayTable.Column"
-                          x-component-props={{ width: 80, title: '排序', align: 'center' }}
+                          x-component-props={{
+                            width: 80,
+                            title: '排序',
+                            align: 'center',
+                          }}
                         >
                           <SchemaField.Void
                             x-decorator="FormItem"
@@ -522,7 +612,10 @@ export default (props) => {
                         </SchemaField.Void>
                         <SchemaField.Void
                           x-component="ArrayTable.Column"
-                          x-component-props={{ title: '支出日期', align: 'center' }}
+                          x-component-props={{
+                            title: '支出日期',
+                            align: 'center',
+                          }}
                         >
                           <SchemaField.String
                             name="expectDate"
@@ -546,11 +639,11 @@ export default (props) => {
                           x-component-props={{ width: 80, title: '操作' }}
                         >
                           <SchemaField.Void x-component="FormItem">
-                            <SchemaField.Void x-component="ArrayTableRemove"/>
+                            <SchemaField.Void x-component="ArrayTableRemove" />
                           </SchemaField.Void>
                         </SchemaField.Void>
                       </SchemaField.Object>
-                      <SchemaField.Void x-component="ArrayTableAddition"/>
+                      <SchemaField.Void x-component="ArrayTableAddition" />
                     </SchemaField.Array>
                   </SchemaField.Void>
                   <SchemaField.Void
@@ -558,16 +651,16 @@ export default (props) => {
                     x-component-props={{ width: 80, title: '操作' }}
                   >
                     <SchemaField.Void x-component="FormItem">
-                      <SchemaField.Void x-component="ArrayTableRemove"/>
+                      <SchemaField.Void x-component="ArrayTableRemove" />
                     </SchemaField.Void>
                   </SchemaField.Void>
                 </SchemaField.Object>
-                <SchemaField.Void x-component="ArrayTableAddition"/>
+                <SchemaField.Void x-component="ArrayTableAddition" />
               </SchemaField.Array>
             </SchemaField.Void>
           </SchemaField.Void>
         </SchemaField>
       </Form>
     </ConfigProvider>
-  )
-}
+  );
+};

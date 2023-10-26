@@ -15,7 +15,7 @@ export default (props) => {
       valueType: 'text',
       formItemProps: { rules: [{ required: true, message: '此项为必填项' }] },
     },
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     {
       title: '预计签约金额',
       dataIndex: 'expectMoney',

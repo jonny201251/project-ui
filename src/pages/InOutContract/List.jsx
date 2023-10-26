@@ -104,7 +104,7 @@ export default () => {
       valueType: 'text',
       render: (text, record) => render(record),
     },
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     {
       title: '成本类型',

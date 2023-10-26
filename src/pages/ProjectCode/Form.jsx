@@ -312,7 +312,7 @@ export default (props) => {
             />
             <SchemaField.String
               name="taskCode"
-              title="任务号/备案号"
+              title="备案号/备案号"
               x-decorator="FormItem"
               x-component="Input"
             />
@@ -371,7 +371,7 @@ export default (props) => {
               required
               title="多个预算表"
               x-decorator="FormItem"
-              description="一个任务号是否有多个预算表"
+              description="一个备案号是否有多个预算表"
               x-component="Radio.Group"
               enum={[
                 { label: '是', value: '是' },

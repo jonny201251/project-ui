@@ -21,7 +21,7 @@ export default (props) => {
         );
       },
     },
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '客户名称', dataIndex: 'customerName', valueType: 'text' },
     { title: '战略伙伴名称', dataIndex: 'providerName', valueType: 'text' },
     { title: '预计签约额', dataIndex: 'expectMoney', valueType: 'text' },

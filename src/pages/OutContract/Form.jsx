@@ -77,7 +77,7 @@ export default (props) => {
   useEffect(async () => {
     form
       .query(
-        '*(displayName,deptName,createDatetime,taskCode,property,costType,costRate,endMoney)',
+        '*(displayName,deptName,createDatetime,taskCode,property,costType)',
       )
       .forEach((field) => {
         field.setPattern('disabled');
@@ -273,7 +273,7 @@ export default (props) => {
             />
             <SchemaField.String
               name="taskCode"
-              title="任务号"
+              title="备案号"
               x-decorator="FormItem"
               x-component="Input"
             />
@@ -290,7 +290,7 @@ export default (props) => {
             />
             <SchemaField.String
               name="costRate"
-              title="税费"
+              title="税率"
               x-decorator="FormItem"
               x-component="Input"
             />
@@ -352,6 +352,11 @@ export default (props) => {
               x-decorator="FormItem"
               title="结算金额"
               x-component="NumberPicker"
+              x-component-props={{
+                addonAfter: '元',
+                formatter: (value) =>
+                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+              }}
             />
             <SchemaField.String
               name="fileList"

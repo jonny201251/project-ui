@@ -21,7 +21,7 @@ export default () => {
       width: '20%',
       fixed: true,
     },
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text', width: 120 },
+    { title: '备案号', dataIndex: 'taskCode', valueType: 'text', width: 120 },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     {
       title: '预计毛利率',

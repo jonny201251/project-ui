@@ -13,9 +13,9 @@ export default (props) => {
       title: '项目名称',
       dataIndex: 'name',
       valueType: 'text',
-      formItemProps: { rules: [{ required: true, message: '此项为必填项' }] },
+      // formItemProps: { rules: [{ required: true, message: '此项为必填项' }] },
     },
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     {
       title: '成本类型',
       dataIndex: 'outType',
@@ -24,6 +24,7 @@ export default (props) => {
       // valueEnum: { 材料及设备费: { text: '材料及设备费' }, 劳务费: { text: '劳务费' }, 技术服务费: { text: '技术服务费' }, 工程款: { text: '工程款' } },
     },
     { title: '税率', dataIndex: 'rate', valueType: 'text', hideInSearch: true },
+    { title: 'WBS', dataIndex: 'wbs', valueType: 'text' },
     {
       title: '金额',
       dataIndex: 'money',

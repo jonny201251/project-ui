@@ -22,7 +22,7 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
     },
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '收款合同名称', dataIndex: 'inContractName', valueType: 'text' },
     { title: '收款合同编号', dataIndex: 'inContractCode', valueType: 'text' },
     {

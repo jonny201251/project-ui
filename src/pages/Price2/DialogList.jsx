@@ -16,7 +16,7 @@ export default (props) => {
       hideInSearch: true,
     },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     {
       title: 'WBS编号',
       dataIndex: 'wbs',

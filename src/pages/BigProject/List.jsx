@@ -5,7 +5,7 @@ export default () => {
   const columns = [
     { title: '项目名称', dataIndex: 'name', valueType: 'text', width: '20%' },
     { title: '项目密级', dataIndex: 'projectLevel', valueType: 'text' },
-    { title: '任务号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     {
       title: '预计签约额',
       dataIndex: 'expectMoney',
