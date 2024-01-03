@@ -280,29 +280,6 @@ export default (props) => {
             x-component-props={{ maxColumns: 3, strictAutoFit: true }}
           >
             <SchemaField.String
-              name="displayName"
-              title="创建人"
-              x-component="Input"
-              x-decorator="FormItem"
-            />
-            <SchemaField.String
-              name="deptName"
-              title="创建部门"
-              x-component="Input"
-              x-decorator="FormItem"
-            />
-            <SchemaField.String
-              name="createDatetime"
-              title="创建时间"
-              x-decorator="FormItem"
-              x-component="Input"
-            />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="FormGrid"
-            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-          >
-            <SchemaField.String
               name="projectName"
               required
               title="项目名称"
@@ -312,7 +289,7 @@ export default (props) => {
             />
             <SchemaField.String
               name="taskCode"
-              title="备案号/备案号"
+              title="备案号"
               x-decorator="FormItem"
               x-component="Input"
             />

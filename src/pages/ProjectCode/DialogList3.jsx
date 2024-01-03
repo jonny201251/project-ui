@@ -4,7 +4,7 @@ export default (props) => {
   const columns = [
     { title: '相似度', dataIndex: 'likeValue', valueType: 'text' },
     { title: '项目名称', dataIndex: 'projectName', valueType: 'text' },
-    { title: '备案号/备案号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '状态', dataIndex: 'status', valueType: 'text' },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
     { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },

@@ -318,7 +318,7 @@ export default (props) => {
             <SchemaField.String
               name="projectRate"
               x-decorator="FormItem"
-              title="预计毛利率"
+              title="预计利润率"
               x-component="Input"
             />
             <SchemaField.Number

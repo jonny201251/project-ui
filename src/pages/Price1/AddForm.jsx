@@ -101,11 +101,12 @@ export default (props) => {
           field.setState({ required: true });
         });
       } else {
-        console.log(value);
         f?.setComponent('Input');
-        form.query('*(inContractName,inContractCode)').forEach((field) => {
-          field.setState({ required: false });
-        });
+        form
+          .query('*(taskCode,inContractName,inContractCode)')
+          .forEach((field) => {
+            field.setState({ required: false });
+          });
       }
     });
   });

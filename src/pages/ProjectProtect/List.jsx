@@ -3,12 +3,27 @@ import { BaseProTableProcess } from '../../components';
 
 export default () => {
   const columns = [
-    { title: '项目立项', dataIndex: 'type', valueType: 'text' },
+    {
+      title: '项目立项',
+      dataIndex: 'type',
+      valueType: 'text',
+      hideInSearch: true,
+    },
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '项目名称', dataIndex: 'name', valueType: 'text', width: '20%' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '项目状态', dataIndex: 'status', valueType: 'text' },
-    { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '收付类型', dataIndex: 'payType', valueType: 'text' },
+    {
+      title: '金额',
+      dataIndex: 'money',
+      valueType: 'text',
+      render: (text, record, _, action) => {
+        return record.money > 0
+          ? (record.money + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          : '';
+      },
+    },
     {
       title: '申请时间',
       dataIndex: 'createDatetime',

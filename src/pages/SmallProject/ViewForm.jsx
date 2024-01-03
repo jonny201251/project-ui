@@ -538,7 +538,6 @@ export default (props) => {
                 >
                   <SchemaField.String
                     name="history2"
-                    required
                     title="项目合作历史"
                     x-decorator="FormItem"
                     x-decorator-props={{ gridSpan: 3 }}
@@ -552,7 +551,6 @@ export default (props) => {
                 >
                   <SchemaField.String
                     name="haveProblem2"
-                    required
                     title="是否存在纠纷"
                     x-decorator="FormItem"
                     x-component="Radio.Group"
@@ -563,14 +561,12 @@ export default (props) => {
                   />
                   <SchemaField.String
                     name="protectPerson"
-                    required
                     title="战略伙伴保证人"
                     x-decorator="FormItem"
                     x-component="Input"
                   />
                   <SchemaField.String
                     name="evaluate2"
-                    required
                     title="战略伙伴目前的资信及综合能力综合评价"
                     x-decorator="FormItem"
                     x-component="Input"

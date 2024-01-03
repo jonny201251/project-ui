@@ -14,7 +14,7 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
     },
-    { title: '项目名称', dataIndex: 'name', valueType: 'text' },
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     { title: '收款合同编号', dataIndex: 'contractCode', valueType: 'text' },
@@ -31,18 +31,15 @@ export default () => {
       },
     },
     {
-      title: '结算金额',
+      title: '结算/决算额',
       dataIndex: 'endMoney',
       valueType: 'text',
       hideInSearch: true,
-    },
-    { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
-    {
-      title: '创建时间',
-      dataIndex: 'createDatetime',
-      valueType: 'text',
-      hideInSearch: true,
+      render: (text, record, _, action) => {
+        return record.endMoney > 0
+          ? (record.endMoney + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          : '';
+      },
     },
     {
       title: '操作',

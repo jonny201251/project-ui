@@ -142,6 +142,9 @@ import ContractRunForm from '../pages/ContractRun/Form';
 import ContractRunList from '../pages/ContractRun/List';
 import ProjectRunForm from '../pages/ProjectRun/Form';
 import ProjectRunList from '../pages/ProjectRun/List';
+
+import ProjectCreate1ReportList from '../pages/ProjectCreate1Report/List';
+import ProjectCreate2ReportList from '../pages/ProjectCreate2Report/List';
 //
 import AForm from '../pages/A/Form';
 import AList from '../pages/A/List';
@@ -775,4 +778,15 @@ export const projectRunPath = {
   Form: ProjectRunForm,
   List: ProjectRunList,
   list: contextPath + '/projectRunPath/list',
+};
+export const projectCreate1ReportPath = {
+  flag: 'projectCreate1ReportPath',
+  List: ProjectCreate1ReportList,
+  list: contextPath + '/projectCreate1ReportPath/list',
+};
+
+export const projectCreate2ReportPath = {
+  flag: 'projectCreate2ReportPath',
+  List: ProjectCreate2ReportList,
+  list: contextPath + '/projectCreate2ReportPath/list',
 };

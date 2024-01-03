@@ -131,24 +131,6 @@ export default (props) => {
                 x-component-props={{ maxColumns: 3, strictAutoFit: true }}
               >
                 <SchemaField.String
-                  name="displayName"
-                  title="申请人"
-                  x-component="Input"
-                  x-decorator="FormItem"
-                />
-                <SchemaField.String
-                  name="deptName"
-                  title="申请部门"
-                  x-component="Input"
-                  x-decorator="FormItem"
-                />
-                <SchemaField.String
-                  name="createDatetime"
-                  title="申请时间"
-                  x-decorator="FormItem"
-                  x-component="Input"
-                />
-                <SchemaField.String
                   name="name"
                   required
                   title="项目名称"

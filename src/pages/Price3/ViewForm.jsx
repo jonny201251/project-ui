@@ -110,9 +110,11 @@ export default (props) => {
         });
       } else {
         f?.setComponent('Input');
-        form.query('*(inContractName,inContractCode)').forEach((field) => {
-          field.setState({ required: false });
-        });
+        form
+          .query('*(taskCode,inContractName,inContractCode)')
+          .forEach((field) => {
+            field.setState({ required: false });
+          });
       }
     });
   });
