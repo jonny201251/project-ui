@@ -52,7 +52,7 @@ export default () => {
     },
     { title: '合同名称', dataIndex: 'contractName', valueType: 'text' },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     {
       title: '创建时间',
       dataIndex: 'createDatetime',

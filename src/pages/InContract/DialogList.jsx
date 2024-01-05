@@ -35,7 +35,7 @@ export default (props) => {
       hideInSearch: true,
     },
     {
-      title: '申请部门',
+      title: '所属部门',
       dataIndex: 'deptName',
       valueType: 'text',
       hideInSearch: true,

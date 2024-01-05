@@ -13,7 +13,7 @@ export default () => {
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     { title: '项目状态', dataIndex: 'status', valueType: 'text' },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text' },
     {
       title: '操作',

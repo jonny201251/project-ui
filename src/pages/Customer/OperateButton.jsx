@@ -100,7 +100,7 @@ export default (props) => {
             actionRef.current.clearSelected();
             actionRef.current.reload();
             close();
-            message.success('复制成功');
+            message.success('变更成功');
           }
         },
       });

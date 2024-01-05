@@ -26,7 +26,7 @@ export default () => {
       hideInSearch: true,
     },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     {
       title: '创建时间',
       dataIndex: 'createDatetime',
@@ -35,5 +35,11 @@ export default () => {
     },
   ];
 
-  return <BaseProTable2 path={projectIoPath} columns={columns} search={true} />;
+  return (
+    <BaseProTable2
+      path={projectIoPath}
+      columns={columns}
+      search={{ span: 6 }}
+    />
+  );
 };

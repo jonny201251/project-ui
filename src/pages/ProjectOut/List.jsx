@@ -60,7 +60,7 @@ export default () => {
       },
     },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     {
       title: '申请时间',
       dataIndex: 'createDatetime',
@@ -94,7 +94,7 @@ export default () => {
     <BaseProTableProcess
       path={projectOutPath}
       columns={columns}
-      search={true}
+      search={{ span: 6 }}
     />
   );
 };

@@ -132,7 +132,7 @@ export default () => {
       },
     },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     {
       title: '创建时间',
       dataIndex: 'createDatetime',
@@ -154,7 +154,7 @@ export default () => {
       request={proTableRequest}
       //
       options={{ density: false }}
-      search={true}
+      search={{ span: 6 }}
     />
   );
 };

@@ -3,7 +3,7 @@ import { BaseProTableProcess } from '../../components';
 
 export default () => {
   const columns = [
-    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     {
       title: '项目名称',
       dataIndex: 'name',
@@ -74,7 +74,7 @@ export default () => {
     <BaseProTableProcess
       path={budgetProjecttPath}
       columns={columns}
-      search={true}
+      search={{ span: 6 }}
     />
   );
 };

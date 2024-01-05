@@ -9,7 +9,12 @@ export default () => {
   const actionRef = useRef();
   const columns = [
     { title: '客户名称', dataIndex: 'name', valueType: 'text' },
-    { title: '客户企业性质', dataIndex: 'property', valueType: 'text' },
+    {
+      title: '客户企业性质',
+      dataIndex: 'property',
+      valueType: 'text',
+      hideInSearch: true,
+    },
     {
       title: '结论',
       dataIndex: 'result',
@@ -23,10 +28,9 @@ export default () => {
       hideInSearch: true,
     },
     {
-      title: '创建部门',
+      title: '所属部门',
       dataIndex: 'deptName',
       valueType: 'text',
-      hideInSearch: true,
     },
     {
       title: '创建时间',
@@ -67,6 +71,8 @@ export default () => {
           selectedRowKeys={selectedRowKeys}
         />
       }
+      //
+      search={{ span: 6 }}
     />
   );
 };

@@ -26,7 +26,7 @@ export default () => {
       hideInSearch: true,
     },
     {
-      title: '申请部门',
+      title: '所属部门',
       dataIndex: 'deptName',
       valueType: 'text',
       hideInSearch: true,
@@ -60,5 +60,11 @@ export default () => {
     },
   ];
 
-  return <BaseProTableProcess path={providerScorePath} columns={columns} />;
+  return (
+    <BaseProTableProcess
+      path={providerScorePath}
+      columns={columns}
+      search={{ span: 6 }}
+    />
+  );
 };

@@ -14,7 +14,7 @@ export default () => {
     },
     // { title: '项目状态', dataIndex: 'projectStatus', valueType: 'text' },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '创建部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     {
       title: '创建时间',
       dataIndex: 'createDatetime',
@@ -24,6 +24,10 @@ export default () => {
   ];
 
   return (
-    <BaseProTable2 path={smallProjectNoPath} columns={columns} search={true} />
+    <BaseProTable2
+      path={smallProjectNoPath}
+      columns={columns}
+      search={{ span: 6 }}
+    />
   );
 };

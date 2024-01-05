@@ -15,5 +15,11 @@ export default () => {
     { title: '备注', dataIndex: 'remark', valueType: 'text' },
   ];
 
-  return <BaseProTable2 path={projectEndPath} columns={columns} />;
+  return (
+    <BaseProTable2
+      path={projectEndPath}
+      columns={columns}
+      search={{ span: 6 }}
+    />
+  );
 };

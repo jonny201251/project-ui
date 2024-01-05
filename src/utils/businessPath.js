@@ -279,6 +279,7 @@ export const customerPath = {
   edit: contextPath + '/customer/edit',
   delete: contextPath + '/customer/delete',
   export: contextPath + '/customer/export',
+  modify: contextPath + '/customer/modify',
 };
 export const customer2Path = {
   list: contextPath + '/customer/list2',
@@ -289,6 +290,7 @@ export const customer3Path = {
 export const customerScore1Path = {
   flag: 'customerScore1Path',
   width: 1100,
+  haveChange: 'no',
   changeButtonName: '复评',
   List: CustomerScore1List,
   AddForm: CustomerScore1AddForm,

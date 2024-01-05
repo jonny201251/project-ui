@@ -52,7 +52,7 @@ export default () => {
           style={{
             border: 0,
             width: '100%',
-            height: document.body.clientHeight - 50,
+            height: document.body.clientHeight - 100,
           }}
           frameBorder="0"
         />

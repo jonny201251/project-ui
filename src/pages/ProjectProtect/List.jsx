@@ -57,7 +57,7 @@ export default () => {
     <BaseProTableProcess
       path={projectProtectPath}
       columns={columns}
-      search={true}
+      search={{ span: 6 }}
     />
   );
 };

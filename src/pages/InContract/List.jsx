@@ -70,6 +70,8 @@ export default () => {
       headerTitle={
         <ToolBarButton path={inContractPath} actionRef={actionRef} />
       }
+      //
+      search={{ span: 6 }}
     />
   );
 };

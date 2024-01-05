@@ -6,7 +6,7 @@ export default () => {
     { title: '项目类别', dataIndex: 'usee', valueType: 'text' },
     { title: '供方名称', dataIndex: 'name', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '申请时间', dataIndex: 'createDatetime', valueType: 'text' },
     {
       title: '流程状态',
@@ -33,7 +33,7 @@ export default () => {
     <BaseProTableProcess
       path={providerControlPath}
       columns={columns}
-      search={true}
+      search={{ span: 6 }}
     />
   );
 };

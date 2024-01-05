@@ -32,7 +32,7 @@ export default () => {
     { title: '授权号', dataIndex: 'powerCode', valueType: 'text' },
     { title: '项目状态', dataIndex: 'projectStatus', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '申请部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     {
       title: '申请时间',
       dataIndex: 'createDatetime',
@@ -66,5 +66,11 @@ export default () => {
     },
   ];
 
-  return <BaseProTableProcess path={bigProjectPath} columns={columns} />;
+  return (
+    <BaseProTableProcess
+      path={bigProjectPath}
+      columns={columns}
+      search={{ span: 6 }}
+    />
+  );
 };
