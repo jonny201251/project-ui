@@ -180,6 +180,7 @@ export default (props) => {
                     x-decorator="FormItem"
                     title="日期"
                     x-component="DatePicker"
+                    x-component-props={{ format: 'YYYY-M-D' }}
                   />
                   <SchemaField.Number
                     name="money"

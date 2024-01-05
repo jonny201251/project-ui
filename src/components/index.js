@@ -32,6 +32,24 @@ export {
 };
 
 //文本框+按钮
+const TextAreaButton = (props) => {
+  return (
+    <div style={{ display: 'inline-flex', width: '100%' }}>
+      <Input.TextArea {...props} style={{ ...props.style }} disabled />
+      <Button
+        onClick={(e) => {
+          if (props.onClick) {
+            props.onClick('open');
+          }
+        }}
+        icon={<SearchOutlined />}
+        type={'primary'}
+      />
+    </div>
+  );
+};
+export { TextAreaButton };
+//文本框+按钮
 const InputButton = (props) => {
   return (
     <div style={{ display: 'inline-flex', width: '100%' }}>

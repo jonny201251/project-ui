@@ -339,6 +339,7 @@ export default (props) => {
               x-decorator="FormItem"
               title="开工日期"
               x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M' }}
             />
             <SchemaField.String
               name="endDate"
@@ -346,6 +347,7 @@ export default (props) => {
               x-decorator="FormItem"
               title="预计完工日期"
               x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M' }}
             />
             <SchemaField.String
               name="endMoney"
@@ -461,7 +463,7 @@ export default (props) => {
                   name="outDate"
                   x-decorator="FormItem"
                   x-component="DatePicker"
-                  x-component-props={{ picker: 'month' }}
+                  x-component-props={{ picker: 'month', format: 'YYYY-M' }}
                 />
               </SchemaField.Void>
               <SchemaField.Void
@@ -472,7 +474,7 @@ export default (props) => {
                   name="inDate"
                   x-decorator="FormItem"
                   x-component="DatePicker"
-                  x-component-props={{ picker: 'month' }}
+                  x-component-props={{ picker: 'month', format: 'YYYY-M' }}
                 />
               </SchemaField.Void>
               <SchemaField.Void

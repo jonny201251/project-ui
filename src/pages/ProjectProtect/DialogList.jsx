@@ -4,9 +4,10 @@ import { BaseList } from '../../components';
 export default (props) => {
   const columns = [
     {
-      title: '部门',
+      title: '所属部门',
       dataIndex: 'deptName',
       valueType: 'text',
+      hideInSearch: true,
     },
     {
       title: '项目名称',
@@ -27,26 +28,10 @@ export default (props) => {
       },
     },
     {
-      title: '预计签约金额',
-      dataIndex: 'expectMoney',
+      title: '保证金(函) 元',
+      dataIndex: 'protectMoney',
       valueType: 'text',
       hideInSearch: true,
-      render: (text, record, _, action) => {
-        return record.expectMoney > 0
-          ? (record.expectMoney + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-          : '';
-      },
-    },
-    {
-      title: '?保证金(函)',
-      dataIndex: 'expectMoney',
-      valueType: 'text',
-      hideInSearch: true,
-      render: (text, record, _, action) => {
-        return record.expectMoney > 0
-          ? (record.expectMoney + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-          : '';
-      },
     },
   ];
 
@@ -56,7 +41,7 @@ export default (props) => {
       selectedId={props.selectedId}
       path={projectDialogPath}
       columns={columns}
-      search={{ span: 12, defaultCollapsed: false }}
+      search={{ span: 6, defaultCollapsed: false }}
       rowKey={'idd'}
     />
   );

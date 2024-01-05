@@ -7,13 +7,13 @@ export default () => {
       title: '项目立项',
       dataIndex: 'type',
       valueType: 'text',
-      hideInSearch: true,
     },
-    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '项目名称', dataIndex: 'name', valueType: 'text', width: '20%' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '项目状态', dataIndex: 'status', valueType: 'text' },
     { title: '收付类型', dataIndex: 'payType', valueType: 'text' },
+    { title: '支付状态', dataIndex: 'payStatus', valueType: 'text' },
     {
       title: '金额',
       dataIndex: 'money',
@@ -23,12 +23,6 @@ export default () => {
           ? (record.money + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
           : '';
       },
-    },
-    {
-      title: '申请时间',
-      dataIndex: 'createDatetime',
-      valueType: 'text',
-      hideInSearch: true,
     },
     {
       title: '流程状态',

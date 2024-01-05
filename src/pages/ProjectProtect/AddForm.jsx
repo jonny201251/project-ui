@@ -64,8 +64,6 @@ export default (props) => {
         displayName: user.displayName,
         displayNamee: user.displayName,
         loginName: user.loginName,
-        deptId: user.deptId,
-        deptName: user.deptName,
         userNameeList: ['张慧'],
       });
     }
@@ -90,12 +88,20 @@ export default (props) => {
                     onClick={async () => {
                       const values = await form2.submit();
                       if (values.selectedRow) {
+                        let remark = '';
+                        if (values.selectedRow.protectMoney) {
+                          remark =
+                            '立项中,' + values.selectedRow.protectMoney + '。';
+                        }
                         form.setValues({
                           projectId: values.selectedRow.id,
                           type: values.selectedRow.projectType,
                           name: values.selectedRow.name,
                           taskCode: values.selectedRow.taskCode,
                           property: values.selectedRow.property,
+                          deptId: values.selectedRow.deptId,
+                          deptName: values.selectedRow.deptName,
+                          remark: remark,
                         });
                         dialog2.close();
                       } else {
@@ -129,15 +135,9 @@ export default (props) => {
               required
               title="项目名称"
               x-decorator="FormItem"
-              x-decorator-props={{ gridSpan: 2 }}
               x-component="InputButton"
               x-component-props={{ onClick: onClick }}
             />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="FormGrid"
-            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-          >
             <SchemaField.String
               name="taskCode"
               title="备案号"
@@ -158,93 +158,76 @@ export default (props) => {
                 { label: '终止', value: '终止' },
               ]}
             />
+            <SchemaField.String
+              name="inName"
+              title="收款单位"
+              required
+              x-component="Input"
+              x-decorator="FormItem"
             />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="MyCard"
-            x-component-props={{ title: '收付款信息' }}
-          >
-            <SchemaField.Void
-              x-component="FormGrid"
-              x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-            >
-              <SchemaField.String
-                name="registeDate"
-                required
-                x-decorator="FormItem"
-                title="收付款日期"
-                x-component="DatePicker"
-              />
-              <SchemaField.Number
-                name="money"
-                required
-                x-decorator="FormItem"
-                title="金额"
-                x-component="NumberPicker"
-                x-component-props={{
-                  addonAfter: '元',
-                  formatter: (value) =>
-                    `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-                }}
-              />
-            </SchemaField.Void>
-            <SchemaField.Void
-              x-component="FormGrid"
-              x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-            >
-              <SchemaField.String
-                name="outName"
-                title="付款单位"
-                required
-                x-component="Input"
-                x-decorator="FormItem"
-                x-decorator-props={{ gridSpan: 2 }}
-              />
-              <SchemaField.String
-                name="inName"
-                title="收款单位"
-                required
-                x-component="Input"
-                x-decorator="FormItem"
-                x-decorator-props={{ gridSpan: 2 }}
-              />
-              <SchemaField.String
-                name="code"
-                title="单据单号"
-                required
-                description="财务共享系统里的单据单号"
-                x-component="Input"
-                x-decorator="FormItem"
-                x-decorator-props={{ gridSpan: 2 }}
-              />
-            </SchemaField.Void>
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="FormGrid"
-            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-          >
+            <SchemaField.String
+              name="outName"
+              title="付款单位"
+              required
+              x-component="Input"
+              x-decorator="FormItem"
+            />
+            <SchemaField.String
+              name="protectType"
+              required
+              title="保证金类型"
+              x-decorator="FormItem"
+              x-component="Select"
+              enum={[
+                { label: '投标', value: '投标' },
+                { label: '质量', value: '质量' },
+                { label: '工资', value: '工资' },
+                { label: '履约', value: '履约' },
+              ]}
+            />
+            <SchemaField.String
+              name="registeDate"
+              required
+              x-decorator="FormItem"
+              title="收付款日期"
+              x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M-D' }}
+            />
+            <SchemaField.String
+              name="code"
+              title="单据单号"
+              required
+              description="财务共享系统里的单据单号"
+              x-component="Input"
+              x-decorator="FormItem"
+            />
+            <SchemaField.Number
+              name="money"
+              required
+              x-decorator="FormItem"
+              title="金额"
+              x-component="NumberPicker"
+              x-component-props={{
+                addonAfter: '元',
+                formatter: (value) =>
+                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+              }}
+            />
+            <SchemaField.String
+              name="userNameeList"
+              required
+              title="财务部"
+              x-decorator="FormItem"
+              x-component="Select"
+              x-component-props={{ showSearch: true, mode: 'multiple' }}
+              enum={session.getItem('userList')}
+            />
             <SchemaField.String
               name="remark"
               title="备注"
               x-component="Input.TextArea"
               x-component-props={{ rows: 2 }}
               x-decorator="FormItem"
-              x-decorator-props={{ gridSpan: 2 }}
-            />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="FormGrid"
-            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-          >
-            <SchemaField.String
-              name="userNameeList"
-              required
-              title="财务部"
-              x-decorator="FormItem"
-              x-decorator-props={{ gridSpan: 2, tooltip: '流程审批节点' }}
-              x-component="Select"
-              x-component-props={{ showSearch: true, mode: 'multiple' }}
-              enum={session.getItem('userList')}
             />
           </SchemaField.Void>
         </SchemaField>

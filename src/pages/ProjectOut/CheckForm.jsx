@@ -386,6 +386,7 @@ export default (props) => {
                   required
                   x-decorator="FormItem"
                   x-component="DatePicker"
+                  x-component-props={{ format: 'YYYY-M-D' }}
                 />
                 <SchemaField.String
                   name="remark"
@@ -431,7 +432,7 @@ export default (props) => {
                   title="到期日"
                   x-decorator="FormItem"
                   x-component="DatePicker"
-                  x-component-props={{ picker: 'month' }}
+                  x-component-props={{ picker: 'month', format: 'YYYY-M' }}
                 />
               </SchemaField.Void>
               <SchemaField.Void

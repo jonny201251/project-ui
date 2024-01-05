@@ -214,7 +214,7 @@ export default (props) => {
                     x-component="DatePicker"
                     x-component-props={{
                       picker: 'month',
-                      format: 'YYYY年MM月',
+                      format: 'YYYY年M月',
                     }}
                   />
                 </SchemaField.Void>

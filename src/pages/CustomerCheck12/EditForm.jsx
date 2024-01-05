@@ -441,6 +441,7 @@ export default (props) => {
               title="创建时间"
               x-decorator="FormItem"
               x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M' }}
             />
             <SchemaField.String
               name="providerName"

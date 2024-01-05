@@ -847,6 +847,20 @@ export default (props) => {
                     { label: '机密', value: '机密' },
                   ]}
                 />
+                <SchemaField.String
+                  name="projectTypee"
+                  required
+                  title="项目类型"
+                  x-decorator="FormItem"
+                  x-component="Select"
+                  enum={[
+                    { label: '消防工程', value: '消防工程' },
+                    { label: '智能化工程', value: '智能化工程' },
+                    { label: '机电工程', value: '机电工程' },
+                    { label: '通风空调工程', value: '通风空调工程' },
+                    { label: '其他', value: '其他' },
+                  ]}
+                />
               </SchemaField.Void>
               <SchemaField.Void
                 x-component="FormGrid"
@@ -961,6 +975,7 @@ export default (props) => {
                   title="预计签约日期"
                   x-decorator="FormItem"
                   x-component="DatePicker"
+                  x-component-props={{ format: 'YYYY-M' }}
                 />
                 <SchemaField.String
                   name="invoiceType"

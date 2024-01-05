@@ -351,42 +351,49 @@ export default (props) => {
               title="用印日期"
               x-decorator="FormItem"
               x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M' }}
             />
             <SchemaField.String
               name="validDate"
               title="生效日期"
               x-decorator="FormItem"
               x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M' }}
             />
             <SchemaField.String
               name="startDate"
               title="开工日期"
               x-decorator="FormItem"
               x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M' }}
             />
             <SchemaField.String
               name="endDate"
               title="竣工日期"
               x-decorator="FormItem"
               x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M' }}
             />
             <SchemaField.String
               name="expectDate"
               title="签订日期"
               x-decorator="FormItem"
               x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M' }}
             />
             <SchemaField.String
               name="documentDate"
               title="归档日期"
               x-decorator="FormItem"
               x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M' }}
             />
             <SchemaField.String
               name="endDatee"
               title="结束日期"
               x-decorator="FormItem"
               x-component="DatePicker"
+              x-component-props={{ format: 'YYYY-M' }}
             />
             <SchemaField.String
               name="runtimeTmp"

@@ -94,6 +94,7 @@ export default (props) => {
                   title="考察时间"
                   x-decorator="FormItem"
                   x-component="DatePicker"
+                  x-component-props={{ format: 'YYYY-M-D' }}
                 />
                 <SchemaField.String
                   name="scale"
