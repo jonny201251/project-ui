@@ -50,6 +50,7 @@ export default (props) => {
 
   const aa = () => {
     form.query('a').take().value = 'aaa';
+    form.query('a').take().value = 'aaa';
   };
 
   const SchemaField = createSchemaField({

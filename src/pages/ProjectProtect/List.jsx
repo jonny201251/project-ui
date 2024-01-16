@@ -12,7 +12,14 @@ export default () => {
     { title: '项目名称', dataIndex: 'name', valueType: 'text', width: '20%' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '项目状态', dataIndex: 'status', valueType: 'text' },
-    { title: '收付类型', dataIndex: 'payType', valueType: 'text' },
+    {
+      title: '收付类型',
+      dataIndex: 'payType',
+      valueType: 'text',
+      render: (text, record, _, action) => {
+        return record.inName.indexOf('海鹰安全') > 0 ? '收' : '付';
+      },
+    },
     { title: '支付状态', dataIndex: 'payStatus', valueType: 'text' },
     {
       title: '金额',
