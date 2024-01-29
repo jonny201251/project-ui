@@ -708,14 +708,10 @@ export default (props) => {
               required
               title="项目类型"
               x-decorator="FormItem"
-              x-component="Select"
-              enum={[
-                { label: '消防工程', value: '消防工程' },
-                { label: '智能化工程', value: '智能化工程' },
-                { label: '机电工程', value: '机电工程' },
-                { label: '通风空调工程', value: '通风空调工程' },
-                { label: '其他', value: '其他' },
-              ]}
+              x-component="Input"
+              x-decorator-props={{
+                tooltip: '消防工程、智能化工程、机电工程、通风空调工程、其他',
+              }}
             />
           </SchemaField.Void>
           <SchemaField.Void

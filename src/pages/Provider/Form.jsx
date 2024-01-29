@@ -137,7 +137,7 @@ export default (props) => {
             x-decorator="FormItem"
             x-component="NumberPicker"
             x-component-props={{
-              // addonAfter: '元',
+              addonAfter: '元',
               formatter: (value) =>
                 `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
             }}
@@ -148,7 +148,7 @@ export default (props) => {
             x-decorator="FormItem"
             x-component="NumberPicker"
             x-component-props={{
-              // addonAfter: '元',
+              addonAfter: '元',
               formatter: (value) =>
                 `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
             }}

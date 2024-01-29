@@ -514,6 +514,10 @@ export default (props) => {
                         x-component="Select"
                         enum={[
                           { label: '项目收入', value: '项目收入' },
+                          { label: '采购费', value: '采购费' },
+                          { label: '劳务费', value: '劳务费' },
+                          { label: '技术服务费', value: '技术服务费' },
+                          { label: '维修款', value: '维修款' },
                           { label: '其他', value: '其他' },
                         ]}
                       />
@@ -612,9 +616,10 @@ export default (props) => {
                         x-component="Select"
                         x-component-props={{ showSearch: true }}
                         enum={[
-                          { label: '材料及设备费', value: '材料及设备费' },
+                          { label: '采购费', value: '采购费' },
                           { label: '劳务费', value: '劳务费' },
                           { label: '技术服务费', value: '技术服务费' },
+                          { label: '维修款', value: '维修款' },
                           { label: '工程款', value: '工程款' },
                           { label: '税费', value: '税费' },
                           { label: '投标费用', value: '投标费用' },
@@ -623,7 +628,8 @@ export default (props) => {
                           { label: '资金成本', value: '资金成本' },
                           { label: '交易服务费', value: '交易服务费' },
                           { label: '交通费', value: '交通费' },
-                          { label: '餐费', value: '餐费' },
+                          { label: '招待费', value: '招待费' },
+                          { label: '评审费', value: '评审费' },
                           { label: '差旅费', value: '差旅费' },
                           { label: '其他', value: '其他' },
                         ]}
