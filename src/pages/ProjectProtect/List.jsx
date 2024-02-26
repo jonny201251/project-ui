@@ -17,7 +17,7 @@ export default () => {
       dataIndex: 'payType',
       valueType: 'text',
       render: (text, record, _, action) => {
-        return record.inName.indexOf('海鹰安全') > 0 ? '收' : '付';
+        return record.inName?.indexOf('海鹰安全') > 0 ? '收' : '付';
       },
     },
     { title: '支付状态', dataIndex: 'payStatus', valueType: 'text' },
@@ -26,8 +26,8 @@ export default () => {
       dataIndex: 'money',
       valueType: 'text',
       render: (text, record, _, action) => {
-        return record.money > 0
-          ? (record.money + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        return record?.money > 0
+          ? (record?.money + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
           : '';
       },
     },
@@ -35,7 +35,7 @@ export default () => {
       title: '流程状态',
       valueType: 'text',
       renderText: (text, record) =>
-        record.processInst ? record.processInst.processStatus : '草稿',
+        record?.processInst ? record?.processInst.processStatus : '草稿',
       valueEnum: {
         草稿: { text: '草稿', status: 'Default' },
         审批中: { text: '审批中', status: 'Processing' },

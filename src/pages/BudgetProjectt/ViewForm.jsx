@@ -490,6 +490,7 @@ export default (props) => {
                           { label: '劳务费', value: '劳务费' },
                           { label: '技术服务费', value: '技术服务费' },
                           { label: '维修款', value: '维修款' },
+                          { label: '工程款', value: '工程款' },
                           { label: '其他', value: '其他' },
                         ]}
                       />

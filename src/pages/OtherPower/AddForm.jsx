@@ -164,7 +164,7 @@ export default (props) => {
               required
               title="申请事项及权限"
               x-component="Input.TextArea"
-              x-component-props={{ rows: 2 }}
+              x-component-props={{ rows: 4 }}
               x-decorator="FormItem"
               x-decorator-props={{ gridSpan: 2 }}
             />
