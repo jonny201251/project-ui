@@ -17,7 +17,6 @@ export default () => {
       ellipsis: true,
     },
     { title: '授权号', dataIndex: 'code', valueType: 'text' },
-    { title: '使用状态', dataIndex: 'status', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
     { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     {

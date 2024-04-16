@@ -239,6 +239,10 @@ export default (props) => {
           <SchemaField.Void
             x-component="FormGrid"
             x-component-props={{ maxColumns: 3, strictAutoFit: true }}
+          ></SchemaField.Void>
+          <SchemaField.Void
+            x-component="FormGrid"
+            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
           >
             <SchemaField.String
               name="name"
@@ -246,14 +250,8 @@ export default (props) => {
               title="项目名称"
               x-decorator="FormItem"
               x-component="InputButton"
-              x-component-props={{ onClick: onClick }}
-              x-decorator-props={{ gridSpan: 2 }}
+              x-component-props={{ onClick: onClick, rows: 2 }}
             />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="FormGrid"
-            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-          >
             <SchemaField.String
               required
               name="taskCode"
@@ -276,30 +274,30 @@ export default (props) => {
             x-component-props={{ maxColumns: 3, strictAutoFit: true }}
           >
             <SchemaField.String
+              name="contractName"
+              required
+              x-decorator="FormItem"
+              title="收款合同名称"
+              x-component="Input.TextArea"
+              x-component-props={{ rows: 2 }}
+            />
+            <SchemaField.String
               name="contractCode"
               x-decorator="FormItem"
-              title="合同编号"
+              title="收款合同编号"
               x-component="Input"
             />
             <SchemaField.Number
               name="contractMoney"
               required
               x-decorator="FormItem"
-              title="合同金额"
+              title="收款合同金额"
               x-component="NumberPicker"
               x-component-props={{
                 addonAfter: '元',
                 formatter: (value) =>
                   `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
               }}
-            />
-            <SchemaField.String
-              name="contractName"
-              required
-              x-decorator="FormItem"
-              title="合同名称"
-              x-component="Input.TextArea"
-              x-component-props={{ rows: 2 }}
             />
             <SchemaField.String
               name="protectRate"

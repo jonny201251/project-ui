@@ -116,6 +116,17 @@ export default (props) => {
             ]}
           />
           <SchemaField.String
+            name="zizhi"
+            required
+            title="纳税人资质"
+            x-decorator="FormItem"
+            x-component="Select"
+            enum={[
+              { label: '一般纳税人', value: '一般纳税人' },
+              { label: '小规模纳税人', value: '小规模纳税人' },
+            ]}
+          />
+          <SchemaField.String
             name="address"
             required
             title="注册地址"

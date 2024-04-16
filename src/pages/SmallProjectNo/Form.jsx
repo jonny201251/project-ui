@@ -16,7 +16,7 @@ import { createSchemaField } from '@formily/react';
 import React, { useEffect } from 'react';
 import zhCN from 'antd/lib/locale/zh_CN';
 import { Button, ConfigProvider, Divider, message } from 'antd';
-import { get, projectCodePath, session } from '../../utils';
+import { session } from '../../utils';
 import {
   ArrayTableAddition,
   ArrayTableIndex,
@@ -26,9 +26,9 @@ import {
   NumberPicker,
 } from '../../components';
 import styles from '../table-placeholder.less';
-import { onFieldReact } from '@formily/core';
 import { SearchOutlined } from '@ant-design/icons';
 import DialogList4 from '../SmallProject/DialogList4';
+import DialogList from '../SmallProject/DialogList';
 
 const InputButton4 = (props) => {
   return (
@@ -116,6 +116,48 @@ export default (props) => {
                       if (values.selectedRow) {
                         form.setValues({
                           taskCode: values.selectedRow.taskCode,
+                        });
+                        dialog2.close();
+                      } else {
+                        message.error('选择一条数据');
+                      }
+                    }}
+                    type={'primary'}
+                  >
+                    确定
+                  </LoadingButton>
+                </FormButtonGroup>
+              </FormDialog.Footer>
+            </>
+          );
+        },
+      );
+      dialog2.open({});
+    }
+  };
+
+  const onClick5 = (flag) => {
+    if (flag === 'open') {
+      let dialog2 = FormDialog(
+        { footer: null, keyboard: false, maskClosable: false, width: 800 },
+        (form2) => {
+          return (
+            <>
+              <DialogList
+                form={form2}
+                dialog={dialog2}
+                selectedId={form.values.customerId}
+              />
+              <FormDialog.Footer>
+                <FormButtonGroup gutter={16} align={'right'}>
+                  <Button onClick={() => dialog2.close()}>取消</Button>
+                  <LoadingButton
+                    onClick={async () => {
+                      const values = await form2.submit();
+                      if (values.selectedRow) {
+                        form.setValues({
+                          customerId: values.selectedRow.id,
+                          customerName: values.selectedRow.name,
                         });
                         dialog2.close();
                       } else {
@@ -239,6 +281,15 @@ export default (props) => {
               x-decorator="FormItem"
               x-component="Input"
               x-decorator-props={{ gridSpan: 2 }}
+            />
+            <SchemaField.String
+              name="customerName"
+              required
+              title="客户名称"
+              x-decorator="FormItem"
+              x-component="InputButton4"
+              x-decorator-props={{ gridSpan: 2 }}
+              x-component-props={{ onClick: onClick5 }}
             />
           </SchemaField.Void>
           <SchemaField.Void

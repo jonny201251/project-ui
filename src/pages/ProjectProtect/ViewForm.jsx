@@ -233,7 +233,7 @@ export default (props) => {
                   name="remark"
                   title="备注"
                   x-component="Input.TextArea"
-                  x-component-props={{ rows: 2 }}
+                  x-component-props={{ rows: 3 }}
                   x-decorator="FormItem"
                 />
               </SchemaField.Void>

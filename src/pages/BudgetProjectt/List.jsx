@@ -33,13 +33,13 @@ export default () => {
     },
     {
       title: '项目联系人',
-      dataIndex: 'bb',
+      dataIndex: 'projectLoginName',
       valueType: 'text',
       hideInSearch: true,
     },
     {
       title: '完成时间',
-      dataIndex: 'aa',
+      dataIndex: ['processInst', 'endDatetime'],
       valueType: 'text',
       hideInSearch: true,
     },

@@ -41,7 +41,7 @@ export default (props) => {
       selectedId={props.selectedId}
       path={projectDialogPath}
       columns={columns}
-      search={{ span: 6, defaultCollapsed: false }}
+      search={{ span: 8, defaultCollapsed: false }}
       rowKey={'idd'}
     />
   );

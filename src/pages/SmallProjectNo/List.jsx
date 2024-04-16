@@ -12,7 +12,7 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
     },
-    // { title: '项目状态', dataIndex: 'projectStatus', valueType: 'text' },
+    { title: '客户名称', dataIndex: 'customerName', valueType: 'text' },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
     { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     {

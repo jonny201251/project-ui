@@ -45,6 +45,7 @@ const typeArr = [
   '差旅费',
   '其他',
 ];
+
 export default (props) => {
   let { form, record } = props;
 
@@ -244,10 +245,10 @@ export default (props) => {
                   title="预计完工时间"
                   x-decorator="FormItem"
                   x-component="DatePicker"
-                  x-component-props={{ picker: 'month', format: 'YYYY-M' }}
+                  x-component-props={{ picker: 'month', format: 'yyyy-MM' }}
                 />
                 <SchemaField.String
-                  name="i"
+                  name="zbjbl"
                   title="质保金比例"
                   x-decorator="FormItem"
                   x-component="Input"
@@ -259,7 +260,7 @@ export default (props) => {
                   x-component="NumberPicker"
                 />
                 <SchemaField.Number
-                  name="k"
+                  name="s"
                   title="收入调整金额"
                   x-decorator="FormItem"
                   x-component="NumberPicker"
