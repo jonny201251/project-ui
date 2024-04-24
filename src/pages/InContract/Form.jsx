@@ -223,7 +223,6 @@ export default (props) => {
               required
               title="项目名称"
               x-decorator="FormItem"
-              x-decorator-props={{ gridSpan: 2 }}
               x-component="InputButton"
               x-component-props={{ onClick: onClick }}
             />
@@ -232,48 +231,6 @@ export default (props) => {
               title="备案号"
               x-decorator="FormItem"
               x-component="Input"
-            />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="FormGrid"
-            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-          >
-            <SchemaField.String
-              name="projectTypee"
-              required
-              title="项目类别"
-              x-decorator="FormItem"
-              x-component="Select"
-              enum={[
-                { label: '民用产业', value: '民用产业' },
-                { label: '非民用产业', value: '非民用产业' },
-              ]}
-            />
-            <SchemaField.String
-              name="property"
-              title="项目性质"
-              x-decorator="FormItem"
-              x-component="Select"
-              enum={[
-                { label: '一类', value: '一类' },
-                { label: '二类', value: '二类' },
-                { label: '三类', value: '三类' },
-              ]}
-            />
-            <SchemaField.String
-              name="location"
-              title="项目所在地"
-              x-decorator="FormItem"
-              x-component="Input"
-            />
-            <SchemaField.String
-              name="customerName"
-              required
-              title="客户名称"
-              x-decorator="FormItem"
-              x-decorator-props={{ gridSpan: 2 }}
-              x-component="InputButton"
-              x-component-props={{ onClick: onClick2 }}
             />
             <SchemaField.String
               name="wbs"
@@ -286,18 +243,6 @@ export default (props) => {
               required
               x-decorator="FormItem"
               title="收款合同名称"
-              x-component="Input"
-              x-decorator-props={{ gridSpan: 2 }}
-            />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="FormGrid"
-            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-          >
-            <SchemaField.String
-              name="contractCode"
-              x-decorator="FormItem"
-              title="收款合同编号"
               x-component="Input"
             />
             <SchemaField.Number
@@ -322,6 +267,48 @@ export default (props) => {
                 formatter: (value) =>
                   `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
               }}
+            />
+            <SchemaField.String
+              name="customerName"
+              required
+              title="客户名称"
+              x-decorator="FormItem"
+              x-component="InputButton"
+              x-component-props={{ onClick: onClick2 }}
+            />
+            <SchemaField.String
+              name="contractCode"
+              x-decorator="FormItem"
+              title="收款合同编号"
+              x-component="Input"
+            />
+            <SchemaField.String
+              name="projectTypee"
+              required
+              title="项目类别"
+              x-decorator="FormItem"
+              x-component="Select"
+              enum={[
+                { label: '民用产业', value: '民用产业' },
+                { label: '非民用产业', value: '非民用产业' },
+              ]}
+            />
+            <SchemaField.String
+              name="location"
+              title="项目所在地"
+              x-decorator="FormItem"
+              x-component="Input"
+            />
+            <SchemaField.String
+              name="property"
+              title="项目性质"
+              x-decorator="FormItem"
+              x-component="Select"
+              enum={[
+                { label: '一类', value: '一类' },
+                { label: '二类', value: '二类' },
+                { label: '三类', value: '三类' },
+              ]}
             />
           </SchemaField.Void>
           <SchemaField.Void

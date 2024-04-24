@@ -75,6 +75,13 @@ export default (props) => {
       },
     );
     if (dbRecord && processFormBefore) {
+      if (record && record.businessVersion > 0) {
+        if (record.path.includes('udgetProjecttPath')) {
+          title = '项目预算调整表(第' + record.businessVersion + '次)';
+        } else {
+          title = record.processName + '(第' + record.businessVersion + '次)';
+        }
+      }
       let dialog = FormDialog(
         {
           title: title,

@@ -1,16 +1,16 @@
-import { outContractPath } from '../../utils';
+import { inNoContractPath } from '../../utils';
 import { BaseProTable2 } from '../../components';
+import { useRef } from 'react';
 
 export default () => {
+  const actionRef = useRef();
+
   const columns = [
     { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
-    { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
-    { title: '付款合同名称', dataIndex: 'contractName', valueType: 'text' },
-    { title: '付款合同编号', dataIndex: 'contractCode', valueType: 'text' },
     {
-      title: '付款合同金额',
+      title: '收款合同金额',
       dataIndex: 'contractMoney',
       valueType: 'text',
       hideInSearch: true,
@@ -20,24 +20,12 @@ export default () => {
           : '';
       },
     },
-    {
-      title: '结算金额',
-      dataIndex: 'endMoney',
-      valueType: 'text',
-      hideInSearch: true,
-    },
-    {
-      title: '税率',
-      dataIndex: 'costRate',
-      valueType: 'text',
-      hideInSearch: true,
-    },
-    { title: '成本类型', dataIndex: 'costType', valueType: 'text' },
+    { title: '客户名称', dataIndex: 'customerName', valueType: 'text' },
   ];
 
   return (
     <BaseProTable2
-      path={outContractPath}
+      path={inNoContractPath}
       columns={columns}
       search={{ span: 6 }}
     />

@@ -204,6 +204,43 @@ export default (props) => {
         form.query('projectRate').take()?.setState({ value: rate });
       }
     });
+
+    onFieldReact('innList.*.inType', (field) => {
+      let rateField = field.query('.rate').take();
+      let remarkField = field.query('.remark').take();
+      if (field.value) {
+        if (field.value === '其他') {
+          rateField && rateField.setRequired(false);
+          remarkField && remarkField.setRequired(true);
+        } else {
+          rateField && rateField.setRequired(true);
+          remarkField && remarkField.setRequired(false);
+        }
+      }
+    });
+
+    onFieldReact('outList.*.outType', (field) => {
+      let rateField = field.query('.rate').take();
+      let remarkField = field.query('.remark').take();
+      if (field.value) {
+        if (field.value === '其他') {
+          rateField && rateField.setRequired(false);
+          remarkField && remarkField.setRequired(true);
+        } else if (
+          field.value === '采购费' ||
+          field.value === '劳务费' ||
+          field.value === '技术服务费' ||
+          field.value === '维修款' ||
+          field.value === '工程款'
+        ) {
+          rateField && rateField.setRequired(true);
+          remarkField && remarkField.setRequired(false);
+        } else {
+          rateField && rateField.setRequired(false);
+          remarkField && remarkField.setRequired(false);
+        }
+      }
+    });
   });
 
   const showHaveThree = () => {
@@ -333,7 +370,7 @@ export default (props) => {
               name="startDate"
               required
               x-decorator="FormItem"
-              title="开工日期"
+              title="预计开工日期"
               x-component="DatePicker"
               x-component-props={{ format: 'YYYY-M-D' }}
             />

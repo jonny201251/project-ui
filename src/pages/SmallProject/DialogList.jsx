@@ -10,12 +10,6 @@ export default (props) => {
       valueType: 'text',
       hideInSearch: true,
     },
-    {
-      title: '创建人',
-      dataIndex: 'loginName',
-      valueType: 'text',
-      hideInSearch: true,
-    },
   ];
 
   return (

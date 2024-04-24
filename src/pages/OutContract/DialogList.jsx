@@ -4,10 +4,9 @@ import { BaseList } from '../../components';
 export default (props) => {
   const columns = [
     {
-      title: '项目立项',
-      dataIndex: 'projectType',
+      title: '所属部门',
+      dataIndex: 'deptName',
       valueType: 'text',
-      hideInSearch: true,
     },
     {
       title: '项目名称',
@@ -16,6 +15,7 @@ export default (props) => {
       // formItemProps: { rules: [{ required: true, message: '此项为必填项' }] },
     },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
+    { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     {
       title: '成本类型',
       dataIndex: 'outType',
@@ -24,7 +24,6 @@ export default (props) => {
       // valueEnum: { 材料及设备费: { text: '材料及设备费' }, 劳务费: { text: '劳务费' }, 技术服务费: { text: '技术服务费' }, 工程款: { text: '工程款' } },
     },
     { title: '税率', dataIndex: 'rate', valueType: 'text', hideInSearch: true },
-    { title: 'WBS', dataIndex: 'wbs', valueType: 'text' },
     {
       title: '金额',
       dataIndex: 'money',
@@ -36,18 +35,6 @@ export default (props) => {
           : '';
       },
     },
-    {
-      title: '所属部门',
-      dataIndex: 'deptName',
-      valueType: 'text',
-      hideInSearch: true,
-    },
-    {
-      title: '创建人',
-      dataIndex: 'displayName',
-      valueType: 'text',
-      hideInSearch: true,
-    },
   ];
 
   return (
@@ -57,7 +44,7 @@ export default (props) => {
       selectedId={props.selectedId}
       path={budgetDialog2Path}
       columns={columns}
-      search={{ span: 12, defaultCollapsed: false }}
+      search={{ span: 8, defaultCollapsed: false }}
     />
   );
 };

@@ -207,6 +207,43 @@ export default (props) => {
         form.query('projectRate').take()?.setState({ value: rate });
       }
     });
+
+    onFieldReact('innList.*.inType', (field) => {
+      let rateField = field.query('.rate').take();
+      let remarkField = field.query('.remark').take();
+      if (field.value) {
+        if (field.value === '其他') {
+          rateField && rateField.setRequired(false);
+          remarkField && remarkField.setRequired(true);
+        } else {
+          rateField && rateField.setRequired(true);
+          remarkField && remarkField.setRequired(false);
+        }
+      }
+    });
+
+    onFieldReact('outList.*.outType', (field) => {
+      let rateField = field.query('.rate').take();
+      let remarkField = field.query('.remark').take();
+      if (field.value) {
+        if (field.value === '其他') {
+          rateField && rateField.setRequired(false);
+          remarkField && remarkField.setRequired(true);
+        } else if (
+          field.value === '采购费' ||
+          field.value === '劳务费' ||
+          field.value === '技术服务费' ||
+          field.value === '维修款' ||
+          field.value === '工程款'
+        ) {
+          rateField && rateField.setRequired(true);
+          remarkField && remarkField.setRequired(false);
+        } else {
+          rateField && rateField.setRequired(false);
+          remarkField && remarkField.setRequired(false);
+        }
+      }
+    });
   });
 
   const showHaveThree = () => {
@@ -299,26 +336,6 @@ export default (props) => {
                   `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
               }}
             />
-            <SchemaField.String
-              name="protectRate"
-              required
-              x-decorator="FormItem"
-              title="质保金比例"
-              x-component="Input"
-              x-component-props={{ placeholder: '示例：3%' }}
-            />
-            <SchemaField.String
-              name="invoiceRate"
-              x-decorator="FormItem"
-              title="预计收入税率"
-              x-component="Input"
-            />
-            <SchemaField.String
-              name="projectRate"
-              x-decorator="FormItem"
-              title="预计利润率"
-              x-component="Input"
-            />
             <SchemaField.Number
               name="totalCost"
               required
@@ -332,10 +349,30 @@ export default (props) => {
               }}
             />
             <SchemaField.String
+              name="invoiceRate"
+              x-decorator="FormItem"
+              title="预计收入税率"
+              x-component="Input"
+            />
+            <SchemaField.String
+              name="projectRate"
+              x-decorator="FormItem"
+              title="预计利润率"
+              x-component="Input"
+            />
+            <SchemaField.String
+              name="protectRate"
+              required
+              x-decorator="FormItem"
+              title="质保金比例"
+              x-component="Input"
+              x-component-props={{ placeholder: '示例：3%' }}
+            />
+            <SchemaField.String
               name="startDate"
               required
               x-decorator="FormItem"
-              title="开工日期"
+              title="预计开工日期"
               x-component="DatePicker"
               x-component-props={{ format: 'YYYY-M-D' }}
             />
@@ -371,6 +408,12 @@ export default (props) => {
               title="客户名称"
               x-component="Input"
               x-decorator-props={{ gridSpan: 2 }}
+            />
+            <SchemaField.String
+              name="wbs"
+              x-decorator="FormItem"
+              title="WBS编号"
+              x-component="Input"
             />
           </SchemaField.Void>
           <SchemaField.Void

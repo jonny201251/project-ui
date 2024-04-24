@@ -133,6 +133,9 @@ import InContractList from '../pages/InContract/List';
 import InContractForm from '../pages/InContract/Form';
 import InContractUploadForm from '../pages/InContract/UploadForm';
 
+import InNoContractList from '../pages/InNoContract/List';
+import InNoContractForm from '../pages/InNoContract/Form';
+
 import OutContractList from '../pages/OutContract/List';
 import OutContractForm from '../pages/OutContract/Form';
 import InOutContractList from '../pages/InOutContract/List';
@@ -747,9 +750,21 @@ export const inContractPath2 = {
 export const inContractPath3 = {
   list: contextPath + '/inContract/dialog3',
 };
+
+export const inNoContractPath = {
+  flag: 'inNoContractPath',
+  width: 800,
+  List: InNoContractList,
+  Form: InNoContractForm,
+  list: contextPath + '/inNoContract/list',
+  get: contextPath + '/inNoContract/get',
+  add: contextPath + '/inNoContract/add',
+  edit: contextPath + '/inNoContract/edit',
+};
+
 export const outContractPath = {
   flag: 'outContractPath',
-  width: 1100,
+  width: 1000,
   List: OutContractList,
   Form: OutContractForm,
   list: contextPath + '/outContract/list',

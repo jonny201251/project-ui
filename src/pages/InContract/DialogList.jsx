@@ -3,14 +3,14 @@ import { BaseList } from '../../components';
 
 export default (props) => {
   const columns = [
+    {
+      title: '所属部门',
+      dataIndex: 'deptName',
+      valueType: 'text',
+    },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
-    {
-      title: '项目性质',
-      dataIndex: 'property',
-      valueType: 'text',
-      hideInSearch: true,
-    },
+    { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     {
       title: '收款合同金额',
       dataIndex: 'contractMoney',
@@ -28,18 +28,6 @@ export default (props) => {
       valueType: 'text',
       hideInSearch: true,
     },
-    {
-      title: '申请人',
-      dataIndex: 'displayName',
-      valueType: 'text',
-      hideInSearch: true,
-    },
-    {
-      title: '所属部门',
-      dataIndex: 'deptName',
-      valueType: 'text',
-      hideInSearch: true,
-    },
   ];
 
   return (
@@ -48,7 +36,7 @@ export default (props) => {
       selectedId={props.selectedId}
       path={budgetDialogPath}
       columns={columns}
-      search={{ span: 12, defaultCollapsed: false }}
+      search={{ span: 8, defaultCollapsed: false }}
     />
   );
 };

@@ -175,6 +175,43 @@ export default (props) => {
         form.query('projectRate').take()?.setState({ value: rate });
       }
     });
+
+    onFieldReact('innList.*.inType', (field) => {
+      let rateField = field.query('.rate').take();
+      let remarkField = field.query('.remark').take();
+      if (field.value) {
+        if (field.value === '其他') {
+          rateField && rateField.setRequired(false);
+          remarkField && remarkField.setRequired(true);
+        } else {
+          rateField && rateField.setRequired(true);
+          remarkField && remarkField.setRequired(false);
+        }
+      }
+    });
+
+    onFieldReact('outList.*.outType', (field) => {
+      let rateField = field.query('.rate').take();
+      let remarkField = field.query('.remark').take();
+      if (field.value) {
+        if (field.value === '其他') {
+          rateField && rateField.setRequired(false);
+          remarkField && remarkField.setRequired(true);
+        } else if (
+          field.value === '采购费' ||
+          field.value === '劳务费' ||
+          field.value === '技术服务费' ||
+          field.value === '维修款' ||
+          field.value === '工程款'
+        ) {
+          rateField && rateField.setRequired(true);
+          remarkField && remarkField.setRequired(false);
+        } else {
+          rateField && rateField.setRequired(false);
+          remarkField && remarkField.setRequired(false);
+        }
+      }
+    });
   });
 
   const showHaveThree = () => {
@@ -229,22 +266,21 @@ export default (props) => {
               <SchemaField.Void
                 x-component="FormGrid"
                 x-component-props={{ maxColumns: 3, strictAutoFit: true }}
+              ></SchemaField.Void>
+              <SchemaField.Void
+                x-component="FormGrid"
+                x-component-props={{ maxColumns: 3, strictAutoFit: true }}
               >
                 <SchemaField.String
                   name="name"
                   required
                   title="项目名称"
                   x-decorator="FormItem"
-                  x-decorator-props={{ gridSpan: 2 }}
                   x-component="InputButton"
-                  x-component-props={{ onClick: onClick }}
+                  x-component-props={{ onClick: onClick, rows: 2 }}
                 />
-              </SchemaField.Void>
-              <SchemaField.Void
-                x-component="FormGrid"
-                x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-              >
                 <SchemaField.String
+                  required
                   name="taskCode"
                   title="备案号"
                   x-decorator="FormItem"
@@ -259,56 +295,36 @@ export default (props) => {
                   x-component-props={{ showSearch: true }}
                   enum={session.getItem('userList')}
                 />
-                />
               </SchemaField.Void>
               <SchemaField.Void
                 x-component="FormGrid"
                 x-component-props={{ maxColumns: 3, strictAutoFit: true }}
               >
                 <SchemaField.String
+                  name="contractName"
+                  required
+                  x-decorator="FormItem"
+                  title="收款合同名称"
+                  x-component="Input.TextArea"
+                  x-component-props={{ rows: 2 }}
+                />
+                <SchemaField.String
                   name="contractCode"
                   x-decorator="FormItem"
-                  title="合同编号"
+                  title="收款合同编号"
                   x-component="Input"
                 />
                 <SchemaField.Number
                   name="contractMoney"
                   required
                   x-decorator="FormItem"
-                  title="合同金额"
+                  title="收款合同金额"
                   x-component="NumberPicker"
                   x-component-props={{
                     addonAfter: '元',
                     formatter: (value) =>
                       `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
                   }}
-                />
-                <SchemaField.String
-                  name="contractName"
-                  required
-                  x-decorator="FormItem"
-                  title="合同名称"
-                  x-component="Input.TextArea"
-                  x-component-props={{ rows: 2 }}
-                />
-                <SchemaField.String
-                  name="protectRate"
-                  required
-                  x-decorator="FormItem"
-                  title="质保金比例"
-                  x-component="Input"
-                />
-                <SchemaField.String
-                  name="invoiceRate"
-                  x-decorator="FormItem"
-                  title="预计收入税率"
-                  x-component="Input"
-                />
-                <SchemaField.String
-                  name="projectRate"
-                  x-decorator="FormItem"
-                  title="预计利润率"
-                  x-component="Input"
                 />
                 <SchemaField.Number
                   name="totalCost"
@@ -323,10 +339,30 @@ export default (props) => {
                   }}
                 />
                 <SchemaField.String
+                  name="invoiceRate"
+                  x-decorator="FormItem"
+                  title="预计收入税率"
+                  x-component="Input"
+                />
+                <SchemaField.String
+                  name="projectRate"
+                  x-decorator="FormItem"
+                  title="预计利润率"
+                  x-component="Input"
+                />
+                <SchemaField.String
+                  name="protectRate"
+                  required
+                  x-decorator="FormItem"
+                  title="质保金比例"
+                  x-component="Input"
+                  x-component-props={{ placeholder: '示例：3%' }}
+                />
+                <SchemaField.String
                   name="startDate"
                   required
                   x-decorator="FormItem"
-                  title="开工日期"
+                  title="预计开工日期"
                   x-component="DatePicker"
                   x-component-props={{ format: 'YYYY-M-D' }}
                 />
@@ -363,6 +399,12 @@ export default (props) => {
                   x-component="Input"
                   x-decorator-props={{ gridSpan: 2 }}
                 />
+                <SchemaField.String
+                  name="wbs"
+                  x-decorator="FormItem"
+                  title="WBS编号"
+                  x-component="Input"
+                />
               </SchemaField.Void>
               <SchemaField.Void
                 x-component="FormGrid"
@@ -387,6 +429,7 @@ export default (props) => {
                   x-component="Input"
                 />
               </SchemaField.Void>
+
               <SchemaField.Array
                 name="protectList"
                 x-decorator="FormItem"
@@ -513,7 +556,6 @@ export default (props) => {
                         x-decorator="FormItem"
                         x-component="Select"
                         enum={[
-                          { label: '项目收入', value: '项目收入' },
                           { label: '采购费', value: '采购费' },
                           { label: '劳务费', value: '劳务费' },
                           { label: '技术服务费', value: '技术服务费' },
@@ -718,7 +760,18 @@ export default (props) => {
                   x-component="File"
                   x-decorator-props={{
                     gridSpan: 2,
+                    feedbackText: '上传 预算表',
                   }}
+                />
+                <SchemaField.String
+                  name="userNamee"
+                  required
+                  title="财务部"
+                  x-decorator="FormItem"
+                  x-decorator-props={{ gridSpan: 2, tooltip: '流程审批节点' }}
+                  x-component="Select"
+                  x-component-props={{ showSearch: true }}
+                  enum={session.getItem('userList')}
                 />
                 {showHaveThree()}
                 <SchemaField.String
@@ -730,7 +783,6 @@ export default (props) => {
                   x-component-props={{ rows: 2 }}
                 />
               </SchemaField.Void>
-
               {showComment()}
             </SchemaField>
           </Form>
