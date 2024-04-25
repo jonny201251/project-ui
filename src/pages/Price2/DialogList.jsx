@@ -9,12 +9,6 @@ export default (props) => {
       valueType: 'text',
       hideInSearch: true,
     },
-    {
-      title: '项目立项',
-      dataIndex: 'projectType',
-      valueType: 'text',
-      hideInSearch: true,
-    },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     {

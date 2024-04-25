@@ -283,7 +283,7 @@ export default (props) => {
                   x-component="NumberPicker"
                   minimum={0}
                   maximum={10}
-                  default={1}
+                  default={2}
                 />
               </SchemaField.Void>
               <SchemaField.Void

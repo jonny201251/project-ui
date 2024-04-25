@@ -11,12 +11,6 @@ export default (props) => {
       hideInSearch: true,
     },
     {
-      title: '创建人',
-      dataIndex: 'displayName',
-      valueType: 'text',
-      hideInSearch: true,
-    },
-    {
       title: '所属部门',
       dataIndex: 'deptName',
       valueType: 'text',

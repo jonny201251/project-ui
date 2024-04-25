@@ -78,6 +78,11 @@ import Price1AddForm from '../pages/Price1/AddForm';
 import Price1CheckForm from '../pages/Price1/CheckForm';
 import Price1ViewForm from '../pages/Price1/ViewForm';
 
+import Price4List from '../pages/Price4/List';
+import Price4AddForm from '../pages/Price4/AddForm';
+import Price4CheckForm from '../pages/Price4/CheckForm';
+import Price4ViewForm from '../pages/Price4/ViewForm';
+
 import Price2List from '../pages/Price2/List';
 import Price2AddForm from '../pages/Price2/AddForm';
 import Price2CheckForm from '../pages/Price2/CheckForm';
@@ -633,6 +638,19 @@ export const price3Path = {
   list: contextPath + '/price3/list',
   get: contextPath + '/price3/get',
   btnHandle: contextPath + '/price3/btnHandle',
+};
+export const price4Path = {
+  flag: 'price4Path',
+  width: 1000,
+  haveChange: 'no',
+  List: Price4List,
+  AddForm: Price4AddForm,
+  EditForm: Price4AddForm,
+  CheckForm: Price4CheckForm,
+  ViewForm: Price4ViewForm,
+  list: contextPath + '/price4/list',
+  get: contextPath + '/price4/get',
+  btnHandle: contextPath + '/price4/btnHandle',
 };
 export const providerQueryPath = {
   flag: 'providerQueryPath',
