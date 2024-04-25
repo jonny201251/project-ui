@@ -14,7 +14,7 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
     },
-    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     { title: '收款合同编号', dataIndex: 'contractCode', valueType: 'text' },

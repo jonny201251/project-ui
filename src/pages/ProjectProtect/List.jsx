@@ -8,7 +8,7 @@ export default () => {
       dataIndex: 'type',
       valueType: 'text',
     },
-    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '项目名称', dataIndex: 'name', valueType: 'text', width: '20%' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '项目状态', dataIndex: 'status', valueType: 'text' },

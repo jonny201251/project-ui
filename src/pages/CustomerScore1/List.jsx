@@ -40,7 +40,7 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
     },
-    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     {
       title: '申请时间',
       dataIndex: 'createDatetime',

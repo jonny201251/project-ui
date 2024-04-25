@@ -4,7 +4,7 @@ import { BaseList } from '../../components';
 export default (props) => {
   const columns = [
     {
-      title: '所属部门',
+      title: '部门',
       dataIndex: 'deptName',
       valueType: 'text',
       hideInSearch: true,

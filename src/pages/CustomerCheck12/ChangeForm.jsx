@@ -435,7 +435,7 @@ export default (props) => {
             <SchemaField.String
               name="deptName"
               required
-              title="所属部门"
+              title="部门"
               x-component="Input"
               x-decorator="FormItem"
               x-decorator-props={{ gridSpan: 2 }}

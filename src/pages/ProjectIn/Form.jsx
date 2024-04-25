@@ -103,6 +103,7 @@ export default (props) => {
                           contractMoney: values.selectedRow.contractMoney,
                           endMoney: values.selectedRow.endMoney,
                           contractName: values.selectedRow.contractName,
+                          deptName: values.selectedRow.deptName,
                           wbs: values.selectedRow.wbs,
                         });
                         dialog2.close();
@@ -189,7 +190,6 @@ export default (props) => {
               required
               title="项目名称"
               x-decorator="FormItem"
-              x-decorator-props={{ gridSpan: 2 }}
               x-component="InputButton"
               x-component-props={{ onClick: onClick }}
             />
@@ -200,13 +200,6 @@ export default (props) => {
               x-component="Input"
             />
             <SchemaField.String
-              name="customerName"
-              title="客户名称"
-              x-decorator="FormItem"
-              x-component="Input"
-              x-decorator-props={{ gridSpan: 2 }}
-            />
-            <SchemaField.String
               name="wbs"
               required
               title="WBS编号"
@@ -215,10 +208,16 @@ export default (props) => {
             />
             <SchemaField.String
               name="contractName"
-              title="合同名称"
+              title="收款合同名称"
               x-decorator="FormItem"
               x-component="Input"
-              x-decorator-props={{ gridSpan: 2 }}
+            />
+            <SchemaField.String
+              name="contractCode"
+              required
+              title="收款合同编号"
+              x-decorator="FormItem"
+              x-component="Input"
             />
           </SchemaField.Void>
           <SchemaField.Void
@@ -226,9 +225,8 @@ export default (props) => {
             x-component-props={{ maxColumns: 3, strictAutoFit: true }}
           >
             <SchemaField.String
-              name="contractCode"
-              required
-              title="收款合同编号"
+              name="customerName"
+              title="客户名称"
               x-decorator="FormItem"
               x-component="Input"
             />
@@ -242,6 +240,7 @@ export default (props) => {
                   `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
               }}
             />
+
             <SchemaField.Number
               name="endMoney"
               title="结算金额"
@@ -254,11 +253,23 @@ export default (props) => {
             />
             <SchemaField.String
               name="inDate"
-              title="日期"
+              title="收款/开票日期"
               required
               x-decorator="FormItem"
               x-component="DatePicker"
               x-component-props={{ format: 'YYYY-M-D' }}
+            />
+            <SchemaField.String
+              name="inStyle"
+              title="收款方式"
+              x-decorator="FormItem"
+              x-component="Select"
+              enum={[
+                { label: '支票', value: '支票' },
+                { label: '网银', value: '网银' },
+                { label: '银行承兑', value: '银行承兑' },
+                { label: '商业承兑', value: '商业承兑' },
+              ]}
             />
             <SchemaField.String
               name="remark"
@@ -288,31 +299,11 @@ export default (props) => {
               }}
             />
             <SchemaField.String
-              name="inStyle"
-              title="收款方式"
-              x-decorator="FormItem"
-              x-component="Select"
-              enum={[
-                { label: '支票', value: '支票' },
-                { label: '网银', value: '网银' },
-                { label: '银行承兑', value: '银行承兑' },
-                { label: '商业承兑', value: '商业承兑' },
-              ]}
-            />
-            <SchemaField.String
               name="arriveDate"
-              title="到期日"
+              title="票据到期日"
               x-decorator="FormItem"
               x-component="DatePicker"
               x-component-props={{ picker: 'month', format: 'YYYY-M' }}
-            />
-            <SchemaField.String
-              x-decorator-props={{ gridSpan: 2 }}
-              name="remarkk"
-              title="备注"
-              x-decorator="FormItem"
-              x-component="Input.TextArea"
-              x-component-props={{ rows: 2 }}
             />
             <SchemaField.String
               name="code"
@@ -326,6 +317,19 @@ export default (props) => {
               title="已收款信息"
               x-component="OnlyButton"
               x-component-props={{ onClick: onClick3, name: '查看' }}
+            />
+            <SchemaField.String
+              x-decorator="FormItem"
+              title="项目收支表"
+              x-component="OnlyButton"
+              x-component-props={{ onClick: onClick3, name: '查看' }}
+            />
+            <SchemaField.String
+              name="remarkk"
+              title="备注"
+              x-decorator="FormItem"
+              x-component="Input.TextArea"
+              x-component-props={{ rows: 2 }}
             />
           </SchemaField.Void>
         </SchemaField>

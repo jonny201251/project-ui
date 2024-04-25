@@ -555,7 +555,7 @@ export const bigBudgetOutPath = {
 };
 export const projectInPath = {
   flag: 'projectInPath',
-  width: 900,
+  width: 1000,
   Form: ProjectInForm,
   List: ProjectInList,
   list: contextPath + '/projectIn/list',
@@ -568,7 +568,7 @@ export const projectInPath = {
 
 export const projectIoPath = {
   flag: 'projectIoPath',
-  width: 900,
+  width: 1000,
   Form: ProjectIoForm,
   List: ProjectIoList,
   list: contextPath + '/projectIo/list',

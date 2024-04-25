@@ -6,7 +6,7 @@ export default () => {
   const actionRef = useRef();
 
   const columns = [
-    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     {

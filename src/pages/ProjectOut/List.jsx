@@ -3,9 +3,12 @@ import { BaseProTableProcess } from '../../components';
 
 export default () => {
   const columns = [
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
+    { title: '付款合同编号', dataIndex: 'contractCode', valueType: 'text' },
+    { title: '供方名称', dataIndex: 'providerName', valueType: 'text' },
     { title: '成本类型', dataIndex: 'costType', valueType: 'text' },
     {
       title: '税率',
@@ -13,32 +16,15 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
     },
-    { title: '付款合同编号', dataIndex: 'contractCode', valueType: 'text' },
-    { title: '付款合同名称', dataIndex: 'contractName', valueType: 'text' },
+
     {
-      title: '付款合同金额',
-      dataIndex: 'contractMoney',
-      valueType: 'text',
-      render: (text, record, _, action) => {
-        return record.contractMoney > 0
-          ? (record.contractMoney + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-          : '';
-      },
-    },
-    {
-      title: '结算金额',
-      dataIndex: 'contractMoney',
-      valueType: 'text',
-      hideInSearch: true,
-    },
-    {
-      title: '日期',
+      title: '申请付款日期',
       dataIndex: 'outDate',
       valueType: 'text',
       hideInSearch: true,
     },
     {
-      title: '开票金额',
+      title: '发票金额',
       dataIndex: 'money1',
       valueType: 'text',
       hideInSearch: true,
@@ -58,14 +44,6 @@ export default () => {
           ? (record.money2 + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
           : '';
       },
-    },
-    { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
-    {
-      title: '申请时间',
-      dataIndex: 'createDatetime',
-      valueType: 'text',
-      hideInSearch: true,
     },
     {
       title: '流程状态',

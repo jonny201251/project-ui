@@ -26,7 +26,7 @@ import DialogList2 from './DialogList2';
 import styles from '../table-placeholder.less';
 import { Button, ConfigProvider, message } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { onFieldReact } from '@formily/core';
 import { post, projectOutPath, session } from '../../utils';
 import DialogList3 from './DialogList3';
@@ -51,7 +51,7 @@ const SchemaField = createSchemaField({
   },
 });
 
-const typeArr1 = ['材料及设备费', '劳务费', '技术服务费', '工程款'];
+const typeArr1 = ['采购费', '劳务费', '技术服务费', '维修款', '工程款'];
 const typeArr2 = [
   '税费',
   '投标费用',
@@ -60,10 +60,13 @@ const typeArr2 = [
   '资金成本',
   '交易服务费',
   '交通费',
+  '招待费',
+  '评审费',
   '餐费',
   '差旅费',
   '其他',
 ];
+
 export default (props) => {
   let { form, type } = props;
 
@@ -78,11 +81,6 @@ export default (props) => {
     if (type === 'add') {
       const user = session.getItem('user');
       form.setInitialValues({
-        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName,
-        loginName: user.loginName,
-        deptId: user.deptId,
-        deptName: user.deptName,
         userNameeList: ['张慧'],
       });
     }
@@ -126,6 +124,10 @@ export default (props) => {
                             wbs: values.selectedRow.wbs,
                             costType: values.selectedRow.costType,
                             costRate: values.selectedRow.costRate,
+                            displayName: values.selectedRow.displayName,
+                            loginName: values.selectedRow.loginName,
+                            deptId: values.selectedRow.deptId,
+                            deptName: values.selectedRow.deptName,
                           });
                           dialog2.close();
                         } else {
@@ -155,7 +157,6 @@ export default (props) => {
                       onClick={async () => {
                         const values = await form2.submit();
                         if (values.selectedRow) {
-                          console.log(values.selectedRow);
                           form.setValues({
                             budgetId: values.selectedRow.budgetId,
                             projectId: values.selectedRow.projectId,
@@ -164,6 +165,10 @@ export default (props) => {
                             taskCode: values.selectedRow.taskCode,
                             property: values.selectedRow.property,
                             wbs: values.selectedRow.wbs,
+                            displayName: values.selectedRow.displayName,
+                            loginName: values.selectedRow.loginName,
+                            deptId: values.selectedRow.deptId,
+                            deptName: values.selectedRow.deptName,
                           });
                           dialog2.close();
                         } else {
@@ -214,7 +219,7 @@ export default (props) => {
             '*(providerName,contractCode,contractMoney,endMoney,contractName,outStyle,arriveDate,costRate)',
           )
           .forEach((fieldd) => {
-            fieldd.setState({ display: 'hidden' });
+            fieldd.setState({ pattern: 'disabled' });
           });
         form
           .query('.costType')
@@ -300,7 +305,6 @@ export default (props) => {
               title="有无合同"
               x-decorator="FormItem"
               x-component="Radio.Group"
-              x-decorator-props={{ gridSpan: 2 }}
               default={'有'}
               enum={[
                 { label: '有', value: '有' },
@@ -324,13 +328,6 @@ export default (props) => {
               x-component="Input"
             />
             <SchemaField.String
-              name="providerName"
-              title="供方名称"
-              x-decorator="FormItem"
-              x-component="Input"
-              x-decorator-props={{ gridSpan: 2 }}
-            />
-            <SchemaField.String
               name="wbs"
               required
               title="WBS编号"
@@ -338,21 +335,14 @@ export default (props) => {
               x-component="Input"
             />
             <SchemaField.String
-              name="contractName"
-              title="合同名称"
+              name="contractCode"
+              title="付款合同编号"
               x-decorator="FormItem"
               x-component="Input"
-              x-decorator-props={{ gridSpan: 2 }}
             />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="FormGrid"
-            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-          >
             <SchemaField.String
-              name="contractCode"
-              required
-              title="付款合同编号"
+              name="contractName"
+              title="付款合同名称"
               x-decorator="FormItem"
               x-component="Input"
             />
@@ -382,6 +372,12 @@ export default (props) => {
             x-component-props={{ maxColumns: 3, strictAutoFit: true }}
           >
             <SchemaField.String
+              name="providerName"
+              title="供方名称"
+              x-decorator="FormItem"
+              x-component="Input"
+            />
+            <SchemaField.String
               name="costType"
               title="成本类型"
               x-decorator="FormItem"
@@ -401,22 +397,34 @@ export default (props) => {
           >
             <SchemaField.String
               name="outDate"
-              title="日期"
+              title="申请付款日期"
               required
               x-decorator="FormItem"
               x-component="DatePicker"
               x-component-props={{ format: 'YYYY-M-D' }}
             />
             <SchemaField.String
+              name="outStyle"
+              title="付款方式"
+              x-decorator="FormItem"
+              x-component="Select"
+              enum={[
+                { label: '支票', value: '支票' },
+                { label: '网银', value: '网银' },
+                { label: '银行承兑', value: '银行承兑' },
+                { label: '商业承兑', value: '商业承兑' },
+              ]}
+            />
+            <SchemaField.String
               name="remark"
               title="摘要"
               x-decorator="FormItem"
               x-component="Input.TextArea"
-              x-component-props={{ rows: 2 }}
+              x-component-props={{ rows: 3 }}
             />
             <SchemaField.Number
               name="money1"
-              title="开票金额"
+              title="发票金额"
               x-decorator="FormItem"
               x-component="NumberPicker"
               x-component-props={{
@@ -435,43 +443,30 @@ export default (props) => {
               }}
             />
             <SchemaField.String
-              name="outStyle"
-              title="付款方式"
+              name="code"
+              title="单据编号"
+              description="财务共享里的单据编号"
+              x-component="Input"
               x-decorator="FormItem"
-              x-component="Select"
-              enum={[
-                { label: '支票', value: '支票' },
-                { label: '网银', value: '网银' },
-                { label: '银行承兑', value: '银行承兑' },
-                { label: '商业承兑', value: '商业承兑' },
-              ]}
             />
             <SchemaField.String
               name="arriveDate"
-              title="到期日"
+              title="实际付款日期"
               x-decorator="FormItem"
               x-component="DatePicker"
               x-component-props={{ picker: 'month', format: 'YYYY-M' }}
             />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="FormGrid"
-            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-          >
             <SchemaField.String
-              x-decorator-props={{ gridSpan: 2 }}
-              name="remarkk"
-              title="备注"
               x-decorator="FormItem"
-              x-component="Input.TextArea"
-              x-component-props={{ rows: 2 }}
+              title="已付款信息"
+              x-component="OnlyButton"
+              x-component-props={{ onClick: onClick3, name: '查看' }}
             />
             <SchemaField.String
-              name="code"
-              title="单据单号"
-              description="财务共享里的单据单号"
-              x-component="Input"
               x-decorator="FormItem"
+              title="项目收支表"
+              x-component="OnlyButton"
+              x-component-props={{ onClick: onClick3, name: '查看' }}
             />
             <SchemaField.String
               name="userNameeList"
@@ -484,10 +479,11 @@ export default (props) => {
               enum={session.getItem('userList')}
             />
             <SchemaField.String
+              name="remarkk"
+              title="备注"
               x-decorator="FormItem"
-              title="已付款信息"
-              x-component="OnlyButton"
-              x-component-props={{ onClick: onClick3, name: '查看' }}
+              x-component="Input.TextArea"
+              x-component-props={{ rows: 2 }}
             />
           </SchemaField.Void>
         </SchemaField>

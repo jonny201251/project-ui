@@ -27,7 +27,6 @@ import zhCN from 'antd/lib/locale/zh_CN';
 import React, { useEffect } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import DialogList2 from '../SmallProject/DialogList2';
-import { session } from '../../utils';
 
 const InputButton2 = (props) => {
   return (
@@ -77,16 +76,6 @@ export default (props) => {
       .forEach((field) => {
         field.setPattern('disabled');
       });
-    if (type === 'add') {
-      const user = session.getItem('user');
-      form.setInitialValues({
-        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName,
-        loginName: user.loginName,
-        deptId: user.deptId,
-        deptName: user.deptName,
-      });
-    }
   }, []);
 
   const onClick = (flag) => {
@@ -116,6 +105,10 @@ export default (props) => {
                           taskCode: values.selectedRow.taskCode,
                           property: values.selectedRow.property,
                           wbs: values.selectedRow.wbs,
+                          displayName: values.selectedRow.displayName,
+                          loginName: values.selectedRow.loginName,
+                          deptId: values.selectedRow.deptId,
+                          deptName: values.selectedRow.deptName,
                         });
                         dialog2.close();
                       } else {
@@ -158,7 +151,6 @@ export default (props) => {
                         form.setValues({
                           providerId: values.selectedRow.id,
                           providerName: values.selectedRow.name,
-                          providerUsee: values.selectedRow.usee,
                         });
                         dialog2.close();
                       } else {
@@ -192,7 +184,6 @@ export default (props) => {
               required
               title="项目名称"
               x-decorator="FormItem"
-              x-decorator-props={{ gridSpan: 2 }}
               x-component="InputButton"
               x-component-props={{ onClick: onClick }}
             />
@@ -201,28 +192,6 @@ export default (props) => {
               title="备案号"
               x-decorator="FormItem"
               x-component="Input"
-            />
-            <SchemaField.String
-              name="type2"
-              required
-              title="往来类型"
-              x-decorator="FormItem"
-              x-component="Radio.Group"
-              enum={[
-                { label: '收款', value: '收款' },
-                { label: '付款', value: '付款' },
-              ]}
-            />
-            <SchemaField.String
-              name="haveInOut"
-              required
-              title="影响收支"
-              x-decorator="FormItem"
-              x-component="Radio.Group"
-              enum={[
-                { label: '是', value: '是' },
-                { label: '否', value: '否' },
-              ]}
             />
             <SchemaField.String
               name="wbs"
@@ -238,16 +207,32 @@ export default (props) => {
               x-decorator="FormItem"
               x-component="InputButton2"
               x-component-props={{ onClick: onClick2 }}
-              x-decorator-props={{ gridSpan: 2 }}
             />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-component="FormGrid"
-            x-component-props={{ maxColumns: 3, strictAutoFit: true }}
-          >
+            <SchemaField.String
+              name="haveInOut"
+              required
+              title="影响收支"
+              x-decorator="FormItem"
+              x-component="Radio.Group"
+              enum={[
+                { label: '是', value: '是' },
+                { label: '否', value: '否' },
+              ]}
+            />
+            <SchemaField.String
+              name="type2"
+              required
+              title="往来类型"
+              x-decorator="FormItem"
+              x-component="Radio.Group"
+              enum={[
+                { label: '收款', value: '收款' },
+                { label: '付款', value: '付款' },
+              ]}
+            />
             <SchemaField.String
               name="ioDate"
-              title="日期"
+              title="收款/付款日期"
               required
               x-decorator="FormItem"
               x-component="DatePicker"
@@ -273,7 +258,6 @@ export default (props) => {
               }}
             />
             <SchemaField.String
-              x-decorator-props={{ gridSpan: 2 }}
               name="remarkk"
               title="备注"
               x-decorator="FormItem"

@@ -7,7 +7,7 @@ export default (props) => {
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: '状态', dataIndex: 'status', valueType: 'text' },
     { title: '创建人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '创建时间', dataIndex: 'createDatetime', valueType: 'text' },
   ];
 

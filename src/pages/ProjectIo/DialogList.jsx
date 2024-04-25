@@ -7,13 +7,7 @@ export default (props) => {
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
     {
-      title: '创建人',
-      dataIndex: 'displayName',
-      valueType: 'text',
-      hideInSearch: true,
-    },
-    {
-      title: '所属部门',
+      title: '部门',
       dataIndex: 'deptName',
       valueType: 'text',
       hideInSearch: true,

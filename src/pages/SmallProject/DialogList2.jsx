@@ -10,23 +10,10 @@ export default (props) => {
       colSize: 2,
       hideInSearch: true,
     },
-    {
-      title: '项目大小',
-      dataIndex: 'type',
-      valueType: 'text',
-      colSize: 2,
-      hideInSearch: true,
-    },
     { title: '战略伙伴名称', dataIndex: 'name', valueType: 'text', colSize: 2 },
     {
       title: '结论',
       dataIndex: 'result',
-      valueType: 'text',
-      hideInSearch: true,
-    },
-    {
-      title: '创建人',
-      dataIndex: 'loginName',
       valueType: 'text',
       hideInSearch: true,
     },

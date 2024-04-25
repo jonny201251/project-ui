@@ -21,7 +21,7 @@ import {
   LoadingButton,
   NumberPicker,
 } from '../../components';
-import { contractMoneyPath, post, session } from '../../utils';
+import { contractMoneyPath, post } from '../../utils';
 import DialogList from './DialogList';
 import DialogList3 from './DialogList3';
 import DialogList2 from '../SmallProject/DialogList';
@@ -78,16 +78,6 @@ export default (props) => {
       .forEach((field) => {
         field.setPattern('disabled');
       });
-    if (type === 'add') {
-      const user = session.getItem('user');
-      form.setInitialValues({
-        createDatetime: new Date().Format('yyyy-MM-dd hh:mm:ss'),
-        displayName: user.displayName,
-        loginName: user.loginName,
-        deptId: user.deptId,
-        deptName: user.deptName,
-      });
-    }
   }, []);
 
   const onClick = (flag) => {
@@ -122,6 +112,11 @@ export default (props) => {
                           contractCode: values.selectedRow.contractCode,
                           contractMoney: values.selectedRow.contractMoney,
                           contractName: values.selectedRow.contractName,
+                          deptId: values.selectedRow.deptId,
+                          deptName: values.selectedRow.deptName,
+                          loginName: values.selectedRow.loginName,
+                          displayName: values.selectedRow.loginName,
+                          createDatetime: values.selectedRow.createDatetime,
                         });
                         dialog2.close();
                       } else {

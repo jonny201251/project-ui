@@ -55,7 +55,7 @@ export default (props) => {
                 />
                 <SchemaField.String
                   name="deptName"
-                  title="所属部门"
+                  title="部门"
                   x-component="Input"
                   x-decorator="FormItem"
                 />

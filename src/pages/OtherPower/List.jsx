@@ -18,7 +18,7 @@ export default () => {
     },
     { title: '授权号', dataIndex: 'code', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     {
       title: '申请时间',
       dataIndex: 'createDatetime',

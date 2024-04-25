@@ -3,6 +3,12 @@ import { BaseList } from '../../components';
 
 export default (props) => {
   const columns = [
+    {
+      title: '部门',
+      dataIndex: 'deptName',
+      valueType: 'text',
+      hideInSearch: true,
+    },
     { title: '项目名称', dataIndex: 'name', valueType: 'text' },
     { title: '备案号', dataIndex: 'taskCode', valueType: 'text' },
     { title: 'WBS编号', dataIndex: 'wbs', valueType: 'text' },
@@ -18,18 +24,6 @@ export default (props) => {
           ? (record.contractMoney + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
           : '';
       },
-    },
-    {
-      title: '创建人',
-      dataIndex: 'displayName',
-      valueType: 'text',
-      hideInSearch: true,
-    },
-    {
-      title: '所属部门',
-      dataIndex: 'deptName',
-      valueType: 'text',
-      hideInSearch: true,
     },
   ];
 

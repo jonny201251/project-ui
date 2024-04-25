@@ -28,7 +28,7 @@ export default () => {
       hideInSearch: true,
     },
     {
-      title: '所属部门',
+      title: '部门',
       dataIndex: 'deptName',
       valueType: 'text',
     },

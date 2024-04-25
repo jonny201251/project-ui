@@ -3,7 +3,7 @@ import { BaseProTable2 } from '../../components';
 
 export default () => {
   const columns = [
-    { title: '所属部门', dataIndex: 'a1', valueType: 'text' },
+    { title: '部门', dataIndex: 'a1', valueType: 'text' },
     { title: '项目名称', dataIndex: 'a2', valueType: 'text' },
     { title: '合同类型', dataIndex: 'a3', valueType: 'text' },
     { title: '合同编号', dataIndex: 'a4', valueType: 'text' },

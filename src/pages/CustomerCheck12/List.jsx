@@ -7,7 +7,7 @@ export default () => {
     { title: '客户企业性质', dataIndex: 'customerName', valueType: 'text' },
     { title: '评定级别', dataIndex: 'endResult', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '申请时间', dataIndex: 'createDate', valueType: 'text' },
     {
       title: '流程状态',

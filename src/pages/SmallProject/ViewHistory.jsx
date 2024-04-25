@@ -27,7 +27,7 @@ export default (props) => {
     { title: '预计签约额', dataIndex: 'expectMoney', valueType: 'text' },
     { title: '预计签约日期', dataIndex: 'expectDate', valueType: 'text' },
     { title: '申请人', dataIndex: 'displayName', valueType: 'text' },
-    { title: '所属部门', dataIndex: 'deptName', valueType: 'text' },
+    { title: '部门', dataIndex: 'deptName', valueType: 'text' },
     { title: '申请时间', dataIndex: 'createDatetime', valueType: 'text' },
   ];
 

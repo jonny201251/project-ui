@@ -16,7 +16,7 @@ export default (props) => {
           : '';
       },
     },
-    { title: '日期', dataIndex: 'inDate', valueType: 'text' },
+    { title: '开票日期', dataIndex: 'inDate', valueType: 'text' },
     { title: '开票金额', dataIndex: 'money1', valueType: 'text' },
     { title: '收款金额', dataIndex: 'money2', valueType: 'text' },
     { title: '累计收款比例', dataIndex: 'aa', valueType: 'text' },
